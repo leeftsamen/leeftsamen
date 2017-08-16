@@ -1,0 +1,12 @@
+﻿@model LeeftSamen.Portal.Web.Models.HelpIconViewModel
+@using (Ajax.BeginForm("SetIconIsShown", "HelpIcon", new { id = Model.Id }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "ajax-icon-form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <a class="hidden-xs help-icon @Model.CssClass"
+        data-toggle="tooltip"
+        data-original-title="@Model.HelpText"
+        data-placement="@Model.Placement.ToLower()">
+        <i class="fa fa-question-circle"></i>
+    </a>
+}

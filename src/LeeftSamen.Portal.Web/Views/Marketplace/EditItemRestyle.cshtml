@@ -1,0 +1,303 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Extensions
+@model LeeftSamen.Portal.Web.Models.Marketplace.ItemViewModel
+@{
+    var action = "CreateItem";
+    var title = Title.CreateMarketplaceItem;
+    if (Model.Category != null && Model.Category.Alias == MarketplaceItemCategory.CategoryAlias.HelpNeighborhood && !Model.CircleId.HasValue)
+    {
+        title = Title.CreateNeighborhoodHelp;
+    }
+    var submitButton = Button.MarketplacePublish;
+    var routeValues = new RouteValueDictionary();
+    if (Model.MarketplaceItemId.HasValue)
+    {
+        action = "EditItem";
+        routeValues.Add("id", Model.MarketplaceItemId.Value);
+        title = Model.Title;
+    }
+    routeValues.Add("circleId", Model.CircleId);
+
+    ViewBag.Title = title;
+    var typesHiddenFor = String.Empty;
+    var pricingHiddenFor = String.Join(",", MarketplaceItemCategory.CategoryAlias.Borrowing);
+    var preferencesHiddenFor = String.Join(",", MarketplaceItemCategory.CategoryAlias.HelpNeighborhood, MarketplaceItemCategory.CategoryAlias.Borrowing);
+    var imagesHiddenFor = String.Empty;
+    var preferenceMailOnlineHiddenFor = String.Join(",", MarketplaceItemCategory.CategoryAlias.Meals);
+}
+
+<div class="content-wide">
+    <h1 class="page-title-small">@ViewBag.Title</h1>
+
+@using (Html.BeginForm(action, "Marketplace", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    <div class="panel-edit marketplace-form">
+            @Html.AntiForgeryToken()
+            <div class="panel-body">
+                @*<div class="edit-section">
+                        @Html.Raw(Text.EditItemExplanation)
+                    </div>*@
+
+                @Html.HiddenFor(m => Model.CategoryCategoryId)
+                @if (Model.ShowInCircle)
+                {
+                    <div class="edit-section">
+                        <label class="control-label">@Html.LabelFor(m => Model.CategoryCategoryId)</label>
+                        <ul class="nav nav-pills">
+                            @foreach (var category in Model.CategoriesList)
+                            {
+                                if (!Model.SocialVersion || (int)category.Alias == 0 || (int)category.Alias == 1)
+                                {
+                                    <li class="@(Model.CategoryCategoryId == category.CategoryId ? "active" : null)">
+                                        <a href="#" data-val-target="@Html.IdFor(m => Model.CategoryCategoryId)" data-val="@category.CategoryId" data-hide-ref="@category.Alias">@category.Name</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                }
+                @if (Model.Category == null || Model.Category.Alias != MarketplaceItemCategory.CategoryAlias.HelpNeighborhood || Model.CircleId.HasValue)
+                {
+                    <div id="MarketplaceItemTypes" class="edit-section" data-hiddenfor="@typesHiddenFor">
+
+                        @Html.HiddenFor(m => Model.Type)
+                        <label class="control-label">@Html.LabelFor(m => Model.Type)</label>
+                        <ul class="nav nav-pills">
+                            <li class="@(Model.Type == MarketplaceItem.MarketplaceItemType.Offered ? "active" : null)">
+                                <a href="#" data-val-target="@Html.IdFor(m => Model.Type)" data-val="@MarketplaceItem.MarketplaceItemType.Offered">@MarketplaceItem.MarketplaceItemType.Offered.DisplayName()</a>
+                            </li>
+                            <li class="@(Model.Type == MarketplaceItem.MarketplaceItemType.Asked ? "active" : null)">
+                                <a href="#" data-val-target="@Html.IdFor(m => Model.Type)" data-val="@MarketplaceItem.MarketplaceItemType.Asked">@MarketplaceItem.MarketplaceItemType.Asked.DisplayName()</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(m => Model.Type)
+                }
+
+                @using (Html.BeginFormGroupFor(m => m.Title))
+                {
+                    @Html.RequiredLabelFor(m => m.Title, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+                }
+                @using (Html.BeginFormGroupFor(m => m.Description, new { @class = "no-border" }))
+                {
+                    @Html.RequiredLabelFor(m => m.Description, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Description, 8, 0, new { @class = "form-control text-editor" })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                }
+                @if (!Model.SocialVersion)
+                {
+                <div id="MarketplaceItemPricing" class="row" data-hiddenfor="@pricingHiddenFor">
+                    @using (Html.BeginFormGroupFor(m => m.Price, new { @class = "no-border" }))
+                    {
+                        <div class="col-md-5 col-xs-12">
+                            @Html.RequiredLabelFor(m => m.Price, new { @class = "control-label" }):
+                            @if (Model.AllowZuiderling)
+                            {
+                                        <label>
+                                            @Html.RadioButtonFor(m => m.Currency, MarketplaceItem.MarketplaceCurrency.Euro)
+                                            @MarketplaceItem.MarketplaceCurrency.Euro.DisplayName()
+                                        </label>
+                                        <label>
+                                            @Html.RadioButtonFor(m => m.Currency, MarketplaceItem.MarketplaceCurrency.Zuiderling, new { @text = Label.PaymentCurrencyZuiderling })
+                                            @MarketplaceItem.MarketplaceCurrency.Zuiderling.DisplayName()
+                                        </label>
+                            }
+                            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Price, null, new { @class = "help-block" })
+                        </div>
+                        <div class="col-md-5 col-xs-12">
+                            <label class="control-label">Prijstype:</label>
+                            @Html.EnumDropDownListFor(m => m.PaymentOption, Label.PaymentOptionPlaceholder, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PaymentOption, null, new { @class = "help-block" })
+                        </div>
+
+                        <div class="col-md-4">
+                            @Html.ValidationMessageFor(m => m.Price, null, new { @class = "help-block" })
+                        </div>
+                        <div class="clear"></div>
+                    }
+                </div>
+                }
+
+                <div class="form-group">
+                    <label>@Label.ExpirationDate</label>
+                    <div class="datepicker-control futuredate">
+                        @Html.TextBoxFor(m => m.ExpirationDate, new { @class = "form-control", style = "float:left;", @Value = Model.ExpirationDate.HasValue ? Model.ExpirationDate.Value.ToString("dd-MM-yyyy") : string.Empty })
+                        <button type="button">
+                            Kies datum
+                        </button>
+                    </div>
+                </div>
+                <div id="MarketplaceItemPreferences" class="edit-section" data-hiddenfor="@preferencesHiddenFor">
+                    <label class="control-label">@Title.Preferences</label>
+                    <ul class="list-unstyled">
+                        <li>
+                            @Html.CheckBoxFor(m => m.PreferenceDelivery)
+                            @Html.LabelFor(m => m.PreferenceDelivery, new { @class = "value-label" })
+                            @Html.ValidationMessageFor(m => m.PreferenceDelivery, null, new { @class = "help-block" })
+                        </li>
+                        <li>
+                            @Html.CheckBoxFor(m => m.PreferencePickup)
+                            @Html.LabelFor(m => m.PreferencePickup, new { @class = "value-label" })
+                            @Html.ValidationMessageFor(m => m.PreferencePickup, null, new { @class = "help-block" })
+                        </li>
+                        <li data-hiddenfor="@preferenceMailOnlineHiddenFor">
+                            @Html.CheckBoxFor(m => m.PreferenceMail)
+                            @Html.LabelFor(m => m.PreferenceMail, new { @class = "value-label" })
+                            @Html.ValidationMessageFor(m => m.PreferenceMail, null, new { @class = "help-block" })
+                        </li>
+                        <li data-hiddenfor="@preferenceMailOnlineHiddenFor">
+                            @Html.CheckBoxFor(m => m.PreferenceOnline)
+                            @Html.LabelFor(m => m.PreferenceOnline, new { @class = "value-label" })
+                            @Html.ValidationMessageFor(m => m.PreferenceOnline, null, new { @class = "help-block" })
+                        </li>
+                    </ul>
+                </div>
+                <div class="edit-section row">
+                    <div class="col-xs-12">
+                        <label class="control-label">@Title.Showlocation</label>
+                    </div>
+                    <div class="col-xs-12">
+                        @Html.CheckBoxFor(m => m.ShowLocation)
+                        @Html.LabelFor(m => m.ShowLocation, new { @class = "value-label" })
+                        @Html.ValidationMessageFor(m => m.ShowLocation, null, new { @class = "help-block" })
+                    </div>
+                </div>            
+
+                @Html.HiddenFor(m => m.IsPublic)
+                @Html.HiddenFor(m => m.ShowInCircle)
+                @Html.HiddenFor(m => m.ShowInCircleId)
+                @*@if (Model.CirleSelectListItems != null && Model.CirleSelectListItems.Any())
+                {
+                    <div id="MarketplaceItemVisibility" class="edit-section row">
+                        <div class="col-xs-12">
+                            <label class="control-label">@Title.ItemVisibility</label>
+                        </div>
+
+                        <div class="col-xs-12">
+                            @Html.CheckBoxFor(m => m.IsPublic, new { @id = "IsPublic" })
+                            @Html.LabelFor(m => m.IsPublic, new { @class = "value-label" })
+                            @Html.ValidationMessageFor(m => m.IsPublic, null, new { @class = "help-block" })
+                        </div>
+
+                        <div class="row col-xs-12">
+                            <div class="col-md-2 col-xs-12">
+                                @Html.CheckBoxFor(m => m.ShowInCircle)
+                                @Html.LabelFor(m => m.ShowInCircle, new { @class = "value-label" })
+                            </div>
+                            <div class="col-md-5 col-xs-12">
+                                @Html.DropDownListFor(m => m.ShowInCircleId, Model.CirleSelectListItems, new { @class = "form-control" + (Model.ShowInCircle ? String.Empty : " hidden") })
+                            </div>
+                            <div class="col-md-5 col-xs-12">
+                                @Html.ValidationMessageFor(m => m.ShowInCircleId, null, new { @class = "help-block" })
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    Model.IsPublic = true;
+                    @Html.HiddenFor(m => m.IsPublic)
+                }*@
+
+                @Html.HiddenFor(m => m.AllowSharing)
+                @* Sharing is disabled for now, but not removed yet. We include a hiddenFor to persist data.
+                <div id="MarketplaceItemSharing" class="edit-section">
+                    <label  class="control-label">@Title.Share</h4>
+                    @using (Html.BeginFormGroupFor(m => m.AllowSharing))
+                    {
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.AllowSharing) @Label.ShareDescription
+                        </label>
+                    </div>
+                    }
+                </div>*@
+            </div>
+    </div>
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.Images</h2>
+        </div>
+        <div class="panel-body" data-hiddenfor="@imagesHiddenFor">
+                @Html.Partial("_ImageUploadRestyle", new FileUploadModel(Model.Image1Id, "DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1 }, Label.MainImage, "Image1"))
+                @Html.Partial("_ImageUploadRestyle", new FileUploadModel(Model.Image2Id, "DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image2Id, index = 2 }, Label.Image + " 2", "Image2"))
+                @Html.Partial("_ImageUploadRestyle", new FileUploadModel(Model.Image3Id, "DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image3Id, index = 3 }, Label.Image + " 3", "Image3"))
+                @Html.Partial("_ImageUploadRestyle", new FileUploadModel(Model.Image4Id, "DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image4Id, index = 4 }, Label.Image + " 4", "Image4"))
+                @Html.Partial("_ImageUploadRestyle", new FileUploadModel(Model.Image5Id, "DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image5Id, index = 5 }, Label.Image + " 5", "Image5"))
+        </div>
+    </div>
+    <div class="panel-footer edit-buttons">
+        <button type="submit" class="btn btn-primary">@submitButton</button>
+        <a class="btn btn-link" href="@Url.Action("MyMarketplace")">@Button.Cancel</a>
+    </div>
+}
+</div>
+
+@section scripts
+{
+    <script>
+        $('.nav-pills li').on('click', function () {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+        $('a[data-hide-ref]').on('click', function () {
+            var ref = $(this).data('hide-ref');
+            $('[data-hiddenfor]').each(function () {
+                // -1 below means it's not found, so it should NOT be hidden.
+                if ($.inArray(ref, $(this).data('hiddenfor').split(',')) == -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+        $('#IsPublic').on('change', function () {
+            var inCircleCheck = $('#ShowInCircle');
+            if (!$(this).is(':checked') && !$(inCircleCheck).is(':checked')) {
+                $(inCircleCheck).click();
+            }
+        });
+        $('#ShowInCircle').on('change', function () {
+            var circleSelect = $('#ShowInCircleId');
+            if ($(this).is(':checked')) {
+                console.log(circleSelect);
+                $(circleSelect).removeClass('hidden').show();
+            } else {
+                $(circleSelect).hide();
+                publicCheck = $('#IsPublic');
+                if (!$(publicCheck).is(':checked')) {
+                    $(publicCheck).click();
+                }
+            }
+        });
+        $('#PaymentOption').on('change', function () {
+            handlePaymentOption($(this));
+        });
+        $('#PaymentOption').ready(function () {
+            handlePaymentOption();
+        });
+        function handlePaymentOption() {
+            var priceField = $('#Price');
+            if ($('#PaymentOption').val() == '') {
+                $(priceField).prop('disabled', false);
+            } else {
+                $(priceField).prop('disabled', true);
+            }
+        }
+
+        if ($('#MarketplaceItemVisibility ul').data('circle') > 0) {
+            $('#IsPublic').prop('checked', false);
+            $('#ShowInCircle').prop('checked', true);
+            $('#ShowInCircleId').removeClass('hidden').show();
+            $('#ShowInCircleId option[value="' + $('#MarketplaceItemVisibility ul').data('circle') + '"]').prop('selected', true);
+
+        }
+    </script>
+}

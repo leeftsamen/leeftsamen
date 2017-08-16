@@ -1,0 +1,91 @@
+﻿@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model System.Collections.Generic.List<LeeftSamen.Portal.Web.Models.Circles.IndexViewModel.CircleViewModel>
+@{
+    var helpIconShown = false;
+}
+
+<table class="table">
+    @foreach (var circle in Model)
+    {        
+        <tr>
+            <td>
+                <div class="circle-item">
+                    <a href="@Url.Action("Detail", "Circles", new { id = circle.CircleId })" style="text-decoration: none">
+                        @if (circle.ProfileImageId.HasValue)
+                        {
+                            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "ProfileImage", id = circle.CircleId, mediaId = circle.ProfileImageId })" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;" />
+                        }
+                        <span class="visible-xs-inline-block pull-left">
+                            @if (circle.ProfileImageId.HasValue)
+                            {
+                                <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "ProfileImage", id = circle.CircleId, mediaId = circle.ProfileImageId })" alt="" class="img-circle profile-image-med block" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med block" />
+                            }
+                            <span class="circlemembercount">@circle.MemberCount @Label.Members.ToLower()</span>
+                        </span>
+                        <strong style="margin-right: 16px;">@circle.Name</strong>
+                        @if (circle.IsPrivate)
+                        {
+                            <span class="label label-info">
+                                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                                @Label.Private
+                            </span>
+                        }
+                    </a>
+
+                    <div class="circle-details relative-inline-block hidden-xs">
+                        <span class="circlemembercount">@circle.MemberCount @Label.Members.ToLower()</span>
+                    </div>
+
+                    @if (circle.HasRequestedToJoin)
+                    {
+                        <button class="btn btn-primary disabled">@Button.RequestSent</button>
+                    }
+                    else if (circle.IsInvitedToJoin)
+                    {
+                        @*<button class="btn btn-default">@Button.AcceptInvitation</button>*@
+                    }
+                    else if (!circle.IsPrivate && !circle.IsCurrentUserMember)
+                    {
+                        if (!helpIconShown && circle.HelpIcons.Any(h => h.Type == "circle-join"))
+                        {
+                            helpIconShown = true;
+                            var helpIcon = circle.HelpIcons.First(h => h.Type == "circle-join");
+                            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "circle-create", HelpText = helpIcon.Text });
+                        }
+                        using (Html.BeginForm("RequestToJoin", "Circles", new { id = circle.CircleId }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-primary">@Button.BecomeMember</button>
+                        }
+                    }
+
+                    @if (circle.IsCurrentUserAdmin)
+                    {
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "Edit", id = circle.CircleId })">@Button.EditCircle</a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    <div class="clear"></div>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+

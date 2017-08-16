@@ -1,0 +1,32 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.MarketplaceHelpModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, (string.IsNullOrWhiteSpace(Model.Receiver) ? "heer/mevrouw" : Model.Receiver))</p>
+<p style="margin-top:0;margin-bottom:16px">
+    @string.Format(Email.MarketplaceHelpAsked, Model.CreatorName, Model.MarketplaceItemTitle)
+</p>
+
+@if (!string.IsNullOrEmpty(Model.MarketplaceItemDescription))
+{
+    <p style="margin-top:0;margin-bottom:16px">@Raw(Model.MarketplaceItemDescription)</p>
+}
+
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)<br /><br />@Model.CreatorName</p>
+<a href="@Model.ItemUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.AssignJobToMe
+</a>
+
+
+@*@section reason {
+    @if (Model.CircleId.HasValue)
+    {
+        @Email.MarketplaceLendRequestInCircleReason
+    }
+    else
+    {
+        @Email.MarketplaceLendRequestInNeighboorhoudReason
+    }
+}*@

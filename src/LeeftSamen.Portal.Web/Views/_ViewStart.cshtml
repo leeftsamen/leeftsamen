@@ -1,0 +1,4 @@
+﻿@using System.Configuration
+@{
+    Layout = string.Format("~/Views/Shared/_Layout{0}.cshtml", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty);
+}

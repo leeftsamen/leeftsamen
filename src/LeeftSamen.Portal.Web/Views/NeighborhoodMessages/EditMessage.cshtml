@@ -1,0 +1,141 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.NeighborhoodMessages.PostMessageViewModel
+
+@{
+    var action = "CreateMessage";
+    var title = Title.CreateNeighborhoodMessage;
+    var submitButton = Button.Save;
+    var routeValues = new RouteValueDictionary();
+    var cancelUrl = Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "Index" });
+    if (Model.MessageId.HasValue)
+    {
+        action = "EditMessage";
+        routeValues.Add("id", Model.MessageId.Value);
+        title = Model.Title;
+        cancelUrl = Url.RouteUrl("NeighborhoodMessage", new { messageId = Model.MessageId.Value });
+    }
+
+    ViewBag.Title = title;
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm(action, "NeighborhoodMessages", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.GeneralInformation</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Title))
+            {
+                @Html.RequiredLabelFor(m => m.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.IntroductionText))
+            {
+                @Html.RequiredLabelFor(m => m.IntroductionText, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.IntroductionText, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IntroductionText, null, new { @class = "help-block" })
+            }
+            
+            @using (Html.BeginFormGroupFor(m => m.FullText))
+            {
+                @Html.RequiredLabelFor(m => m.FullText, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.FullText, 8, 0, new { @class = "form-control text-editor" })
+                @Html.ValidationMessageFor(m => m.FullText, null, new { @class = "help-block" })
+            }
+            
+            @using (Html.BeginFormGroupFor(m => m.Expires))
+            {
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Expires) @Label.MessageExpires
+                    </label>
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.ExpirationDateTime))
+            {
+                <span id="expirationDate">
+                    @Html.RequiredLabelFor(m => m.ExpirationDateTime, new { @class = "control-label" })
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group datepicker-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </button>
+                                </span>
+                                @Html.TextBoxFor(m => m.ExpirationDateTime, new { @class = "form-control", @Value = Model.Expires && Model.ExpirationDateTime.HasValue ? Model.ExpirationDateTime.Value.ToString("dd-MM-yyyy") : string.Empty })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                @Html.TextBoxFor(m => m.ExpirationDateTimeHour, new { @class = "form-control", @Value = Model.ExpirationDateTimeHour.ToString("00") })
+                                <div class="input-group-addon" style="padding: 6px; border-right: 0; border-left: 0">:</div>
+                                @Html.TextBoxFor(m => m.ExpirationDateTimeMinute, new { @class = "form-control", @Value = Model.ExpirationDateTimeMinute.ToString("00") })
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ExpirationDateTime, null, new { @class = "help-block" })
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.Images</h2>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_ImageUpload", new FileUploadModel(Model.Image1Id, "NeighborhoodMessage", new { action = "MessageImage", NeighborhoodMessage.MessageTypes.Any, messageId = Model.MessageId, mediaId = Model.Image1Id }, "Afbeelding 1 <small>Hoofdafbeelding</small>", "Image1"))
+            @Html.Partial("_FileUpload", new FileUploadModel(Model.File1Id, "NeighborhoodMessage", new { action = "MessageImage", NeighborhoodMessage.MessageTypes.Any, messageId = Model.MessageId, mediaId = Model.Image1Id }, "Bijlage", "File1"))
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.Share</h2>
+        </div>
+
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.AllowSharing))
+            {
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AllowSharing) @Label.ShareDescription
+                    </label>
+                </div>                              
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@submitButton</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Cancel</a>
+        </div>
+    </div>
+}
+
+<script>
+    var expiresElement = document.getElementsByName('Expires')[0];
+
+    function setExpirationDateTimeVisibility() {
+        document.getElementById('expirationDate').style.display = expiresElement.checked ? 'block' : 'none';
+    }
+
+    expiresElement.onchange = function() {
+        setExpirationDateTimeVisibility();
+    }
+
+    setExpirationDateTimeVisibility();
+</script>

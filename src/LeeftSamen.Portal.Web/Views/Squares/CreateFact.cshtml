@@ -1,0 +1,76 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.CreateFactViewModel
+@{
+    var action = "CreateFact";
+    var title = Title.CreateFact;
+    var submitButton = Button.Save;
+    var routeValues = new RouteValueDictionary();
+    var cancelUrl = Url.RouteUrl("Default", new { controller = "Squares", action = "Facts", id = Model.SquareId });
+    ViewBag.Title = title;
+}
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+    </div>
+</div>
+<h1>@title</h1>
+
+@using (Html.BeginForm(action, "Squares", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.IntroductionInformation</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Title))
+            {
+                @Html.RequiredLabelFor(m => m.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.IntroductionText))
+            {
+                @Html.RequiredLabelFor(m => m.IntroductionText, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.IntroductionText, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IntroductionText, null, new { @class = "help-block" })
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.DetailInformation</h2>
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginFormGroupFor(m => m.FullText))
+            {
+                @Html.RequiredLabelFor(m => m.FullText, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.FullText, 8, 0, new { @class = "form-control text-editor" })
+                @Html.ValidationMessageFor(m => m.FullText, null, new { @class = "help-block" })
+            }
+
+            <div id="FactFiles" class="edit-section">
+                <h4>@Title.Files</h4>
+                <div class="row">
+                    @Html.Partial("_MultiFileUpload", new MultiFileUploadModel(null, null, null, Label.Files, "File1"))
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@submitButton</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Cancel</a>
+        </div>
+    </div>
+}
+

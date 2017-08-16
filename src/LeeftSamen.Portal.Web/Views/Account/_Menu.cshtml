@@ -1,0 +1,149 @@
+﻿@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Account.MenuViewModel
+<div id="sticky-anchor"></div>
+<div id="sticky">
+    <div id="side-menu" class="collapse navbar-collapse" role="navigation">
+
+        <div id="user-neighborhood">
+            @Html.Action("PostalCode", "Users")
+            <span class="arrow-up"></span>
+        </div>
+
+        <ul class="nav nav-pills nav-stacked">
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Home") ? "class=\"active\"" : string.Empty)>
+                @{ Html.RenderAction("HomePageIcon", "HelpIcon"); }
+                <a href="@Url.RouteUrl("Default", new { controller = "Home" })" onclick="_paq.push(['trackEvent', 'Click', 'StartPage']);" class="menu-item">
+                    <span class="menu-icon home"></span>
+                    @Button.StartPage
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "NeighborhoodMessages") ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "Index" })" class="menu-item">
+                    <span class="menu-icon news"></span>
+                    @Button.NeighborhoodMessages
+                    @if (Model.NeigborhoodMessages > 0)
+                    {
+                        <span class="new">@Model.NeigborhoodMessages</span>
+                    }
+                </a>
+            </li>
+            @{
+                var isCircleActivity = ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Activities") && ViewContext.ParentActionViewContext.RouteData.Values.ContainsKey("circleId") || Request["circleId"] != null;
+            }
+            <li @Html.Raw((ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Activities") && !isCircleActivity) ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Index" })" class="menu-item">
+                    <span class="menu-icon agenda"></span>
+                    @Button.NeighborhoodActivities
+                    @if (Model.Activities > 0)
+                    {
+                        <span class="new">@Model.Activities</span>
+                    }
+                </a>
+            </li>
+            @{
+                var isCircleMarketplace = ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Marketplace") && ViewContext.ParentActionViewContext.RouteData.Values.ContainsKey("circleId");
+                var category = -1;
+                if (Request["Category"] != null)
+                {
+                    int.TryParse(Request["Category"], out category);
+                }
+                if (Request["CategoryId"] != null)
+                {
+                    int.TryParse(Request["CategoryId"], out category);
+                }
+            }
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Marketplace") && !isCircleMarketplace && category == 2 ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new {controller = "Marketplace", action = "Overview", Category = 2})" class="menu-item">
+                    <i class="fa fa-shopping-cart fa-menu"></i>
+                    @Button.StuffForSale
+                    @if (Model.ForSale > 0)
+                    {
+                        <span class="new">@Model.ForSale</span>
+                    }
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Marketplace") && !isCircleMarketplace && category == 3 ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new {controller = "Marketplace", action = "Overview", Category = 3})" class="menu-item">
+                    <i class="fa fa-exchange fa-menu"></i>
+                    @Button.StuffToBorrow
+                    @if (Model.ToBorrow > 0)
+                    {
+                        <span class="new">@Model.ToBorrow</span>
+                    }
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Marketplace") && !isCircleMarketplace && category == 1 ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new {controller = "Marketplace", action = "Overview", Category = 1})" class="menu-item">
+                    <i class="fa fa-cutlery fa-menu"></i>
+                    @Button.Meals
+                    @if (Model.Meals > 0)
+                    {
+                        <span class="new">@Model.Meals</span>
+                    }
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Marketplace") && !isCircleMarketplace && category == 0 ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new {controller = "Marketplace", action = "Overview", Category = 0})" class="menu-item">
+                    <i class="fa fa-users fa-menu"></i>
+                    @Button.NeighbourHelp
+                    @if (Model.NeighborHelp > 0)
+                    {
+                        <span class="new">@Model.NeighborHelp</span>
+                    }
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Organizations") ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new { controller = "Organizations", action = "Index" })" class="menu-item">
+                    <span class="menu-icon companies"></span>
+                    @Button.Organizations
+                    @if (Model.Organisations > 0)
+                    {
+                        <span class="new">@Model.Organisations</span>
+                    }
+                </a>
+            </li>
+            <li>
+                @Html.Action("MenuActions", "Action")
+            </li>
+            @{
+                var myCirclesSelected = isCircleMarketplace || isCircleActivity || (string.Equals(ViewUtils.GetController(ViewContext.ParentActionViewContext), "Circles", StringComparison.OrdinalIgnoreCase) && !string.Equals(ViewUtils.GetAction(ViewContext.ParentActionViewContext), "Public", StringComparison.OrdinalIgnoreCase)) || string.Equals(ViewUtils.GetController(ViewContext.ParentActionViewContext), "Jobs");
+            }
+            <li @Html.Raw(myCirclesSelected ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new { controller = "Circles", action = "Index" })" class="menu-item">
+                    <span class="menu-icon my-circle"></span>
+                    @Button.MyCircles
+                    @if (Model.Circles > 0)
+                    {
+                        <span class="new">@Model.Circles</span>
+                    }
+                </a>
+            </li>
+            <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext.ParentActionViewContext, "Circles", "Public") ? "class=\"active\"" : string.Empty)>
+                <a href="@Url.RouteUrl("Default", new { controller = "Circles", action = "Public" })" class="menu-item">
+                    <span class="menu-icon public-circle"></span>
+                    @Button.PublicCircles
+                    @if (Model.PublicCircles > 0)
+                    {
+                        <span class="new">@Model.PublicCircles</span>
+                    }
+                </a>
+            </li>
+            @Html.Action("FeaturedCircles", "Circles", new { controller = ViewUtils.GetController(ViewContext.ParentActionViewContext) })
+            <li class="menu-button">
+                @Html.Action("MenuSquares", "Squares")
+            </li>
+            <li>
+                <a onclick="_paq.push(['trackEvent', 'Help', 'YouTube']);" href="https://www.youtube.com/watch?v=ZtGGuRjDljg&list=PLHvW0o_IfM07IKKoWIX3Aipkphfv86rIH" target="_blank" class="menu-item">
+                    <i class="fa fa-youtube-play fa-menu"></i> @Button.InstructionVideos
+                </a>
+            </li>
+            <li>
+                <a onclick="_paq.push(['trackEvent', 'Help', 'Email']);" href="mailto:info@leeftsamen.nl" class="menu-item">
+                    <i class="fa fa-envelope-o fa-menu"></i> @Button.SendUsAnEmail
+                </a>
+            </li>
+        </ul>
+        <div class="btn btn-default sidebar-suggestion" data-target="#suggestionModal" data-toggle="modal">@Button.GiveSuggestion</div>
+    </div>
+</div>
+

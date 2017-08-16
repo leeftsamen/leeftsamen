@@ -1,0 +1,131 @@
+﻿@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Activities.IndexViewModel
+@{
+    ViewBag.Title = Title.Activities;
+    if (Model.ShownInCircle.HasValue)
+    {
+        ViewBag.Title = Title.CircleActivities;
+    }
+}
+
+@if (Model.ShownInCircle.HasValue)
+{
+    @Html.Action("DetailHeader", "Circles", new { id = Model.ShownInCircle })
+    @*<h1 class="page-title-small">@ViewBag.Title</h1>*@
+}
+else
+{
+    <h1 class="page-title">@ViewBag.Title</h1>
+}
+
+
+
+<div class="page-buttons">
+    <div class="menu-background"></div>
+    <div class="bottom-display">
+        <div class="open-menu">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+    <div class="buttons">
+        <a class="btn btn-primary btn-small" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Create", circleId = Model.ShownInCircle })">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            @Button.CreateActivity
+        </a>
+        @if (!Model.ShownInCircle.HasValue)
+        {
+            <a class="btn btn-primary btn-small" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "CreateBulk", circleId = Model.ShownInCircle })">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                @Button.CreateActivities
+            </a>
+        }
+        @if (Model.HelpIcons.Any(h => h.Type == "activity-create"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-create");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-create", HelpText = helpIcon.Text });
+        }
+    </div>
+</div>
+
+@{
+    var items = new List<MenuItemModel>();
+    items.Add(
+    new MenuItemModel(
+        "Default",
+        new RouteValueDictionary(new { controller = "Activities", action = "Index", circleId = Model.ShownInCircle }),
+        Button.ActivitiesUpcoming,
+        ViewUtils.IsActiveAction(ViewContext, "Activities", "Index")
+    ));
+    items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "Activities", action = "MyActivities", circleId = Model.ShownInCircle }),
+            Button.ActivitiesSelfOrganized,
+            ViewUtils.IsActiveAction(ViewContext, "Activities", "MyActivities")
+        ));
+}
+@Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)
+
+@*@if (ViewUtils.IsActiveAction(ViewContext, "Activities", "Index"))
+{
+    using (Html.BeginForm("Index", "Activities", FormMethod.Get))
+    {
+        <div class="panel-blue shift-left search-box">
+            <label class="search-label">Filteren op leeftijd:</label>
+            <div class="search-bar full">
+                @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-search"><i class="fa fa-plus"></i> @Button.Search</button>
+            <div class="block-left"></div>
+        </div>
+    }
+}*@
+
+<div class="content-left clear">
+
+
+    @*<div class="relative-inline-block button-margin visible-xs">
+        <a class="btn btn-primary" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Create", circleId = Model.ShownInCircle })">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            @Button.CreateActivity
+        </a>
+        @if (Model.HelpIcons.Any(h => h.Type == "activity-create"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-create");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-create", HelpText = helpIcon.Text });
+        }
+    </div>*@
+
+
+    @*<div class="panel panel-default has-nav">
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li>
+                    @if (Model.HelpIcons.Any(h => h.Type == "activity-upcoming"))
+                    {
+                        var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-upcoming");
+                        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-upcoming", HelpText = helpIcon.Text });
+                    }
+                </li>
+                <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Activities", "Index") ? "class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl(Model.ShownInCircle.HasValue ? "CircleActivities" : "Default", new { controller = "Activities", action = "Index", circleId = Model.ShownInCircle })">@Button.ActivitiesUpcoming</a>
+                </li>
+                <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Activities", "MyActivities") ? "class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl(Model.ShownInCircle.HasValue ? "CircleMyActivities" : "Default", new { controller = "Activities", action = "MyActivities", circleId = Model.ShownInCircle })">@Button.ActivitiesSelfOrganized</a>
+                </li>
+                <li>
+                    @if (Model.HelpIcons.Any(h => h.Type == "activity-self-organized"))
+                    {
+                        var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-self-organized");
+                        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-self-organized", HelpText = helpIcon.Text });
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>*@
+
+    @Html.Action("ActivitiesOverview", Model)
+</div> <!-- Activities/Index.cshtml .content-left -->

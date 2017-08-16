@@ -1,0 +1,59 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Common.Extensions;
+@model LeeftSamen.Portal.Web.Models.Notifications.IndexViewModel
+@{
+    ViewBag.Title = Title.Notifications;
+}
+
+
+<h1>@ViewBag.Title</h1>
+
+@if (Model.Notifications.Count > 0)
+{
+    var lastDayDate = new DateTime();
+    var tableOpened = false;
+    foreach (var notification in Model.Notifications.OrderByDescending(i => i.CreationDateTime.Date))
+    {
+        if (lastDayDate.Date != notification.CreationDateTime.Date)
+        {
+            lastDayDate = notification.CreationDateTime;
+            if (tableOpened)
+            {
+                @Html.Raw("</Table>");
+            }
+            var label = notification.CreationDateTime.ToString("dddd d MMMM yyyy");
+            if (notification.CreationDateTime.IsToday())
+            {
+                label = Label.Today;
+            }
+            if (notification.CreationDateTime.IsYesterday())
+            {
+                label = Label.Yesterday;
+            }
+
+            @Html.Raw("<span class=\"label label-block label-default\" style=\"position:static;\">" + label + "</span>")
+            @Html.Raw("<table class=\"table\" style=\"background: white; border: 1px solid #ddd\">"
+                      + "<colgroup><col style=\"width:5%\"/><col style=\"width:95%\"/></colgroup>")
+            tableOpened = true;
+        }
+        <tr>
+            <td class="vert-align">@notification.CreationDateTime.ToString("HH:mm")</td>
+            <td class="vert-align">
+                @if (!notification.Read)
+                {
+                    <label class="label label-primary">@Label.New</label>
+                }
+                <a href="@notification.Url" style="text-decoration: none">@Html.Raw(notification.Message)</a>
+            </td>
+        </tr>
+    }
+    if (tableOpened)
+    {
+        @Html.Raw("</Table>");
+    }
+}
+else
+{
+    <h3>@Title.NoNotificationsFound</h3>
+}

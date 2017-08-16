@@ -1,0 +1,122 @@
+﻿<script>
+    var resultset;
+    var fetching = false;
+    var firstchar = '';
+    // Overrides the default autocomplete filter function to search only from the beginning of the string
+    $.ui.autocomplete.filter = function (array, term) {
+        var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+        return $.grep(array, function (value) {
+            return matcher.test(value.label || value.value || value);
+        });
+    };
+    angular.module('OrganizationApp', [])
+        .service('organizationService', function ($http) {
+            return {
+                getDistricts: function (url, city) {
+                    fetching = true;
+                    return $http.get(url + "?city=" + city);
+                }
+            };
+        })
+        .controller('DefineNeighborhoodController', [
+                'organizationService', '$scope', function (organizationService, $scope) {
+                    $scope.districtsByCityUrl = '@Html.Raw(Ajax.JavaScriptStringEncode(Url.Action("DistrictsByCity", "Organizations")))';
+                    $scope.city = '@Html.Raw(Ajax.JavaScriptStringEncode(Model.City))';
+                    $scope.districtsInCity = @Html.Raw(Json.Encode(Model.DistrictsInCity));
+                    $scope.cities = [];
+                    $scope.getDistricts = function () {
+                        if ($scope.city.length != 0){
+                            // check if the first character was changed. If so we do a service call.
+                            // Else we can use the data we already got.
+                            if (firstchar != $scope.city.charAt(0))
+                            {
+                                firstchar = $scope.city.charAt(0);
+                                organizationService.getDistricts($scope.districtsByCityUrl, $scope.city).then(function (result) {
+                                    resultset = result.data;
+                                    fetching = false;
+                                    handleDistrictResult(organizationService, $scope);
+                                });
+                            }
+                        }
+                        handleDistrictResult(organizationService, $scope);
+                    }
+                }
+        ])
+        .controller('ServicesController', [
+             '$scope', function ($scope) {
+                 $scope.services = @Html.Raw(Json.Encode(Model.Services));
+
+                 $scope.addService = function () {
+                     $scope.services.push({ });
+                 }
+                 $scope.deleteService = function (item) {
+                     var index = $scope.services.indexOf(item);
+                     $scope.services.splice(index, 1);
+                 }
+             }
+        ])
+     .controller('ProductsController', [
+             '$scope', function ($scope) {
+                 $scope.products = @Html.Raw(Json.Encode(Model.Products));
+
+                 $scope.addProduct = function () {
+                     $scope.products.push({ });
+                 }
+                 $scope.deleteProduct = function (item) {
+                     var index = $scope.products.indexOf(item);
+                     $scope.products.splice(index, 1);
+                 }
+             }
+     ]);
+    function handleDistrictResult(organizationService, $scope){
+        if (resultset && resultset.length > 0 && fetching != true){
+
+            $scope.districtsInCity = [];
+            if(resultset[0].Name == $scope.city)
+            {
+                $scope.districtsInCity = resultset[0].Districts;
+                if(!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }
+            $scope.cities = [];
+            $.each(resultset, function (index,item){
+                $scope.cities.push(item.Name);
+            });
+
+            $(".auto-complete-cities").autocomplete({
+                source: $scope.cities,
+                select: function (event, selectedItem) {
+                    // Do something with the selected item, e.g.
+                    $scope.city = selectedItem.item.value;
+
+                    $.each(resultset, function (index,item){
+                        if (item.Name == $scope.city){
+                            $scope.districtsInCity = item.Districts;
+                        }
+                    });
+                    if(!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                },
+                response: function( event, data ) {
+                    if (data.content.length == 1 && data.content[0].value == $scope.city){
+                        $.each(resultset, function (index,item){
+                            if (item.Name == $scope.city){
+                                $scope.districtsInCity = item.Districts;
+                            }
+                        });
+                        if(!$scope.$$phase) {
+                            $scope.$apply();
+                        }
+                    }
+                }
+            });
+        } else {
+            $scope.districtsInCity = null;
+            if(!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }
+    }
+</script>

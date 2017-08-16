@@ -1,0 +1,17 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.MarketplaceReactionModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, Model.ReceiverName)</p>
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.MarketplaceReaction, Model.SenderName, Model.MarketplaceItemTitle)
+</p>
+<p style="margin-top:0;margin-bottom:48px;text-align:center">
+    <a href="@Model.ReactionUrl" style="font-size:24px">@Email.MarketplaceReactionLinkText</a>
+</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    @Email.MarketplaceReactionReason
+}

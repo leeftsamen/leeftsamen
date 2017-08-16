@@ -1,0 +1,15 @@
+﻿@using System
+@model LeeftSamen.Portal.Web.Models.FileUploadModel
+
+
+@{
+
+    throw new Exception("Hidden image upload is obsolete. Does not work on Android systems. Refrain from using this.");
+    
+}
+
+<span class="btn btn-default btn-file" style="display: none;">
+    @Button.ChooseImageFromPC <input id="circle-photo-input" type="file" name="@Model.InputName" class="file-input" accept="image/gif, image/jpeg, image/png">
+</span>
+
+@Html.ValidationMessage(Model.InputName, null, new { @class = "help-block" })

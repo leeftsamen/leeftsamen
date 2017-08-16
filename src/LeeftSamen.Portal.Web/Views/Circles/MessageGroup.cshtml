@@ -1,0 +1,71 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Circles.MessagingGroupModel
+@{
+    ViewBag.Title = Model.CircleName;
+
+    var routeValues = new RouteValueDictionary();
+    routeValues.Add("id", Model.CircleId);
+    routeValues.Add("groupId", Model.GroupId);
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+<a class="btn btn-default" href="@Url.RouteUrl("DefaultDetail", new { action = "Messaging", controller = "Circles", id = Model.CircleId })">@Button.BackToOverview</a>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-10">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3>
+                    @string.Join(", ", Model.Receivers.Select(r => r.Name))
+                </h3>
+            </div>
+            <div class="panel-body">
+                @if (Model.Messages.Count > 5)
+                {
+                <div class="margin-bottom-10-px text-center">
+                    <a href="" onclick="$('.messages-toggle').toggle(); $(this).siblings().andSelf().toggle(); return false">@Label.EarlierEmails (@Model.Messages.Count())</a>
+                    <a href="" onclick="$('.messages-toggle').toggle(); $(this).siblings().andSelf().toggle(); return false" style="display:none">@Label.LessEmails</a>
+                </div>
+                }
+                <div class="messages-toggle" style="display:none;">
+                    @foreach (var message in Model.Messages.Take(Math.Max(0, Model.Messages.Count - 5)))
+                    {
+                        <div class="@(message.UserId == Model.CurrentUserId ? "message-self" : "message-other")">
+                            <label>
+                                @if (Model.Receivers.Count > 1)
+                                {
+                                    @message.UserName<br />
+                                }
+                                @message.CreationDate.ToTimeAgoString()
+                            </label>
+                            <div class="text">@Html.Raw(message.Text)</div>
+                        </div>
+                    }
+                </div>
+                @foreach (var message in Model.Messages.Skip(Math.Max(0, Model.Messages.Count - 5)))
+                {
+                    <div class="@(message.UserId == Model.CurrentUserId ? "message-self" : "message-other")">
+                        <label>
+                            @if (Model.Receivers.Count > 1)
+                            {
+                                @message.UserName<br />
+                            }
+                            @message.CreationDate.ToTimeAgoString()
+                        </label>
+                        <div class="text">@Html.Raw(message.Text)</div>
+                    </div>
+                }
+                @using (Html.BeginForm("CreateEmail", "Circles", routeValues))
+                {
+                    @Html.AntiForgeryToken()
+                    <div style="margin-left:30px;">
+                        @Html.TextAreaFor(m => m.MessageText, new { @class = "form-control"})
+                        <button class="btn btn-primary circle-message-btn" type="submit" style="margin-top:5px;">@Button.SendMessage</button>
+                    </div>                     
+                }
+            </div>
+        </div>
+    </div>
+</div>

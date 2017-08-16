@@ -1,0 +1,370 @@
+﻿@using LeeftSamen.Portal.Web.Utils
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @Title.AppName</title>
+    @Styles.Render("~/Content/css")
+    @RenderSection("stylesheets", false)
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+</head>
+
+@{ string bodyclass = null;}
+@if (ViewBag.BackgroundPoster != null)
+{
+    bodyclass = "not-authenticated body-home";
+}
+else if (Request.IsAuthenticated == false)
+{
+    bodyclass = "not-authenticated";
+}
+
+<body class="@bodyclass">
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-WWVMG8"
+                height="0" width="0" style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WWVMG8');
+    </script>
+    <!-- End Google Tag Manager -->
+
+
+<div class="background">
+    <div class="bg-container">
+        <div class="head"></div>
+        <div class="bg"></div>
+    </div>
+    <div class="right"></div>
+    <div class="head-right"></div>
+</div>
+
+<div id="view-wrapper" class="row">
+    <div class="container content">
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header navbar-left">
+                <a href="~/" class="navbar-brand" onclick="_paq.push(['trackEvent', 'Click', 'Logo']);">
+                    <div id="logo">
+                        @*<img src="/Content/Images/leeftsamen_logo.png" alt="Leeftsamen" />*@
+                    </div>
+                </a>
+            </div>
+
+            @if (Request.IsAuthenticated)
+            {
+                var query = ViewUtils.GetController(ViewContext).ToLower() == "search" ? Request.QueryString["query"] : string.Empty;
+
+                <div class="navbar-right">
+                    <form method="get" action="@Url.RouteUrl("Default", new { controller = "Search", action = "Index" })" class="search-form">
+                        <div class="search-expand">
+                            <button type="submit" id="searchSubmit" class="glyphicon glyphicon-search"></button>
+                            <div id="searchBox">
+                                <input name="query" value="@query" type="text" id="searchBoxInput" placeholder="@PlaceHolder.TypeToSearch" tabindex="1" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#side-menu">
+                        <span class="sr-only">@Label.Toggle</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            }
+
+            <ul class="nav navbar-nav navbar-right">
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.Action("Header", "Account")
+                }
+                else
+                {
+                    @Html.Partial("_LoginBox", new LeeftSamen.Portal.Web.Models.Account.LoginViewModel())
+                }
+            </ul>
+
+        </div>
+
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Action("menu", "Account")
+        }
+
+        @Html.Partial("_Notification")
+        <div id="maincontent">
+            @RenderBody()
+        </div>
+
+        <div class="clearfix"></div>
+
+        <footer class="home-footer">
+            <p>&copy; @DateTime.Now.Year @Text.FooterAllRightsReserved</p>
+            <a onclick="_paq.push(['trackEvent', 'Footer', 'Email']);" href="mailto:info@leeftsamen.nl">@Text.FooterSendUsAnEmail</a>
+            &nbsp;-&nbsp;
+            <a onclick="_paq.push(['trackEvent', 'Footer', 'Twitter']);" href="https://twitter.com/leeftsamen" target="_blank">@Text.FooterFollowUsOnTwitter</a>
+            &nbsp;-&nbsp;
+            <a onclick="_paq.push(['trackEvent', 'Footer', 'YouTube']);" href="https://www.youtube.com/channel/UCMSecnetQiinO6K0LDLzQcw" target="_blank">@Text.FooterFollowUsOnYouTube</a>
+            &nbsp;-&nbsp;
+            <a onclick="_paq.push(['trackEvent', 'Footer', 'TermsAndConditions']);" href="@Url.Action("termsandconditions", "page")">@Text.FooterTermsAndConditions</a>
+        </footer>
+    </div>
+</div>
+
+    @Html.Partial("_ModalReportAbuse")
+    @Html.Partial("_SuggestionModal", new LeeftSamen.Portal.Web.Models.Suggestion.SuggestionModalViewModel())
+    @Html.Partial("_Modal")
+    @RenderSection("modals", false)
+
+    <div id="__AjaxAntiForgeryForm">
+        @Html.AntiForgeryToken()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    @*@Scripts.Render("~/bundles/font")*@
+    @Scripts.Render("~/bundles/leeftsamen")
+    @RenderSection("scripts", false)
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').hover(
+                function () {
+                    return;
+                },
+                function () {
+                    if ($(this).data("submit") != false) {
+                        $(this).parents("form").submit();
+                    }
+                });
+
+            @* Configure the contents of the generic modal *@
+            if ($('#modal-welcome').length === 1 && readCookie("welcome") == null) {
+                $('#modal-welcome').modal('toggle');
+                createCookie("welcome", "1", 365);
+            }
+
+            // Bootstrap modal IOS9 quick-fix
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                document.querySelector('meta[name=viewport]')
+                  .setAttribute(
+                    'content',
+                    'initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no'
+                  );
+            }
+
+            $('#modal').on('show.bs.modal', function (event) {
+                var triggerButton = $(event.relatedTarget);
+                var modal = $(this);
+                modal.find('.modal-title').text(triggerButton.data('title'));
+                modal.find('.modal-body p').text(triggerButton.data('body'));
+
+                var form = modal.find('form');
+                form.attr('action', triggerButton.data('action'));
+                form.attr('method', triggerButton.data('method') || 'post');
+
+                var hiddenInputs = modal.find('form .hidden').empty();
+                var hiddenData = triggerButton.data('hidden');
+                for (var name in hiddenData) {
+                    $("<input>").attr({ "type": "hidden", "name": name }).val(hiddenData[name]).appendTo(hiddenInputs);
+                }
+
+                modal.find('button[type="submit"]').text(triggerButton.data('button'));
+            });
+
+            @* Make table-rows with a href data attribute clickable. *@
+            $('.table tr[data-href]').click(function (e) {
+                e.preventDefault();
+                window.location = $(this).data('href');
+            });
+
+            $(".datepicker-control > input").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+            $(".datepicker-control.futuredate > input").datepicker("option", "minDate", new Date());
+
+            $(".datepicker-control button").click(function () {
+                $(this).parent().find("input").datepicker("show");
+            });
+
+            if (typeof $('#colorselector').colorselector === "function") {
+                $('#colorselector').colorselector();
+            }
+
+            @* Display name of selected file *@
+            $(".file-input").change(function () {
+                $(this).parents(".form-group:first").find(".file-input-filename").html($(this).val().replace("C:\\fakepath\\", ""));
+            });
+        });
+
+        function postalCodeCheck(postalCode, houseNumber) {
+            return $.post('@Html.Raw(Ajax.JavaScriptStringEncode(Url.Action("PostalCodeCheck", "Register")))', {
+                __RequestVerificationToken: $('#__AjaxAntiForgeryForm input[name=__RequestVerificationToken]').val(),
+                postalCode: postalCode,
+                houseNumber: houseNumber
+            });
+        }
+    </script>
+    @if (Request.IsAuthenticated)
+    {
+        <audio id="notification" src="~/Content/Audio/notification.mp3" preload="none"></audio>
+        <script>
+            function checkForNewNotifictions() {
+                $.ajax({
+                    url: '@Html.Raw(Ajax.JavaScriptStringEncode(Url.RouteUrl("Default", new { controller = "Notifications", action = "GetNewNotificationStripped" })))'
+                }).done(function (data) {
+                    if (typeof data.Message !== "undefined") {
+                        if (("Notification" in window)) {
+                            var notification;
+                            if (Notification.permission === "granted") {
+                                notification = new Notification(data.Message);
+                                notification.onclick = function () {
+                                    window.location = data.Url;
+                                };
+                            } else if (Notification.permission !== 'denied') {
+                                Notification.requestPermission(function (permission) {
+                                    if (permission === "granted") {
+                                        notification = new Notification(data.Message);
+                                        notification.onclick = function () {
+                                            window.location = data.Url;
+                                        };
+                                    }
+                                });
+                            }
+
+                            document.getElementById('notification').play();
+                            if (!document.querySelectorAll('#latestNotifications a[data-notification="' + data.NotificationId + '"]').length) {
+                                $('#latestNotifications').prepend(
+                                    '<li>' +
+                                    '<a data-notification="' + data.NotificationId + '" href="' + data.Url + '">' +
+                                    '<label class="label label-primary">@Label.New</label> ' + data.Message +
+                                    '</a>' +
+                                    '</li><li class="divider"></li>');
+                                var badge = $('#unreadNotificationsBadge');
+                                badge.html(parseInt(badge.html()) + 1);
+                                badge.css({ display: "inline-block" });
+                            }
+                        }
+                    }
+                }).fail(function () {
+                    window.clearInterval(checkForNewNotifictionsIntervalId);
+                });
+            }
+
+            function createCookie(name, value, days) {
+                var expires = "";
+
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toGMTString();
+                }
+
+                document.cookie = name + "=" + value + expires + "; path=/";
+            }
+
+            function readCookie(name) {
+                var nameEq = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                        c = c.substring(1, c.length);
+                    }
+
+                    if (c.indexOf(nameEq) === 0) {
+                        return c.substring(nameEq.length, c.length);
+                    }
+                }
+
+                return null;
+            }
+
+            var checkForNewNotifictionsIntervalId = window.setInterval(checkForNewNotifictions, 60000);
+            checkForNewNotifictions();
+
+            $(function () {
+                if (typeof window.LeeftSamenAndroidUnsupportedFileUpload !== "undefined") {
+                    $("input[type='file']").click(function () {
+                        alert('@Text.AndroidUploadNotSupported');
+                    });
+                }
+            });
+
+            tinymce.init({
+                selector: '.text-editor',
+                style_formats_merge: false,
+                style_formats: [
+                    {
+                        title: "Inline",
+                        items: [
+                            { title: "Bold", icon: "bold", format: "bold" },
+                            { title: "Italic", icon: "italic", format: "italic" },
+                            { title: "Underline", icon: "underline", format: "underline" },
+                            { title: "Strikethrough", icon: "strikethrough", format: "strikethrough" },
+                            { title: "Superscript", icon: "superscript", format: "superscript" },
+                            { title: "Subscript", icon: "subscript", format: "subscript" },
+                            { title: "Code", icon: "code", format: "code" }
+                        ]
+                    },
+                    {
+                        title: "Blocks",
+                        items: [
+                            { title: "Paragraph", format: "p" },
+                            { title: "Blockquote", format: "blockquote" },
+                            { title: "Pre", format: "pre" }
+                        ]
+                    }
+                ],
+                invalid_elements: "h1,div,script",
+                //extended_valid_elements: "iframe[src|frameborder|width|height]", //TODO: Ask Thomas why
+                schema: "html5",
+                relative_urls: true,
+                remove_script_host: false,
+                convert_urls: false,
+                plugins: "link",
+                language: 'nl'
+            });
+        </script>
+    }
+    @using (Html.BeginForm("LinkTokenAndroid", "Account", null, FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" class="token" name="token" />
+    }
+    <script type="text/javascript">
+        $(function () {
+            if (typeof window.JavaScriptHandler !== "undefined") {
+                var token = window.JavaScriptHandler.GetIosCode();
+                if (token == '') {
+                    return;
+                }
+                var $token = $("input[type=hidden].token");
+                $token.val(token);
+                var $form = $token.closest("form");
+                $.post("/account/linktokenandroid", $form.serialize());
+            }
+        });
+    </script>
+</body>
+</html>

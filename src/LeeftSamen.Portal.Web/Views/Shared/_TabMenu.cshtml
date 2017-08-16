@@ -1,0 +1,72 @@
+﻿@using LeeftSamen.Portal.Web.Models
+@model List<LeeftSamen.Portal.Web.Models.MenuItemModel>
+@{ 
+    var i = 0;
+    if (Model != null)
+    {
+        for (i = Model.Count - 1; i > 0; i--)
+        {
+            if (Model[i].Selected)
+            {
+                break;
+            }
+        }
+    }
+}
+<div class="nav-bar">
+    @if (i == 0)
+    {
+        <span class="previous disabled"><i class="fa fa-chevron-left"></i></span>
+    }
+    else
+    {
+        if (Model[i - 1].RouteValues != null)
+        {
+            <a href="@Url.RouteUrl(Model[i-1].RouteName, Model[i-1].RouteValues)" @Html.Raw(Model[i - 1].Attributes) class="previous"><i class="fa fa-chevron-left"></i></a>
+        }
+        else
+        {
+            <a @Html.Raw(Model[i - 1].Attributes) class="previous"><i class="fa fa-chevron-left"></i></a>
+        }
+    }
+    <ul>
+        @{
+            var j = 0;
+            foreach (var menuItem in Model)
+            {
+                <li class="@(i == j ? "active" : string.Empty)">
+                    @if (menuItem.RouteValues != null)
+                    {
+                        <a href="@Url.RouteUrl(menuItem.RouteName, menuItem.RouteValues)" @Html.Raw(menuItem.Attributes)>@menuItem.Text</a>
+                    }
+                    else
+                    {
+                        <a @Html.Raw(menuItem.Attributes)>@menuItem.Text</a>
+                    }
+                </li>
+                j++;
+            }
+        }
+    </ul>
+    @if (i == Model.Count -1)
+    {
+        <span class="next disabled"><i class="fa fa-chevron-right"></i></span>
+    }
+    else
+    {
+        if (Model[i + 1].RouteValues != null)
+        {
+            <a href="@Url.RouteUrl(Model[i + 1].RouteName, Model[i + 1].RouteValues)" @Html.Raw(Model[i + 1].Attributes) class="next"><i class="fa fa-chevron-right"></i></a>
+        }
+        else
+        {
+            <a @Html.Raw(Model[i + 1].Attributes) class="next"><i class="fa fa-chevron-right"></i></a>
+        }
+    }
+    <span class="separator"></span>
+    <div class="button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+</div>

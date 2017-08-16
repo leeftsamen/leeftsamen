@@ -1,0 +1,102 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.FactDetailModel
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new {id = Model.SquareId})
+    </div>
+</div>
+
+<a class="btn btn-default" href="@Url.Action("Facts", new { id = Model.SquareId})">@Button.BackToOverview</a>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @if (Model.UserIsAdmin)
+            {
+                    <div class="dropdown pull-right margin-left-10-px">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "EditFact", id = Model.SquareId, factId = Model.FactId })">@Button.EditFact</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="javascript:void(0);"
+                                   data-toggle="modal"
+                                   data-target="#modal"
+                                   data-title="@Title.ConfirmRemoveFact"
+                                   data-body="@Text.ConfirmRemoveFact"
+                                   data-button="@Button.RemoveFact"
+                                   data-action="@Url.RouteUrl("DefaultDetail", new {controller = "Squares", action = "RemoveFact", id = Model.SquareId, factId = Model.FactId})">@Button.RemoveFact</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                <h1>@Model.Title</h1>
+                <time class="margin-bottom-10-px block" datetime="@Model.CreationDate.ToString("s")"
+                      title="@Model.CreationDate.ToString("f")">
+                    @Model.CreationDate.ToTimeAgoString()
+                </time>
+                @Html.Raw(Model.Text)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="panel-avatar">@Html.Partial("_UserProfileImage", new UserProfileImage(Model.Creator.ProfileImageId, Model.Creator.Id, "profile-image-sm"))</div>
+                <div class="panel-information">
+                    <span class="creator"><b>@Model.Creator.Name</b></span>
+                    @string.Format(Text.DistanceFromYou, Model.Distance)
+                </div>
+            </div>
+        </div>
+        @if (Model.Files.Count > 0)
+        {
+        <div class="panel panel-default fact-detail">
+            <h4>@Title.Files</h4>
+            <div class="file-list">
+                @foreach (var file in Model.Files)
+                {
+                    var fontAwesome = file.FontAwesomeClass();
+                    <div class="file">
+                        <div class="image">
+                            <a href="@Url.Action("DownloadFile", new { factId = Model.FactId, mediaId = file.MediaId })">
+                                @if (!string.IsNullOrEmpty(fontAwesome))
+                                {
+                                    <i class="fa @fontAwesome"></i>
+                                }
+                                else
+                                {
+                                    <img src="@Url.RouteUrl("SquareFactImage", new { action = "FactImage", mediaId = file.MediaId, factId = Model.FactId })" alt="">
+                                }
+                            </a>
+                        </div>
+                        <div class="name">
+                            <a href="@Url.Action("DownloadFile", new { factId = Model.FactId, mediaId = file.MediaId })">
+                                @file.Name.Truncate(25)
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.Files.Count > 1)
+            {
+            <div class="text-center download-link">
+                <a href="@Url.Action("DownloadAllFiles", new { factId = Model.FactId })" class="highlight"><i class="fa fa-download"></i> @Button.DownloadAllAttachments</a>
+            </div>
+            }
+        </div>
+        }
+    </div>
+</div>

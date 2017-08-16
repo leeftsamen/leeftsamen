@@ -1,0 +1,57 @@
+﻿@model LeeftSamen.Portal.Web.Models.Circles.CircleCreateEmailMessageModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+@Html.Partial("_InboxMenu")
+
+
+
+@using (Html.BeginForm("CreateEmailMessage", "Circles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="circleId" value="@Model.CircleId" />
+
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <h3 class="panel-title">@Html.RequiredLabelFor(m => m.subjectText)</h3>
+                @Html.TextBoxFor(m => m.subjectText, new { @class = "form-control", @placeholder = "Het onderwerp" })
+                @Html.ValidationMessageFor(m => m.subjectText, null, new { @class = "help-block" })
+
+
+                <h3>@Html.RequiredLabelFor(m => m.messageText)</h3>
+                @Html.TextAreaFor(m => m.messageText, new { @class = "form-control text-editor", @placeholder = "De tekst van het bericht" })
+                @Html.ValidationMessageFor(m => m.messageText, null, new { @class = "help-block" })
+
+
+                <h3>@Label.Users</h3>
+                @Html.ValidationMessageFor(m => m.CircleUsers, null, new { @class = "help-block" })
+                <div class="row">
+                    @foreach (var member in Model.CircleUsers)
+                    {
+                        if (member.User != Model.CurrentUser)
+                        {
+                            <h3 class="col-md-4"><span>
+                                <input class="" type="checkbox" name="checkedUsersIdList" value="@member.User.Id" 
+                                @(Model.CheckedUsers.Any(c => c == member.User.Id) ? "checked = \"checked\"" : string.Empty) />
+                                </span> @member.User.Name </h3>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-send"></span>
+                    @Button.SendMessage
+                </button>
+                <a class="btn btn-link" href="@Url.Action("InboxReceived", "Circles", new { id = Model.CircleId })">@Button.Cancel</a>
+            </div>
+
+        </div>
+}

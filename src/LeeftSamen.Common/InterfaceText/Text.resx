@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddAddressDescription" xml:space="preserve">
+    <value>Vul je postcode en huisnummer in zodat kan worden bepaald in welke buurt je woont.</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>alles</value>
+  </data>
+  <data name="AppLead" xml:space="preserve">
+    <value>Samen maken we de beste buurt!</value>
+  </data>
+  <data name="AttachmentDescription" xml:space="preserve">
+    <value>Voeg een afbeelding toe</value>
+  </data>
+  <data name="BecomePioneerDescription" xml:space="preserve">
+    <value>&lt;p&gt;Je bent één van de eerste gebruikers in jouw gemeente. Leuk! Je bent dus een echte pionier! &lt;/p&gt;&lt;p&gt;Wil je meehelpen om LeeftSamen bekend te maken binnen jouw gemeente? Meld je dan aan voor het pionierspakket!&lt;/p&gt;&lt;p&gt;Je ontvangt dan een mooi pakket met promotiemateriaal. Zo kun je je buurtgenoten ook enthousiast maken voor LeeftSamen.&lt;/p&gt;</value>
+  </data>
+  <data name="CircleCoverImageDescription" xml:space="preserve">
+    <value>De achtergrondfoto voor de kring</value>
+  </data>
+  <data name="CircleInvitationMessage" xml:space="preserve">
+    <value>{0} nodigt je uit om lid te worden van de kring '{1}'.</value>
+  </data>
+  <data name="CircleProfileImageDescription" xml:space="preserve">
+    <value>De profielfoto van de kring</value>
+  </data>
+  <data name="ConfirmGiveMemberCircleAdminRights" xml:space="preserve">
+    <value>Deze gebruiker zal ook het ledenbestand, de taken en de kring kunnen beheren.</value>
+  </data>
+  <data name="ConfirmGiveMemberOrganizationAdminRights" xml:space="preserve">
+    <value>Deze gebruiker zal ook het organisatieprofiel kunnen beheren en uit naam van de organisatie berichten kunnen plaatsen.</value>
+  </data>
+  <data name="ConfirmLeaveCircle" xml:space="preserve">
+    <value>Je kunt geen berichten meer plaatsen in deze kring.</value>
+  </data>
+  <data name="ConfirmRemoveAccount" xml:space="preserve">
+    <value>Weet je zeker dat je je volledige profiel wilt verwijderen? Al je gegevens gaan dan verloren. Je kunt dan ook niet meer inloggen. Wil je weer opnieuw inloggen dan zul je een nieuw profiel moeten aanmaken.</value>
+  </data>
+  <data name="ConfirmRemoveActivity" xml:space="preserve">
+    <value>Het verwijderen van deze activiteit kan niet ongedaan gemaakt worden.</value>
+  </data>
+  <data name="ConfirmRemoveCircle" xml:space="preserve">
+    <value>Deze kring en alle aan deze kring gekoppelde gegevens zullen verwijderd worden.</value>
+  </data>
+  <data name="ConfirmRemoveCircleMember" xml:space="preserve">
+    <value>Deze gebruiker zal geen berichten meer kunnen plaatsen in deze kring.</value>
+  </data>
+  <data name="ConfirmRemoveAdmin" xml:space="preserve">
+    <value>Deze gebruiker zal geen beheer meer kunnen doen van dit buurtplein.</value>
+  </data>
+  <data name="ConfirmRemoveJob" xml:space="preserve">
+    <value>Deze taak zal definitief verwijderd worden.</value>
+  </data>
+  <data name="ConfirmRemoveMarketplaceItem" xml:space="preserve">
+    <value>Het verwijderen van deze advertentie kan niet ongedaan gemaakt worden.</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessage" xml:space="preserve">
+    <value>Het verwijderen van dit nieuwsbericht kan niet ongedaan gemaakt worden.</value>
+  </data>
+  <data name="ConfirmRemoveOrganizationMember" xml:space="preserve">
+    <value>Deze gebruiker zal geen berichten meer kunnen plaatsen uit naam van de organisatie.</value>
+  </data>
+  <data name="ConfirmRemovePhoto" xml:space="preserve">
+    <value>Dit kan niet meer ongedaan worden gemaakt.</value>
+  </data>
+  <data name="ConfirmRemovePhotoAlbum" xml:space="preserve">
+    <value>Alle foto's in dit album zullen verwijderd worden.</value>
+  </data>
+  <data name="ConfirmSetCirclePrivate" xml:space="preserve">
+    <value>Berichten in deze kring kunnen alleen door de leden van de kring gelezen worden.</value>
+  </data>
+  <data name="ConfirmSetCirclePublic" xml:space="preserve">
+    <value>Alle berichten van deze kring zullen openbaar worden!</value>
+  </data>
+  <data name="CreateAccountDescription" xml:space="preserve">
+    <value>Maak een nieuw profiel aan.</value>
+  </data>
+  <data name="DistanceFromYou" xml:space="preserve">
+    <value>{0} km bij jou vandaan</value>
+  </data>
+  <data name="EditItemExplanation" xml:space="preserve">
+    <value>&lt;h3&gt;Korte uitleg&lt;/h3&gt;&lt;p&gt;Hier kan een korte uitleg getoond worden voor dit formulier&lt;/p&gt;</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Je e-mailadres is bevestigd.</value>
+  </data>
+  <data name="ForgotPasswordInstruction" xml:space="preserve">
+    <value>Vul het e-mailadres van jouw LeeftSamen-profiel in en we sturen je de instructies voor het instellen van een nieuw wachtwoord.</value>
+  </data>
+  <data name="ForgotPasswordInstructionsSend" xml:space="preserve">
+    <value>Er is een e-mail naar je gestuurd om je wachtwoord opnieuw in te stellen.</value>
+  </data>
+  <data name="InfoActivities" xml:space="preserve">
+    <value>Weten wat er in je buurt te doen is? Bekijk de buurtagenda of maak zelf een activiteit aan.</value>
+  </data>
+  <data name="InfoCircles" xml:space="preserve">
+    <value>Wil je met een groep mensen een kring vormen rond een thema of een activiteit? Of wil je een ondersteuningskring vormen rondom iemand? Door een kring aan te maken wordt samen iets regelen of organiseren nog gemakkelijker. Er zijn twee mogelijkheden: Je kunt een publieke kring of een privékring aanmaken. Een publieke kring is ook voor andere mensen zichtbaar. Iedereen die de kring ziet kan zich aanmelden als lid. Jij bepaalt uiteindelijk of iemand lid mag worden of niet. Een privékring daarentegen is voor niemand anders zichtbaar. Niemand kan zich voor een privékring aanmelden. Je zult dus zelf actief mensen moeten uitnodigen om lid te worden van een privékring.</value>
+  </data>
+  <data name="InfoEditMessage" xml:space="preserve">
+    <value>Je kunt je bericht wijzigen tot {0}.</value>
+  </data>
+  <data name="InfoEditReaction" xml:space="preserve">
+    <value>Je kunt je reactie wijzigen tot {0}</value>
+  </data>
+  <data name="InfoInvitations" xml:space="preserve">
+    <value>Hier vind je alle openstaande uitnodigingen voor zowel organisaties als kringen.</value>
+  </data>
+  <data name="InfoMarketplace" xml:space="preserve">
+    <value>Heb je wat nodig of wat over? Wil je iets van iemand lenen of ben je bereid iets uit te lenen? Of kan je iemand tot hulp zijn of heb je hulp nodig? Regel het bij vraag en aanbod!</value>
+  </data>
+  <data name="InfoNeighborhoodMessages" xml:space="preserve">
+    <value>Lees wat je buurtgenoten en organisaties, clubs, verenigingen en dergelijke in je buurt te melden hebben. Of schrijf zelf iets!</value>
+  </data>
+  <data name="InfoOrganizations" xml:space="preserve">
+    <value>Wil je weten welke organisaties, clubs, verenigingen en dergelijke in je buurt actief zijn? En wil je weten wat ze doen en welke producten en diensten ze aanbieden? Vind alles in de buurtgids!</value>
+  </data>
+  <data name="InviteUsersToActivityInstruction" xml:space="preserve">
+    <value>Nodig mensen uit voor deze activiteit. Mensen die nog geen profiel hebben op LeeftSamen of die niet in jouw buurt wonen kun je uitnodigen via e-mail. Mensen die al wel een profiel hebben en in jouw buurt wonen kun je uitnodigen door hun profiel aan te klikken.</value>
+  </data>
+  <data name="InviteUsersToCircleInstruction" xml:space="preserve">
+    <value>Nodig mensen uit voor deze kring. Mensen die nog geen profiel hebben op LeeftSamen of die niet in jouw buurt wonen kun je uitnodigen via e-mail. Mensen uit jouw buurt voeg je toe door te zoeken in jouw buurt.</value>
+  </data>
+  <data name="AddAdminToSquareInstruction" xml:space="preserve">
+    <value>Maak mensen beheerder voor dit buurtplein. Mensen uit jouw buurt voeg je toe door te zoeken in jouw buurt.</value>
+  </data>
+  <data name="InviteUsersToOrganizationInstruction" xml:space="preserve">
+    <value>Nodig mensen uit voor deze organisatie. Mensen die nog geen profiel hebben op LeeftSamen of die niet in jouw buurt wonen kun je uitnodigen via e-mail. Mensen uit jouw buurt voeg je toe door te zoeken in jouw buurt.</value>
+  </data>
+  <data name="LatestItemIn" xml:space="preserve">
+    <value>Laatste advertentie in</value>
+  </data>
+  <data name="NoAccountCreateOne" xml:space="preserve">
+    <value>Heb je nog geen profiel? Maak dan &lt;a href="{0}"&gt;hier&lt;/a&gt; een profiel aan.</value>
+  </data>
+  <data name="NoPhotosFound" xml:space="preserve">
+    <value>Er zijn nog geen foto's toegevoegd aan dit album.</value>
+  </data>
+  <data name="NotActiveInCity" xml:space="preserve">
+    <value>Jouw gemeente doet nog niet mee met LeeftSamen. Je kan LeeftSamen wel volledig gebruiken, maar er is nog geen ondersteuning beschikbaar vanuit jouw gemeente.</value>
+  </data>
+  <data name="NotYetRegistered" xml:space="preserve">
+    <value>Heb je nog geen profiel op LeeftSamen?</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="OrganisationThemesInstruction" xml:space="preserve">
+    <value>Je kunt één of meerdere thema's aanvinken.</value>
+  </data>
+  <data name="OrganisationThemesSettingsInstruction" xml:space="preserve">
+    <value>Geef aan met welke thema's je organisatie zich bezig houdt.</value>
+  </data>
+  <data name="OrganizationActiveInDistrictsInstruction" xml:space="preserve">
+    <value>Je kunt één of meerdere wijken aanvinken.</value>
+  </data>
+  <data name="OrganizationActivityFeed" xml:space="preserve">
+    <value>Een overzicht van alle activiteiten, geplaatst door {0}.</value>
+  </data>
+  <data name="OrganizationContactInformationInstruction" xml:space="preserve">
+    <value>Vul je contactgegevens in.</value>
+  </data>
+  <data name="OrganizationGeneralInformationInstruction" xml:space="preserve">
+    <value>Algemene informatie over je organisatie</value>
+  </data>
+  <data name="OrganizationMessagesFeed" xml:space="preserve">
+    <value>Een overzicht van alle berichten, geplaatst door {0}.</value>
+  </data>
+  <data name="OrganizationNeighborhoodSettingsInstruction" xml:space="preserve">
+    <value>Geef aan in welke omgeving je organisatie actief is.</value>
+  </data>
+  <data name="OrganizationRequest" xml:space="preserve">
+    <value>Je kan altijd een aanvraag indienen om jouw organisatie ook een plek te geven op LeeftSamen.</value>
+  </data>
+  <data name="OrganizationServiceFullTextInstruction" xml:space="preserve">
+    <value>Deze omschrijving komt op je profiel te staan. Met deze omschrijving kan je in maximaal 600 karakters een bredere omschrijving geven van je dienst.</value>
+  </data>
+  <data name="OrganizationServiceIntroductionTextInstruction" xml:space="preserve">
+    <value>Deze omschrijving komt op de overzichtspagina te staan. Presenteer in maximaal 140 karakters je dienst. Deze omschrijving kan de bezoeker overhalen meer over je dienst te weten te willen komen.</value>
+  </data>
+  <data name="OrganizationServicesInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OrganizationServiceTitleInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PasswordDescription" xml:space="preserve">
+    <value>Je wachtwoord moet minimaal 8 karakters lang zijn.</value>
+  </data>
+  <data name="PinConfirmation" xml:space="preserve">
+    <value>Als u dit bericht vast zet zal het boven aan in de lijst van de berichten gaan staan.</value>
+  </data>
+  <data name="PreferenceDelivery" xml:space="preserve">
+    <value>Levering (Ik kom het bij je brengen.)</value>
+  </data>
+  <data name="PreferencePickup" xml:space="preserve">
+    <value>Ophalen (Je kan bij mij langskomen.)</value>
+  </data>
+  <data name="ProfileImageDescription" xml:space="preserve">
+    <value>Kies een duidelijke foto van jezelf, zodat anderen je makkelijk kunnen vinden.</value>
+  </data>
+  <data name="RemoveMemberCircleAdminRights" xml:space="preserve">
+    <value>Deze gebruiker zal het ledenbestand, de taken en de kring niet meer kunnen beheren.</value>
+  </data>
+  <data name="RemoveMemberOrganizationAdminRights" xml:space="preserve">
+    <value>Deze gebruiker zal het organisatieprofiel niet meer kunnen beheren en geen berichten meer uit naam van de organisatie kunnen plaatsen.</value>
+  </data>
+  <data name="RemovePhotoAlbum" xml:space="preserve">
+    <value>Verwijder het {0} album</value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>Ongewenst gedrag, spam-berichten en ander misbruik op deze pagina kun je hier melden. LeeftSamen neemt elke melding serieus.</value>
+  </data>
+  <data name="SearchedOn" xml:space="preserve">
+    <value>Gezocht op:</value>
+  </data>
+  <data name="SetNeighborhoodRadiusDescription" xml:space="preserve">
+    <value>Stel de grootte van je buurt in.</value>
+  </data>
+  <data name="ShareActivity" xml:space="preserve">
+    <value>Deel deze activiteit.</value>
+  </data>
+  <data name="ShareMarketPlaceItem" xml:space="preserve">
+    <value>Deel deze advertentie.</value>
+  </data>
+  <data name="ShareNews" xml:space="preserve">
+    <value>Deel dit bericht</value>
+  </data>
+  <data name="UnpinConfirmation" xml:space="preserve">
+    <value>Als je dit bericht los maakt zal het bericht niet meer bovenaan in de lijst van berichten staan. (Tenzij het een nieuw bericht is natuurlijk!)</value>
+  </data>
+  <data name="WelcomeUser" xml:space="preserve">
+    <value>Welkom {0}!</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>binnen</value>
+  </data>
+  <data name="YouAreBuddyOf" xml:space="preserve">
+    <value>Deze personen hebben je de bevoegdheid gegeven om namens hen berichten te plaatsen.</value>
+  </data>
+  <data name="YourBuddies" xml:space="preserve">
+    <value>Deze personen heb je de bevoegdheid gegeven om namens jou berichten te plaatsen.</value>
+  </data>
+  <data name="YourNeighborhoodInstruction" xml:space="preserve">
+    <value>&lt;p&gt;De grootte van je buurt bepaalt welke berichten en buurtgenoten je ziet.&lt;/p&gt;&lt;p&gt;Gebruik het menu of de schuif om zelf de grootte van je buurt in te stellen.&lt;/p&gt;</value>
+  </data>
+  <data name="OrganizationProductFullTextInstruction" xml:space="preserve">
+    <value>Deze omschrijving komt op je profiel te staan. Met deze omschrijving kan je in maximaal 600 karakters een bredere omschrijving geven van je product.</value>
+  </data>
+  <data name="OrganizationProductIntroductionTextInstruction" xml:space="preserve">
+    <value>Deze omschrijving komt op de overzichtspagina te staan. Presenteer in maximaal 140 karakters je dienst. Deze omschrijving kan de bezoeker overhalen om meer over je dienst te weten te willen komen.</value>
+  </data>
+  <data name="OrganizationProductsInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OrganizationProductTitleInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessageReaction" xml:space="preserve">
+    <value>Het verwijderen van deze reactie kan niet ongedaan gemaakt worden.</value>
+  </data>
+  <data name="MarketPlaceItemIsPrivate" xml:space="preserve">
+    <value>Deze advertentie is privé.</value>
+  </data>
+  <data name="ForgotPasswordInstructionError" xml:space="preserve">
+    <value>Het emailadres wat je hebt ingetypt bestaat niet.</value>
+  </data>
+  <data name="NotYetItemsIn" xml:space="preserve">
+    <value>Nog geen advertenties in</value>
+  </data>
+  <data name="AppLeadSubText" xml:space="preserve">
+    <value>LeeftSamen is het platform van jouw buurt. Alles wat je nodig hebt in de buurt vind je hier.</value>
+  </data>
+  <data name="FooterAllRightsReserved" xml:space="preserve">
+    <value>Coöperatieve vereniging LeeftSamen - Alle rechten voorbehouden</value>
+  </data>
+  <data name="FooterFollowUsOnTwitter" xml:space="preserve">
+    <value>volg ons op Twitter</value>
+  </data>
+  <data name="FooterFollowUsOnYouTube" xml:space="preserve">
+    <value>volg ons op YouTube</value>
+  </data>
+  <data name="FooterSendUsAnEmail" xml:space="preserve">
+    <value>stuur ons een e-mail</value>
+  </data>
+  <data name="FooterTermsAndConditions" xml:space="preserve">
+    <value>algemene voorwaarden</value>
+  </data>
+  <data name="ConfirmVoteAction" xml:space="preserve">
+    <value>U kunt maar 1 keer stemmen.</value>
+  </data>
+  <data name="NotSendMessageToMarketplaceItemOwner" xml:space="preserve">
+    <value>Je kunt geen privebericht sturen.</value>
+  </data>
+  <data name="ZuiderlingRequiredForTransaction" xml:space="preserve">
+    <value>Om deze advertentie te betalen is een zuiderling account nodig.</value>
+  </data>
+  <data name="ConfirmZuiderlingTransaction" xml:space="preserve">
+    <value>De overschrijving zal hiermee definitief uitgevoerd worden.</value>
+  </data>
+  <data name="ZuiderlingTransactionPaid" xml:space="preserve">
+    <value>Advertentie betaald.</value>
+  </data>
+  <data name="ZuiderlingServiceTransactionDescription" xml:space="preserve">
+    <value>LeeftSamen betaling</value>
+  </data>
+  <data name="CircleRemoveMessage" xml:space="preserve">
+    <value>Weet je zeker dat je dit bericht wilt verwijderen uit 'Postvak IN'?</value>
+  </data>
+  <data name="CircleRemoveSendMessage" xml:space="preserve">
+    <value>Weet je zeker dat je dit bericht wilt verwijderen uit 'Verzonden berichten'?</value>
+  </data>
+  <data name="ConfirmInvitationReminder" xml:space="preserve">
+    <value>Weet je zeker dat je {0} een herinnering wilt sturen?</value>
+  </data>
+  <data name="CircleMembersAdminSubText" xml:space="preserve">
+    <value>Omdat je deze kring beheert zie je ook openstaande uitnodigingen, en kun je herinneringen sturen.</value>
+  </data>
+  <data name="NoTimelineNavigationTip" xml:space="preserve">
+    <value>Gebruik het menu rechtsbovenin om het platform te doorzoeken.</value>
+  </data>
+  <data name="FactsEmpty" xml:space="preserve">
+    <value>Er zijn op dit moment geen feiten toegevoegd aan dit buurtplein.</value>
+  </data>
+  <data name="CircleProfileNotAllowed" xml:space="preserve">
+    <value>&lt;p&gt;Uw huidige profiel heeft geen rechten om deze kring te bekijken.&lt;/p&gt;&lt;p&gt;Wissel naar uw persoonlijke account om verder te gaan.&lt;/p&gt;</value>
+  </data>
+  <data name="ConfirmZipCodeDelete" xml:space="preserve">
+    <value>Gebruikers met een verwijderde postcode zullen niet langer meer bij dit buurtplein kunnen komen.</value>
+  </data>
+  <data name="SquareCoverImageDescription" xml:space="preserve">
+    <value>De achtergrondfoto voor het buurtplein</value>
+  </data>
+  <data name="SquareProfileImageDescription" xml:space="preserve">
+    <value>De profielfoto van het buurtplein</value>
+  </data>
+  <data name="ConfirmRemoveFact" xml:space="preserve">
+    <value>Dit feiten alle aan dit feit gekoppelde bestanden zullen verwijderd worden.</value>
+  </data>
+  <data name="ReactionDeleted" xml:space="preserve">
+    <value>Deze reactie is verwijderd.</value>
+  </data>
+  <data name="ConfirmRemoveReaction" xml:space="preserve">
+    <value>Deze reactie zal verwijderd worden.</value>
+  </data>
+  <data name="ConfirmReportReaction" xml:space="preserve">
+    <value>De beheerders zullen zo snel mogelijk naar de reactie kijken.</value>
+  </data>
+  <data name="NoReportedReactions" xml:space="preserve">
+    <value>Er zijn op dit moment geen geraporteerde reacties.</value>
+  </data>
+  <data name="NoForumSubjects" xml:space="preserve">
+    <value>Er zijn nog geen onderwerpen aangemaakt</value>
+  </data>
+  <data name="NoReactions" xml:space="preserve">
+    <value>Er zijn nog geen reacties geplaatst</value>
+  </data>
+  <data name="ConfirmRemoveSubject" xml:space="preserve">
+    <value>Dit onderwerp zal verwijderd worden</value>
+  </data>
+  <data name="ConfirmRemoveOrganization" xml:space="preserve">
+    <value>Deze organisatie en alle gekoppelde gegevens zullen verwijderd worden.</value>
+  </data>
+  <data name="AndroidUploadNotSupported" xml:space="preserve">
+    <value>Het uploaden van afbeeldingen wordt niet op deze versie van je telefoon of tablet ondersteund.</value>
+  </data>
+  <data name="LockedOut" xml:space="preserve">
+    <value>This account has been locked out, please try again later.</value>
+  </data>
+  <data name="NoMessagesFound" xml:space="preserve">
+    <value>Er zijn geen berichten gevonden</value>
+  </data>
+  <data name="OverviewInvited" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; heeft de gebruiker '&lt;u&gt;&lt;strong&gt;{1}&lt;/strong&gt;&lt;/u&gt;' uitgenodigd om lid te worden van de kring.</value>
+  </data>
+  <data name="OverviewJoinRequest" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; wilt lid worden van de kring.</value>
+  </data>
+  <data name="OverviewNewMessage" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; heeft een nieuw bericht geplaatst.</value>
+  </data>
+  <data name="OverviewNewPhoto" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; heeft een nieuwe foto geplaatst.</value>
+  </data>
+  <data name="OverviewNewTask" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; heeft een nieuwe taak geplaatst genaamd '&lt;u&gt;&lt;strong&gt;{1}&lt;/strong&gt;&lt;/u&gt;'.</value>
+  </data>
+  <data name="SingleReciever" xml:space="preserve">
+    <value>Alleen jij hebt dit bericht ontvangen.</value>
+  </data>
+  <data name="ZuiderlingInfo" xml:space="preserve">
+    <value>De Zuiderling is een ruilmunt in Rotterdam. Je kunt Zuiderlingen verdienen én uitgeven  door met je talent een ander te helpen of door het talent van een ander voor jezelf in te zetten.  Je kunt je Zuiderling account &lt;a href="http://www.dezuiderling.nl/meedoen/meld-je-aan-direct-sms-de-helpdesk" target="_blank"&gt;hier&lt;/a&gt; aanvragen en koppelen aan je LeeftSamen-profiel. Zo kun je gemakkelijk Zuiderlingen verdienen én uitgeven op het LeeftSamen-platform!&lt;br /&gt;&lt;br /&gt; Je kunt je account koppelen door hieronder je mobiele nummer in te vullen en het wachtwoord in te voeren dat je van de Zuiderling ontvangen hebt. Klik &lt;a href="http://www.dezuiderling.nl/de-zuiderling/wat-de-zuiderling" target="_blank"&gt;hier&lt;/a&gt; voor meer informatie over de Zuiderling.</value>
+  </data>
+  <data name="BirthDayDescription" xml:space="preserve">
+    <value>Door je verjaardag in te vullen weten we of je boven de 18 bent. Zo kunnen we er voor zorgen dat je LeeftSamen-ervaring bij je leeftijd past. Deze gegevens zijn niet zichtbaar voor anderen en worden niet gebruikt voor andere doeleinden. Je kunt je gegevens wijzigen bij ‘Mijn profiel’.</value>
+  </data>
+  <data name="IntroHome" xml:space="preserve">
+    <value>LeeftSamen is gratis en van alle gebruikers</value>
+  </data>
+  <data name="LoginIntro" xml:space="preserve">
+    <value>&lt;p&gt; Leuk dat je ook een profiel hebt aangemaakt op LeeftSamen. We hopen dat je hier alles vindt dat je nodig hebt in jouw buurt. Wij doen ons best om het LeeftSamen-platform samen met jou beter te maken. We hopen dan ook dat je suggesties voor ons hebt, die kun je via de oranje knop “ suggesties" aan ons doorgeven.&lt;/p&gt;
+&lt;p&gt;Verder raden we je aan om direct een profielfoto toe te voegen. Dat maakt het een stuk gezelliger in de buurt!&lt;/p&gt;
+&lt;p class="hidden-xs"&gt;Door te klikken op de vraagtekens ontdek je snel alle functies van het LeeftSamen-platform.&lt;/p&gt;
+&lt;p&gt;Veel plezier bij het gebruiken van LeeftSamen!&lt;/p&gt;
+&lt;p&gt;Hartelijke groet,&lt;/p&gt;
+&lt;p&gt;Het LeeftSamen-team&lt;/p&gt;</value>
+  </data>
+  <data name="InviteMultipleUsersByEmail" xml:space="preserve">
+    <value>Je kunt meerdere mensen tegelijkertijd uitnodigen door de e-mailadressen te scheiden met een puntkomma (;), een komma (,) of een spatie.</value>
+  </data>
+  <data name="CircleEmailNewGroup" xml:space="preserve">
+    <value>Hier kun je berichten sturen naar specifieke personen binnen deze kring.&lt;br /&gt;Kies eerst één of meerdere personen waarmee je in gesprek wilt.</value>
+  </data>
+  <data name="NoDocumentsFound" xml:space="preserve">
+    <value>Er zijn nog geen documenten toegevoegd aan deze kring</value>
+  </data>
+  <data name="ConfirmRemoveEmailGroup" xml:space="preserve">
+    <value>Je zal dan geen berichten meer ontvangen van dit gesprek.</value>
+  </data>
+  <data name="NoAlbumsFound" xml:space="preserve">
+    <value>Er zijn nog geen albums toegevoegd aan deze kring.</value>
+  </data>
+  <data name="ConfirmRemoveDocument" xml:space="preserve">
+    <value>Dit kan niet meer ongedaan worden gemaakt.</value>
+  </data>
+  <data name="ContinueReading" xml:space="preserve">
+    <value>Lees verder...</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Bekijk</value>
+  </data>
+  <data name="ConfirmStartCircleEmails" xml:space="preserve">
+    <value>Je wordt weer gewaarschuwd bij nieuwe activiteiten in deze kring</value>
+  </data>
+  <data name="ConfirmStopCircleEmails" xml:space="preserve">
+    <value>Je wordt niet meer gewaarschuwd bij nieuwe activiteiten in deze kring</value>
+  </data>
+  <data name="InviteUsersToWebsite" xml:space="preserve">
+    <value>Samen maken we de beste buurt! Nodig je buren, familie, vrienden en kennissen uit voor LeeftSamen. Zo kunnen ook zij ervaren hoe leuk hun buurt is! &lt;br /&gt;&lt;br /&gt;Vul hieronder hun e-mailadressen in en je kunt ze direct een uitnodiging sturen.</value>
+  </data>
+  <data name="OverviewNewAction" xml:space="preserve">
+    <value>&lt;strong&gt;{0}&lt;/strong&gt; heeft een nieuwe activiteit geplaatst genaamd '&lt;u&gt;&lt;strong&gt;{1}&lt;/strong&gt;&lt;/u&gt;'.</value>
+  </data>
+  <data name="NotificationSettings" xml:space="preserve">
+    <value>LeeftSamen gebruikt notificaties zodat we je gemakkelijk op de hoogte kunnen houden van alle belangrijke dingen die er in jouw buurt gebeuren. Je kunt je instellingen voor het ontvangen van notificaties helemaal naar jouw wens aanpassen zodat je alleen notificaties ontvangt van de dingen die jij belangrijk vindt. 
+Hieronder kun je aanvinken voor welke onderwerpen je graag notificaties wilt ontvangen. De linkerkolom staat voor notificaties op het platform en de rechterkolom staat voor notificaties op je telefoon.</value>
+  </data>
+</root>

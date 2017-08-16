@@ -1,0 +1,71 @@
+﻿@using System.Globalization
+@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Register.AddressViewModel
+@{
+    ViewBag.Title = Title.RegisterStep2;
+}
+
+<h1>@ViewBag.Title</h1>
+<p>@Text.AddAddressDescription</p>
+<hr />
+
+@using (Html.BeginForm("Address", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="address-control">
+
+        <input type="hidden" name="Latitude" id="Latitude" value="@Model.Latitude.ToString(CultureInfo.InvariantCulture)" />
+        <input type="hidden" name="Longitude" id="Longitude" value="@Model.Longitude.ToString(CultureInfo.InvariantCulture)" />
+
+        @using (Html.BeginFormGroupFor(m => m.PostalCode))
+        {
+            @Html.RequiredLabelFor(m => m.PostalCode, new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control", @tabindex = "1", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.PostalCode, null, new { @class = "text-danger" })
+            </div>
+        }
+
+        @using (Html.BeginFormGroupFor(m => m.HouseNumber))
+        {
+            @Html.RequiredLabelFor(m => m.HouseNumber, new { @class = "col-md-3 control-label" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.HouseNumber, new { @class = "form-control", @tabindex = "2" })
+                @Html.ValidationMessageFor(m => m.HouseNumber, null, new { @class = "text-danger" })
+                <span class="privacy-info">@Label.PrivacyPolicyAddress</span>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+                <div id="NotFoundAlert" class="text-danger @(!Model.HasError ? "hidden" : "")">@Error.AddressNotFound</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-3 text-right">
+                <img id="Loader" class="hidden" src="~/Content/Images/loader16.gif" />
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Street, new { @class = "form-control", @readonly = "true" })
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-right">
+        <input type="submit" class="btn btn-primary" value="@Button.NextStep" tabindex="3" />
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/neighborhood")
+
+    <script>
+        $(function () {
+            $("#address-control").address();
+        });
+    </script>
+}

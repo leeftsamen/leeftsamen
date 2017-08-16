@@ -1,0 +1,128 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@model LeeftSamen.Portal.Web.Models.Organizations.DetailViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<a class="btn btn-default" href="@Url.RouteUrl("Default", new { controller = "Organizations", action = "Index" })">@Button.BackToOverview</a>
+<br />
+<br />
+
+<link rel="alternate" type="application/atom+xml" title="@string.Format(Title.OrganizationActivityFeed, Model.Name)" href="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "ActivityFeed", id = Model.OrganizationId })" />
+<link rel="alternate" type="application/atom+xml" title="@string.Format(Title.OrganizationMessagesFeed, Model.Name)" href="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "MessagesFeed", id = Model.OrganizationId })" />
+
+<div class="panel panel-default">
+    @Html.Action("DetailHeader", new { id = Model.OrganizationId })
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p style="white-space: pre-line">@Model.Description</p>
+            </div>
+        </div>
+        
+        @if (Model.Messages.Count > 0)
+        {
+            <h4>@Title.LatestMessages</h4>
+
+            <div class="row" id="message-items">
+                @{
+                    const int Cols = 2;
+                }
+                @for (var col = 1; col <= Cols; col++)
+                {
+                    var index = -1 * col;
+                    <div class="col-md-6">
+                        @foreach (var message in Model.Messages.OrderByDescending(i => i.CreationDateTime))
+                        {
+                            index++;
+                            if (index % Cols != 0)
+                            {
+                                continue;
+                            }
+
+                            var itemUrl = Url.RouteUrl("OrganizationMessage", new { id = Model.OrganizationId, messageId = message.MessageId });
+                            var hasImage = message.Image1Id.HasValue;
+                            <div class="panel panel-default">
+                                @if (hasImage)
+                                {
+                                    <a href="@itemUrl">
+                                        <div class="panel-heading"
+                                             style="background-image: url('@Url.RouteUrl("NeighborhoodMessage", new { action = "MessageImage", messageType = NeighborhoodMessage.MessageTypes.OrganizationMessages, messageId = message.MessageId, mediaId = message.Image1Id })')">
+                                        </div>
+                                    </a>
+                                }
+                                <div class="panel-body">
+                                    <time datetime="@message.CreationDateTime.ToString("s")"
+                                          title="@message.CreationDateTime.ToString("f")">
+                                        @message.CreationDateTime.ToTimeAgoString()
+                                    </time>
+                                    <a href="@itemUrl">
+                                        <h4>@message.Title</h4>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.ContactAndAddress</h2>
+            </div>
+            <div class="panel-body">
+                <address>
+                    <strong>@Model.Name</strong><br />
+                    @Model.Address<br />
+                    @Model.PostalCode @Model.City<br />
+
+                    @if (Model.HasPhone)
+                    {
+                        <span title="@Label.PhoneNumber" class="glyphicon glyphicon-earphone"></span>
+                        @Model.Phone
+                        <br />
+                    }
+
+                    @if (Model.HasEmail)
+                    {
+                        <span title="@Label.Email" class="glyphicon glyphicon-envelope"></span>
+                        <a href="mailto:@{ @Model.Email }">@Model.Email</a>
+                        <br />
+                    }
+
+                    @if (Model.HasWebsite)
+                    {
+                        <span title="@Label.Website" class="glyphicon glyphicon-globe"></span>
+                        <a href="@Model.Website" rel="external" target="_blank">@Model.WebsiteDisplayText</a>
+                        <br />
+                    }
+
+                    @if (Model.HasOpeningHours)
+                    {
+                        <br />
+                        <strong>@Label.OpeningHours</strong><br/>
+                        @Html.Raw(Model.OpeningHours.Replace(Environment.NewLine, "<br />"))
+                        <br />
+                    }
+
+                    <br />
+                    <span title="@Label.Website" class="glyphicon glyphicon-globe"></span>
+                    <a href="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "ActivityFeed", id = Model.OrganizationId })" target="_blank">@Button.OrganizationActivityFeed</a>
+                    <br />
+
+                    <span title="@Label.Website" class="glyphicon glyphicon-globe"></span>
+                    <a href="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "MessagesFeed", id = Model.OrganizationId })" target="_blank">@Button.OrganizationMessagesFeed</a>
+
+                </address>
+            </div>
+        </div>
+    </div>
+</div>

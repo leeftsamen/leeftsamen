@@ -1,0 +1,74 @@
+﻿@model LeeftSamen.Portal.Web.Models.Account.IndexViewModel
+@{
+    ViewBag.Title = Title.ManageAccount;
+}
+
+<h1>@ViewBag.Title.</h1>
+
+<div class="make-block shift-left">
+    <div class="panel-heading">
+        <h2 class="panel-title">@Title.ChangeAccountSettings</h2>
+    </div>
+    <div class="panel-body">
+        
+        <p class="text-success">@ViewBag.StatusMessage</p>
+
+        <dl class="dl-horizontal">
+            <dt>@Label.Name</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeName, "ChangeName")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.Username:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeUsername, "ChangeUsername")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.Password:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangePassword, "ChangePassword")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.ProfileImage:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeProfileImage, "ChangeProfileImage")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.NeighborhoodSettings:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeNeighborhood, "ChangeNeighborhood")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.ChangeEmailSettings:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeEmailSettings, "ChangeEmailSettings")
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.ChangeNotifications:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeNotifications, "ChangeNotifications")
+            </dd>
+        </dl>
+        @if (Model.AllowZuiderling)
+        {
+        <dl class="dl-horizontal">
+            <dt>@Label.ChangeZuiderling:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeZuiderlingAccount, "ChangeZuiderlingSettings")
+            </dd>
+        </dl>
+        }
+        <dl class="dl-horizontal">
+            <dt>&nbsp;</dt>
+            <dd>
+                <small>@Html.ActionLink(Button.RemoveAccount, "RemoveAccount")</small>
+            </dd>
+        </dl>
+    </div>
+</div>

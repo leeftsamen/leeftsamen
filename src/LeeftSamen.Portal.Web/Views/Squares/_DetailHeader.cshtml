@@ -1,0 +1,65 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Extensions
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Squares.DetailHeaderViewModel
+@{
+    var bg = Model.CoverImageId.HasValue ? "style=\"background-image: url('" + Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "CoverImage", id = Model.SquareId, mediaId = Model.CoverImageId }) + "')\"" : string.Empty;
+    if (string.IsNullOrEmpty(bg))
+    {
+        var c = Color.FromArgb(Model.CoverColor);
+        var c1 = ColorTranslator.ToHtml(c);
+        var c2 = ColorTranslator.ToHtml(c.ChangeBrightness(-0.25f));
+        bg = "style=\"background: linear-gradient(to top, " + c1 + " 0%, " + c2 + " 100%)\"";
+    }
+}
+<div class="panel panel-default" id="circle-header" @Html.Raw(bg)>
+    <div class="panel-body">
+
+        @if (Model.IsUserAdmin)
+        {
+        <div class="dropdown pull-right">
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "Settings", id = Model.SquareId })">@Button.EditSquare</a>
+                </li>
+            </ul>
+        </div>
+        }
+
+        <span class="label label-info">
+            @Label.PrivateSquare
+        </span>
+
+        @if (Model.ProfileImageId.HasValue)
+        {
+            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "ProfileImage", id = Model.SquareId, mediaId = Model.ProfileImageId })" alt="" class="img-circle profile-image-lg" />
+        }
+        else
+        {
+            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-lg" />
+        }
+        <h1> @Model.Name</h1>
+    </div>
+    <div class="panel-footer" style="background: white">
+        <div class="row">
+            <ul class="nav nav-tabs pull-right">
+                <li role="presentation">
+                    @if (Model.HelpIcons.Any(h => h.Type == "square-all"))
+                    {
+                        var helpIcon = Model.HelpIcons.First(h => h.Type == "square-all");
+                        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "square-all", HelpText = helpIcon.Text });
+                    }
+                </li>
+                @foreach (var menuItem in Model.MenuItems)
+                {
+                    <li role="presentation" class="@(menuItem.Selected ? "active" : string.Empty)"><a href="@Url.RouteUrl(menuItem.RouteName, menuItem.RouteValues)">@menuItem.Text</a></li>
+                }
+            </ul>
+        </div>   
+    </div>
+</div>
+
+<div style="padding:0.5em 0; margin-top:-24px" class="text-right">@Html.Partial("_ReportAbuseLink")</div>

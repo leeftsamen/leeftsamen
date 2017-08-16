@@ -1,0 +1,16 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.OrganizationInvitationModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, (string.IsNullOrWhiteSpace(Model.Name) ? "heer/mevrouw" : Model.Name))</p>
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.OrganizationInvitationInstruction, Model.InvitedByName, Model.OrganizationName)</p>
+<p style="margin-top:0;margin-bottom:48px;text-align:center">
+    <a href="@Model.AcceptInvitationUrl" style="font-size:24px">@Email.OrganizationInvitationAcceptLinkText</a>
+</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    @Email.OrganizationInvitationReason
+}

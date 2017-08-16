@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivityAttending" xml:space="preserve">
+    <value>Je bent nu aangemeld voor de activiteit '{0}'.</value>
+  </data>
+  <data name="ActivityNotAttending" xml:space="preserve">
+    <value>Je bent nu afgemeld voor de activiteit '{0}'.</value>
+  </data>
+  <data name="AskToJoinCircleSuccess" xml:space="preserve">
+    <value>Je verzoek om lid te worden van de kring is verstuurd naar de beheerders van de kring. Zij bepalen of je lid kunt worden van de kring.</value>
+  </data>
+  <data name="ChangeNameSuccess" xml:space="preserve">
+    <value>Je naam is gewijzigd.</value>
+  </data>
+  <data name="ChangeNeighborhoodSuccess" xml:space="preserve">
+    <value>Je buurt is gewijzigd.</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>Je wachtwoord is gewijzigd.</value>
+  </data>
+  <data name="ChangeProfilePictureSuccess" xml:space="preserve">
+    <value>Je profielfoto is gewijzigd.</value>
+  </data>
+  <data name="ChangeUsernameSuccess" xml:space="preserve">
+    <value>Je e-mailadres is gewijzigd.</value>
+  </data>
+  <data name="CircleCreated" xml:space="preserve">
+    <value>De kring is aangemaakt.</value>
+  </data>
+  <data name="CircleMessageCreated" xml:space="preserve">
+    <value>Je bericht is geplaatst.</value>
+  </data>
+  <data name="CircleMessageEdited" xml:space="preserve">
+    <value>Je bericht is successvol gewijzigd.</value>
+  </data>
+  <data name="CircleMessageEditTimeExpired" xml:space="preserve">
+    <value>Er is langer dan 10 minuten verstreken. Je kunt je bericht niet langer aanpassen.</value>
+  </data>
+  <data name="CircleMessageReactionCreated" xml:space="preserve">
+    <value>Je reactie is geplaatst.</value>
+  </data>
+  <data name="CircleUserAdminGiven" xml:space="preserve">
+    <value>{0} heeft nu beheerrechten voor de kring.</value>
+  </data>
+  <data name="CircleUserAdminRevoked" xml:space="preserve">
+    <value>De beheerrechten voor de kring van {0} zijn ingetrokken.</value>
+  </data>
+  <data name="DeclinedCircleRequest" xml:space="preserve">
+    <value>Je hebt de uitnodiging geweigerd.</value>
+  </data>
+  <data name="DeselectOrganizationSuccess" xml:space="preserve">
+    <value>Je plaatst nu berichten met je persoonlijke profiel.</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Je e-mailadres is bevestigd.</value>
+  </data>
+  <data name="IncorrectFileType" xml:space="preserve">
+    <value>Ongeldig bestandstype geupload</value>
+  </data>
+  <data name="JobAssignedToCurrentUser" xml:space="preserve">
+    <value>De taak is aan je toegekend.</value>
+  </data>
+  <data name="JobRemoved" xml:space="preserve">
+    <value>De taak is verwijderd.</value>
+  </data>
+  <data name="JoinRequestAccepted" xml:space="preserve">
+    <value>Het verzoek is goedgekeurd.</value>
+  </data>
+  <data name="JoinRequestRejected" xml:space="preserve">
+    <value>Het verzoek is afgewezen.</value>
+  </data>
+  <data name="LeaveCircleSuccess" xml:space="preserve">
+    <value>Je hebt de kring verlaten.</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Je bent nu ingelogd.</value>
+  </data>
+  <data name="OrganizationEditSuccess" xml:space="preserve">
+    <value>De gegevens van de organisatie zijn aangepast.</value>
+  </data>
+  <data name="OrganizationRequestSuccess" xml:space="preserve">
+    <value>De aanvraag is ingediend. Een beheerder van LeeftSamen zal de aanvraag zo spoedig mogelijk in behandeling nemen.</value>
+  </data>
+  <data name="OrganizationUserAdminGiven" xml:space="preserve">
+    <value>{0} heeft nu beheerrechten voor de organisatie.</value>
+  </data>
+  <data name="OrganizationUserAdminRevoked" xml:space="preserve">
+    <value>De beheerrechten voor de organisatie van {0} zijn ingetrokken.</value>
+  </data>
+  <data name="RemoveAccountSuccess" xml:space="preserve">
+    <value>Je account is verwijderd.</value>
+  </data>
+  <data name="RemoveCircleSuccess" xml:space="preserve">
+    <value>De kring is verwijderd.</value>
+  </data>
+  <data name="RemoveMemberFromCircleSuccess" xml:space="preserve">
+    <value>Het kringlid is uit de kring verwijderd.</value>
+  </data>
+  <data name="RemoveMemberFromOrganizationSuccess" xml:space="preserve">
+    <value>De medewerker is verwijderd.</value>
+  </data>
+  <data name="ReportAbuseReported" xml:space="preserve">
+    <value>Je melding van misbruik is verzonden. We nemen deze serieus en zullen deze zo snel mogelijk behandelen.</value>
+  </data>
+  <data name="ResetPasswordSuccess" xml:space="preserve">
+    <value>Je wachtwoord is gewijzigd.</value>
+  </data>
+  <data name="SelectOrganizationSuccess" xml:space="preserve">
+    <value>Je plaatst nu berichten als medewerker van {0}.</value>
+  </data>
+  <data name="SetCirclePrivateSuccess" xml:space="preserve">
+    <value>De kring is nu privé.</value>
+  </data>
+  <data name="SetCirclePublicSuccess" xml:space="preserve">
+    <value>De kring is nu openbaar.</value>
+  </data>
+  <data name="UserIsInvitedForTheCircle" xml:space="preserve">
+    <value>Je hebt {0} succesvol uitgenodigd om toe te treden tot je kring. {0} ontvangt een e-mail met je uitnodiging.</value>
+  </data>
+  <data name="UserIsInvitedForTheOrganization" xml:space="preserve">
+    <value>Je hebt {0} succesvol uitgenodigd om toe te treden tot je organisatie. {0} ontvangt een e-mail met je uitnodiging.</value>
+  </data>
+  <data name="UsersInvitedForTheCircleByEmail" xml:space="preserve">
+    <value>Je hebt {0} uitgenodigd om toe te treden tot je kring. De uitnodiging wordt verstuurd via e-mail.</value>
+  </data>
+  <data name="UsersInvitedForTheOrganizationByEmail" xml:space="preserve">
+    <value>Je hebt {0} uitgenodigd om toe te treden tot je organisatie. De uitnodiging wordt verstuurd via e-mail.</value>
+  </data>
+  <data name="YouAreNowACircleMember" xml:space="preserve">
+    <value>Je bent nu lid van de kring '{0}'.</value>
+  </data>
+  <data name="YouAreNowAOrganizationMember" xml:space="preserve">
+    <value>Je bent nu lid van de organisatie '{0}'.</value>
+  </data>
+  <data name="CircleMessageEditEmpy" xml:space="preserve">
+    <value>Je bericht moet minstens 1 karakter lang zijn.</value>
+  </data>
+  <data name="ChangeEmailSettingsSuccess" xml:space="preserve">
+    <value>Je e-mailinstellingen zijn gewijzigd.</value>
+  </data>
+  <data name="ActivityCreated" xml:space="preserve">
+    <value>De activiteit is aangemaakt.</value>
+  </data>
+  <data name="JobCreated" xml:space="preserve">
+    <value>De taak is aangemaakt.</value>
+  </data>
+  <data name="NeighborhoodMessageReactionCreated" xml:space="preserve">
+    <value>Je reactie is geplaatst.</value>
+  </data>
+  <data name="UserInvitedForActivity" xml:space="preserve">
+    <value>Je hebt {0} uitgenodigd om mee te doen met jouw activiteit.</value>
+  </data>
+  <data name="ActivityInvitationExpired" xml:space="preserve">
+    <value>De uitnodiging voor deze activiteit is verlopen.</value>
+  </data>
+  <data name="UserIsInvitedForTheActivityByEmail" xml:space="preserve">
+    <value>Je hebt {0} uitgenodigd om mee te doen met een activiteit. De uitnodiging wordt verstuurd via e-mail.</value>
+  </data>
+  <data name="CirclePhotoUploaded" xml:space="preserve">
+    <value>Je foto is geplaatst.</value>
+  </data>
+  <data name="CirclePhotoRemoved" xml:space="preserve">
+    <value>Je hebt de foto verwijderd.</value>
+  </data>
+  <data name="ActivitiesCreated" xml:space="preserve">
+    <value>{0} activiteiten aangemaakt</value>
+  </data>
+  <data name="CirclePhotoAlbumRemoved" xml:space="preserve">
+    <value>Je hebt het fotoalbum {0} verwijderd.</value>
+  </data>
+  <data name="CirclePhotoAlbumCreated" xml:space="preserve">
+    <value>Je hebt het fotoalbum {0} aangemaakt.</value>
+  </data>
+  <data name="CantCreatePhotoAlbum" xml:space="preserve">
+    <value>Het fotoalbum kon niet aangemaakt worden.</value>
+  </data>
+  <data name="UsersInvitedByEmailFailed" xml:space="preserve">
+    <value>Er is iets mis gegaan met het versturen van de uitnodigingen, probeer het later opnieuw.</value>
+  </data>
+  <data name="CircleMessageDeleted" xml:space="preserve">
+    <value>Het bericht is verwijderd.</value>
+  </data>
+  <data name="SuggestionSend" xml:space="preserve">
+    <value>Je suggestie is verzonden naar het LeeftSamen-team. Bedankt!</value>
+  </data>
+  <data name="VoteActionSuccess" xml:space="preserve">
+    <value>Bedankt voor jouw stem.</value>
+  </data>
+  <data name="VoteActionFailure" xml:space="preserve">
+    <value>Je stem kon niet verwerkt worden.</value>
+  </data>
+  <data name="JobEdited" xml:space="preserve">
+    <value>Je taak is aangepast</value>
+  </data>
+  <data name="ZuiderlingAccountLinked" xml:space="preserve">
+    <value>Jouw zuiderling account is gekoppeld.</value>
+  </data>
+  <data name="ZuiderlingTransactionDailyLimit" xml:space="preserve">
+    <value>Deze transactie overschrijdt het dagelijkse overmaaklimiet van jouw account.</value>
+  </data>
+  <data name="ZuiderlingTransactionError" xml:space="preserve">
+    <value>Er is iets fout gegaan bij de transactie.</value>
+  </data>
+  <data name="ZuiderlingTransactionReceiverLimit" xml:space="preserve">
+    <value>De ontvanger kan op dit moment deze hoeveelheid zuiderlingen niet meer ontvangen.</value>
+  </data>
+  <data name="ZuiderlingTransactionShortage" xml:space="preserve">
+    <value>Jouw account heeft niet meer genoeg zuiderlingen voor deze transactie.</value>
+  </data>
+  <data name="ZuiderlingTransactionSuccess" xml:space="preserve">
+    <value>Zuiderlingen overgemaakt</value>
+  </data>
+  <data name="UsersInvitedByOrganizationUserFailed" xml:space="preserve">
+    <value>Als medewerker kan je geen mensen uitnodigen voor deze activiteit.</value>
+  </data>
+  <data name="InvitationRejected" xml:space="preserve">
+    <value>Je hebt de uitnodiging van de kring '{0}' geweigerd.</value>
+  </data>
+  <data name="RemoveAdminFromSquareSuccess" xml:space="preserve">
+    <value>De beheerder is uit het buurtplein verwijderd.</value>
+  </data>
+  <data name="AddZipCodeSuccess" xml:space="preserve">
+    <value>Postcode succesvol toegevoegd</value>
+  </data>
+  <data name="ChangeForumSuccess" xml:space="preserve">
+    <value>Foruminstellingen zijn gewijzigd.</value>
+  </data>
+  <data name="RemoveFactSuccess" xml:space="preserve">
+    <value>Het feit is verwijderd.</value>
+  </data>
+  <data name="RemoveZipCodeSuccess" xml:space="preserve">
+    <value>De postcode is verwijderd.</value>
+  </data>
+  <data name="UserIsInvitedForTheSquare" xml:space="preserve">
+    <value>Je hebt {0} succesvol toegevoegd als beheerder van dit buurtplein.</value>
+  </data>
+  <data name="RemoveReactionReportSuccess" xml:space="preserve">
+    <value>Gerapporteerde reactie genegeerd</value>
+  </data>
+  <data name="RemoveReactionSuccess" xml:space="preserve">
+    <value>De reactie is verwijderd</value>
+  </data>
+  <data name="ReportReactionSuccess" xml:space="preserve">
+    <value>De reactie is gerapporteerd</value>
+  </data>
+  <data name="ActionExpired" xml:space="preserve">
+    <value>Helaas, deze actie is inmiddels afgelopen.</value>
+  </data>
+  <data name="RemoveSubjectSuccess" xml:space="preserve">
+    <value>Het onderwerp is verwijderd</value>
+  </data>
+  <data name="MessageRemovedFromInbox" xml:space="preserve">
+    <value>Het bericht is uit 'Postvak IN' verwijderd</value>
+  </data>
+  <data name="MessageRemovedFromSend" xml:space="preserve">
+    <value>Het bericht is uit 'Verzonden berichten' verwijderd</value>
+  </data>
+  <data name="MessageSendSuccess" xml:space="preserve">
+    <value>Het bericht is verzonden!</value>
+  </data>
+  <data name="CirclePhotosUploaded" xml:space="preserve">
+    <value>De {0} foto's zijn geplaatst.</value>
+  </data>
+  <data name="MessageGroupCreatedSuccess" xml:space="preserve">
+    <value>Groep aangemaakt.</value>
+  </data>
+  <data name="CircleDocsUploaded" xml:space="preserve">
+    <value>De {0} documenten zijn geplaatst.</value>
+  </data>
+  <data name="CircleDocUploaded" xml:space="preserve">
+    <value>Je document is geplaatst.</value>
+  </data>
+  <data name="JobAssignedToOtherUser" xml:space="preserve">
+    <value>Super leuk dat je dit wilde doen, maar iemand anders heeft deze al opgepakt</value>
+  </data>
+  <data name="CircleEmailGroupRemoved" xml:space="preserve">
+    <value>Je bent uit het gesprek verwijderd</value>
+  </data>
+  <data name="CircleDocumentRemoved" xml:space="preserve">
+    <value>Je hebt het document verwijderd.</value>
+  </data>
+  <data name="JobUnassigned" xml:space="preserve">
+    <value>De taak is weer vrijgegeven.</value>
+  </data>
+  <data name="CircleUserEmailStarted" xml:space="preserve">
+    <value>Je ontvangt weer emails van deze kring</value>
+  </data>
+  <data name="CircleUserEmailStopped" xml:space="preserve">
+    <value>Je ontvangt niet langer meer emails van deze kring</value>
+  </data>
+  <data name="UsersInvitedforWebsite" xml:space="preserve">
+    <value>De uitnodiging is succesvol verzonden</value>
+  </data>
+  <data name="LendMarketplaceItem" xml:space="preserve">
+    <value>Jouw vraag is doorgestuurd naar je buren!</value>
+  </data>
+  <data name="HelpMarketplaceItem" xml:space="preserve">
+    <value>Jouw vraag is doorgestuurd naar je buren!</value>
+  </data>
+  <data name="OnlyAdminOfCircle" xml:space="preserve">
+    <value>Je bent nog beheerder van de volgende kringen: {0}. Verwijder eerst deze kringen of maak iemand anders beheerder.</value>
+  </data>
+</root>

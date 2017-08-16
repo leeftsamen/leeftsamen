@@ -1,0 +1,19 @@
+﻿@model LeeftSamen.Portal.Web.Models.FileUploadModel
+
+<div class="form-group profile-img-upload">
+    <label>@Html.Raw(Model.InputLabel)</label>
+
+    @if (Model.FileId.HasValue)
+    {
+        <img src="@Url.RouteUrl(Model.RouteName, Model.RouteValues)" alt="" class="uploaded-image">
+    }
+    <div class="input-group image-picker">
+        <b class="file-input-filename"></b>
+        &nbsp;
+        <span class="btn btn-default btn-small btn-file">
+            @Button.ChooseImageFromPC <input type="file" name="@Model.InputName" class="file-input" accept="application/excel, application/pdf, text/plain, application/msword, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.spreadsheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </span>
+    </div>
+    <div class="clear"></div>
+    @Html.ValidationMessage(Model.InputName, null, new { @class = "help-block" })
+</div>

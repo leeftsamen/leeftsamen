@@ -1,0 +1,70 @@
+﻿@model LeeftSamen.Portal.Web.Models.Circles.CircleInboxSendViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+@Html.Partial("_InboxMenu")
+
+
+<div class="panel">
+    <div class="panel-body">
+        <h3 class="panel-title">Verzonden Berichten</h3>
+        @if (Model.SendEmailMessages.Count > 0)
+        {
+
+
+            <table class="table table-striped">
+                <tr>
+                    <th>@Label.To</th>
+                    <th>@Label.Subject</th>
+                    <th>@Label.Date</th>
+                    <th></th>
+                </tr>
+
+                @foreach (var emailMessage in Model.SendEmailMessages)
+                {
+                    string emailMessageReceiverNames = null;
+                    int i = 0;
+
+                    foreach (var receiver in emailMessage.Recipients)
+                    {
+                        if (receiver.Receiver != null)
+                        {
+                            emailMessageReceiverNames += receiver.Receiver.Name;
+                        }
+                        else
+                        {
+                            emailMessageReceiverNames += string.Format("[{0}]", Label.Deleted);
+                        }
+
+                        if (i < emailMessage.Recipients.Count - 1)
+                        {
+                            emailMessageReceiverNames += ", ";
+                        }
+
+                        i++;
+                    }
+
+                    <tr>
+                        <td><a href="@(Url.Action("OpenEmailMessage", "Circles", new { emailMessageId = emailMessage.MessageId }))">@emailMessage.Creator.Name</a></td>
+                        <td><a href="@(Url.Action("OpenEmailMessage", "Circles", new { emailMessageId = emailMessage.MessageId }))">@emailMessage.Subject</a></td>
+                        <td><a href="@(Url.Action("OpenEmailMessage", "Circles", new { emailMessageId = emailMessage.MessageId }))">@emailMessage.CreationDateTime.ToString("dd/MM/yyyy HH:mm")</a></td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal" data-title="@Title.CircleRemoveMessage" data-body="@Text.CircleRemoveSendMessage" data-button="Ja" data-action="@Url.Action("RemoveSendEmailMessage", "Circles", new { circleId = Model.CircleId, userId = Model.CurrentUserId, emailMessageId = emailMessage.MessageId })">
+                                <span class="glyphicon glyphicon-trash option"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        }
+        else
+        {
+            <h4>@Text.NoMessagesFound</h4>
+        }
+
+    </div>
+</div>

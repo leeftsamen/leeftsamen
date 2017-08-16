@@ -1,0 +1,264 @@
+﻿@using System.Runtime.Versioning
+@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Jobs.CreateViewModel
+@{
+    ViewBag.Title = Title.CreateNewJob;
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("Create", "Jobs", new { circleId = Model.CircleId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">1. @Title.CreateNewJobDetails</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Title))
+            {
+                @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Description))
+            {
+                @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.Description, 8, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+            }
+
+            <div class="row">
+                <div class="col-xs-12"><span class="jobs-description-info">@Label.JobCreateDescriptionInfo</span><span class="jobs-create-charcounter jobs-description-info">4000</span></div>
+            </div>
+
+            <div class="row"><br/></div>
+
+                @using (Html.BeginFormGroupFor(m => m.DueDateTime))
+            {
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.DueDateTime, new { @class = "control-label" })
+                            <div class="datepicker-control">
+                                @Html.TextBoxFor(m => m.DueDateTime, new { @class = "form-control", @Value = Model.DueDateTime == DateTime.MinValue ? string.Empty : Model.DueDateTime.ToString("dd-MM-yyyy") })
+                                <button type="button">
+                                    Kies datum
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-3 hide-time">
+                            @Html.HiddenFor(m => m.HasDueDateTimeHour, new {@Value = "true"})
+                            @Html.HiddenFor(m => m.HasDueDateTimeMinute, new {@Value = "true"})
+                            <label class="control-label">@Label.Time</label><br />
+                            <div class="timepicker">
+                                @Html.TextBoxFor(m => m.DueDateTimeHour, new {@class = "form-control", @Value = !Model.DueDateTimeHour.HasValue ? "12" : Model.DueDateTimeHour.Value.ToString("00")})
+                                <div class="separator">:</div>
+                                @Html.TextBoxFor(m => m.DueDateTimeMinute, new {@class = "form-control", @Value = !Model.DueDateTimeMinute.HasValue ? "00" : Model.DueDateTimeMinute.Value.ToString("00")})
+                            </div>
+                        </div>
+                        @using (Html.BeginFormGroupFor(m => m.DueDateTime))
+                        {
+                            <div class="col-md-3 hide-time">
+                                @Html.HiddenFor(m => m.HasDueDateTimeEndHour, new { @Value = "true" })
+                                @Html.HiddenFor(m => m.HasDueDateTimeEndMinute, new { @Value = "true" })
+                                <label class="control-label">@Label.EndTime</label><br />
+                                <div class="timepicker">
+                                    @Html.TextBoxFor(m => m.DueDateTimeEndHour, new { @class = "form-control", @Value = !Model.DueDateTimeEndHour.HasValue ? string.Empty : Model.DueDateTimeEndHour.Value.ToString("00") })
+                                    <div class="separator">:</div>
+                                    @Html.TextBoxFor(m => m.DueDateTimeEndMinute, new { @class = "form-control", @Value = !Model.DueDateTimeEndMinute.HasValue ? string.Empty : Model.DueDateTimeEndMinute.Value.ToString("00") })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.DueDateTime, null, new { @class = "help-block" })
+                }
+                <div class="row">
+                    <div class="col-md-push-6 col-md-6">
+                        @Html.CheckBoxFor(m => m.HasNoDueDate, new { onchange = "$('.hide-time').toggle(!this.checked);" })
+                        @Html.LabelFor(m => m.HasNoDueDate)
+                    </div>
+                </div>
+
+
+
+                @Html.CheckBoxFor(m => m.Repeat)
+                @Html.LabelFor(m => m.Repeat)
+
+                <div id="repeat-section" style="display: none">
+
+                    @using (Html.BeginFormGroupFor(m => m.CompletionDateTime))
+                {
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.CompletionDateTime, new { @class = "control-label" })
+                                <div class="datepicker-control">
+                                    @Html.TextBoxFor(m => m.CompletionDateTime, new { @class = "form-control", @Value = Model.CompletionDateTime == DateTime.MinValue ? string.Empty : Model.CompletionDateTime.ToString("dd-MM-yyyy") })
+                                    <button type="button">
+                                        Kies datum
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                @Html.HiddenFor(m => m.HasCompletionDateTimeHour, new { @Value = "true" })
+                                @Html.HiddenFor(m => m.HasCompletionDateTimeMinute, new { @Value = "true" })
+                                <label class="control-label">@Label.Time</label><br />
+                                <div class="timepicker">
+                                    @Html.TextBoxFor(m => m.CompletionDateTimeHour, new { @class = "form-control", @Value = !Model.HasCompletionDateTimeHour ? "12" : Model.CompletionDateTimeHour.ToString("00") })
+                                    <div class="separator">:</div>
+                                    @Html.TextBoxFor(m => m.CompletionDateTimeMinute, new { @class = "form-control", @Value = !Model.HasCompletionDateTimeMinute ? "00" : Model.CompletionDateTimeMinute.ToString("00") })
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.CompletionDateTime, null, new { @class = "help-block" })
+                }
+
+                    @using (Html.BeginFormGroupFor(m => m.Weekdays))
+                {
+                        @Html.LabelFor(m => m.Weekdays)
+                        <br />
+
+                        foreach (var day in Model.Weekdays)
+                        {
+                            <div class="weekday">
+                                @Html.CheckBoxFor(m => m.Weekdays[day.Key])
+                                @Html.LabelFor(m => m.Weekdays[day.Key], day.Key, new { @class = "weekday-label" })
+                            </div>
+                        }
+                        @Html.ValidationMessageFor(m => m.Weekdays, null, new { @class = "help-block" })
+                }
+
+                </div>
+
+            </div>
+    </div>
+
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">2. @Title.CreateNewJobVisibility</h2>
+        </div>
+        <div class="panel-body" id="selectUserModal" ng-app="SelectUserApp" ng-controller="SelectUserController">
+            @using (Html.BeginFormGroupFor(m => m.IsOnlyVisibleToSelectedMembers))
+            {
+                @Html.LabelFor(m => m.IsOnlyVisibleToSelectedMembers)<br />
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(m => m.IsOnlyVisibleToSelectedMembers, "False", new { id = "IsOnlyVisibleToSelectedMembersFalse", @ng_model = "isOnlyVisibleToSelectedMembers" }) @Label.AllCircleMembers
+                </label>
+                <label style="font-weight: normal">
+                    @Html.RadioButtonFor(m => m.IsOnlyVisibleToSelectedMembers, "True", new { id = "IsOnlyVisibleToSelectedMembersTrue", @ng_model = "isOnlyVisibleToSelectedMembers" }) @Label.OnlySelectedCircleMembers
+                </label>
+            }
+
+            <div class="ng-hide" ng-show="isOnlyVisibleToSelectedMembers == 'True'">
+                <div class="row" style="max-height: 450px; overflow-y: auto">
+                    <div class="col-md-3" ng-repeat="user in members">
+                        <div class="panel" ng-class="{true: 'panel-info', false: 'panel-default'}[!!user.Selected]">
+                            <div class="panel-heading text-center">
+                                <button type="button" class="pull-right btn btn-xs btn-xs-mobile" ng-click="toggleUserSelection(user)" ng-class="{true: 'btn-primary', false: 'btn-danger'}[!user.Selected]" style="position: absolute; right: 30px">
+                                    <span class="glyphicon glyphicon-minus ng-hide" ng-show="user.Selected"></span>
+                                    <span class="glyphicon glyphicon-plus" ng-hide="user.Selected"></span>
+                                </button>
+                                <img ng-show="user.HasProfileImage" ng-src="{{user.ProfileImageUrl}}" alt="@Label.ProfileImage" class="ng-hide img-circle profile-image" />
+                                <img ng-hide="user.HasProfileImage" src="@Url.Content("~/Content/Images/profile-image.jpg")" class="img-circle profile-image"/>
+                                <h4>{{user.UserName}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @Html.HiddenFor(m => m.SelectedMembershipIds)
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button name="JobSubmit" value="save" type="submit" class="btn btn-primary">@Button.Save</button>
+            <button name="JobSubmit" value="new" type="submit" class="btn btn-default btn-fontresize-xs">@Button.SaveAndCreateTask</button>
+            <a class="btn btn-link" href="@Url.RouteUrl("CircleSubResources", new { controller = "Jobs", circleId = Model.CircleId })">@Button.Cancel</a>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    <script>
+        angular.module('SelectUserApp', [])
+            .service('selectUserService', function($http) {
+                return {
+                    search: function(url, query) {
+                        return $http.get(url + "?q=" + query);
+                    }
+                };
+            })
+            .controller('SelectUserController', [
+                'selectUserService', '$scope', function(searchUserService, $scope) {
+                    $scope.searchUrl = '';
+                    $scope.searchQuery = '';
+                    $scope.members = [];
+                    $scope.isOnlyVisibleToSelectedMembers = "@Model.IsOnlyVisibleToSelectedMembers";
+
+                    $scope.search = function() {
+                        searchUserService.search($scope.searchUrl, $scope.searchQuery).then(function(result) {
+                            $scope.members = result.data;
+                            
+                            var selectedMembershipids = $("#SelectedMembershipIds").val().split(",");
+                            for (var i = 0; i < selectedMembershipids.length; i++) {
+                                for (var y = 0; y < $scope.members.length; y++) {
+                                    if ($scope.members[y].CircleMembershipId == selectedMembershipids[i]) {
+                                        $scope.members[y].Selected = true;
+                                    }
+                                }
+                            }
+                        });
+                    };
+
+                    var updateSelectedMembershipIds = function() {
+                        var membershipIds = [];
+                        for (var i = 0; i < $scope.members.length; i++) {
+                            var user = $scope.members[i];
+                            if (user.Selected) {
+                                membershipIds.push($scope.members[i].CircleMembershipId);
+                            }
+                        }
+
+                        $("#SelectedMembershipIds").val(membershipIds.join(','));
+                    }
+
+                    $scope.toggleUserSelection = function(user) {
+                        user.Selected = !user.Selected;
+                        updateSelectedMembershipIds();
+                    }
+                }
+            ]);
+
+        $(function() {
+            var scope = angular.element(document.getElementById('selectUserModal')).scope();
+            scope.$apply(function() {
+                scope.searchQuery = '';
+                scope.searchResult = [];
+                scope.searchUrl = '@Html.Raw(Ajax.JavaScriptStringEncode(Url.RouteUrl("DefaultDetail", new { controller = "circles", action = "SearchMembers", id = Model.CircleId })))';
+            });
+            scope.search();
+            $("#searchField").focus();
+            SetDescriptionLength();
+        });
+
+        $("#Description").keyup(function () {
+            SetDescriptionLength();
+        });
+
+        function SetDescriptionLength() {
+            var i = $("#Description").val().length + $("#Description").val().split('\n').length - 1;
+            $(".jobs-create-charcounter").text(4000 - i);
+
+            if (i > 4000) {
+                $(".jobs-description-info").css("color", "red");
+            } else {
+                $(".jobs-description-info").css("color", "#888888");
+            }
+        }
+    </script>
+}

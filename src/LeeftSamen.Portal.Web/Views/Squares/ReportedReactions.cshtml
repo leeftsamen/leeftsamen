@@ -1,0 +1,95 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Squares.ReportedReactionsModel
+@{
+    var title = Title.ReportedReactions;
+    ViewBag.Title = title;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>@title</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                @if (Model.Reactions.Count > 0)
+                {
+                    foreach (var reaction in Model.Reactions)
+                    {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>@Label.PlacedBy:</h4> 
+                            @reaction.ReactionByName
+                            <h4>@Label.ReportedBy:</h4> 
+                            @reaction.ReporterName
+                        </div>
+                        <div class="col-md-8">
+                            <div class="dropdown pull-right">
+                                <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "IgnoreReportedReaction", id = Model.SquareId, reportId = reaction.ReportId })">@Button.IgnoreReportedReaction</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "EditReaction", id = Model.SquareId, reactionId = reaction.ReactionId })">@Button.EditReaction</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a role="menuitem" href="#"
+                                           data-toggle="modal" data-target="#modal"
+                                           data-title="@Title.ConfirmRemoveReaction"
+                                           data-body="@Text.ConfirmRemoveReaction"
+                                           data-button="@Button.Remove"
+                                           data-hidden='{"id": "@Model.SquareId","reactionId": "@reaction.ReactionId", "fromReported": "true"}'
+                                           data-action="@Url.Action("RemoveReaction")">
+                                            @Button.DeleteReaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4>@Label.Message:</h4>
+                            @Html.Raw(reaction.Reaction)
+                            <div>
+                                @foreach (var media in reaction.MediaList)
+                                {
+                                        <div class="col-md-4 col-xs-6 margin-bottom-10-px">
+                                            <a data-lightbox="reaction-@reaction.ReactionId" href="@Url.RouteUrl("ForumReactionImageLarge", new { action = "ReactionImageLarge", mediaId = media.MediaId, reactionId = reaction.ReactionId })">
+                                                <img src="@Url.RouteUrl("ForumReactionImage", new { action = "ReactionImage", mediaId = media.MediaId, reactionId = reaction.ReactionId })" alt="" style="max-width:100%;">
+                                            </a>
+                                        </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    }
+                }
+                else
+                {
+                    @Text.NoReportedReactions
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Styles.Render("~/Content/lightbox")
+    @Scripts.Render("~/bundles/lightbox")
+}
+

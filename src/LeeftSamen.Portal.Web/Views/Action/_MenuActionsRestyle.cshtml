@@ -1,0 +1,9 @@
+﻿@model LeeftSamen.Portal.Web.Models.Action.ActionsMenuModel
+@if (Model.Menus != null && Model.Menus.Count > 0)
+{
+    foreach (var actionMenuItem in Model.Menus)
+    {
+        <a href="@Url.RouteUrl("Default", new {controller = "Action", action = "Index", id = actionMenuItem.ActionId})" 
+            class="btn btn-danger sidebar-action">@actionMenuItem.MenuItem</a>
+    }
+}

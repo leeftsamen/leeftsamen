@@ -1,0 +1,84 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Circles.MessagingViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="@Url.Action("CreateEmailGroup", "Circles", new { id = Model.CircleId })">@Button.NewConversation</a>
+                </div>
+                <h3 class="panel-title">@Title.Conversations</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th>@Label.Subject</th>
+                        <th>@Label.Participants</th>
+                        <th>@Label.Date</th>
+                        <th></th>
+                    </tr>
+
+                        @foreach (var group in Model.Groups)
+                    {
+                        var url = (Url.Action("MessageGroup", "Circles", new { id= Model.CircleId, groupId = group.GroupId }));
+                            <tr>
+                                <td>
+                                    <a href="@url">
+                                        @group.Name
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@url">
+                                        @foreach (var receiver in group.Receivers)
+                                        {
+                                            <span>
+                                                @*@Html.Partial("_UserProfileImage", new UserProfileImage(receiver.ProfileImageId, receiver.UserId, "profile-image-sm valign-top"))*@
+                                                @receiver.Name
+                                            </span>
+                                        }
+                                        @if (group.Receivers.Count == 0)
+                                        {
+                                            <span>
+                                            - @Label.None -
+                                            </span>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@url">
+                                        @(group.LastMessage.HasValue ? group.LastMessage.Value.ToTimeAgoString() : string.Empty)
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="dropdown pull-right" style="margin-left: -26px;">
+                                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a role="menuitem" href="#"
+                                                   data-toggle="modal" data-target="#modal"
+                                                   data-title="@Title.ConfirmRemoveEmailGroup"
+                                                   data-body="@Text.ConfirmRemoveEmailGroup"
+                                                   data-button="@Button.RemoveEmailGroup"
+                                                   data-hidden='{"groupId": "@group.GroupId"}'
+                                                   data-action="@Url.Action("RemoveEmailGroup", new {id = Model.CircleId})">@Button.RemoveEmailGroup</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

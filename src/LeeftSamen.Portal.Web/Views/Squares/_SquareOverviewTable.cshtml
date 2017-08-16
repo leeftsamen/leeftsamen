@@ -1,0 +1,34 @@
+﻿@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@model System.Collections.Generic.List<LeeftSamen.Portal.Web.Models.Squares.IndexViewModel.SquareViewModel> 
+
+<table class="table">
+    @foreach (var square in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Detail", "Squares", new {id = square.SquareId})" style="text-decoration: none">
+                    @if (square.ProfileImageId.HasValue)
+                    {
+                        <img src="@Url.RouteUrl("DefaultDetail", new {controller = "Squares", action = "ProfileImage", id = square.SquareId, mediaId = square.ProfileImageId})" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;"/>
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;"/>
+                    }
+                    <span class="visible-xs-inline-block pull-left">
+                        @if (square.ProfileImageId.HasValue)
+                        {
+                            <img src="@Url.RouteUrl("DefaultDetail", new {controller = "Squares", action = "ProfileImage", id = square.SquareId, mediaId = square.ProfileImageId})" alt="" class="img-circle profile-image-med block" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med block" />
+                        }
+                    </span>
+                    <strong style="margin-right: 16px;">@square.Name</strong>
+                </a>
+            </td>
+        </tr>
+    }
+</table>

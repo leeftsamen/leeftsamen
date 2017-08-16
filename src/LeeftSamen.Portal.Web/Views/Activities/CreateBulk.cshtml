@@ -1,0 +1,187 @@
+﻿@{
+    var title = Title.CreateBulkActivity;
+    ViewBag.Title = title;
+}
+
+<h1 class="page-title-small">@ViewBag.Title</h1>
+@using (Html.BeginForm("CreateBulk", "Activities", new { }, FormMethod.Post, new { id = "activitiesForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default" ng-app="CreateBulkApp" ng-controller="CreateBulkController">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.BulkActivities</h2>
+        </div>
+        <div class="panel-body">
+
+            <input type="hidden" name="Activities" value="{{dates}}"/>
+
+            <label ng-repeat-start="date in dates">@Html.RequiredTextLabel(Label.Date)</label>
+            <div class="input-group datepicker-control col-md-2{{date.Date ? '' : ' has-error'}}" style="margin-bottom: 0.5em">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </button>
+            </span>
+                <input required add-datepicker type="text" class="form-control" ng-model="date.Date" placeholder="dd-mm-yy" readonly="true" />
+            </div>
+
+            <table class="table table-condensed">
+                <colgroup>
+                    <col style="width: 120px;"/>
+                    <col style="width: 120px;"/>
+                    <col/>
+                    <col/>
+                    <col/>
+                    <col/>
+                </colgroup>
+                <tr>
+                    <th>@Label.StartTime</th>
+                    <th>@Label.EndTime</th>
+                    <th>@Html.RequiredTextLabel(Label.Title)</th>
+                    <th>@Label.Location</th>
+                    <th></th>
+                </tr>
+
+                <tr ng-repeat-start="activity in date.Activities">
+                    <td class="timeInput">
+                        <div class="input-group" style="opacity:@("{{(activity.AllDay ? 0.2 : 1)}}")">
+                            <input type="text" class="form-control" ng-model="activity.StartTimeH" ng-disabled="activity.AllDay"/>
+                            <div class="input-group-addon" style="padding: 6px; border-right: 0; border-left: 0">:</div>
+                            <input type="text" class="form-control" ng-model="activity.StartTimeM" ng-disabled="activity.AllDay"/>
+                        </div>
+                    </td>
+                    <td class="timeInput">
+                        <div class="input-group" style="opacity:@("{{(activity.Allday ? 0.2 : 1)}}")">
+                            <input type="text" class="form-control" ng-model="activity.EndTimeH" ng-disabled="activity.AllDay" />
+                            <div class="input-group-addon" style="padding: 6px; border-right: 0; border-left: 0">:</div>
+                            <input type="text" class="form-control" ng-model="activity.EndTimeM" ng-disabled="activity.AllDay" />
+                        </div>
+                    </td>
+                    <td class="{{activity.Title ? '' : ' has-error'}}">
+                        <input required type="text" ng-model="activity.Title" class="form-control" placeholder="@PlaceHolder.MaxCharacters"/>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="activity.Location" class="form-control"/>
+                    </td>
+                    <td>
+                        <button type="button" ng-click="removeActivity($parent.$index, $index)" class="pull-right btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="checkbox" ng-model="activity.AllDay"/> @Label.AllDayActivity</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>@Label.Description</th>
+                    <td colspan="3">
+                        <textarea class="form-control" ng-model="activity.Description" rows="12"></textarea>
+                    </td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="6">
+                        <hr/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="6">
+                        <button ng-click="addActivity($index)" type="button" class="pull-right btn btn-xs btn-default">
+                            <span class="glyphicon glyphicon-plus"></span> @Button.AddActivity</button>
+                    </td>
+                </tr>
+            </table>
+
+            <hr ng-repeat-end/>
+
+            <button type="button" ng-click="addDate()" class="pull-right btn btn-xs btn-default">
+                <span class="glyphicon glyphicon-plus"></span> @Button.AddDate</button>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.Share</h2>
+        </div>
+        <div class="panel-body">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="True" name="Shareable"/> @Label.ShareAllDescription
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+            <a class="btn btn-link" href="@Url.Action("Index")">@Button.Cancel</a>
+        </div>
+    </div>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    <script>
+        angular.module('CreateBulkApp', [])
+            .controller('CreateBulkController', [
+                '$scope', function($scope) {
+
+                    function ActivityDate() {
+                        this.Date = '';
+                        this.Activities = [];
+                    }
+
+                    function Activity() {
+                        this.StartTimeH = '00';
+                        this.StartTimeM = '00';
+                        this.EndTimeH = '00';
+                        this.EndTimeM = '00';
+                        this.AllDay = false;
+                        this.Title = '';
+                        this.Description = '';
+                        this.Location = '';
+                    }
+
+                    $scope.dates = [];
+                    $scope.addDate = function() {
+                        $scope.dates.push(new ActivityDate());
+                        $scope.addActivity($scope.dates.length - 1);
+                    }
+                    
+                    $scope.addActivity = function(index) {
+                        $scope.dates[index].Activities.push(new Activity());
+                    }
+
+                    $scope.removeActivity = function(parentIndex, index) {
+                        $scope.dates[parentIndex].Activities.splice(index, 1);
+                        if ($scope.dates[parentIndex].Activities.length === 0) {
+                            $scope.dates.splice(parentIndex, 1);
+                        }
+                    }
+
+                    $scope.addDate();
+                }
+            ])
+            .directive('addDatepicker', [
+                '$timeout', function(timer) {
+                    return {
+                        link: function(scope, elem, attrs, ctrl) {
+                            var addDatepicker = function () {
+                                $(elem).datepicker({
+                                    dateFormat: "dd-mm-yy",
+                                    minDate: new Date()
+                                });
+                                $(elem).prev().find(".btn-default").click(function() {
+                                    $(this).parent().parent().find("input").datepicker("show");
+                                });
+                            }
+                            timer(addDatepicker, 0);
+                        }
+                    }
+                }
+            ]);
+    </script>
+}

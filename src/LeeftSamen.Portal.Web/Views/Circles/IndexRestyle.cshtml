@@ -1,0 +1,63 @@
+﻿@using LeeftSamen.Portal.Web.Models
+@using System.Configuration
+@model LeeftSamen.Portal.Web.Models.Circles.IndexViewModel
+@{
+    var title = Title.MyCircles;
+    var noCirclesLabel = Label.NoUserCircles;
+    if (!Model.MyCircles)
+    {
+        title = Title.PublicCircles;
+        noCirclesLabel = Label.NoPublicCirclesInNeighborhoodFound;
+    }
+
+    ViewBag.Title = title;
+}
+
+<div class="content-wide">
+    <h1 class="page-title">@title</h1>
+    @if (!Model.CurrentUserCanOnlyView)
+    {
+        <div class="page-buttons margin-bottom-10-px">
+            <div class="menu-background"></div>
+            <div class="bottom-display">
+                <div class="open-menu">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+            <div class="buttons">
+                @if (Model.HelpIcons.Any(h => h.Type == "circle-create"))
+                {
+                    var helpIcon = Model.HelpIcons.First(h => h.Type == "circle-create");
+                    Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "circle-create", HelpText = helpIcon.Text });
+                }
+                <a class="btn btn-primary btn-small" href="@Url.Action("Create", "Circles")">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    @Button.CreateCircle
+                </a>
+            </div>
+        </div>
+    }
+        @if (Model.InvitationCircles != null && Model.InvitationCircles.Count > 0)
+        {
+            <h1>@Title.MyCircleInvites</h1>
+            <div class="panel panel-default panel-overflow shift-left">
+                <div class="panel-body circle-overview">
+                    @Html.Partial(string.Format("_CircleInvitationTable{0}", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), Model.InvitationCircles)
+                </div>
+            </div>
+            <h1>@Title.MyCircles</h1>
+        }
+
+        <div class="panel panel-default panel-overflow shift-left">
+            <div class="panel-body circle-overview">
+                @if (Model.Circles.Any())
+                {
+                    @Html.Partial(string.Format("_CircleOverviewTable{0}", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), Model.Circles)
+                }
+                else
+                {
+                    @noCirclesLabel
+                }
+            </div>
+        </div>
+    </div>

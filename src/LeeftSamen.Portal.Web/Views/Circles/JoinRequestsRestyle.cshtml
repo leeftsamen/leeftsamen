@@ -1,0 +1,141 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.JoinRequestsViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-overflow">
+            <div class="panel-body" style="padding-bottom: 0">
+                <div class="btn btn-primary pull-right" data-target="#inviteUserModal" data-toggle="modal">@Button.InviteUsers</div>
+                <h3 class="panel-title">
+                    @string.Format(Model.JoinRequests.Count == 1 ? Title.NbrCircleJoinRequest : Title.NbrCircleJoinRequests, Model.JoinRequests.Count)
+                </h3>
+                <br />
+                @{
+                    var items = new List<MenuItemModel>();
+                    items.Add(
+                    new MenuItemModel(
+                        "DefaultDetail",
+                        new RouteValueDictionary(new { controller = "Circles", action = "Members", Id = Model.CircleId }),
+                        Button.AllMembers,
+                        false
+                    ));
+                    items.Add(
+                    new MenuItemModel(
+                        "DefaultDetail",
+                        new RouteValueDictionary(new { controller = "Circles", action = "JoinRequests", Id = Model.CircleId }),
+                        Button.PendingJoinRequests,
+                        true
+                    ));
+                    @Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)
+                }
+            </div>
+        </div>
+        <div id="members" class="row">
+            @foreach (var member in Model.JoinRequests)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="tile panel-member">
+                        <div class="panel-body text-center">
+                            @Html.Partial("_UserProfileImage", new UserProfileImage(member.UserProfileImageId, member.UserId, "profile-image"))
+                            <h4>@member.UserName</h4>
+                            @member.UserCity<br /><br/>
+
+                            @using (Html.BeginForm("RejectJoinRequest", "Circles", new { id = Model.CircleId, requestId = member.CircleJoinRequestId }, FormMethod.Post, new { @style = "display:inline"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">@Button.Reject</button>
+                            }
+
+                            @using (Html.BeginForm("AcceptJoinRequest", "Circles", new { id = Model.CircleId, requestId = member.CircleJoinRequestId }, FormMethod.Post, new { @style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary">@Button.Accept</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            @foreach (var member in Model.Invitations)
+            {
+                <div class="col-lg-3 col-md-4 col-xs-6 col-xxs-12">
+                    <div class="tile panel-member">
+                        <div class="panel-body text-center">
+                                <div class="dropdown pull-right" style="margin-left: -26px;">
+                                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li role="presentation">
+                                            <button type="button" class="btn btn-link"
+                                                    data-toggle="modal" data-target="#modal"
+                                                    data-title="@Title.ConfirmInvitationReminder" data-body="@String.Format(Text.ConfirmInvitationReminder, member.UserName)" data-button="@Button.SendMessage"
+                                                    data-action="@Url.Action("SendInvitationReminder", new { id = Model.CircleId })" data-hidden='{"memberId": "@member.UserId", "email": "@member.Email" }'>
+                                                @(Label.SendCircleInvitationReminder)
+                                            </button>
+                                        </li>
+                                        <li role="presentation">
+                                            <button type="button" class="btn btn-link"
+                                                    data-toggle="modal" data-target="#modal"
+                                                    data-title="@Title.ConfirmRemoveCircleMember" data-body="@Text.ConfirmRemoveCircleMember" data-button="@Button.RemoveMember"
+                                                    data-action="@Url.Action("RemoveMember", new { id = Model.CircleId })" data-hidden='{"memberId": "@member.UserId", "email": "@member.Email" }'>
+                                                @(member.HasBeenInvited ? Label.RemoveInvitation : Label.RemoveCircleMember)
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @Html.Partial("_UserProfileImage", new UserProfileImage(member.UserProfileImageId, member.UserId, "profile-image"))
+                            <h4>@(member.UserName ?? member.Email)</h4>
+                            @member.UserCity
+                            <br />
+                            @if (!string.IsNullOrEmpty(member.ProfileDescription))
+                            {
+                                <br />
+                                if (member.ProfileDescription.Length > 83)
+                                {
+                                    @(member.ProfileDescription.Substring(0, 80) + "...")
+
+                                    <a href="@Url.RouteUrl("CircleMemberDetail", new { controller = "Circles", action = "MemberDetail", id = Model.CircleId, userId = member.UserId })">@Text.ContinueReading</a>
+                                }
+                                else
+                                {
+
+                                    @member.ProfileDescription
+                                }
+                            }
+                        </div>
+                        <div class="panel-footer">
+                        @if (member.InvitationIsExpired)
+                        {
+                            <label class="label label-danger">@Label.InvitationExpired</label>
+                        }
+                        else
+                        {
+                            <label class="label label-info">@Label.InvitedToCircle</label>
+                        }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section modals {
+    @Html.Partial("_InviteUserModal", new InviteUserViewModel { Title = Title.InviteUsersToCircle, Instruction = Text.InviteUsersToCircleInstruction })
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_InviteUserModalScript")
+}

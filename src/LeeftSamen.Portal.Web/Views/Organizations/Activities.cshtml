@@ -1,0 +1,11 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Organizations.ActivitiesViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="panel panel-default">
+    @Html.Action("DetailHeader", new { id = Model.OrganizationId })
+</div>
+
+@Html.Partial("~/Views/Activities/ActivitiesOverview.cshtml", Model.ActivitiesModel)

@@ -1,0 +1,35 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Account.ChangeNamePostModel
+@{
+    ViewBag.Title = Title.ChangeName;
+}
+
+<h1>@Title.ManageAccount.</h1>
+
+@using (Html.BeginForm("ChangeName", "Account", FormMethod.Post, new { @class = "", role = "form" }))
+{
+<div class="panel-edit">
+    <div class="panel-heading">
+        <h2 class="panel-title">@ViewBag.Title.</h2>
+    </div>
+    <div class="panel-body">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginFormGroupFor(m => m.Name))
+        {
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
+        }
+    </div>
+</div>
+
+<div class="panel panel-default edit-buttons">
+    <div class="panel-body">
+        <button type="submit" class="btn btn-primary">@Button.Save</button>
+        <a class="btn btn-link" href="@Url.Action("Index")">@Button.Cancel</a>
+    </div>
+</div>
+}
+
+
+

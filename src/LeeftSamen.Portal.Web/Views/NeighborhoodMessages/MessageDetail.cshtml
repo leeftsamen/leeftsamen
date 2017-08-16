@@ -1,0 +1,161 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models.NeighborhoodMessages
+@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Utils
+@model MessageDetailViewModel
+@{
+    ViewBag.Title = Model.Message.Title;
+    ViewBag.ShareText = Model.Message.FullText.StripHtmlAndNormalize();
+    
+    var overviewUrl = Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = (Model.MessageType == NeighborhoodMessage.MessageTypes.Any ? "Index" : Model.MessageType.ToString()) });
+    if (ViewUtils.GetController(this.ViewContext) == "Organizations")
+    {
+        overviewUrl = Url.RouteUrl("DefaultDetail", new { controller = "Organizations", id = Model.Message.OrganizationMembership.Organization.OrganizationId });
+    }    
+}
+
+<a class="btn btn-default" href="@overviewUrl">@Button.BackToOverview</a>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default message-detail-panel">
+            <div class="panel-heading labeled">
+                @if (Model.UserCanEditMessage || Model.UserCanPinMessage)
+                {
+                    @Html.Partial("_MessageDetailEditMenu", Model)
+                }
+
+                <h1>@ViewBag.Title</h1>
+
+                <time datetime="@Model.Message.CreationDateTime.ToString("s")" title="@Model.Message.CreationDateTime.ToString("f")">
+                    @Model.Message.CreationDateTime.ToTimeAgoString()
+                </time>
+            </div>
+            <div class="panel-body">
+                @if (!string.IsNullOrEmpty(Model.Message.IntroductionText))
+                {
+                    <p><b>@Model.Message.IntroductionText</b>
+                    </p>
+                    <br/>
+                }
+                
+                @Html.Raw(Model.Message.FullText)
+                @if (Model.Message.Image1Id.HasValue)
+                {
+                    <div style="text-align: center; margin: 15px -15px -15px -15px; padding: 30px; border-top: 1px solid rgba(0, 0, 0, 0.1)">
+                        <img style="max-width: 100%;" src="@Url.RouteUrl("NeighborhoodMessage", new {action = "MessageImage", Model.MessageType, messageId = Model.Message.MessageId, mediaId = Model.Message.Image1Id})"/>
+                    </div>
+                }
+            </div>
+        </div>
+
+        @using (Html.BeginForm("CreateReaction", "NeighborhoodMessages", FormMethod.Post))
+        {
+
+        @Html.AntiForgeryToken()
+
+            <div class="bg-warning">
+                @Html.ValidationMessageFor(m => m.NewReaction)
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    @Html.TextAreaFor(m => m.NewReaction, new { @class = "form-control", @placeholder = PlaceHolder.PostNewReaction })
+                    @Html.Hidden("messageId", Model.Message.MessageId)
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-primary" type="submit">@Button.PostReaction</button>
+                </div>
+            </div>
+        }
+
+        <br />
+
+        <div id="messages">
+            @foreach (var reaction in Model.Reactions.OrderByDescending(m => m.CreationDateTime).Take(20))
+            {
+                Html.RenderPartial("~/Views/NeighborhoodMessages/_Reaction.cshtml", new ReactionViewModel { Reaction = reaction, UserCanDeleteReaction = Model.UserCanEditMessage });
+            }
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default messagedetail-userpanel">
+            <div class="panel-body">
+                @if (Model.Message.OrganizationMembershipId.HasValue)
+                {
+                    <div class="panel-information">
+                        <span class="creator">
+                            @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.Message.OrganizationMembership.Organization.Name))
+                        </span>
+
+                        <span class="time">
+                            <time datetime="@Model.Message.CreationDateTime.ToString("s")"
+                                  title="@Model.Message.CreationDateTime.ToString("f")">
+                                @Model.Message.CreationDateTime.ToTimeAgoString()
+                            </time>
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="panel-avatar">@Html.Partial("_UserProfileImage", new UserProfileImage(Model.Message.Creator.ProfileImageId, Model.Message.Creator.Id, "profile-image-sm"))</div>
+                    <div class="panel-information">
+                        <span class="creator">@Model.Message.Creator.Name</span>
+                        
+                        @if (!string.IsNullOrEmpty(ViewBag.UserPosition.ToString()))
+                        {
+                            <span class="time">
+                                @string.Format(Text.DistanceFromYou, Math.Round((double)(Model.Message.Creator.Position.Distance(ViewBag.UserPosition) / 1000), 1))
+                            </span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @if (Model.Message.AllowSharing)
+                {
+                <h4>@Text.ShareNews</h4>
+                    @Html.Partial("_ShareButtons")
+                }
+                
+                @if (Model.Message.File1 != null)
+                {
+                    var fontAwesome = Model.Message.File1.FontAwesomeClass();
+                    <div class="file-list">
+                        <div class="file">
+                            <div class="image">
+                                <a href="@Url.Action("DownloadFile", new { Model.Message.MessageId, mediaId = Model.Message.File1.MediaId })">
+                                    @if (!string.IsNullOrEmpty(fontAwesome))
+                                    {
+                                        <i class="fa @fontAwesome"></i>
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.RouteUrl("NeighborhoodMessageImage", new { action = "Image", mediaId = Model.Message.File1.MediaId, Model.Message.MessageId})" alt="">
+                                    }
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a href="@Url.Action("DownloadFile", new { Model.Message.MessageId, mediaId = Model.Message.File1.MediaId })">
+                                    @Model.Message.File1.Name.Truncate(25)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @Html.Partial("_ReportAbuseLink")
+            </div>
+        </div>
+
+    </div>
+</div>

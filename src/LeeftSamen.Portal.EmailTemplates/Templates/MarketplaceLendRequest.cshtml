@@ -1,0 +1,40 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.MarketplaceLendModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.InformalSaluation, (string.IsNullOrWhiteSpace(Model.Receiver) ? "heer/mevrouw" : Model.Receiver))</p>
+<p style="margin-top:0;margin-bottom:16px">
+    @string.Format(Email.MarketplaceLenditemAsked, Model.MarketplaceItemTitle)
+</p>
+
+@if (!string.IsNullOrEmpty(Model.MarketplaceItemDescription))
+{
+    <p style="margin-top:0;margin-bottom:16px">@Raw(Model.MarketplaceItemDescription)</p>
+}
+
+@if (Model.ExpirationDate.HasValue)
+{
+    <p style="margin-top:0;margin-bottom:16px">
+        @string.Format(Email.LendRequiredOn, Model.ExpirationDate.Value.ToString("dd-MM-yyyy"))
+    </p>
+}
+
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.InformalCloseHtml)<br /><br />@Model.CreatorName</p>
+<a href="@Model.ItemUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.YesIHave
+</a>
+
+<br />
+
+@section reason {
+    @if (Model.CircleId.HasValue)
+    {
+        @Email.MarketplaceLendRequestInCircleReason
+    }
+    else
+    {
+        @Email.MarketplaceLendRequestInNeighboorhoudReason
+    }
+}

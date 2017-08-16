@@ -1,0 +1,883 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADF24EFE-6759-4EBA-92FE-01A0F88A038F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeeftSamen.Portal.Data</RootNamespace>
+    <AssemblyName>LeeftSamen.Portal.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Enums\DeviceType.cs" />
+    <Compile Include="Enums\ModelType.cs" />
+    <Compile Include="Enums\PageVisitType.cs" />
+    <Compile Include="Enums\SettingName.cs" />
+    <Compile Include="IApplicationDbContext.cs" />
+    <Compile Include="Migrations\201505060847362_Initial.cs" />
+    <Compile Include="Migrations\201505060847362_Initial.Designer.cs">
+      <DependentUpon>201505060847362_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505060906060_AndroidCustomLogin.cs" />
+    <Compile Include="Migrations\201505060906060_AndroidCustomLogin.Designer.cs">
+      <DependentUpon>201505060906060_AndroidCustomLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505060908261_ActivityAttendance.cs" />
+    <Compile Include="Migrations\201505060908261_ActivityAttendance.Designer.cs">
+      <DependentUpon>201505060908261_ActivityAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505081228180_HideOrganization.cs" />
+    <Compile Include="Migrations\201505081228180_HideOrganization.Designer.cs">
+      <DependentUpon>201505081228180_HideOrganization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505081512487_HelpIcon.cs" />
+    <Compile Include="Migrations\201505081512487_HelpIcon.Designer.cs">
+      <DependentUpon>201505081512487_HelpIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505121302506_FixRemovingActivities.cs" />
+    <Compile Include="Migrations\201505121302506_FixRemovingActivities.Designer.cs">
+      <DependentUpon>201505121302506_FixRemovingActivities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506180925444_WillCascadeOnDelete.cs" />
+    <Compile Include="Migrations\201506180925444_WillCascadeOnDelete.Designer.cs">
+      <DependentUpon>201506180925444_WillCascadeOnDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506181802202_RemoveUserCascades.cs" />
+    <Compile Include="Migrations\201506181802202_RemoveUserCascades.Designer.cs">
+      <DependentUpon>201506181802202_RemoveUserCascades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506250841017_NeighborhoodMessageExpiration.cs" />
+    <Compile Include="Migrations\201506250841017_NeighborhoodMessageExpiration.Designer.cs">
+      <DependentUpon>201506250841017_NeighborhoodMessageExpiration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507230728433_UserLastSeen.cs" />
+    <Compile Include="Migrations\201507230728433_UserLastSeen.Designer.cs">
+      <DependentUpon>201507230728433_UserLastSeen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507231446276_OrganizationTheme.cs" />
+    <Compile Include="Migrations\201507231446276_OrganizationTheme.Designer.cs">
+      <DependentUpon>201507231446276_OrganizationTheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508130845137_UserCityPioneer.cs" />
+    <Compile Include="Migrations\201508130845137_UserCityPioneer.Designer.cs">
+      <DependentUpon>201508130845137_UserCityPioneer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508200857366_ActivityCreationDate.cs" />
+    <Compile Include="Migrations\201508200857366_ActivityCreationDate.Designer.cs">
+      <DependentUpon>201508200857366_ActivityCreationDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508211402521_MessageSharingProperty.cs" />
+    <Compile Include="Migrations\201508211402521_MessageSharingProperty.Designer.cs">
+      <DependentUpon>201508211402521_MessageSharingProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508211450130_ActivitySharingProperty.cs" />
+    <Compile Include="Migrations\201508211450130_ActivitySharingProperty.Designer.cs">
+      <DependentUpon>201508211450130_ActivitySharingProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508211501248_MarketplaceSharingProperty.cs" />
+    <Compile Include="Migrations\201508211501248_MarketplaceSharingProperty.Designer.cs">
+      <DependentUpon>201508211501248_MarketplaceSharingProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508271419197_NeighborhoodMessageReactions.cs" />
+    <Compile Include="Migrations\201508271419197_NeighborhoodMessageReactions.Designer.cs">
+      <DependentUpon>201508271419197_NeighborhoodMessageReactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011335560_EmailSettings.cs" />
+    <Compile Include="Migrations\201509011335560_EmailSettings.Designer.cs">
+      <DependentUpon>201509011335560_EmailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509021104274_EmailSettingsJobAssigned.cs" />
+    <Compile Include="Migrations\201509021104274_EmailSettingsJobAssigned.Designer.cs">
+      <DependentUpon>201509021104274_EmailSettingsJobAssigned.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509031219002_AddPinToNeighborhoodMessage.cs" />
+    <Compile Include="Migrations\201509031219002_AddPinToNeighborhoodMessage.Designer.cs">
+      <DependentUpon>201509031219002_AddPinToNeighborhoodMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509031422477_NeighborhoodMessageReactionsChange.cs" />
+    <Compile Include="Migrations\201509031422477_NeighborhoodMessageReactionsChange.Designer.cs">
+      <DependentUpon>201509031422477_NeighborhoodMessageReactionsChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509081437233_ActivityInvitation.cs" />
+    <Compile Include="Migrations\201509081437233_ActivityInvitation.Designer.cs">
+      <DependentUpon>201509081437233_ActivityInvitation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509100737012_ExpiredateCircleInvitation.cs" />
+    <Compile Include="Migrations\201509100737012_ExpiredateCircleInvitation.Designer.cs">
+      <DependentUpon>201509100737012_ExpiredateCircleInvitation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509100819339_MergeFix.cs" />
+    <Compile Include="Migrations\201509100819339_MergeFix.Designer.cs">
+      <DependentUpon>201509100819339_MergeFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509100919438_DelNeighborhoodMessageParentReaction.cs" />
+    <Compile Include="Migrations\201509100919438_DelNeighborhoodMessageParentReaction.Designer.cs">
+      <DependentUpon>201509100919438_DelNeighborhoodMessageParentReaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509100933164_MergeFix2.cs" />
+    <Compile Include="Migrations\201509100933164_MergeFix2.Designer.cs">
+      <DependentUpon>201509100933164_MergeFix2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509110855267_test.cs" />
+    <Compile Include="Migrations\201509110855267_test.Designer.cs">
+      <DependentUpon>201509110855267_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111219584_CircleMessageAttachment.cs" />
+    <Compile Include="Migrations\201509111219584_CircleMessageAttachment.Designer.cs">
+      <DependentUpon>201509111219584_CircleMessageAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141339166_CirclePhoto.cs" />
+    <Compile Include="Migrations\201509141339166_CirclePhoto.Designer.cs">
+      <DependentUpon>201509141339166_CirclePhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509140703088_MergeFix3.cs" />
+    <Compile Include="Migrations\201509140703088_MergeFix3.Designer.cs">
+      <DependentUpon>201509140703088_MergeFix3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141040135_ActivityReactions.cs" />
+    <Compile Include="Migrations\201509141040135_ActivityReactions.Designer.cs">
+      <DependentUpon>201509141040135_ActivityReactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509161208284_MergeFix4.cs" />
+    <Compile Include="Migrations\201509161208284_MergeFix4.Designer.cs">
+      <DependentUpon>201509161208284_MergeFix4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509282102305_AddPrice.cs" />
+    <Compile Include="Migrations\201509282102305_AddPrice.Designer.cs">
+      <DependentUpon>201509282102305_AddPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509280818383_CirclePhotoAlbum.cs" />
+    <Compile Include="Migrations\201509280818383_CirclePhotoAlbum.Designer.cs">
+      <DependentUpon>201509280818383_CirclePhotoAlbum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509290837111_MergeFix5.cs" />
+    <Compile Include="Migrations\201509290837111_MergeFix5.Designer.cs">
+      <DependentUpon>201509290837111_MergeFix5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509290912263_AddPreferences.cs" />
+    <Compile Include="Migrations\201509290912263_AddPreferences.Designer.cs">
+      <DependentUpon>201509290912263_AddPreferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509291010564_AddCategoryTitleAndDescription.cs" />
+    <Compile Include="Migrations\201509291010564_AddCategoryTitleAndDescription.Designer.cs">
+      <DependentUpon>201509291010564_AddCategoryTitleAndDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509291457117_ShowLocation.cs" />
+    <Compile Include="Migrations\201509291457117_ShowLocation.Designer.cs">
+      <DependentUpon>201509291457117_ShowLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509291752228_AddCategoryAlias.cs" />
+    <Compile Include="Migrations\201509291752228_AddCategoryAlias.Designer.cs">
+      <DependentUpon>201509291752228_AddCategoryAlias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509300931436_RemoveMarketplaceItemAlias.cs" />
+    <Compile Include="Migrations\201509300931436_RemoveMarketplaceItemAlias.Designer.cs">
+      <DependentUpon>201509300931436_RemoveMarketplaceItemAlias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509300956274_AddMarketplaceItemAliasEnum.cs" />
+    <Compile Include="Migrations\201509300956274_AddMarketplaceItemAliasEnum.Designer.cs">
+      <DependentUpon>201509300956274_AddMarketplaceItemAliasEnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301241050_MergeFix6.cs" />
+    <Compile Include="Migrations\201509301241050_MergeFix6.Designer.cs">
+      <DependentUpon>201509301241050_MergeFix6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301323554_AddMarketplaceItemPublicCirclePaymentOption.cs" />
+    <Compile Include="Migrations\201509301323554_AddMarketplaceItemPublicCirclePaymentOption.Designer.cs">
+      <DependentUpon>201509301323554_AddMarketplaceItemPublicCirclePaymentOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510011420122_ActivityAge.cs" />
+    <Compile Include="Migrations\201510011420122_ActivityAge.Designer.cs">
+      <DependentUpon>201510011420122_ActivityAge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510161240401_AddOpeningHours.cs" />
+    <Compile Include="Migrations\201510161240401_AddOpeningHours.Designer.cs">
+      <DependentUpon>201510161240401_AddOpeningHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510081305471_ActivityRecurrance.cs" />
+    <Compile Include="Migrations\201510081305471_ActivityRecurrance.Designer.cs">
+      <DependentUpon>201510081305471_ActivityRecurrance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510161500072_CircleActivity.cs" />
+    <Compile Include="Migrations\201510161500072_CircleActivity.Designer.cs">
+      <DependentUpon>201510161500072_CircleActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510191029055_MergeFix7.cs" />
+    <Compile Include="Migrations\201510191029055_MergeFix7.Designer.cs">
+      <DependentUpon>201510191029055_MergeFix7.cs</DependentUpon>
+    </Compile>
+    <Content Include="Migrations\201510261022523_AddCategorySortOrder_readme.txt" />
+    <Compile Include="Migrations\201510261022523_AddCategorySortOrder.cs" />
+    <Compile Include="Migrations\201510261022523_AddCategorySortOrder.Designer.cs">
+      <DependentUpon>201510261022523_AddCategorySortOrder.cs</DependentUpon>
+    </Compile>
+    <Content Include="Migrations\20151029.sql" />
+    <Compile Include="Migrations\201511180923260_ActivityRecurringEnd.cs" />
+    <Compile Include="Migrations\201511180923260_ActivityRecurringEnd.Designer.cs">
+      <DependentUpon>201511180923260_ActivityRecurringEnd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511181129572_Stats.cs" />
+    <Compile Include="Migrations\201511181129572_Stats.Designer.cs">
+      <DependentUpon>201511181129572_Stats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511241541249_CircleMessageProperty.cs" />
+    <Compile Include="Migrations\201511241541249_CircleMessageProperty.Designer.cs">
+      <DependentUpon>201511241541249_CircleMessageProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512081416001_HomePageRegister.cs" />
+    <Compile Include="Migrations\201512081416001_HomePageRegister.Designer.cs">
+      <DependentUpon>201512081416001_HomePageRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512081712072_HomePageRegister2.cs" />
+    <Compile Include="Migrations\201512081712072_HomePageRegister2.Designer.cs">
+      <DependentUpon>201512081712072_HomePageRegister2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601080943558_MissingOrganisationTables.cs" />
+    <Compile Include="Migrations\201601080943558_MissingOrganisationTables.Designer.cs">
+      <DependentUpon>201601080943558_MissingOrganisationTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601191459442_AddActions.cs" />
+    <Compile Include="Migrations\201601191459442_AddActions.Designer.cs">
+      <DependentUpon>201601191459442_AddActions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601210838299_AddActionZipcodes.cs" />
+    <Compile Include="Migrations\201601210838299_AddActionZipcodes.Designer.cs">
+      <DependentUpon>201601210838299_AddActionZipcodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601211050438_AddUserZuiderlingAccount.cs" />
+    <Compile Include="Migrations\201601211050438_AddUserZuiderlingAccount.Designer.cs">
+      <DependentUpon>201601211050438_AddUserZuiderlingAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601220852316_AddCurrencies.cs" />
+    <Compile Include="Migrations\201601220852316_AddCurrencies.Designer.cs">
+      <DependentUpon>201601220852316_AddCurrencies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601221506313_AddActionDetails.cs" />
+    <Compile Include="Migrations\201601221506313_AddActionDetails.Designer.cs">
+      <DependentUpon>201601221506313_AddActionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601250915097_addTransactions.cs" />
+    <Compile Include="Migrations\201601250915097_addTransactions.Designer.cs">
+      <DependentUpon>201601250915097_addTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601291240419_AddJobEndTime.cs" />
+    <Compile Include="Migrations\201601291240419_AddJobEndTime.Designer.cs">
+      <DependentUpon>201601291240419_AddJobEndTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602081453334_addsquareforum.cs" />
+    <Compile Include="Migrations\201602081453334_addsquareforum.Designer.cs">
+      <DependentUpon>201602081453334_addsquareforum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602101539094_AddSquareFacts.cs" />
+    <Compile Include="Migrations\201602101539094_AddSquareFacts.Designer.cs">
+      <DependentUpon>201602101539094_AddSquareFacts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602111340300_ShowMarketplaceItemLocation.cs" />
+    <Compile Include="Migrations\201602111340300_ShowMarketplaceItemLocation.Designer.cs">
+      <DependentUpon>201602111340300_ShowMarketplaceItemLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602151456432_MultifileList.cs" />
+    <Compile Include="Migrations\201602151456432_MultifileList.Designer.cs">
+      <DependentUpon>201602151456432_MultifileList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602161402300_AddSquareRestrictions.cs" />
+    <Compile Include="Migrations\201602161402300_AddSquareRestrictions.Designer.cs">
+      <DependentUpon>201602161402300_AddSquareRestrictions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602180934246_SquareSettings.cs" />
+    <Compile Include="Migrations\201602180934246_SquareSettings.Designer.cs">
+      <DependentUpon>201602180934246_SquareSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602220855176_AddFeaturedCircles.cs" />
+    <Compile Include="Migrations\201602220855176_AddFeaturedCircles.Designer.cs">
+      <DependentUpon>201602220855176_AddFeaturedCircles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602231045592_ReportReactions.cs" />
+    <Compile Include="Migrations\201602231045592_ReportReactions.Designer.cs">
+      <DependentUpon>201602231045592_ReportReactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602241037493_TrackEdits.cs" />
+    <Compile Include="Migrations\201602241037493_TrackEdits.Designer.cs">
+      <DependentUpon>201602241037493_TrackEdits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602260952259_NeigboorhoodMessagePosition.cs" />
+    <Compile Include="Migrations\201602260952259_NeigboorhoodMessagePosition.Designer.cs">
+      <DependentUpon>201602260952259_NeigboorhoodMessagePosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261120372_migrationForum.cs" />
+    <Compile Include="Migrations\201602261120372_migrationForum.Designer.cs">
+      <DependentUpon>201602261120372_migrationForum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602261303257_addChildReactions.cs" />
+    <Compile Include="Migrations\201602261303257_addChildReactions.Designer.cs">
+      <DependentUpon>201602261303257_addChildReactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602291043573_ZuiderlingZipcodes.cs" />
+    <Compile Include="Migrations\201602291043573_ZuiderlingZipcodes.Designer.cs">
+      <DependentUpon>201602291043573_ZuiderlingZipcodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603010950092_ReactToSubject.cs" />
+    <Compile Include="Migrations\201603010950092_ReactToSubject.Designer.cs">
+      <DependentUpon>201603010950092_ReactToSubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603011526085_SubjectMainReactions.cs" />
+    <Compile Include="Migrations\201603011526085_SubjectMainReactions.Designer.cs">
+      <DependentUpon>201603011526085_SubjectMainReactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021012310_DeleteSubjects.cs" />
+    <Compile Include="Migrations\201603021012310_DeleteSubjects.Designer.cs">
+      <DependentUpon>201603021012310_DeleteSubjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603090832266_PushNotifications.cs" />
+    <Compile Include="Migrations\201603090832266_PushNotifications.Designer.cs">
+      <DependentUpon>201603090832266_PushNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604040725041_ActivityPosition.cs" />
+    <Compile Include="Migrations\201604040725041_ActivityPosition.Designer.cs">
+      <DependentUpon>201604040725041_ActivityPosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604140928496_DeviceTypes.cs" />
+    <Compile Include="Migrations\201604140928496_DeviceTypes.Designer.cs">
+      <DependentUpon>201604140928496_DeviceTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604141307091_DeviceTypes2.cs" />
+    <Compile Include="Migrations\201604141307091_DeviceTypes2.Designer.cs">
+      <DependentUpon>201604141307091_DeviceTypes2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604151005155_AddCircleEmailGroup.cs" />
+    <Compile Include="Migrations\201604151005155_AddCircleEmailGroup.Designer.cs">
+      <DependentUpon>201604151005155_AddCircleEmailGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604181437344_FixMerge.cs" />
+    <Compile Include="Migrations\201604181437344_FixMerge.Designer.cs">
+      <DependentUpon>201604181437344_FixMerge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604191212312_FixFixedVersion.cs" />
+    <Compile Include="Migrations\201604191212312_FixFixedVersion.Designer.cs">
+      <DependentUpon>201604191212312_FixFixedVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604191412356_CircleMessageReactionAttachments.cs" />
+    <Compile Include="Migrations\201604191412356_CircleMessageReactionAttachments.Designer.cs">
+      <DependentUpon>201604191412356_CircleMessageReactionAttachments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604290734193_JobNoTime.cs" />
+    <Compile Include="Migrations\201604290734193_JobNoTime.Designer.cs">
+      <DependentUpon>201604290734193_JobNoTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605100958434_CircleEmailSetting.cs" />
+    <Compile Include="Migrations\201605100958434_CircleEmailSetting.Designer.cs">
+      <DependentUpon>201605100958434_CircleEmailSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605101456167_MarketplacePosition.cs" />
+    <Compile Include="Migrations\201605101456167_MarketplacePosition.Designer.cs">
+      <DependentUpon>201605101456167_MarketplacePosition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605111258488_neighboorhoudMessageDocument.cs" />
+    <Compile Include="Migrations\201605111258488_neighboorhoudMessageDocument.Designer.cs">
+      <DependentUpon>201605111258488_neighboorhoudMessageDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605180845557_CircleLabels.cs" />
+    <Compile Include="Migrations\201605180845557_CircleLabels.Designer.cs">
+      <DependentUpon>201605180845557_CircleLabels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606011356300_CircleMembershipProfile.cs" />
+    <Compile Include="Migrations\201606011356300_CircleMembershipProfile.Designer.cs">
+      <DependentUpon>201606011356300_CircleMembershipProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606030727383_ActivityCircle.cs" />
+    <Compile Include="Migrations\201606030727383_ActivityCircle.Designer.cs">
+      <DependentUpon>201606030727383_ActivityCircle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606031413008_CircleSettings.cs" />
+    <Compile Include="Migrations\201606031413008_CircleSettings.Designer.cs">
+      <DependentUpon>201606031413008_CircleSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606290903162_AddAccountSettingMarketplaceItem.cs" />
+    <Compile Include="Migrations\201606290903162_AddAccountSettingMarketplaceItem.Designer.cs">
+      <DependentUpon>201606290903162_AddAccountSettingMarketplaceItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607040905284_MarketplaceItemExpirationdate.cs" />
+    <Compile Include="Migrations\201607040905284_MarketplaceItemExpirationdate.Designer.cs">
+      <DependentUpon>201607040905284_MarketplaceItemExpirationdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607071341596_UserSettings.cs" />
+    <Compile Include="Migrations\201607071341596_UserSettings.Designer.cs">
+      <DependentUpon>201607071341596_UserSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607081448361_SettingText.cs" />
+    <Compile Include="Migrations\201607081448361_SettingText.Designer.cs">
+      <DependentUpon>201607081448361_SettingText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607111216431_NeighborhoodMessageImages.cs" />
+    <Compile Include="Migrations\201607111216431_NeighborhoodMessageImages.Designer.cs">
+      <DependentUpon>201607111216431_NeighborhoodMessageImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131003063_UserPageVisits.cs" />
+    <Compile Include="Migrations\201607131003063_UserPageVisits.Designer.cs">
+      <DependentUpon>201607131003063_UserPageVisits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Action.cs" />
+    <Compile Include="Models\ActionParticipant.cs" />
+    <Compile Include="Models\ActionVote.cs" />
+    <Compile Include="Models\ActionZipcode.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\ActivityAttendance.cs" />
+    <Compile Include="Models\ActivityInterval.cs" />
+    <Compile Include="Models\ActivityInvitation.cs" />
+    <Compile Include="Models\ActivityReaction.cs" />
+    <Compile Include="Models\CircleActivity.cs" />
+    <Compile Include="Models\CircleActivityAttendance.cs" />
+    <Compile Include="Models\CircleActivityInvitation.cs" />
+    <Compile Include="Models\CircleActivityReaction.cs" />
+    <Compile Include="Models\CircleEmailGroup.cs" />
+    <Compile Include="Models\CircleEmailMessage.cs" />
+    <Compile Include="Models\CircleEmailMessageReceiver.cs" />
+    <Compile Include="Models\CircleInvitation.cs" />
+    <Compile Include="Models\CircleJoinRequest.cs" />
+    <Compile Include="Models\CircleLabel.cs" />
+    <Compile Include="Models\CircleMembership.cs" />
+    <Compile Include="Models\CircleMessage.cs" />
+    <Compile Include="Models\CircleMessageReaction.cs" />
+    <Compile Include="Models\CirclePhotoAlbum.cs" />
+    <Compile Include="Models\CircleSetting.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\CirclePhoto.cs" />
+    <Compile Include="Models\District.cs" />
+    <Compile Include="Models\FeaturedCircle.cs" />
+    <Compile Include="Models\ForumReactionRemark.cs" />
+    <Compile Include="Models\ForumReactionReport.cs" />
+    <Compile Include="Models\HelpIcon.cs" />
+    <Compile Include="Models\HelpIconUser.cs" />
+    <Compile Include="Models\IActivity.cs" />
+    <Compile Include="Models\IntervalActivity.cs" />
+    <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\MarketplaceItem.cs" />
+    <Compile Include="Models\MarketplaceItemCategory.cs" />
+    <Compile Include="Models\MarketplaceItemReaction.cs" />
+    <Compile Include="Models\MarketplaceItemsPerCategory.cs" />
+    <Compile Include="Models\MarketplaceItemTransaction.cs" />
+    <Compile Include="Models\Media.cs" />
+    <Compile Include="Models\NeighborhoodMessage.cs" />
+    <Compile Include="Models\NeighborhoodMessageReaction.cs" />
+    <Compile Include="Models\PushNotification.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\Square.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\OrganizationInvitation.cs" />
+    <Compile Include="Models\OrganizationMembership.cs" />
+    <Compile Include="Models\OrganizationProduct.cs" />
+    <Compile Include="Models\OrganizationService.cs" />
+    <Compile Include="Models\OrganizationTheme.cs" />
+    <Compile Include="Models\OrganizationType.cs" />
+    <Compile Include="Models\SearchResult.cs" />
+    <Compile Include="Models\SquareAdmin.cs" />
+    <Compile Include="Models\SquareFact.cs" />
+    <Compile Include="Models\SquareFactMedia.cs" />
+    <Compile Include="Models\ForumReactionMedia.cs" />
+    <Compile Include="Models\ForumSubject.cs" />
+    <Compile Include="Models\ForumReaction.cs" />
+    <Compile Include="Models\SquareZipCode.cs" />
+    <Compile Include="Models\Stat.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Circle.cs" />
+    <Compile Include="Models\UserDevice.cs" />
+    <Compile Include="Models\UserPageVisit.cs" />
+    <Compile Include="Models\UserSetting.cs" />
+    <Compile Include="Models\UsersPerCity.cs" />
+    <Compile Include="Models\ZuiderlingZipcode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505060847362_Initial.resx">
+      <DependentUpon>201505060847362_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505060906060_AndroidCustomLogin.resx">
+      <DependentUpon>201505060906060_AndroidCustomLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505060908261_ActivityAttendance.resx">
+      <DependentUpon>201505060908261_ActivityAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505081228180_HideOrganization.resx">
+      <DependentUpon>201505081228180_HideOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505081512487_HelpIcon.resx">
+      <DependentUpon>201505081512487_HelpIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505121302506_FixRemovingActivities.resx">
+      <DependentUpon>201505121302506_FixRemovingActivities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506180925444_WillCascadeOnDelete.resx">
+      <DependentUpon>201506180925444_WillCascadeOnDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506181802202_RemoveUserCascades.resx">
+      <DependentUpon>201506181802202_RemoveUserCascades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506250841017_NeighborhoodMessageExpiration.resx">
+      <DependentUpon>201506250841017_NeighborhoodMessageExpiration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507230728433_UserLastSeen.resx">
+      <DependentUpon>201507230728433_UserLastSeen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507231446276_OrganizationTheme.resx">
+      <DependentUpon>201507231446276_OrganizationTheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508130845137_UserCityPioneer.resx">
+      <DependentUpon>201508130845137_UserCityPioneer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508200857366_ActivityCreationDate.resx">
+      <DependentUpon>201508200857366_ActivityCreationDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508211402521_MessageSharingProperty.resx">
+      <DependentUpon>201508211402521_MessageSharingProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508211450130_ActivitySharingProperty.resx">
+      <DependentUpon>201508211450130_ActivitySharingProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508211501248_MarketplaceSharingProperty.resx">
+      <DependentUpon>201508211501248_MarketplaceSharingProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508271419197_NeighborhoodMessageReactions.resx">
+      <DependentUpon>201508271419197_NeighborhoodMessageReactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011335560_EmailSettings.resx">
+      <DependentUpon>201509011335560_EmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509021104274_EmailSettingsJobAssigned.resx">
+      <DependentUpon>201509021104274_EmailSettingsJobAssigned.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509031219002_AddPinToNeighborhoodMessage.resx">
+      <DependentUpon>201509031219002_AddPinToNeighborhoodMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509031422477_NeighborhoodMessageReactionsChange.resx">
+      <DependentUpon>201509031422477_NeighborhoodMessageReactionsChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509081437233_ActivityInvitation.resx">
+      <DependentUpon>201509081437233_ActivityInvitation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509100737012_ExpiredateCircleInvitation.resx">
+      <DependentUpon>201509100737012_ExpiredateCircleInvitation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509100819339_MergeFix.resx">
+      <DependentUpon>201509100819339_MergeFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509100919438_DelNeighborhoodMessageParentReaction.resx">
+      <DependentUpon>201509100919438_DelNeighborhoodMessageParentReaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509100933164_MergeFix2.resx">
+      <DependentUpon>201509100933164_MergeFix2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509110855267_test.resx">
+      <DependentUpon>201509110855267_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111219584_CircleMessageAttachment.resx">
+      <DependentUpon>201509111219584_CircleMessageAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141339166_CirclePhoto.resx">
+      <DependentUpon>201509141339166_CirclePhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509140703088_MergeFix3.resx">
+      <DependentUpon>201509140703088_MergeFix3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141040135_ActivityReactions.resx">
+      <DependentUpon>201509141040135_ActivityReactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161208284_MergeFix4.resx">
+      <DependentUpon>201509161208284_MergeFix4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509282102305_AddPrice.resx">
+      <DependentUpon>201509282102305_AddPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509280818383_CirclePhotoAlbum.resx">
+      <DependentUpon>201509280818383_CirclePhotoAlbum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509290837111_MergeFix5.resx">
+      <DependentUpon>201509290837111_MergeFix5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509290912263_AddPreferences.resx">
+      <DependentUpon>201509290912263_AddPreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509291010564_AddCategoryTitleAndDescription.resx">
+      <DependentUpon>201509291010564_AddCategoryTitleAndDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509291457117_ShowLocation.resx">
+      <DependentUpon>201509291457117_ShowLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509291752228_AddCategoryAlias.resx">
+      <DependentUpon>201509291752228_AddCategoryAlias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509300931436_RemoveMarketplaceItemAlias.resx">
+      <DependentUpon>201509300931436_RemoveMarketplaceItemAlias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509300956274_AddMarketplaceItemAliasEnum.resx">
+      <DependentUpon>201509300956274_AddMarketplaceItemAliasEnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301241050_MergeFix6.resx">
+      <DependentUpon>201509301241050_MergeFix6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301323554_AddMarketplaceItemPublicCirclePaymentOption.resx">
+      <DependentUpon>201509301323554_AddMarketplaceItemPublicCirclePaymentOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510011420122_ActivityAge.resx">
+      <DependentUpon>201510011420122_ActivityAge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510161240401_AddOpeningHours.resx">
+      <DependentUpon>201510161240401_AddOpeningHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510081305471_ActivityRecurrance.resx">
+      <DependentUpon>201510081305471_ActivityRecurrance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510161500072_CircleActivity.resx">
+      <DependentUpon>201510161500072_CircleActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510191029055_MergeFix7.resx">
+      <DependentUpon>201510191029055_MergeFix7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510261022523_AddCategorySortOrder.resx">
+      <DependentUpon>201510261022523_AddCategorySortOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511180923260_ActivityRecurringEnd.resx">
+      <DependentUpon>201511180923260_ActivityRecurringEnd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511181129572_Stats.resx">
+      <DependentUpon>201511181129572_Stats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511241541249_CircleMessageProperty.resx">
+      <DependentUpon>201511241541249_CircleMessageProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512081416001_HomePageRegister.resx">
+      <DependentUpon>201512081416001_HomePageRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512081712072_HomePageRegister2.resx">
+      <DependentUpon>201512081712072_HomePageRegister2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601080943558_MissingOrganisationTables.resx">
+      <DependentUpon>201601080943558_MissingOrganisationTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601191459442_AddActions.resx">
+      <DependentUpon>201601191459442_AddActions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601210838299_AddActionZipcodes.resx">
+      <DependentUpon>201601210838299_AddActionZipcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601211050438_AddUserZuiderlingAccount.resx">
+      <DependentUpon>201601211050438_AddUserZuiderlingAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601220852316_AddCurrencies.resx">
+      <DependentUpon>201601220852316_AddCurrencies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601221506313_AddActionDetails.resx">
+      <DependentUpon>201601221506313_AddActionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601250915097_addTransactions.resx">
+      <DependentUpon>201601250915097_addTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601291240419_AddJobEndTime.resx">
+      <DependentUpon>201601291240419_AddJobEndTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602081453334_addsquareforum.resx">
+      <DependentUpon>201602081453334_addsquareforum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602101539094_AddSquareFacts.resx">
+      <DependentUpon>201602101539094_AddSquareFacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602111340300_ShowMarketplaceItemLocation.resx">
+      <DependentUpon>201602111340300_ShowMarketplaceItemLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602151456432_MultifileList.resx">
+      <DependentUpon>201602151456432_MultifileList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602161402300_AddSquareRestrictions.resx">
+      <DependentUpon>201602161402300_AddSquareRestrictions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602180934246_SquareSettings.resx">
+      <DependentUpon>201602180934246_SquareSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602220855176_AddFeaturedCircles.resx">
+      <DependentUpon>201602220855176_AddFeaturedCircles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602231045592_ReportReactions.resx">
+      <DependentUpon>201602231045592_ReportReactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602241037493_TrackEdits.resx">
+      <DependentUpon>201602241037493_TrackEdits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602260952259_NeigboorhoodMessagePosition.resx">
+      <DependentUpon>201602260952259_NeigboorhoodMessagePosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261120372_migrationForum.resx">
+      <DependentUpon>201602261120372_migrationForum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602261303257_addChildReactions.resx">
+      <DependentUpon>201602261303257_addChildReactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602291043573_ZuiderlingZipcodes.resx">
+      <DependentUpon>201602291043573_ZuiderlingZipcodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603010950092_ReactToSubject.resx">
+      <DependentUpon>201603010950092_ReactToSubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603011526085_SubjectMainReactions.resx">
+      <DependentUpon>201603011526085_SubjectMainReactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021012310_DeleteSubjects.resx">
+      <DependentUpon>201603021012310_DeleteSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603090832266_PushNotifications.resx">
+      <DependentUpon>201603090832266_PushNotifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604040725041_ActivityPosition.resx">
+      <DependentUpon>201604040725041_ActivityPosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604140928496_DeviceTypes.resx">
+      <DependentUpon>201604140928496_DeviceTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604151005155_AddCircleEmailGroup.resx">
+      <DependentUpon>201604151005155_AddCircleEmailGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604141307091_DeviceTypes2.resx">
+      <DependentUpon>201604141307091_DeviceTypes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604181437344_FixMerge.resx">
+      <DependentUpon>201604181437344_FixMerge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604191212312_FixFixedVersion.resx">
+      <DependentUpon>201604191212312_FixFixedVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604191412356_CircleMessageReactionAttachments.resx">
+      <DependentUpon>201604191412356_CircleMessageReactionAttachments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604290734193_JobNoTime.resx">
+      <DependentUpon>201604290734193_JobNoTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605100958434_CircleEmailSetting.resx">
+      <DependentUpon>201605100958434_CircleEmailSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605101456167_MarketplacePosition.resx">
+      <DependentUpon>201605101456167_MarketplacePosition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605111258488_neighboorhoudMessageDocument.resx">
+      <DependentUpon>201605111258488_neighboorhoudMessageDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605180845557_CircleLabels.resx">
+      <DependentUpon>201605180845557_CircleLabels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606011356300_CircleMembershipProfile.resx">
+      <DependentUpon>201606011356300_CircleMembershipProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606030727383_ActivityCircle.resx">
+      <DependentUpon>201606030727383_ActivityCircle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606031413008_CircleSettings.resx">
+      <DependentUpon>201606031413008_CircleSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606290903162_AddAccountSettingMarketplaceItem.resx">
+      <DependentUpon>201606290903162_AddAccountSettingMarketplaceItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607040905284_MarketplaceItemExpirationdate.resx">
+      <DependentUpon>201607040905284_MarketplaceItemExpirationdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607071341596_UserSettings.resx">
+      <DependentUpon>201607071341596_UserSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607081448361_SettingText.resx">
+      <DependentUpon>201607081448361_SettingText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607111216431_NeighborhoodMessageImages.resx">
+      <DependentUpon>201607111216431_NeighborhoodMessageImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131003063_UserPageVisits.resx">
+      <DependentUpon>201607131003063_UserPageVisits.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LeeftSamen.Common\LeeftSamen.Common.csproj">
+      <Project>{10a750ca-261c-42bb-ae8a-36c481926317}</Project>
+      <Name>LeeftSamen.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

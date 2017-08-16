@@ -1,0 +1,47 @@
+﻿@model LeeftSamen.Portal.Web.Models.MultiFileUploadModel
+
+<div class="form-group profile-multi-upload">
+    <label>@Model.InputLabel</label>
+    <div class="input-group image-picker">
+        <div class="uploaded-files">
+            @{ var i = 0; }
+            @foreach (var media in Model.Files)
+            {
+                var fontAwesome = media.FontAwesomeClass();
+                i++;
+                if (Model.RouteValues.ContainsKey("mediaId"))
+                {
+                    Model.RouteValues["mediaId"] = media.MediaId;
+                }
+                else
+                {
+                    Model.RouteValues.Add("mediaId", media.MediaId);
+                }
+                <div class="uploaded-file">
+                    <div class="image">
+                        @if (!string.IsNullOrEmpty(fontAwesome))
+                        {
+                            <i class="fa @fontAwesome"></i>
+                        }
+                        else
+                        {
+                            <img src="@Url.RouteUrl(Model.RouteName, Model.RouteValues)" alt="" class="maxWidthFull">
+                        }
+                    </div>
+                    <div class="name">
+                        <span class="close" onclick="multiUploader.RemoveFile(this);"><i class="fa fa-times"></i></span>
+                        @media.Name
+                    </div>
+                    @Html.Hidden("file" + i, media.MediaId)
+                </div>
+            }
+        </div>
+
+        <span class="btn btn-default btn-small btn-file pull-right margin-top-10-px">
+            @Button.ChooseFileFromPC <input type="file" name="" class="file-input" onchange="multiUploader.OnUpload(this);"
+                                            accept="image/gif, image/jpeg, image/png, application/excel, application/pdf, text/plain, application/msword, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.spreadsheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </span>
+        @Html.ValidationMessage(Model.InputName, null, new { @class = "help-block" })
+    </div>
+    <div class="clear"></div>
+</div>

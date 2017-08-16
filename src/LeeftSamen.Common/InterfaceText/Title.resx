@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutThisCircle" xml:space="preserve">
+    <value>Over deze kring</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Buurtagenda</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Activiteit</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>LeeftSamen</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Wijzig je profielinstellingen</value>
+  </data>
+  <data name="ChangeNeighborhood" xml:space="preserve">
+    <value>Wijzig je buurtinstellingen</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Wijzig je wachtwoord</value>
+  </data>
+  <data name="ChangePasswordForm" xml:space="preserve">
+    <value>Een veilig wachtwoord bestaat uit zoveel mogelijk verschillende tekens.</value>
+  </data>
+  <data name="ChangeProfileImage" xml:space="preserve">
+    <value>Wijzig je profielfoto</value>
+  </data>
+  <data name="CircleData" xml:space="preserve">
+    <value>Kringgegevens</value>
+  </data>
+  <data name="CircleDesign" xml:space="preserve">
+    <value>Bepaal zelf hoe je kring eruit ziet.</value>
+  </data>
+  <data name="Circles" xml:space="preserve">
+    <value>Kringen</value>
+  </data>
+  <data name="ConfirmGiveMemberAdminRights" xml:space="preserve">
+    <value>Weet je zeker dat je deze gebruiker beheerrechten wilt geven?</value>
+  </data>
+  <data name="ConfirmLeaveCircle" xml:space="preserve">
+    <value>Weet je zeker dat je deze kring wilt verlaten?</value>
+  </data>
+  <data name="ConfirmRemoveActivity" xml:space="preserve">
+    <value>Weet je zeker dat je deze activiteit wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveCircleMember" xml:space="preserve">
+    <value>Weet je zeker dat je dit kringlid uit de kring wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveAdmin" xml:space="preserve">
+    <value>Weet je zeker dat je deze beheerder wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveJob" xml:space="preserve">
+    <value>Weet je zeker dat je deze taak wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveMarketplaceItem" xml:space="preserve">
+    <value>Weet je zeker dat je deze advertentie wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessage" xml:space="preserve">
+    <value>Weet je zeker dat je dit nieuwsbericht wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmRemoveOrganizationMember" xml:space="preserve">
+    <value>Weet je zeker dat je deze medewerker wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmSetCirclePrivate" xml:space="preserve">
+    <value>Weet je zeker dat je deze kring privé wilt maken?</value>
+  </data>
+  <data name="ConfirmSetCirclePublic" xml:space="preserve">
+    <value>Weet je zeker dat je deze kring openbaar wilt maken?</value>
+  </data>
+  <data name="ContactAndAddress" xml:space="preserve">
+    <value>Contact- en adresgegevens</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Contactgegevens</value>
+  </data>
+  <data name="CreateActivity" xml:space="preserve">
+    <value>Activiteit aanmaken</value>
+  </data>
+  <data name="CreateMarketplaceItem" xml:space="preserve">
+    <value>Advertentie aanmaken</value>
+  </data>
+  <data name="CreateNeighborhoodMessage" xml:space="preserve">
+    <value>Nieuwsbericht aanmaken</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Maak een nieuw profiel aan</value>
+  </data>
+  <data name="CreateNewCircle" xml:space="preserve">
+    <value>Nieuwe kring aanmaken</value>
+  </data>
+  <data name="CreateNewJob" xml:space="preserve">
+    <value>Maak een nieuwe taak aan</value>
+  </data>
+  <data name="CreateNewJobDetails" xml:space="preserve">
+    <value>Gegevens</value>
+  </data>
+  <data name="CreateNewJobVisibility" xml:space="preserve">
+    <value>Zichtbaarheid</value>
+  </data>
+  <data name="DateAndTime" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Omschrijving</value>
+  </data>
+  <data name="EditCircle" xml:space="preserve">
+    <value>Wijzig je kring</value>
+  </data>
+  <data name="EditOrganization" xml:space="preserve">
+    <value>Beheer je organisatie</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Je e-mailadres is bevestigd.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Wachtwoord vergeten?</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>Algemene gegevens</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Welkom bij LeeftSamen</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Afbeeldingen</value>
+  </data>
+  <data name="InviteUsersToCircle" xml:space="preserve">
+    <value>Mensen uitnodigen voor je kring</value>
+  </data>
+  <data name="AddAdminToSquare" xml:space="preserve">
+    <value>Mensen beheerder maken van je buurtplein</value>
+  </data>
+  <data name="InviteUsersToOrganization" xml:space="preserve">
+    <value>Mensen uitnodigen voor je organisatie</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Taken</value>
+  </data>
+  <data name="LatestMessages" xml:space="preserve">
+    <value>Laatste berichten</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Aanmelden</value>
+  </data>
+  <data name="LoginUsingYourAccount" xml:space="preserve">
+    <value>Meld je aan met je profiel</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Beheer je profiel</value>
+  </data>
+  <data name="Marketplace" xml:space="preserve">
+    <value>Vraag en aanbod</value>
+  </data>
+  <data name="MyCircles" xml:space="preserve">
+    <value>Mijn kringen</value>
+  </data>
+  <data name="MyMarketplace" xml:space="preserve">
+    <value>Mijn vraag en aanbod</value>
+  </data>
+  <data name="MyMarketplaceItems" xml:space="preserve">
+    <value>Mijn advertenties</value>
+  </data>
+  <data name="MyNeighborhood" xml:space="preserve">
+    <value>Mijn buurt</value>
+  </data>
+  <data name="NbrCircleJoinRequest" xml:space="preserve">
+    <value>{0} persoon wil lid worden van deze kring</value>
+  </data>
+  <data name="NbrCircleJoinRequests" xml:space="preserve">
+    <value>{0} personen willen lid worden van deze kring</value>
+  </data>
+  <data name="NbrCircleMember" xml:space="preserve">
+    <value>{0} kringlid</value>
+  </data>
+  <data name="NbrCircleMembers" xml:space="preserve">
+    <value>{0} kringleden</value>
+  </data>
+  <data name="NbrAdmin" xml:space="preserve">
+    <value>{0} beheerder</value>
+  </data>
+  <data name="NbrAdmins" xml:space="preserve">
+    <value>{0} beheerders</value>
+  </data>
+  <data name="NbrOrganizationMember" xml:space="preserve">
+    <value>{0} medewerker</value>
+  </data>
+  <data name="NbrOrganizationMembers" xml:space="preserve">
+    <value>{0} medewerkers</value>
+  </data>
+  <data name="NeighborhoodMessages" xml:space="preserve">
+    <value>Buurtnieuws</value>
+  </data>
+  <data name="NeighborhoodSettings" xml:space="preserve">
+    <value>Buurtinstellingen</value>
+  </data>
+  <data name="NoActivitiesFound" xml:space="preserve">
+    <value>Geen activiteiten gevonden</value>
+  </data>
+  <data name="NoMarketplaceItemsFound" xml:space="preserve">
+    <value>Geen advertenties gevonden</value>
+  </data>
+  <data name="NoMessagesFound" xml:space="preserve">
+    <value>Geen nieuwsberichten gevonden</value>
+  </data>
+  <data name="NoNotificationsFound" xml:space="preserve">
+    <value>Geen notificaties gevonden</value>
+  </data>
+  <data name="NoOrganizationsFound" xml:space="preserve">
+    <value>Geen organisaties gevonden</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notificaties</value>
+  </data>
+  <data name="NumberOfUnassignedJobs" xml:space="preserve">
+    <value>{0} Openstaande taken</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Organisaties</value>
+  </data>
+  <data name="PublicCirclesInMyNeighborhood" xml:space="preserve">
+    <value>Openbare kringen in mijn buurt</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Profiel aanmaken</value>
+  </data>
+  <data name="RegisterNeighborhood" xml:space="preserve">
+    <value>Definieer je buurt</value>
+  </data>
+  <data name="RemoveMemberAdminRights" xml:space="preserve">
+    <value>Weet je zeker dat je de beheerrechten van deze gebruiker in wilt trekken?</value>
+  </data>
+  <data name="RequestOrganization" xml:space="preserve">
+    <value>Organisatie aanvragen</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Wachtwoord instellen</value>
+  </data>
+  <data name="SelectCircleMember" xml:space="preserve">
+    <value>Selecteer een kringlid</value>
+  </data>
+  <data name="SendMessageToMarketplaceItemOwner" xml:space="preserve">
+    <value>Stuur een privébericht</value>
+  </data>
+  <data name="SendMessageToMarketplaceItemOwnerSub" xml:space="preserve">
+    <value>Alleen je naam en profielfoto zijn voor de ontvanger zichtbaar.</value>
+  </data>
+  <data name="StartPage" xml:space="preserve">
+    <value>Welkom bij LeeftSamen</value>
+  </data>
+  <data name="SummaryError" xml:space="preserve">
+    <value>Fout:</value>
+  </data>
+  <data name="SummaryErrors" xml:space="preserve">
+    <value>Fouten:</value>
+  </data>
+  <data name="WorkingArea" xml:space="preserve">
+    <value>Werkgebied</value>
+  </data>
+  <data name="YouDontHaveMarketplaceItems" xml:space="preserve">
+    <value>Je hebt geen advertenties</value>
+  </data>
+  <data name="NumberOfUnassignedJob" xml:space="preserve">
+    <value>{0} Openstaande taak</value>
+  </data>
+  <data name="ChangeName" xml:space="preserve">
+    <value>Wijzig je naam</value>
+  </data>
+  <data name="Invitations" xml:space="preserve">
+    <value>Uitnodigingen</value>
+  </data>
+  <data name="ConfirmRemoveCircle" xml:space="preserve">
+    <value>Weet je zeker dat je deze kring wilt verwijderen?</value>
+  </data>
+  <data name="ChangeUsername" xml:space="preserve">
+    <value>Wijzig je e-mailadres</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Profiel verwijderen</value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>Misbruik melden</value>
+  </data>
+  <data name="Buddies" xml:space="preserve">
+    <value>Buddy's</value>
+  </data>
+  <data name="YouAreBuddyOf" xml:space="preserve">
+    <value>Personen waarvan jij buddy bent</value>
+  </data>
+  <data name="YourBuddies" xml:space="preserve">
+    <value>Personen die jouw buddy zijn.</value>
+  </data>
+  <data name="OrganisationThemes" xml:space="preserve">
+    <value>Thema's</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="NoSearchResult" xml:space="preserve">
+    <value>Geen resultaten gevonden voor "{0}"</value>
+  </data>
+  <data name="OneSearchResult" xml:space="preserve">
+    <value>Eén resultaat gevonden voor "{0}"</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>{0} resultaten gevonden voor "{1}"</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welkom {0}!</value>
+  </data>
+  <data name="NoTimelineFound" xml:space="preserve">
+    <value>Er staat nog niets op je tijdlijn.</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Delen</value>
+  </data>
+  <data name="OrganizationActivityFeed" xml:space="preserve">
+    <value>{0} activiteitenoverzicht</value>
+  </data>
+  <data name="OrganizationMessagesFeed" xml:space="preserve">
+    <value>{0} berichtenoverzicht</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>E-mail instellingen</value>
+  </data>
+  <data name="InviteUsersToActivity" xml:space="preserve">
+    <value>Mensen uitnodigen voor je activiteit</value>
+  </data>
+  <data name="PinConfirmation" xml:space="preserve">
+    <value>Weet je zeker dat je dit bericht wilt vastzetten?</value>
+  </data>
+  <data name="UnpinConfirmation" xml:space="preserve">
+    <value>Weet je zeker dat je dit bericht wilt losmaken?</value>
+  </data>
+  <data name="CreateBulkActivity" xml:space="preserve">
+    <value>Activiteiten aanmaken</value>
+  </data>
+  <data name="CirclePhotos" xml:space="preserve">
+    <value>Foto's</value>
+  </data>
+  <data name="ConfirmRemovePhoto" xml:space="preserve">
+    <value>Weet je zeker dat je deze foto wilt verwijderen?</value>
+  </data>
+  <data name="BulkActivities" xml:space="preserve">
+    <value>Activiteiten</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Hoe wil je (indien van toepassing) met jouw vraag geholpen worden?</value>
+  </data>
+  <data name="ConfirmRemovePhotoAlbum" xml:space="preserve">
+    <value>Weet je zeker dat je dit fotoalbum wilt verwijderen?</value>
+  </data>
+  <data name="AccountLocationLabel" xml:space="preserve">
+    <value>Locatieweergave</value>
+  </data>
+  <data name="ItemVisibility" xml:space="preserve">
+    <value>Waar moet het item getoond worden?</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessageReaction" xml:space="preserve">
+    <value>Weet je zeker dat je deze reactie wilt verwijderen?</value>
+  </data>
+  <data name="OrganizationServices" xml:space="preserve">
+    <value>Diensten toevoegen</value>
+  </data>
+  <data name="OrganizationProducts" xml:space="preserve">
+    <value>Producten toevoegen</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Algemene voorwaarden</value>
+  </data>
+  <data name="SuggestionModalSubtitle" xml:space="preserve">
+    <value>Het LeeftSamen-platform ontwikkelen we met elkaar.&lt;br /&gt;Heb je een verbetersuggestie of een idee voor de doorontwikkeling van het platform?&lt;br /&gt;Laat je suggestie of idee hier achter.&lt;br /&gt;Alvast heel hartelijk dank!</value>
+  </data>
+  <data name="SuggestionModalTitle" xml:space="preserve">
+    <value>Suggestie indienen</value>
+  </data>
+  <data name="ConfirmVoteAction" xml:space="preserve">
+    <value>Weet u zeker dat u op {0} wil stemmen?</value>
+  </data>
+  <data name="EditJob" xml:space="preserve">
+    <value>Taak aanpassen</value>
+  </data>
+  <data name="ZuiderlingSettings" xml:space="preserve">
+    <value>Zuiderling koppelen</value>
+  </data>
+  <data name="ConfirmZuiderlingTransaction" xml:space="preserve">
+    <value>Weet je zeker dat je de {0} Zuiderlingen wilt overmaken?</value>
+  </data>
+  <data name="CircleRemoveMessage" xml:space="preserve">
+    <value>Bericht Verwijderen</value>
+  </data>
+  <data name="MyCircleInvites" xml:space="preserve">
+    <value>Mijn uitnodigingen</value>
+  </data>
+  <data name="ConfirmInvitationReminder" xml:space="preserve">
+    <value>Bevestig herinnering</value>
+  </data>
+  <data name="Facts" xml:space="preserve">
+    <value>Feiten</value>
+  </data>
+  <data name="CreateFact" xml:space="preserve">
+    <value>Nieuwe feiten toevoegen</value>
+  </data>
+  <data name="DetailInformation" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Bestanden</value>
+  </data>
+  <data name="IntroductionInformation" xml:space="preserve">
+    <value>Introductiegegevens</value>
+  </data>
+  <data name="Showlocation" xml:space="preserve">
+    <value>Toon locatie bij deze advertentie</value>
+  </data>
+  <data name="ProfileNotAllowed" xml:space="preserve">
+    <value>Uw huidige profiel is niet toegestaan</value>
+  </data>
+  <data name="CreateSubject" xml:space="preserve">
+    <value>Nieuw onderwerp toevoegen</value>
+  </data>
+  <data name="CreateReaction" xml:space="preserve">
+    <value>Nieuwe reactie plaatsen</value>
+  </data>
+  <data name="ChangeForum" xml:space="preserve">
+    <value>Wijzig foruminstellingen</value>
+  </data>
+  <data name="ChangeSquare" xml:space="preserve">
+    <value>Wijzig het buurtplein</value>
+  </data>
+  <data name="ChangeSquareSettings" xml:space="preserve">
+    <value>Wijzig de buurtplein instellingen</value>
+  </data>
+  <data name="ChangeZipCodes" xml:space="preserve">
+    <value>Wijzig toegestane postcodes</value>
+  </data>
+  <data name="ConfirmZipCodeDelete" xml:space="preserve">
+    <value>Weet je zeker dat je deze postcode wilt verwijderen?</value>
+  </data>
+  <data name="EditReaction" xml:space="preserve">
+    <value>Reactie bewerken</value>
+  </data>
+  <data name="ManageSquare" xml:space="preserve">
+    <value>Beheer het buurtplein</value>
+  </data>
+  <data name="SquareData" xml:space="preserve">
+    <value>Gegevens buurtplein</value>
+  </data>
+  <data name="SquareInfo" xml:space="preserve">
+    <value>Informatiepagina buurtplein</value>
+  </data>
+  <data name="EditFact" xml:space="preserve">
+    <value>Feit bewerken</value>
+  </data>
+  <data name="ConfirmRemoveFact" xml:space="preserve">
+    <value>Weet je zeker dat je dit feit wilt verwijderen?</value>
+  </data>
+  <data name="MySquares" xml:space="preserve">
+    <value>Mijn buurtpleinen</value>
+  </data>
+  <data name="ConfirmRemoveReaction" xml:space="preserve">
+    <value>Weet je zeker dat je deze reactie wilt verwijderen?</value>
+  </data>
+  <data name="ConfirmReportReaction" xml:space="preserve">
+    <value>Weet je zeker dat je deze reactie wilt rapporteren?</value>
+  </data>
+  <data name="ReportedReactions" xml:space="preserve">
+    <value>Gerapporteerde reacties</value>
+  </data>
+  <data name="ConfirmRemoveSubject" xml:space="preserve">
+    <value>Weet je zeker dat je dit onderwerp wilt verwijderen?</value>
+  </data>
+  <data name="EditSubject" xml:space="preserve">
+    <value>Onderwerp bewerken</value>
+  </data>
+  <data name="ConfirmRemoveOrganization" xml:space="preserve">
+    <value>Weet je zeker dat je deze organisatie wilt verwijderen?</value>
+  </data>
+  <data name="NoOrganizationsFoundTheme" xml:space="preserve">
+    <value>Geen organisaties gevonden rond het thema {0}</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Geen toegang</value>
+  </data>
+  <data name="Agenda" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="BadRequest" xml:space="preserve">
+    <value>Foute aanvraag</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Niet gevonden</value>
+  </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Interne serverfout</value>
+  </data>
+  <data name="LockedOut" xml:space="preserve">
+    <value>Locked out</value>
+  </data>
+  <data name="WelcomeMarketplaceOverview" xml:space="preserve">
+    <value>Welkom op Vraag en Aanbod. U kunt advertenties toevoegen of doorzoeken.</value>
+  </data>
+  <data name="RegisterHome" xml:space="preserve">
+    <value>Registreren</value>
+  </data>
+  <data name="RegisterPioneer" xml:space="preserve">
+    <value>Registreren: Nog één vraag</value>
+  </data>
+  <data name="RegisterStep1" xml:space="preserve">
+    <value>Registreren, stap 1/3: Profiel aanmaken</value>
+  </data>
+  <data name="RegisterStep2" xml:space="preserve">
+    <value>Registreren, stap 2/3: Je adres</value>
+  </data>
+  <data name="RegisterStep3" xml:space="preserve">
+    <value>Registreren, stap 3/3: Jouw buurt</value>
+  </data>
+  <data name="CircleDocuments" xml:space="preserve">
+    <value>Documenten</value>
+  </data>
+  <data name="Conversations" xml:space="preserve">
+    <value>Gesprekken</value>
+  </data>
+  <data name="Meals" xml:space="preserve">
+    <value>Maaltijden</value>
+  </data>
+  <data name="NeighbourHelp" xml:space="preserve">
+    <value>Burenhulp</value>
+  </data>
+  <data name="NewConversation" xml:space="preserve">
+    <value>Nieuw gesprek</value>
+  </data>
+  <data name="StartConversation" xml:space="preserve">
+    <value>Start een gesprek met:</value>
+  </data>
+  <data name="StuffForSale" xml:space="preserve">
+    <value>Spullen te koop</value>
+  </data>
+  <data name="StuffToBorrow" xml:space="preserve">
+    <value>Spullen te leen</value>
+  </data>
+  <data name="WelcomeMarketplaceMeals" xml:space="preserve">
+    <value>Heb je te veel gekookt? Of even geen tijd om zelf te koken? Deel of haal dan gemakkelijk een maaltijd bij jou in de buurt!</value>
+  </data>
+  <data name="WelcomeMarketplaceNeighbourHelp" xml:space="preserve">
+    <value>Vind je het leuk om af en toe iets voor een ander te doen, of kun je zelf wel een handje hulp gebruiken? Via Burenhulp kun je gemakkelijk hulp aanbieden of je buren om hulp vragen.</value>
+  </data>
+  <data name="WelcomeMarketplaceStuffForSale" xml:space="preserve">
+    <value>Welkom op de buurtmarktplaats. Hier kun je gemakkelijk spullen kopen of verkopen bij jou in de buurt.</value>
+  </data>
+  <data name="WelcomeMarketplaceStuffToBorrow" xml:space="preserve">
+    <value>Leen gemakkelijk spullen van je buren of bied zelf iets aan.</value>
+  </data>
+  <data name="CircleAlbums" xml:space="preserve">
+    <value>Albums</value>
+  </data>
+  <data name="ConfirmRemoveEmailGroup" xml:space="preserve">
+    <value>Weet je zeker dat je dit gesprek wilt verlaten?</value>
+  </data>
+  <data name="ConfirmRemoveDocument" xml:space="preserve">
+    <value>Weet je zeker dat je dit document wilt verwijderen?</value>
+  </data>
+  <data name="PublicCircles" xml:space="preserve">
+    <value>Openbare kringen</value>
+  </data>
+  <data name="ConfirmStartCircleEmails" xml:space="preserve">
+    <value>Weet je zeker dat je weer emails van deze kring meer wilt ontvangen?</value>
+  </data>
+  <data name="ConfirmStopCircleEmails" xml:space="preserve">
+    <value>Weet je zeker dat je geen emails van deze kring meer wilt ontvangen?</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InviteUsersToWebsite" xml:space="preserve">
+    <value>Anderen uitnodigen</value>
+  </data>
+  <data name="ChangeMemberProfile" xml:space="preserve">
+    <value>Kringprofiel aanpassen</value>
+  </data>
+  <data name="CircleActivities" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="ChangeNotification" xml:space="preserve">
+    <value>Wijzig je notificatie instellingen</value>
+  </data>
+  <data name="CreateNeighborhoodHelp" xml:space="preserve">
+    <value>Burenhulp aanbieden</value>
+  </data>
+</root>

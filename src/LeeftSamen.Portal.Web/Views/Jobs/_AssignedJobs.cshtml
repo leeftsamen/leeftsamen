@@ -1,0 +1,77 @@
+﻿@using System.Linq
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Jobs.AssignedJobsViewModel
+
+<table class="table" style="background: white; border: 1px solid #ddd">
+    @if (!Model.Jobs.Any())
+    {
+        <tr>
+            <td colspan="3">@Label.NoJobsThisDay</td>
+        </tr>
+    }
+
+    @foreach (var job in Model.Jobs)
+    {
+        <tr>
+            <td class="vert-align" style="width: 5%">@if (job.HasDueDateTime) { @job.DueDateTime.ToString("HH:mm") } else { <b>&nbsp; - </b> }</td>
+            <td class="vert-align">
+                @if (job.IsOnlyVisibleToSelectedMembers)
+                {
+                    <span class="glyphicon glyphicon-lock"></span>
+                }
+                <strong>@job.Title</strong>
+            </td>
+            <td class="vert-align text-right">
+                @if (Model.CurrentUserIsCircleAdministrator || job.AssigneeId == Model.CurrentUserId)
+                {
+                    @Html.Partial("_UserProfileImage", new UserProfileImage(job.AssigneeProfileImageId, job.AssigneeId, "profile-image-xs"))
+                    @job.AssigneeName
+                }
+
+                @*<td class="vert-align" style="width: 5%">*@
+                    @*    @if (Model.CurrentUserIsCircleAdministrator)*@
+                    @*    {*@
+                    @*        <button type="button" class="btn btn-xs btn-danger pull-right"*@
+                    @*                data-toggle="modal" data-target="#modal"*@
+                    @*                data-title="@Title.ConfirmRemoveJob" data-body="@Text.ConfirmRemoveJob" data-button="@Button.RemoveJob"*@
+                    @*                data-action="@Url.RouteUrl("CircleSubResourcesDetail", new { controller = "Jobs", action = "Remove", circle = Model.CircleId, id = job.JobId })">*@
+                    @*            <span class="glyphicon glyphicon-remove"></span>*@
+                    @*        </button>*@
+                    @*    }*@
+                    @*</td>*@
+                    @if (job.AssigneeId == Model.CurrentUserId)
+                    {
+                        using (Html.BeginForm("UnAssignToMe", "Jobs", new { circleId = Model.CircleId, id = job.JobId }, FormMethod.Post, new { style = "display: inline" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">@Button.UnassignJobToMe</button>
+                        }
+                    }
+
+                    @if (Model.CurrentUserIsCircleAdministrator)
+                    {
+                        <div class="dropdown pull-right" style="padding-left: 20px;">
+                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#"
+                                       data-toggle="modal" data-target="#modal"
+                                       data-title="@Title.ConfirmRemoveJob" data-body="@Text.ConfirmRemoveJob" data-button="@Button.RemoveJob"
+                                       data-action="@Url.RouteUrl("CircleSubResourcesDetail", new { controller = "Jobs", action = "Remove", circle = ViewBag.CircleId, id = job.JobId })">
+                                        @Button.RemoveJob
+                                    </a>
+                                </li>
+
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "Jobs", new { jobId = job.JobId })">@Button.EditJob</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    }
+                </td>
+        </tr>
+    }
+</table>

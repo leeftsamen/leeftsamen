@@ -1,0 +1,96 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Forums.ForumReaction
+
+@if (!Model.Reaction.Deleted)
+{
+    if (Model.CurrentUserId == Model.Reaction.CreatorId || Model.IsCurrentUserAdmin)
+    {
+        <div class="dropdown pull-right">
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("Forum", new { controller = "Forums", action = "EditReaction", type = Model.Type, typeId = Model.TypeId, id = Model.Reaction.ReactionId })">@Button.EditReaction</a>
+                </li>
+                @if (Model.IsCurrentUserAdmin)
+                {
+                    <li role="presentation">
+                        <a role="menuitem" href="#"
+                           data-toggle="modal" data-target="#modal"
+                           data-title="@Title.ConfirmRemoveReaction"
+                           data-body="@Text.ConfirmRemoveReaction"
+                           data-button="@Button.Remove"
+                           data-hidden='{"type": "@Model.Type","typeId": "@Model.TypeId","id": "@Model.Reaction.ReactionId"}'
+                           data-action="@Url.Action("RemoveReaction")">
+                            @Button.DeleteReaction
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        if (!Model.Reaction.Reported)
+        {
+            <div class="dropdown pull-right">
+                <a role="menuitem" href="#" class="btn-sm" title="Reactie rapporteren"
+                   data-toggle="modal" data-target="#modal"
+                   data-title="@Title.ConfirmReportReaction"
+                   data-body="@Text.ConfirmReportReaction"
+                   data-button="@Button.ReportAbuse"
+                   data-hidden='{"type": "@Model.Type","typeId": "@Model.TypeId","id": "@Model.Reaction.ReactionId"}'
+                   data-action="@Url.Action("ReportReaction")">
+                    <i class="fa fa-flag"></i>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="dropdown md-pull-right forum-small">
+                @Label.Reported
+            </div>
+        }
+    }
+    if (!String.IsNullOrEmpty(Model.Reaction.Title))
+    {
+        <h1>@Model.Reaction.Title</h1>
+    }
+    <h4>
+        @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Reaction.ProfileImageId, Model.Reaction.CreatorId, "profile-image-sm valign-top"))
+        <span class="relative-inline-block">
+            @Model.Reaction.CreatorName<br />
+            <span class="forum-small">
+                @(Model.Reaction.CreationDate.ToTimeAgoString()) &nbsp;|&nbsp;  @string.Format(Label.MeterAway, Model.Reaction.Distance)
+            </span>
+        </span>
+    </h4>
+    @Html.Raw(Model.Reaction.Text)
+    if (Model.Reaction.MediaList.Count > 0)
+    {
+    <div>
+        @foreach (var media in Model.Reaction.MediaList)
+        {
+            <div class="col-md-4 col-xs-6 margin-bottom-10-px">
+                <a data-lightbox="reaction-@Model.Reaction.ReactionId" href="@Url.RouteUrl("Forum", new { action = "ReactionImageLarge", type = Model.Type, typeId = Model.TypeId, id = media.MediaId, reactionId = Model.Reaction.ReactionId })">
+                    <img src="@Url.RouteUrl("Forum", new { action = "ReactionImage", type = Model.Type, typeId = Model.TypeId, id = media.MediaId, reactionId = Model.Reaction.ReactionId })" alt="" style="max-width:100%;">
+                </a>
+            </div>
+        }
+    </div>
+    }
+}
+else
+{
+    <h4>
+        @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Reaction.ProfileImageId, Model.Reaction.CreatorId, "profile-image-sm valign-top"))
+        <span class="relative-inline-block">
+            @Model.Reaction.CreatorName<br />
+            <span class="forum-small">
+                @(Model.Reaction.CreationDate.ToTimeAgoString()) &nbsp;|&nbsp;  @string.Format(Label.MeterAway, Model.Reaction.Distance)
+            </span>
+        </span>
+    </h4>
+                                            <span class="forum-small">@Text.ReactionDeleted</span>
+}

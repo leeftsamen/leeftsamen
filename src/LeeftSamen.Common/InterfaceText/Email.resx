@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivityInvitationAcceptLinkText" xml:space="preserve">
+    <value>Uitnodiging accepteren</value>
+  </data>
+  <data name="ActivityInvitationInstruction" xml:space="preserve">
+    <value>{0} heeft je uitgenodigd om mee te doen met de activiteit '{1}'. Klik op onderstaande link om de uitnodiging te bekijken.</value>
+  </data>
+  <data name="CircleInvitationAcceptLinkText" xml:space="preserve">
+    <value>Uitnodiging accepteren</value>
+  </data>
+  <data name="CircleInvitationInstruction1" xml:space="preserve">
+    <value>{0} heeft je uitgenodigd voor de kring '{1}'.</value>
+  </data>
+  <data name="CircleInvitationReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat iemand je heeft uitgenodigd voor een kring.</value>
+  </data>
+  <data name="CircleInvitationWarningReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er bijna een uitnodiging van een kring verloopt.</value>
+  </data>
+  <data name="CircleJobAssigned" xml:space="preserve">
+    <value>{0} heeft aangegeven een taak op te pakken in de kring '{1}'.</value>
+  </data>
+  <data name="CircleJobAssignedReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat je kringbeheerder bent.</value>
+  </data>
+  <data name="CircleJobCreated" xml:space="preserve">
+    <value>{0} vraagt of je {1} kunt helpen met: {2}</value>
+  </data>
+  <data name="CircleJobLinkText" xml:space="preserve">
+    <value>Taak bekijken</value>
+  </data>
+  <data name="CircleJobReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat iemand een nieuwe taak heeft aangemaakt binnen een kring waar je lid van bent.</value>
+  </data>
+  <data name="CircleJoinRequestAcceptLinkText" xml:space="preserve">
+    <value>Verzoek goedkeuren</value>
+  </data>
+  <data name="CircleJoinRequestInstruction" xml:space="preserve">
+    <value>{0} heeft een verzoek gedaan om lid te worden van de kring '{1}'. Klik op onderstaande link om het verzoek goed te keuren. Als je dit verzoek niet wilt goedkeuren, negeer dan dit bericht.</value>
+  </data>
+  <data name="CircleJoinRequestReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat je kringbeheerder bent.</value>
+  </data>
+  <data name="CircleJoinRequestSaluation" xml:space="preserve">
+    <value>Beste kringbeheerder,</value>
+  </data>
+  <data name="CircleMarketPlaceItemCreated" xml:space="preserve">
+    <value>Beste kringlid, {0} heeft een nieuw item geplaatst in het vraag en aanbod gedeelte van de kring '{1}'.  Betreft: {2}</value>
+  </data>
+  <data name="CircleMarketplaceItemLinkText" xml:space="preserve">
+    <value>Bekijk vraag en aanbod</value>
+  </data>
+  <data name="CircleMessageCreated" xml:space="preserve">
+    <value>Beste kringlid,&lt;br/&gt;&lt;br/&gt;{0} heeft een nieuw bericht geplaatst in de kring '{1}'</value>
+  </data>
+  <data name="CircleMessageLinkText" xml:space="preserve">
+    <value>Bekijk dit bericht</value>
+  </data>
+  <data name="DefaultCloseHtml" xml:space="preserve">
+    <value>Met vriendelijke groet,</value>
+    <comment>Randomize the name?</comment>
+  </data>
+  <data name="DefaultSaluation" xml:space="preserve">
+    <value>Beste {0},</value>
+  </data>
+  <data name="InvitationExpireWarningText" xml:space="preserve">
+    <value>De uitnodiging van de kring '{0}' zal over 2 dagen verlopen. Je hebt tot {1} de tijd om te reageren. Daarna is de uitnodiging verlopen.</value>
+  </data>
+  <data name="MarketplaceLenditemAsked" xml:space="preserve">
+    <value>Ik ben op zoek naar (een) {0}. Heb je die te leen voor mij?</value>
+  </data>
+  <data name="MarketplaceLendRequestInCircleReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er een advertentie in jouw kring is geplaatst.</value>
+  </data>
+  <data name="MarketplaceLendRequestInNeighboorhoudReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er een advertentie in jouw buurt is geplaatst.</value>
+  </data>
+  <data name="MarketplaceReaction" xml:space="preserve">
+    <value>{0} heeft gereageerd op '{1}'. Klik op de onderstaande link om de reactie te bekijken.</value>
+  </data>
+  <data name="MarketplaceReactionLinkText" xml:space="preserve">
+    <value>Reactie bekijken</value>
+  </data>
+  <data name="MarketplaceReactionReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er een reactie geplaatst is bij een advertentie.</value>
+  </data>
+  <data name="MarketplaceTransaction" xml:space="preserve">
+    <value>{0} heeft betaald voor '{1}'. Klik op de onderstaande link om de advertentie te bekijken.</value>
+  </data>
+  <data name="MarketplaceTransactionLinkText" xml:space="preserve">
+    <value>Advertentie bekijken</value>
+  </data>
+  <data name="MarketplaceTransactionReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er een betaling is gedaan is bij een advertentie.</value>
+  </data>
+  <data name="OrganizationInvitationAcceptLinkText" xml:space="preserve">
+    <value>Uitnodiging accepteren</value>
+  </data>
+  <data name="OrganizationInvitationInstruction" xml:space="preserve">
+    <value>{0} heeft je uitgenodigd om lid te worden van de organisatie '{1}'. Klik op onderstaande link om de uitnodiging te accepteren.</value>
+  </data>
+  <data name="OrganizationInvitationReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat iemand je heeft uitgenodigd voor een organisatie.</value>
+  </data>
+  <data name="OrganizationRequestInstruction" xml:space="preserve">
+    <value>{0} heeft de organisatie '{1}' toegevoegd. Neem contact op met het servicedesk van LeeftSamen om de organisatie zichtbaar te maken op het platform.</value>
+  </data>
+  <data name="PortalAdmin" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat je portalbeheerder bent.</value>
+  </data>
+  <data name="ReactionParentRemoved" xml:space="preserve">
+    <value>Je bericht is helaas niet meer zichtbaar omdat de bijdrage waaronder je bericht stond is verwijderd. De bijdrage strookte niet met de spelregels van het forum. Het gaat om de volgende bijdrage:&lt;br /&gt;{0}&lt;br /&gt;&lt;br /&gt;We hopen je snel op het forum terug te zien.</value>
+  </data>
+  <data name="ReactionRemoved" xml:space="preserve">
+    <value>Je bericht is helaas verwijderd, omdat het niet strookte met de spelregels van het forum. Het gaat om het volgende bericht:&lt;br /&gt;{0}&lt;br /&gt;&lt;br /&gt;We hopen je snel op het forum terug te zien.</value>
+  </data>
+  <data name="ReactionRemovedReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat een beheerder een bericht van je heeft verwijderd.</value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>{0} &lt;{1}&gt; heeft melding gemaakt van misbruik op LeeftSamen.</value>
+  </data>
+  <data name="ReportAbuseReason" xml:space="preserve">
+    <value>Je ontvangt deze e-mail omdat er een vorm van misbruik is gemeld.</value>
+  </data>
+  <data name="ResetPasswordInstruction" xml:space="preserve">
+    <value>Er is een nieuw wachtwoord voor je aangevraagd. Klik op onderstaande link om je wachtwoord opnieuw in te stellen.</value>
+  </data>
+  <data name="ResetPasswordLinkText" xml:space="preserve">
+    <value>Wachtwoord opnieuw instellen</value>
+  </data>
+  <data name="ResetPasswordReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat er een nieuw wachtwoord is aangevraagd.</value>
+  </data>
+  <data name="StopSendingMails" xml:space="preserve">
+    <value>Wil je deze e-mails liever niet meer ontvangen? Klik dan &lt;a href="{0}"&gt;hier&lt;/a&gt; om je instellingen te wijzigen.</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Tijdstip:</value>
+  </data>
+  <data name="UserCloseHtml" xml:space="preserve">
+    <value>Met vriendelijke groet,&lt;br&gt;{0}</value>
+    <comment>Randomize the name?</comment>
+  </data>
+  <data name="ViewInvitationLinkText" xml:space="preserve">
+    <value>Uitnodiging bekijken</value>
+  </data>
+  <data name="WelcomeInstruction" xml:space="preserve">
+    <value>Welkom bij LeeftSamen! Je hebt zojuist een profiel aangemaakt. Gefeliciteerd! Om je profiel definitief te maken, vragen we je jouw e-mailadres te bevestigen door op onderstaande link te klikken.</value>
+  </data>
+  <data name="WelcomeReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat je een profiel hebt aangemaakt.</value>
+  </data>
+  <data name="WelcomeVerifyEmailLinkText" xml:space="preserve">
+    <value>E-mailadres bevestigen</value>
+  </data>
+  <data name="CircleInvitationInstruction2" xml:space="preserve">
+    <value>&lt;b&gt;Lijkt het je leuk om lid te worden van deze kring?&lt;/b&gt; Klik dan op de onderstaande button om de uitnodiging te accepteren.</value>
+  </data>
+  <data name="CircleJobUnassigned" xml:space="preserve">
+    <value>{0} heeft aangegeven de taak '{1}' in de kring '{2}' helaas niet meer te kunnen doen.</value>
+  </data>
+  <data name="CircleJobUnassignedReason" xml:space="preserve">
+    <value>Je ontvangt dit bericht omdat iemand niet langer meer een taak kan doen in een kring waar je lid van bent.</value>
+  </data>
+  <data name="CircleJobUnassignedSalutation" xml:space="preserve">
+    <value>Beste kringlid,</value>
+  </data>
+  <data name="NoTime" xml:space="preserve">
+    <value>Maakt niet uit</value>
+  </data>
+  <data name="TakeJob" xml:space="preserve">
+    <value>Heb jij tijd om deze taak op te pakken?</value>
+  </data>
+  <data name="CircleInvitationNoUser" xml:space="preserve">
+    <value>&lt;b&gt;Ben je nog geen lid van het LeeftSamen-platform? &lt;/b&gt;&lt;br /&gt;
+Geen probleem! Je kunt gemakkelijk en gratis een profiel aanmaken door op &lt;a href="{0}"&gt;deze link&lt;/a&gt; te klikken. Daarna kun je via deze e-mail de uitnodiging voor de kring accepteren.</value>
+  </data>
+  <data name="SeeWebsite" xml:space="preserve">
+    <value>Bekijk LeeftSamen</value>
+  </data>
+  <data name="MarketplaceHelpAsked" xml:space="preserve">
+    <value>{0} vraagt om hulp bij (een) {1}</value>
+  </data>
+  <data name="InformalCloseHtml" xml:space="preserve">
+    <value>Hartelijke groet,</value>
+    <comment>Randomize the name?</comment>
+  </data>
+  <data name="InformalSaluation" xml:space="preserve">
+    <value>Hoi {0},</value>
+  </data>
+  <data name="LendRequiredOn" xml:space="preserve">
+    <value>Ik heb het nodig op {0}</value>
+  </data>
+</root>

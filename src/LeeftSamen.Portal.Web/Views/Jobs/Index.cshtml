@@ -1,0 +1,107 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models.Jobs
+@model IndexViewModel
+@{
+    ViewBag.Title = "Jobs";
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+<div class="row">
+    <div class="col-md-offset-10 col-md-2">
+        @if (Model.CurrentUserIsCircleAdministrator || Model.CircleIsPrivate)
+        {
+            <a href="@Url.RouteUrl("CircleSubResources", new { controller = "Jobs", action = "Create", circleId = Model.CircleId })"
+               class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                @Button.CreateJob
+            </a>
+        }
+    </div>
+</div>
+
+<h3>
+    @string.Format(Model.UnassignedJobs.Count == 1 ? Title.NumberOfUnassignedJob : Title.NumberOfUnassignedJobs, Model.UnassignedJobs.Count)
+</h3>
+<table class="table" style="background: white; border: 1px solid #ddd">
+    @foreach (var job in Model.UnassignedJobs)
+    {
+        <tr>
+            @if (job.HasDueDateTime)
+            {
+                <td style="width: 18%">@job.DueDateTime.ToString("ddd d MMM - HH:mm")@(job.DueDateTimeEnd.HasValue ? job.DueDateTimeEnd.Value.ToString("-HH:mm") : String.Empty)</td>
+            }
+            else
+            {
+
+                <td style="width: 18%">@job.DueDateTime.ToString("ddd d MMM") <br /> <i>@Label.NoStartTime</i></td>
+            }
+            <td style="width: 6%;">
+                @if (job.CreationDateTime.IsFresh())
+                {
+                    <span class="label label-danger">@Label.New</span>
+                }
+
+                @if (job.IsOnlyVisibleToSelectedMembers)
+                {
+                    <span class="glyphicon glyphicon-lock"></span>
+                }
+            </td>
+            <td>
+                <strong>@job.Title</strong>
+                <div style="display: block" class="small">@job.Description</div>
+            </td>
+            <td style="width: 20%">
+                @using (Html.BeginForm("AssignToMe", "Jobs", new { circleId = Model.CircleId, id = job.JobId }, FormMethod.Post, new { style = "display: inline" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-default">@Button.AssignJobToMe</button>
+                }
+
+                @if (Model.CurrentUserIsCircleAdministrator || job.CreatorId == Model.CurrentUserId)
+                {
+                    <div class="dropdown pull-right">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#"
+                                   data-toggle="modal" data-target="#modal"
+                                   data-title="@Title.ConfirmRemoveJob" data-body="@Text.ConfirmRemoveJob" data-button="@Button.RemoveJob"
+                                   data-action="@Url.RouteUrl("CircleSubResourcesDetail", new {controller = "Jobs", action = "Remove", circle = Model.CircleId, id = job.JobId})">
+                                    @Button.RemoveJob
+                                </a>
+                            </li>
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="@Url.Action("Edit", "Jobs", new { jobId = job.JobId })">@Button.EditJob</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<h3>@Title.Jobs</h3>
+<div class="row">
+    <div class="col-md-10">
+
+        <span class="label label-block label-default">@Label.Today</span>
+        @Html.Partial("_AssignedJobs", AssignedJobsViewModel.From(Model, j => j.DueDateTime.Date == DateTime.Today))
+
+        <span class="label label-block label-default">@Label.Tomorrow</span>
+        @Html.Partial("_AssignedJobs", AssignedJobsViewModel.From(Model, j => j.DueDateTime.Date == DateTime.Today.AddDays(1)))
+
+        @foreach (var day in Model.AssignedJobs.Select(j => j.DueDateTime.Date).Where(d => d > DateTime.Today.AddDays(1)).Distinct())
+        {
+            <span class="label label-block label-default">@day.ToString("dddd d MMMM")</span>
+            @Html.Partial("_AssignedJobs", AssignedJobsViewModel.From(Model, j => j.DueDateTime.Date == day))
+        }
+
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = Title.Buddies;
+}
+
+<h1>@ViewBag.Title.</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.YouAreBuddyOf</h2>
+                <p>@Text.YouAreBuddyOf</p>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <td><img src="/users/60e15967-d54d-411b-b6e5-5a27a8b3dcdc/profileimage/3" alt="" class="img-circle profile-image-sm"></td>
+                        <td><b>Thomas Huijzer</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><img src="/users/60e15967-d54d-411b-b6e5-5a27a8b3dcdc/profileimage/3" alt="" class="img-circle profile-image-sm"></td>
+                        <td><b>Thomas Huijzer</b></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><img src="/users/60e15967-d54d-411b-b6e5-5a27a8b3dcdc/profileimage/3" alt="" class="img-circle profile-image-sm"></td>
+                        <td><b>Thomas Huijzer</b></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <br />
+
+                <div class="relative-inline-block pull-right">
+                    <div class="btn btn-default pull-right" data-target="#inviteUserModal" data-toggle="modal">@Button.BecomeBuddy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.YourBuddies</h2>
+                <p>@Text.YourBuddies</p>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <td><img src="/users/60e15967-d54d-411b-b6e5-5a27a8b3dcdc/profileimage/3" alt="" class="img-circle profile-image-sm"></td>
+                        <td><b>Thomas Huijzer</b></td>
+                        <td></td>
+                    </tr>
+                </table>
+                
+                <br/>
+
+                <div class="relative-inline-block pull-right">
+                    <div class="btn btn-default pull-right" data-target="#inviteUserModal" data-toggle="modal">@Button.InviteBuddy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

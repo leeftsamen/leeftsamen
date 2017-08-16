@@ -1,0 +1,213 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Marketplace.OverviewViewModel
+@{
+    var titleTekst = string.Empty;
+    string searchPlaceholder = string.Empty, searchLabel = string.Empty;
+    switch (Model.Category)
+    {
+        case 4:
+            ViewBag.Title = Title.StuffForSale;
+            titleTekst = Title.WelcomeMarketplaceStuffForSale;
+            searchPlaceholder = PlaceHolder.BuyStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 5:
+            ViewBag.Title = Title.StuffToBorrow;
+            titleTekst = Title.WelcomeMarketplaceStuffToBorrow;
+            searchPlaceholder = PlaceHolder.LendStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 3:
+            ViewBag.Title = Title.Meals;
+            titleTekst = Title.WelcomeMarketplaceMeals;
+            searchPlaceholder = PlaceHolder.MealStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 1:
+            ViewBag.Title = Title.NeighbourHelp;
+            titleTekst = Title.WelcomeMarketplaceNeighbourHelp;
+            searchPlaceholder = PlaceHolder.NeighbourHelpStuff;
+            searchLabel = Label.IRequireHelpWith;
+            break;
+        default:
+            ViewBag.Title = Title.Marketplace;
+            titleTekst = Title.WelcomeMarketplaceOverview;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+    }
+    if (Model.CircleId.HasValue)
+    {
+        titleTekst = Title.WelcomeMarketplaceOverview;
+    }
+    var searchDescription = !String.IsNullOrWhiteSpace(Model.SearchQuery) ? Model.SearchQuery : Text.All;
+    searchDescription += !String.IsNullOrWhiteSpace(Model.CurrentCategory) ? String.Concat(" ", Text.Within, " ", Model.CurrentCategory.ToLower()) : String.Empty;
+    searchDescription += Model.Type.HasValue ? Model.Type == MarketplaceItem.MarketplaceItemType.Offered ? String.Concat(" ", @Button.MarketplaceOffered.ToLower()) : String.Concat(" ", @Button.MarketplaceAsked.ToLower()) : String.Empty;
+    var formAction = Url.RouteUrl("Default", new { controller = "Marketplace" });
+}
+
+@if (Model.CircleId.HasValue)
+{
+    formAction = Url.RouteUrl("CircleMarketplace", new { circleId = Model.CircleId, controller = "Marketplace", action = "Overview" });
+    @Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+    <div class="visible-xs" style="margin-bottom: 10px;">
+        <a class="btn btn-primary" href="@Url.Action("CreateItem")">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            @Button.CreateMarketplaceItem
+        </a>
+    </div>
+}
+else
+{
+    @Html.Partial("_HelpIcons", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "hidden-xs" } })
+    <h1>@ViewBag.Title</h1>
+    @Html.Partial("_HelpIcons", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "visible-xs" } })
+}
+<div class="panel panel-default hidden-xs panel-overflow">
+    <div class="row panel-body relative">
+        @if (Model.HelpIcons.Any(h => h.Type == "marketplace-all"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-all");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-intro", HelpText = helpIcon.Text });
+        }
+        <div class="col-md-9 col-xs-12">
+            <h4>@titleTekst</h4>
+        </div>
+        @if (Model.CircleId.HasValue)
+        {
+            <div class="col-md-3 col-xs-12">
+                <a class="btn btn-primary pull-right" href="@Url.Action("CreateCircleItem", "Marketplace", new {circleId = Model.CircleId})">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    @Button.CreateMarketplaceItem
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+@{ var formId = "filterform"; }
+<div class="panel-overflow relative">
+    @if (Model.HelpIcons.Any(h => h.Type == "marketplace-filters"))
+    {
+        var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-filters");
+        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-filters", HelpText = helpIcon.Text });
+    }
+    <form method="get" action="@formAction#start" id="@formId">
+        @Html.HiddenFor(m => m.CircleId)
+        @Html.HiddenFor(m => m.Category)
+        <div class="panel panel-default">
+            <div class="row panel-body">
+                @if (Model.CircleId.HasValue)
+            {
+                    <div class="col-md-7 col-xs-12">
+                        @Html.TextBox("Query", null, new { placeholder = PlaceHolder.IAmSearchingfor, @class = "form-control" })
+                    </div>
+                    <div class="col-md-3 col-sm-8  clear-xs">
+                        @Html.DropDownList("Category", Model.Categories, new { @class = "trigger-submit form-control" })
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-3 col-xs-12" style="padding-top:7px;">
+                        <label>@searchLabel</label>
+                    </div>
+                    <div class="col-md-7 col-xs-12">
+                        @Html.TextBox("Query", null, new { placeholder = searchPlaceholder, @class = "form-control" })
+                    </div>
+                }
+                <div class="col-md-2 col-sm-4">
+                    <button type="submit" class="btn btn-search form-control">@Button.Search</button>
+                </div>
+            </div>
+            @if (Model.CircleId.HasValue)
+            {
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="label label-info transparent">@Text.SearchedOn @searchDescription</label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row tabrow">
+            @Html.Hidden("ListView", Model.ListView)
+            <ul class="nav nav-tabs pull-left col-md-4 col-xs-12 no-gutter">
+                <li role="presentation" class="@(Model.ListView ? null : "active")">
+                    <a class="type-tab" data-val-target="@Html.IdFor(m => Model.ListView)" data-val="@(false)" data-form-trigger="@formId">@Button.MarketplaceCards</a>
+                </li>
+                <li role="presentation" class="@(Model.ListView ? "active" : null)">
+                    <a class="type-tab" data-val-target="@Html.IdFor(m => Model.ListView)" data-val="@(true)" data-form-trigger="@formId">@Button.MarketplaceListView</a>
+                </li>
+            </ul>
+            <div class="col-md-8 col-xs-12 pull-right no-gutter">
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        @Html.RadioButton("Type", string.Empty, new { @class = "trigger-submit" }) @Button.MarketplaceAll
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButton("Type", MarketplaceItem.MarketplaceItemType.Offered, new { @class = "trigger-submit" }) @Button.MarketplaceOffered
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButton("Type", MarketplaceItem.MarketplaceItemType.Asked, new { @class = "trigger-submit" }) @Button.MarketplaceAsked
+                    </label>
+                </div>
+                <div class="col-md-3 actions no-gutter">
+                    @Html.DropDownList("OrderBy", Model.OrderByOptions, new { @class = "trigger-submit pull-right form-control" })
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="start"></div>
+
+@if (Model.MarketplaceItems.Count > 0)
+{
+    <div id="marketplace-items" class="row" pagesize="@Model.Take">
+        @if (Model.ListView)
+        {
+        <div class="col-md-12 marketplace-item-placeholder">
+            @foreach (var item in Model.MarketplaceItems)
+            {
+            @Html.Partial("_DisplayItem", item, new ViewDataDictionary() { { "ListView", Model.ListView }, { "CircleId", Model.CircleId } });
+            }
+        </div>
+        }
+        else
+        {
+        <div class="tileable-items marketplace-item-placeholder" style="margin: 0 15px;">
+            @foreach (var item in Model.MarketplaceItems)
+            {
+            @Html.Partial("_DisplayItem", item, new ViewDataDictionary() { { "ListView", Model.ListView }, { "CircleId", Model.CircleId } })
+            }
+        </div>
+        }
+    </div>
+    if (Model.MarketplaceItems.Count == 10)
+    {
+    <div class="row">
+        <button class="btn btn-default col-md-4 col-md-offset-4" onclick="marketPlaceLoadMore(this, '#@formId')">@Button.MarketplaceShowMore</button>
+    </div>
+    }
+}
+else
+{
+    <h3>@Title.NoMarketplaceItemsFound</h3>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/item-tiler")
+
+    <script>
+        var elements = document.getElementsByClassName('trigger-submit');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].onchange = function() {
+                document.forms.filterform.submit();
+            }
+        }
+    </script>
+
+}

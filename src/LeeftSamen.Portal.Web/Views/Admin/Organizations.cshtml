@@ -1,0 +1,55 @@
+﻿@model LeeftSamen.Portal.Web.Models.Admin.OrganizationsViewModel
+@{
+    ViewBag.Title = String.Format("{0} / {1}", Title.Admin, Button.Organizations);
+}
+
+<a class="pull-right" href="@Url.RouteUrl("Default", new { controller = "Admin", action = "Index" })">Admin</a>
+
+<h1>@ViewBag.Title</h1>
+
+<div class="panel">
+    <div class="panel-body">
+        <table class="table table-striped table-condensed">
+            <tr>
+                <th></th>
+                <th>@Label.Name</th>
+                <th>@Label.City</th>
+                <th>@Label.Email</th>
+                <th>@Label.PhoneNumber</th>
+                <th>@Label.Website</th>
+                <th>@Label.RequestDate</th>
+            </tr>
+            @foreach (var organization in Model.Organizations.OrderByDescending(o => o.RequestDateTime))
+            {
+                var style = "color:" + (organization.IsRequestPending ? "#888888" : "#000000");
+                <tr style="@style">
+                    <td>
+                        @if (organization.IsRequestPending)
+                        {
+                            <button type="button" class="btn btn-danger btn-xs" onclick="activateOrganization(@organization.OrganizationId)">@Button.SetActive</button>
+                        }
+                    </td>
+                    <td>@organization.Name</td>
+                    <td>@organization.City</td>
+                    <td>@organization.Email</td>
+                    <td>@organization.Phone</td>
+                    <td>@organization.Website</td>
+                    <td>@organization.RequestDateTime</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+@using (Html.BeginForm("Organizations", "Admin", new { }, FormMethod.Post, new { id = "organizationForm" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="OrganizationId" id="OrganizationId" />
+}
+
+<script>
+    function activateOrganization(organizationId) {
+        document.getElementById('OrganizationId').value = organizationId;
+        document.forms.organizationForm.submit();
+    }
+</script>

@@ -1,0 +1,86 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.MembersViewModel
+@{
+    ViewBag.Title = Model.SquareName;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding-bottom: 0">
+                @if (Model.CurrentUserIsAdministrator)
+                {
+                    <div class="relative-inline-block pull-right block-xs">
+                        @if (Model.HelpIcons.Any(h => h.Type == "square-invite"))
+                        {
+                            var helpIcon = Model.HelpIcons.First(h => h.Type == "square-invite");
+                            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "square-create", HelpText = helpIcon.Text });
+                        }
+                        <div class="btn btn-default" data-target="#inviteUserModal" data-toggle="modal">@Button.AddAdmins</div>
+                    </div>
+
+                }
+                <h3 class="panel-title">
+                    @string.Format(Model.Admins.Count == 1 ? Title.NbrAdmin : Title.NbrAdmins, Model.Admins.Count)
+                </h3>
+            </div>
+        </div>
+        <div class="shift-left">
+            <div id="members" class="row">
+                @foreach (var member in Model.Admins)
+            {
+                    <div class="col-lg-3 col-md-4 col-xs-6 col-xxs-12">
+                        <div class="tile panel-member">
+                            <div class="panel-body text-center">
+                                @if (Model.CurrentUserIsAdministrator && Model.Admins.Count > 1)
+                            {
+                                    <div class="dropdown pull-right" style="margin-left: -26px;">
+                                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li role="presentation">
+                                                <button type="button" class="btn btn-link"
+                                                        data-toggle="modal" data-target="#modal"
+                                                        data-title="@Title.ConfirmRemoveAdmin" data-body="@Text.ConfirmRemoveAdmin" data-button="@Button.RemoveAdmin"
+                                                        data-action="@Url.Action("RemoveMember", new { id = Model.SquareId })" data-hidden='{"memberId": "@member.Id" }'>
+                                                    @Label.RemoveAdmin
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                            }
+
+                                @Html.Partial("_UserProfileImage", new UserProfileImage(member.ProfileImageId, member.Id, "profile-image"))
+                                <h4>@member.Name</h4>
+                                @member.City
+                                <br />
+                            </div>
+                            <div class="panel-footer">
+                                <label class="label label-primary">@Label.Administrator</label>
+                            </div>
+                        </div>
+                    </div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section modals {
+    @Html.Partial("_InviteUserModal", new InviteUserViewModel { Title = Title.AddAdminToSquare, Instruction = Text.AddAdminToSquareInstruction })
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_InviteUserModalScript")
+}

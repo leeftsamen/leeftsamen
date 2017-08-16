@@ -1,0 +1,47 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.NeighborhoodMessages.ReactionViewModel
+
+<article class="panel-edit" id="reaction-@Model.Reaction.ReactionId">
+    <div class="panel-body">
+        @if (Model.UserCanDeleteReaction)
+        {
+        <div class="dropdown pull-right" style="margin-top: 15px;">
+            <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a href="javascript:void(0);"
+                       data-toggle="modal"
+                       data-target="#modal"
+                       data-title="@Title.ConfirmRemoveNeighborhoodMessageReaction"
+                       data-body="@Text.ConfirmRemoveNeighborhoodMessageReaction"
+                       data-button="@Button.RemoveNeighborhoodMessageReaction"
+                       data-action="@Url.RouteUrl("NeighborhoodMessage", new { action = "RemoveReaction", messageId = Model.Reaction.NeighborhoodMessage.MessageId, reactionId = Model.Reaction.ReactionId })">@Button.RemoveNeighborhoodMessageReaction</a>
+                </li>
+            </ul>
+        </div>
+        }
+        <header>
+            <h4>
+                @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Reaction.Creator.ProfileImageId, Model.Reaction.Creator.Id, "profile-image-xs"))
+                @if (Model.Reaction.OrganizationMembershipId.HasValue)
+                {
+                @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.Reaction.OrganizationMembership.Organization.Name))
+                }
+                else
+                {
+                @Model.Reaction.Creator.Name
+                }
+            </h4>
+            <small>
+                <time datetime="@Model.Reaction.CreationDateTime.ToString("s")"
+                      title="@Model.Reaction.CreationDateTime.ToString("f")">
+                    @Model.Reaction.CreationDateTime.ToTimeAgoString()
+                </time>
+            </small>
+        </header>
+        <p>@Model.Reaction.Text</p>
+    </div>
+</article>

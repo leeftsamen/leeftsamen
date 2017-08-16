@@ -1,0 +1,66 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.JoinRequestsViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding-bottom: 0">
+                <div class="btn btn-default pull-right" data-target="#inviteUserModal" data-toggle="modal">@Button.InviteUsers</div>
+                <h3 class="panel-title">
+                    @string.Format(Model.JoinRequests.Count == 1 ? Title.NbrCircleJoinRequest : Title.NbrCircleJoinRequests, Model.JoinRequests.Count)
+                </h3>
+                <br />
+                <ul class="nav nav-tabs" style="border-bottom: 0">
+                    <li role="presentation"><a href="@Url.Action("Members", "Circles", new { id = Model.CircleId })">@Button.AllMembers</a></li>
+                    <li role="presentation" class="active"><a href="@Url.Action("JoinRequests", "Circles", new { id = Model.CircleId })">@Button.PendingJoinRequests</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="members" class="row">
+            @foreach (var member in Model.JoinRequests)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="panel panel-default panel-member">
+                        <div class="panel-body text-center">
+                            @Html.Partial("_UserProfileImage", new UserProfileImage(member.UserProfileImageId, member.UserId, "profile-image"))
+                            <h4>@member.UserName</h4>
+                            @member.UserCity<br /><br/>
+
+                            @using (Html.BeginForm("RejectJoinRequest", "Circles", new { id = Model.CircleId, requestId = member.CircleJoinRequestId }, FormMethod.Post, new { @style = "display:inline"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">@Button.Reject</button>
+                            }
+
+                            @using (Html.BeginForm("AcceptJoinRequest", "Circles", new { id = Model.CircleId, requestId = member.CircleJoinRequestId }, FormMethod.Post, new { @style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary">@Button.Accept</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section modals {
+    @Html.Partial("_InviteUserModal", new InviteUserViewModel { Title = Title.InviteUsersToCircle, Instruction = Text.InviteUsersToCircleInstruction })
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_InviteUserModalScript")
+}

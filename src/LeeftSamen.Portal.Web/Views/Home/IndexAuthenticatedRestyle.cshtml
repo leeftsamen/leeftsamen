@@ -1,0 +1,186 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models.Users
+@using System.Configuration
+@using System.Drawing.Printing
+@using LeeftSamen.Portal.Web.Models.Home
+@model LeeftSamen.Portal.Web.Models.Home.IndexAuthenticatedViewModel
+@{
+    ViewBag.Title = Title.StartPage;
+}
+
+@Html.Partial(string.Format("_Header{0}", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), Model)
+
+<div class="content-left">
+
+    @if (Model.Actions.Count > 0)
+    {
+        foreach (var item in Model.Actions)
+        {
+            <br />
+            <span class="label label-block label-danger action">@item.Name</span>
+            <div class="panel startpage-item" data-link="@Url.RouteUrl("Default", new { controller = "Action", action = "Index", id = item.ActionId })">
+                <div class="panel-heading">
+                    <a href="@Url.RouteUrl("Default", new { controller = "Action", action = "Index", id = item.ActionId })" class="btn btn-danger pull-right">@Button.VoteAction</a>
+                    <h4>
+                        @item.Title
+                    </h4>
+                    @Html.Raw(item.Text)
+                </div>
+            </div>
+        }
+    }
+
+    @if (Model.Timeline.Count > 0)
+    {
+        var lastDate = DateTime.MinValue.Date;
+
+        foreach (var item in Model.Timeline.OrderByDescending(i => i.Date).Take(100))
+        {
+            var hasImage = false;
+            <div class="panel startpage-item @(item.Date.Date != lastDate ? "first-block" : "")" data-link="@item.Url">
+                <div class="panel-heading">
+
+                    @if (item is IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem)
+                    {
+                        var message = item as IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem;
+                        if (message.ImageId.HasValue)
+                        {
+                            hasImage = true;
+                        <div class="tile panel-image-cover">
+                            <div class="tile panel-image">
+                                <a href="@item.Url">
+                                    <div class="panel-image-inner" style="background-image: url(@Url.RouteUrl("NeighborhoodMessage", new {action = "MessageImage", messageType = message.MessageType, messageId = message.MessageId, mediaId = message.ImageId}))"></div>
+                                </a>
+                            </div>
+
+                        </div>
+                        }
+                    }
+                    @if (item is IndexAuthenticatedViewModel.MarketplaceTimelineItem)
+                    {
+                        var marketplaceItem = item as IndexAuthenticatedViewModel.MarketplaceTimelineItem;
+
+                        if (marketplaceItem.ImageId.HasValue)
+                        {
+                            hasImage = true;
+                            <div class="tile panel-image-cover">
+                                <div class="tile panel-image">
+                                    <a href="@item.Url">
+                                        <div class="panel-image-inner" style="background-image: url(@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = marketplaceItem.MarketplaceItemId, mediaId = marketplaceItem.ImageId, index = 1 }))"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (!hasImage)
+                    {
+                    <div class="img-circle-wrapper">
+                        <span></span>
+                        @Html.Partial("_UserProfileImage", new UserProfileImage(item.UserProfileImageId, item.UserId, "profile-image-sm"))
+                    </div>
+                    }
+
+                    <div>
+                        <label class="label label-info">@Label.In <strong>@item.Category</strong></label>
+                        <h4>
+                            <a href="@item.Url">
+                                @if (item is IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem)
+                                {
+                                    var message = item as IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem;
+                                    <b>@message.Title</b>
+                                    <br />
+                                    <span class="relative-inline-block margin-top-10-px">
+                                        @message.Description<br />
+                                        <label class="label label-info">@Button.ReadMore</label>
+                                    </span>
+                                }
+                                else
+                                {
+                                    @Html.Raw(item.Action)
+                                }
+                            </a>
+                        </h4>
+
+                        @if (item is IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem)
+                    {
+                        var message = item as IndexAuthenticatedViewModel.NeighborhoodMessageTimelineItem;
+                            <a class="btn btn-primary icon-message" href="@Url.RouteUrl("NeighborhoodMessage", new { action = "MessageDetail", messageId = message.MessageId, message.MessageType })#react">@Button.React</a>
+                        }
+                        else if (item is IndexAuthenticatedViewModel.ActivityTimelineItem)
+                        {
+                            var activity = item as IndexAuthenticatedViewModel.ActivityTimelineItem;
+                            @Html.Partial("~/Views/Activities/_AttendanceForm.cshtml", new LeeftSamen.Portal.Web.Models.Activities.AttendanceFormViewModel(activity.ActivityId, null, activity.Attending, true))
+                        }
+                        else if (item is IndexAuthenticatedViewModel.JobTimelineItem)
+                        {
+                            var job = item as IndexAuthenticatedViewModel.JobTimelineItem;
+                            if (!job.Assigned)
+                            {
+                                using (Html.BeginForm("AssignToMe", "Jobs", new { circleId = job.CircleId, id = job.JobId }, FormMethod.Post, new { style = "display: inline" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-primary" style="margin-right:10px;">@Button.AssignJobToMe</button>
+                                }
+                            }
+                        }
+
+                        @if (item.Date.Date != lastDate)
+                    {
+                        lastDate = item.Date.Date;
+                        var dateLabel = lastDate.ToShortDateString();
+                        if (lastDate.IsToday())
+                        {
+                            dateLabel = Label.Today;
+                        }
+                        else if (lastDate.IsYesterday())
+                        {
+                            dateLabel = Label.Yesterday;
+                        }
+                        else
+                        {
+                            dateLabel = @lastDate.ToString("dddd d MMMM");
+                        }
+                        <time datetime="@lastDate.ToString("s")" title="@lastDate.ToString("f")">@dateLabel</time>
+                        }
+                    </div>
+                    @if (hasImage)
+                    {
+                    }
+                        <div class="clear"></div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h2 class="make-block">@Title.NoTimelineFound</h2>
+        <p class="visible-xs">@Text.NoTimelineNavigationTip</p>
+    }
+</div>
+
+<div class="content-right"></div>
+
+<br />
+
+
+@section modals {
+    <div class="modal fade" id="modal-welcome" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="@Button.Cancel"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@string.Format(Text.WelcomeUser, Model.CurrentUserName)</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(Text.LoginIntro)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" autofocus="autofocus">@Button.NextStep</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://access.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="access" targetNamespace="http://access.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://access.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="changeChannels" type="tns:changeChannels" />
+      <xs:element name="changeChannelsResponse" type="tns:changeChannelsResponse" />
+      <xs:element name="changeCredentials" type="tns:changeCredentials" />
+      <xs:element name="changeCredentialsResponse" type="tns:changeCredentialsResponse" />
+      <xs:element name="checkChannel" type="tns:checkChannel" />
+      <xs:element name="checkChannelResponse" type="tns:checkChannelResponse" />
+      <xs:element name="checkCredentials" type="tns:checkCredentials" />
+      <xs:element name="checkCredentialsResponse" type="tns:checkCredentialsResponse" />
+      <xs:element name="isChannelEnabledForMember" type="tns:isChannelEnabledForMember" />
+      <xs:element name="isChannelEnabledForMemberResponse" type="tns:isChannelEnabledForMemberResponse" />
+      <xs:complexType name="changeCredentials">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:changeCredentialsParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeCredentialsParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:principalParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="oldCredentials" type="xs:string" />
+              <xs:element minOccurs="0" name="newCredentials" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="principalParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="principalType" type="xs:string" />
+          <xs:element minOccurs="0" name="principal" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeCredentialsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:changeCredentialsStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeChannels">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:changeChannelsParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeChannelsParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:principalParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="channels" nillable="true" type="tns:changeChannelParameters" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="changeChannelParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="channel" type="xs:string" />
+          <xs:element minOccurs="0" name="enabled" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="changeChannelsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:changeChannelsStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkChannel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:checkChannelParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkChannelParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:principalParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="channel" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="checkChannelResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="isChannelEnabledForMember">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:principalParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="isChannelEnabledForMemberResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkCredentials">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:checkCredentialsParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkCredentialsParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:principalParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="credentials" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="checkCredentialsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:credentialsStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="changeCredentialsStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SUCCESS" />
+          <xs:enumeration value="MEMBER_NOT_FOUND" />
+          <xs:enumeration value="INVALID_CREDENTIALS" />
+          <xs:enumeration value="BLOCKED_CREDENTIALS" />
+          <xs:enumeration value="INVALID_CHARACTERS" />
+          <xs:enumeration value="TOO_SIMPLE" />
+          <xs:enumeration value="CREDENTIALS_ALREADY_USED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="changeChannelsStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SUCCESS" />
+          <xs:enumeration value="MEMBER_NOT_FOUND" />
+          <xs:enumeration value="INVALID" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="credentialsStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="VALID" />
+          <xs:enumeration value="INVALID" />
+          <xs:enumeration value="BLOCKED" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="isChannelEnabledForMember">
+    <wsdl:part name="parameters" element="tns:isChannelEnabledForMember" />
+  </wsdl:message>
+  <wsdl:message name="checkCredentialsResponse">
+    <wsdl:part name="parameters" element="tns:checkCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="changeChannelsResponse">
+    <wsdl:part name="parameters" element="tns:changeChannelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkChannelResponse">
+    <wsdl:part name="parameters" element="tns:checkChannelResponse" />
+  </wsdl:message>
+  <wsdl:message name="isChannelEnabledForMemberResponse">
+    <wsdl:part name="parameters" element="tns:isChannelEnabledForMemberResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkChannel">
+    <wsdl:part name="parameters" element="tns:checkChannel" />
+  </wsdl:message>
+  <wsdl:message name="changeChannels">
+    <wsdl:part name="parameters" element="tns:changeChannels" />
+  </wsdl:message>
+  <wsdl:message name="checkCredentials">
+    <wsdl:part name="parameters" element="tns:checkCredentials" />
+  </wsdl:message>
+  <wsdl:message name="changeCredentialsResponse">
+    <wsdl:part name="parameters" element="tns:changeCredentialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="changeCredentials">
+    <wsdl:part name="parameters" element="tns:changeCredentials" />
+  </wsdl:message>
+  <wsdl:portType name="AccessWebService">
+    <wsdl:operation name="changeCredentials">
+      <wsdl:input name="changeCredentials" message="tns:changeCredentials" />
+      <wsdl:output name="changeCredentialsResponse" message="tns:changeCredentialsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="changeChannels">
+      <wsdl:input name="changeChannels" message="tns:changeChannels" />
+      <wsdl:output name="changeChannelsResponse" message="tns:changeChannelsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkChannel">
+      <wsdl:input name="checkChannel" message="tns:checkChannel" />
+      <wsdl:output name="checkChannelResponse" message="tns:checkChannelResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isChannelEnabledForMember">
+      <wsdl:input name="isChannelEnabledForMember" message="tns:isChannelEnabledForMember" />
+      <wsdl:output name="isChannelEnabledForMemberResponse" message="tns:isChannelEnabledForMemberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkCredentials">
+      <wsdl:input name="checkCredentials" message="tns:checkCredentials" />
+      <wsdl:output name="checkCredentialsResponse" message="tns:checkCredentialsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="accessSoapBinding" type="tns:AccessWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="changeCredentials">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="changeCredentials">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="changeCredentialsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="changeChannels">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="changeChannels">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="changeChannelsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkChannel">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="checkChannel">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkChannelResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkCredentials">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="checkCredentials">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkCredentialsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isChannelEnabledForMember">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="isChannelEnabledForMember">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="isChannelEnabledForMemberResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="access">
+    <wsdl:port name="accessPort" binding="tns:accessSoapBinding">
+      <soap:address location="https://zuiderling-stage.tradeqoin.com/cc2/services/access" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

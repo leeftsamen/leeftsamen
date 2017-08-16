@@ -1,0 +1,24 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.DetailViewModel
+@{
+
+    ViewBag.Title = Model.Name;
+}
+
+@Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="make-block shift-left">
+            @if (!string.IsNullOrEmpty(Model.Title))
+            {
+            <div class="panel-heading">
+                <h2 class="panel-title">@Model.Title</h2>
+            </div>
+            }
+            <div class="panel-body">@Html.Raw(Model.Description)</div>
+        </div>
+    </div>
+</div>

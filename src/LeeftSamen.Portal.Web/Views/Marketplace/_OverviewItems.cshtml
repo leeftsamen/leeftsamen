@@ -1,0 +1,9 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model List<LeeftSamen.Portal.Data.Models.MarketplaceItem>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_DisplayItem", item, ViewData)
+}

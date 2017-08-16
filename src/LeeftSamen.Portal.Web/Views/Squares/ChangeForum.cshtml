@@ -1,0 +1,46 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.ChangeForumModel
+@{
+    var action = "ChangeForum";
+    var title = Title.ChangeForum;
+    var submitButton = Button.Save;
+    var routeValues = new RouteValueDictionary();
+    var cancelUrl = Url.RouteUrl("Default", new { controller = "Squares", action = "Settings", id = Model.SquareId });
+    ViewBag.Title = title;
+}
+<h1>@title</h1>
+
+@using (Html.BeginForm(action, "Squares", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Title))
+            {
+                @Html.RequiredLabelFor(m => m.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Text))
+            {
+                @Html.RequiredLabelFor(m => m.Text, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.Text, 8, 0, new { @class = "form-control text-editor" })
+                @Html.ValidationMessageFor(m => m.Text, null, new { @class = "help-block" })
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@submitButton</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Cancel</a>
+        </div>
+    </div>
+}
+

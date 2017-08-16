@@ -1,0 +1,25 @@
+﻿@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Squares.MenuSquaresModel
+@if (Model.SquaresCount > 0)
+{
+    <div>
+        @if (Model.SquaresCount == 1)
+        {
+        @*<a href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "Detail", id = Model.FirstSquareId })">
+                <i class="fa fa-square-o"></i> @Button.MySquare
+            </a>*@
+        <a class="btn btn-danger sidebar-action" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "Detail", id = Model.FirstSquareId })">
+            @*@Button.MySquare*@Buurtplein Taludweg
+        </a>
+        }
+        else
+        {
+        @*<a href="@Url.RouteUrl("Default", new { controller = "Squares", action = "Index" })">
+                <i class="fa fa-square-o"></i> @Button.MySquares
+            </a>*@
+        <a class="btn btn-danger sidebar-action" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "Detail", id = Model.FirstSquareId })">
+            @*@Button.MySquare*@Buurtplein Taludweg
+        </a>
+        }
+    </div>
+}

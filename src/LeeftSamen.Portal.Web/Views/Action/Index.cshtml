@@ -1,0 +1,98 @@
+﻿@model LeeftSamen.Portal.Web.Models.Action.IndexVoteModel
+@{ 
+    ViewBag.Title = Model.Title;
+}
+
+<h1>@Model.Name</h1>
+
+<div class="panel">
+    <div class="panel-body">
+        <h4>@Model.Title</h4>
+        <p>
+            @Model.Description
+        </p>
+    </div>
+</div>
+
+
+
+@if (Model.Organizations.Count > 0)
+{
+    <br />
+
+        <div class="row">
+            @{
+                const int Cols = 2;
+            }
+            @for (var col = 1; col <= Cols; col++)
+            {
+                var index = -1 * col;
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    @foreach (var organization in Model.Organizations)
+                    {
+                        index++;
+                        if (index % Cols != 0)
+                        {
+                            continue;
+                        }
+
+                        var organizationUrl = Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "Detail", id = organization.OrganizationId });
+
+                        <div class="panel panel-default">
+                            <label class="label-info pull-right small">@organization.OrganizationTypeName</label>
+                            <div class="panel-body organization">
+                                @if (organization.LogoId.HasValue)
+                                {
+                                    <a href="@organizationUrl" class="logo">
+                                        <img src="@Url.RouteUrl("DefaultDetail", new {controller = "Organizations", action = "Logo", id = organization.OrganizationId, mediaId = organization.LogoId})" alt="@organization.Name logo"/>
+                                    </a>
+                                }
+                                <div class="inline-block money">
+                                    <span class="title">@Label.Collected</span>
+                                    <span class="ammount">@organization.Collected.ToString("c")</span>
+                                </div>
+                                <br />
+                                <h4>@organization.Name</h4>
+                                <p style="white-space: normal">
+                                    @organization.Description.Truncate()
+                                    <br/>
+                                    <a href="@organizationUrl">@Button.MoreInformation</a>
+                                </p>
+                                @if (!Model.ActionStarted)
+                                {
+                                    <span class="btn btn-default disabled pull-right">@Button.ActionNotStarted</span>
+                                }
+                                else if (Model.ActionEnded || Model.MaxVotesReached)
+                                {
+                                    <span class="btn btn-default disabled pull-right">@Button.ActionOver</span>
+                                }
+                                else
+                                {
+                                    if (!Model.HasVoted)
+                                    {
+                                        var title = string.Format(Title.ConfirmVoteAction, organization.Name);
+                                        var body = Text.ConfirmVoteAction;
+                                        var button = Button.VoteAction;
+                                        var action = "Vote";
+                                        <a role="menuitem" href="#" class="btn btn-danger pull-right"
+                                           data-toggle="modal" data-target="#modal"
+                                           data-title="@title"
+                                           data-body="@body"
+                                           data-button="@button"
+                                           data-hidden='{"id": "@Model.ActionId","organizationId": "@organization.OrganizationId"}'
+                                           data-action="@Url.Action(action)">@button</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="btn btn-default disabled pull-right">@Button.HasVoted</span>
+                                    }
+                                }
+                                
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+                }
+

@@ -1,0 +1,73 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Register.RegisterAccountViewModel
+@{
+    ViewBag.Title = Title.RegisterStep1;
+}
+
+<h1>@ViewBag.Title.</h1>
+<p>@Text.CreateAccountDescription</p>
+<hr />
+
+@using (Html.BeginForm("Index", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    using (Html.BeginFormGroupFor(m => m.Name))
+    {
+    @Html.RequiredLabelFor(m => m.Name, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @tabindex = "1", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+        </div>
+    }
+    
+    using (Html.BeginFormGroupFor(m => m.Email))
+    {
+    @Html.RequiredLabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @tabindex = "2" })
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+            <span class="privacy-info">@Label.PrivacyPolicyEmail</span>
+        </div>
+    }
+
+    using (Html.BeginFormGroupFor(m => m.Password))
+    {
+    @Html.RequiredLabelFor(m => m.Password, new { @class = "col-md-3 control-label" })
+        <div class="col-md-6">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", autocomplete = "off", @tabindex = "3" })
+            @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+            <span class="privacy-info">@Label.PrivacyPolicyPassword</span>
+        </div>
+        <div class="col-md-3">
+            <input type="checkbox" id="showPasswords" /> @Label.ShowPassword
+        </div>
+    }
+
+    using (Html.BeginFormGroupFor(m => m.ConfirmPassword))
+    {
+    @Html.RequiredLabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })
+        <div class="col-md-6">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autocomplete = "off", @tabindex = "4" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
+        </div>
+    }
+    using (Html.BeginFormGroupFor(m => m.ConfirmPassword))
+    {
+    @Html.RequiredLabelFor(m => m.AcceptTerms, new { @class = "col-md-3 control-label" })
+        <div class="col-md-6">
+            @Html.CheckBoxFor(m => m.AcceptTerms, new { @tabindex = "5" }) @Html.Label("AcceptTerms", Label.AcceptTerms)
+            @Html.ValidationMessageFor(m => m.AcceptTerms, null, new { @class = "text-danger" })
+        </div>
+    }
+    <div class="col-md-12 text-right">
+        <input type="submit" class="btn btn-primary" value="@Button.CreateAccount" tabindex="6"/>
+    </div>
+}
+
+<script>
+    document.getElementById('showPasswords').onchange = function () {
+        document.getElementById('Password').type = this.checked ? 'text' : 'password';
+        document.getElementById('ConfirmPassword').type = this.checked ? 'text' : 'password';
+    }
+</script>

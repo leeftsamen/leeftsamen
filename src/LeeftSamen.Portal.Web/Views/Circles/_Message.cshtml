@@ -1,0 +1,185 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Circles.CircleMessagesViewModel
+<article class="panel panel-default message" id="message-@Model.Message.MessageId">
+    <div class="panel-body">
+        @if (@Model.Message.CreationDateTime.IsFresh())
+        {
+        <label class="label label-info">@Label.New</label>
+        }
+        @if (Model.IsCreator)
+        {
+        <label class="label label-info label-change-msg">@Label.Change</label>
+        }
+        @if (Model.IsCreator || ViewBag.UserIsCircleAdmin)
+        {
+            using (Html.BeginForm("DeleteMessage", "Circles", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="messageId" value="@Model.Message.MessageId" />
+                <input type="hidden" name="circleId" value="@Model.Message.Circle.CircleId" />
+                <button class="label label-info label-change-msg label-button" type="Submit">@Label.Delete</button>
+            }
+        }
+        <div class="message-profile-image">
+            @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Message.Creator.ProfileImageId, Model.Message.Creator.Id, "profile-image-sm"))
+        </div>
+        <div class="message-content">
+            <h4>
+                @Model.Message.Creator.Name
+            </h4>
+            <small>
+                <time datetime="@Model.Message.CreationDateTime.ToString("s")"
+                      title="@Model.Message.CreationDateTime.ToString("f")">
+                    @Model.Message.CreationDateTime.ToTimeAgoString()
+                </time>
+            </small>
+
+            @if (Model.IsCreator)
+            {
+                <div class="edit_message">
+                    @using (Html.BeginForm("EditMessage", "Circles", FormMethod.Post))
+                {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="messageId" value="@Model.Message.MessageId" />
+                        <input type="hidden" name="circleId" value="@Model.Message.Circle.CircleId" />
+
+                        <div class="bg-warning">@Html.ValidationMessageFor(m => m.Message)</div>
+
+                        <textarea class="form-control" rows="5" type="text" name="newMessageText">@Model.Message.MessageText</textarea>
+                        <div class="text-right">
+                            <br /><button class="btn btn-primary" type="submit">@Button.EditMessage</button>
+                        </div>
+                    }
+                    <hr />
+                </div>
+            }
+
+            <p style="max-width:500px;">@Model.Message.MessageText</p>
+
+            @if (Model.Message.AttachmentId.HasValue)
+            {
+                using (Html.BeginForm("RemoveAttachment", "Circles", FormMethod.Post, new { id = "RemoveAttachmentForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("circleId", Model.Message.Circle.CircleId)
+                    @Html.Hidden("messageId", Model.Message.MessageId)
+                    @Html.Hidden("attachmentId", Model.Message.AttachmentId)
+                }
+                <div class="circle-message-attachment" data-attachmentId="@Model.Message.AttachmentId">
+                    <i class="circle-message-attachment-remove fa fa-trash-o" title="@Label.RemoveAttachment"></i>
+                    <a data-lightbox='photos' href='@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "AttachmentLarge", id = Model.Message.MessageId, mediaId = Model.Message.AttachmentId })'>
+                        <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "Attachment", id = Model.Message.MessageId, mediaId = Model.Message.AttachmentId })" alt="" />
+                    </a>
+</div>
+            }
+        </div>
+    </div>
+
+    <div class="panel-footer">        
+        @if (Model.Message.Reactions.Count > 1)
+        {
+            var reactionCssClass = "reaction-message-" + Model.Message.MessageId;
+            <div class="row" style="border-bottom:1px solid #dddddd;padding-bottom:10px;">
+                <div class="col-lg-12 text-center">
+                    <a href="" onclick="$('.@reactionCssClass:not(:last-child)').toggle(); $(this).siblings().andSelf().toggle(); $('body').scrollTo('#message-@Model.Message.MessageId', { offsetTop: $('body').scrollTop() }); return false">@Label.EarlierReactions (@Model.Message.Reactions.Count())</a>
+                    <a href="" onclick="$('.@reactionCssClass:not(:last-child)').toggle(); $(this).siblings().andSelf().toggle(); $('body').scrollTo('#message-@Model.Message.MessageId', { offsetTop: $('body').scrollTop() }); return false" style="display:none">@Label.LessReactions</a>
+                </div>
+            </div>
+        }
+        @if (Model.Message.Reactions.Any())
+        {
+            var reactionCssClass = "reaction-message-" + Model.Message.MessageId;
+            var orgreactions = Model.Message.Reactions.OrderBy(r => r.CreationDateTime).ToList();
+            // we make sure the last reaction is visible
+            var lastReaction = orgreactions.Last();
+            var reactions = orgreactions.Take(orgreactions.Count - 1).ToList();
+
+            <div class="row">
+                <div class="col-lg-12">
+                    @foreach (var reaction in reactions)
+                    {
+                    @renderReaction(reaction, reactionCssClass, true)
+                    }
+                    @renderReaction(lastReaction, reactionCssClass, false)
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <article class="extra-react">
+                    <div class="message-profile-image">
+                        @Html.Partial("_CurrentUserProfileImage", new UserProfileImage(Model.Message.Creator.ProfileImageId, Model.Message.Creator.Id, "profile-image-sm"))
+                    </div>
+                    <div class="message-content">
+                        @using (Html.BeginForm("CreateMessageReaction", "Circles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="Message.MessageId" value="@Model.Message.MessageId" />
+
+                                @Html.TextAreaFor(m => m.NewReaction, new { @class = "form-control", @placeholder = PlaceHolder.PostNewReaction })
+                                @Html.ValidationMessageFor(m => m.NewReaction, null, new { @class = "help-block" })
+
+                            <div class="md-pull-right margin-top-10-px">
+                                <button class="btn btn-primary" type="submit">@Button.PostReaction</button>
+                            </div>
+                            <div class="md-margin-button margin-top-10-px">
+                                @*@Html.Partial("_ImageUpload", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.Attachment, Text.AttachmentDescription), "Attachment"))*@
+
+                                <div class="form-group profile-img-upload">
+                                    <span class="btn btn-default btn-file">
+                                        <i class="fa fa-picture-o"></i> @Button.ChooseImageFromPC <input type="file" name="Attachment" class="file-input" accept="image/gif, image/jpeg, image/png">
+                                    </span>
+                                    &nbsp;
+                                    <b class="file-input-filename"></b>
+                                    @Html.ValidationMessage("Attachment", null, new { @class = "help-block" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</article>
+
+@helper renderReaction(CircleMessageReaction reaction, string reactionCssClass, bool hidden)
+{
+    <article id="reaction-@reaction.ReactionId" class="reaction @reactionCssClass" style="display:@(hidden ? "none" : "block")">
+        <div class="message-profile-image">
+            @Html.Partial("_UserProfileImage", new UserProfileImage(reaction.Creator.ProfileImageId, reaction.Creator.Id, "profile-image-sm"))
+        </div>
+        <div class="message-content">
+            <h4>
+                @reaction.Creator.Name
+            </h4>
+            <small>
+                <time datetime="@reaction.CreationDateTime.ToString("s")"
+                      title="@reaction.CreationDateTime.ToString("f")">
+                    @reaction.CreationDateTime.ToTimeAgoString()
+                </time>
+            </small>
+            <p style="max-width:500px;">@reaction.ReactionText</p>
+
+            @if (reaction.Attachment != null)
+            {
+                using (Html.BeginForm("RemoveAttachment", "Circles", FormMethod.Post, new { id = "RemoveAttachmentForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("circleId", Model.Message.Circle.CircleId)
+                    @Html.Hidden("messageId", Model.Message.MessageId)
+                    @Html.Hidden("reactionId", reaction.ReactionId)
+                    @Html.Hidden("attachmentId", reaction.Attachment.MediaId)
+                }
+                <div class="circle-message-attachment margin-bottom-10-px" data-attachmentId="@reaction.Attachment.MediaId">
+                    <i class="circle-message-attachment-remove fa fa-trash-o" title="@Label.RemoveAttachment"></i>
+                    <a data-lightbox='photos' href='@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "AttachmentLarge", reactionId = reaction.ReactionId, mediaId = reaction.Attachment.MediaId })'>
+                        <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "Attachment", reactionId = reaction.ReactionId, mediaId = reaction.Attachment.MediaId })" alt="" />
+                    </a>
+                </div>
+            }
+        </div>
+    </article>
+}

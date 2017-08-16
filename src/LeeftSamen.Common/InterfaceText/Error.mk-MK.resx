@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceptTermsIsRequired" xml:space="preserve">
+    <value>Прифати услови</value>
+  </data>
+  <data name="AccountDoesntExist" xml:space="preserve">
+    <value>Овој профил не е повеќе активен. </value>
+  </data>
+  <data name="ActivityEndDateBeforeStartDate" xml:space="preserve">
+    <value>Крајниот рок не е можно да биде пред датумот на почеток.</value>
+  </data>
+  <data name="ActivityEndDateIsRequired" xml:space="preserve">
+    <value>Потребен е ден на истекување</value>
+  </data>
+  <data name="ActivityStartDateIsRequired" xml:space="preserve">
+    <value>Потребен е ден за почеток</value>
+  </data>
+  <data name="AddressIsRequired" xml:space="preserve">
+    <value>Потребна е адреса</value>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Внесената адреса не е најдена. Проверете дали поштенскиот код и број на живеалиште се точни. Обидете се повтроно или обидете се со рачно внесување.</value>
+  </data>
+  <data name="CategoryIsRequired" xml:space="preserve">
+    <value>Потребна е категорија</value>
+  </data>
+  <data name="CircleDoesntExist" xml:space="preserve">
+    <value>Овој круг не постои повеќе</value>
+  </data>
+  <data name="CityIsRequired" xml:space="preserve">
+    <value>Потребно е име на место</value>
+  </data>
+  <data name="CompletionDateTimeIsRequired" xml:space="preserve">
+    <value>Потребен е крајниот датум до кога сакате да ја повторувате задачата</value>
+  </data>
+  <data name="ConfirmPasswordIsRequired" xml:space="preserve">
+    <value>Потврдете ја вашата лозинка</value>
+  </data>
+  <data name="ConfirmRemoveAccount" xml:space="preserve">
+    <value>Потребна е потврда</value>
+  </data>
+  <data name="CurrentPasswordIsRequired" xml:space="preserve">
+    <value>Потребна е вашата сегашна лозинка</value>
+  </data>
+  <data name="DateIsRequired" xml:space="preserve">
+    <value>Потребен е датум</value>
+  </data>
+  <data name="DescriptionIsRequired" xml:space="preserve">
+    <value>Потребен е опис</value>
+  </data>
+  <data name="EmailAddressIsInvalid" xml:space="preserve">
+    <value>е-маил адресата е неважечка</value>
+  </data>
+  <data name="EmailAddressIsRequired" xml:space="preserve">
+    <value>Потребна е важечка е-маил адреса</value>
+  </data>
+  <data name="EmailAddressTaken" xml:space="preserve">
+    <value>Оваа е-маил адреса е веќе употребена од друг корисник</value>
+  </data>
+  <data name="HouseNumberIsRequired" xml:space="preserve">
+    <value>Потребен е број на стан-живеалиште</value>
+  </data>
+  <data name="IntroductionIsRequired" xml:space="preserve">
+    <value>Потребни се инструкции</value>
+  </data>
+  <data name="IntroductionMaxLength" xml:space="preserve">
+    <value>Описот на инструкции може да е максимум 140 карактери долг. </value>
+  </data>
+  <data name="InvalidLogin" xml:space="preserve">
+    <value>Имате направено грешка припополнувањето на вашите податоци. Обидете се повторно.</value>
+  </data>
+  <data name="InvitationDoesntExist" xml:space="preserve">
+    <value>Поканата повеќе не е достапна.</value>
+  </data>
+  <data name="InvitationExpired" xml:space="preserve">
+    <value>Вашиот код за активација е стар, имавте максимум 10 дена за да го активирате.</value>
+  </data>
+  <data name="InvitationWrongUser" xml:space="preserve">
+    <value>Поканата не е за профилот со кој сте пријавени.Пријавете се со е-маил адресата на која беше испратена поканата.</value>
+  </data>
+  <data name="InvitationWrongUserAccepted" xml:space="preserve">
+    <value>Вие сте погрешен примач на оваа порака.</value>
+  </data>
+  <data name="JobEndDateBeforeStartDate" xml:space="preserve">
+    <value>Крајниот датум не може да е порано од почетниот датум.</value>
+  </data>
+  <data name="LocationIsRequired" xml:space="preserve">
+    <value>Потребна е локација</value>
+  </data>
+  <data name="LogoIsRequired" xml:space="preserve">
+    <value>Потребно е лого</value>
+  </data>
+  <data name="MarketplaceItemTypeRequired" xml:space="preserve">
+    <value>Потребен е тип.</value>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>{0} може да е максимум {1} карактери долго</value>
+  </data>
+  <data name="MessageTextRequired" xml:space="preserve">
+    <value>Потребен е текст во пораката</value>
+  </data>
+  <data name="MinLength" xml:space="preserve">
+    <value>{0} може да е минимум {1} карактери долго</value>
+  </data>
+  <data name="NameOfCircleIsRequired" xml:space="preserve">
+    <value>Потребно е име на кругот</value>
+  </data>
+  <data name="NameOfSquareIsRequired" xml:space="preserve">
+    <value>Потребно е име на ова соседство.</value>
+  </data>
+  <data name="NewPasswordIsRequired" xml:space="preserve">
+    <value>Потребна е нова лозинка</value>
+  </data>
+  <data name="NewPasswordsDoNotMatch" xml:space="preserve">
+    <value>Новите лозинки не се совпаѓаат.</value>
+  </data>
+  <data name="OrganizationNameIsRequired" xml:space="preserve">
+    <value>Потребно е име на организација</value>
+  </data>
+  <data name="OrganizationTypeIsRequired" xml:space="preserve">
+    <value>Потребен е вид на организација</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Потребна е лозинка</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Лозинката мора да е најмалку {2} карактери долга. </value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Впишаните лозинки не се совпаѓаат. </value>
+  </data>
+  <data name="PasswordStrength" xml:space="preserve">
+    <value>Лозинката мора да е најмалку 8 карактери долга и да состои 1голема буква и 1 цифра. </value>
+  </data>
+  <data name="PhoneNumberIsRequired" xml:space="preserve">
+    <value>Потребен е телефонски број</value>
+  </data>
+  <data name="PostalCodeIsRequired" xml:space="preserve">
+    <value>Потребен е полтинник код.</value>
+  </data>
+  <data name="ProfileImageIsRequired" xml:space="preserve">
+    <value>Потребна е профил-слика</value>
+  </data>
+  <data name="RangeNumericPositive" xml:space="preserve">
+    <value> {0}мора да е позитивен број.</value>
+  </data>
+  <data name="ReactionIsRequired" xml:space="preserve">
+    <value>Потребен е одговор.</value>
+  </data>
+  <data name="RecipientIsRequired" xml:space="preserve">
+    <value>Немате одбрано адреса на која да се прати пораката. </value>
+  </data>
+  <data name="SelectOneNeighborhood" xml:space="preserve">
+    <value>Изберете најмалку едно соседство</value>
+  </data>
+  <data name="SelectOneTheme" xml:space="preserve">
+    <value>Избери минимум една тема</value>
+  </data>
+  <data name="SubjectRequired" xml:space="preserve">
+    <value>Потребен е наслов на пораката</value>
+  </data>
+  <data name="TitleIsRequired" xml:space="preserve">
+    <value>Потребен е наслов</value>
+  </data>
+  <data name="TownIsRequired" xml:space="preserve">
+    <value>Потребна е општина</value>
+  </data>
+  <data name="UserAlreadyMemberOfCircle" xml:space="preserve">
+    <value>Веќе сте член на овој круг.</value>
+  </data>
+  <data name="WebsiteFormat" xml:space="preserve">
+    <value>Вебстраната мора да почнува со http:// или https://</value>
+  </data>
+  <data name="WebsiteIsRequired" xml:space="preserve">
+    <value>Потребна е вебадреса</value>
+  </data>
+  <data name="WeekdayIsRequired" xml:space="preserve">
+    <value>Изберете денови кога може да се изврши задачата.</value>
+  </data>
+  <data name="YourDateOfBirthIsRequired" xml:space="preserve">
+    <value>Сподели датум на раѓање</value>
+  </data>
+  <data name="YourGenderIsRequired" xml:space="preserve">
+    <value>Означете го родот.</value>
+  </data>
+  <data name="YourNameIsRequired" xml:space="preserve">
+    <value>Вашето име  е потребно.</value>
+  </data>
+  <data name="YourUsernameIsRequired" xml:space="preserve">
+    <value>Вашата е-маил адреса е потребна</value>
+  </data>
+  <data name="ZuiderlingAccountBlocked" xml:space="preserve">
+    <value>Блокиран профил</value>
+  </data>
+  <data name="ZuiderlingAccountException" xml:space="preserve">
+    <value>Вашиот профил не може во овој момент да се верификува</value>
+  </data>
+  <data name="ZuiderlingAccountIsRequired" xml:space="preserve">
+    <value>Потребен е профил.                                  </value>
+  </data>
+  <data name="ZuiderlingAccountWrong" xml:space="preserve">
+    <value>Внесените податоци за вашиот профил се неточни</value>
+  </data>
+  <data name="ZuiderlingPasswordIsRequired" xml:space="preserve">
+    <value>Потребна е лозинка</value>
+  </data>
+  <data name="NameOfGroupIsRequired" xml:space="preserve">
+    <value>Потребно е име на групата.</value>
+  </data>
+</root>

@@ -1,0 +1,552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddAddressDescription" xml:space="preserve">
+    <value>Додадете ги вашиот поштенски код и број на живеалиште за да го утврдиме вашето соседство</value>
+  </data>
+  <data name="AddAdminToSquareInstruction" xml:space="preserve">
+    <value>Направете луѓе да бидат администратор на вашиот плоштад. Луѓето кои се во ваша близина можете да ги додадете преку пребарување низ вашето соседство.</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Се</value>
+  </data>
+  <data name="AndroidUploadNotSupported" xml:space="preserve">
+    <value>Внесувањето на слики не подржано од вашата верзија на телефон или таблет.</value>
+  </data>
+  <data name="AppLead" xml:space="preserve">
+    <value>Заедно да го направиме ова соседство</value>
+  </data>
+  <data name="AppLeadSubText" xml:space="preserve">
+    <value>ЖивеемеЗаедно е платформа на ваша соседство. Се што ви е потребно можете да најдете тука. </value>
+  </data>
+  <data name="AttachmentDescription" xml:space="preserve">
+    <value>Додади слика</value>
+  </data>
+  <data name="BecomePioneerDescription" xml:space="preserve">
+    <value>Вие сте еден од првите корисници во вашата општина. Супер. Тоа значи дека сте вистински пионер. Би сакале ли да помогнете ЖивеемеЗаедно да стане познато во вашата општина.Пријавете се за да добиете пакет за пионер. Така ќе добиете промотивни материјали за Живееме заедно кои ќе можете да ги споделите со вашите соседи за да ни се придружат. </value>
+  </data>
+  <data name="BirthDayDescription" xml:space="preserve">
+    <value>Преку внесувањето на вашиот датум на раѓање потврдувате дека сте над 18 години. Така може да се погрижиме искуството на оваа платформа  да одговара на вашата возраст. Овие податоци не се видливи за другите и нема да бидат користени за други цели. Вашите лични податоци можете да ги промените преку менџирање на вашиот личен профил.</value>
+  </data>
+  <data name="CircleCoverImageDescription" xml:space="preserve">
+    <value>Позадина за круг</value>
+  </data>
+  <data name="CircleInvitationMessage" xml:space="preserve">
+    <value>{0} ве покажи да будете член на кругот</value>
+  </data>
+  <data name="CircleMembersAdminSubText" xml:space="preserve">
+    <value>Бидејќи сте администратор на кругот можете да ги видите сите отворени покани и да пратите потсетник.</value>
+  </data>
+  <data name="CircleProfileImageDescription" xml:space="preserve">
+    <value>Профил-сликата на кругот</value>
+  </data>
+  <data name="CircleProfileNotAllowed" xml:space="preserve">
+    <value>Вашиот сегашен профил нема можност да го види овој круг. Променете го вашиот личен акаунт за да продолжите понатаму. </value>
+  </data>
+  <data name="CircleRemoveMessage" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа порака од вашето сандаче</value>
+  </data>
+  <data name="CircleRemoveSendMessage" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа порака од пратени пораки</value>
+  </data>
+  <data name="ConfirmGiveMemberCircleAdminRights" xml:space="preserve">
+    <value>Корисникот може да ги менува членството, задачите и кругот.</value>
+  </data>
+  <data name="ConfirmGiveMemberOrganizationAdminRights" xml:space="preserve">
+    <value>Корисникот може да го менува профилот на организацијата и да пража пораки во име на организацијата</value>
+  </data>
+  <data name="ConfirmInvitationReminder" xml:space="preserve">
+    <value>Сигурни сте дека саате да пратите потсетник</value>
+  </data>
+  <data name="ConfirmLeaveCircle" xml:space="preserve">
+    <value>Не можете да поставувате повеќе пораки во овој круг.</value>
+  </data>
+  <data name="ConfirmRemoveAccount" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете целосно вашиот профил? Во тој случај ќе ги изгубите сите податоци и нема да можете повеќе да се пријавите. За да се пријавите, ќе мора да креирате нов профил.</value>
+  </data>
+  <data name="ConfirmRemoveActivity" xml:space="preserve">
+    <value>Бришењето на оваа активност не може да се отповика.</value>
+  </data>
+  <data name="ConfirmRemoveAdmin" xml:space="preserve">
+    <value>Овој корисник нема да може повеќе да прави промени на овој плоштад.</value>
+  </data>
+  <data name="ConfirmRemoveCircle" xml:space="preserve">
+    <value>Овој круг со сите негови податоци ќе биде избришан</value>
+  </data>
+  <data name="ConfirmRemoveCircleMember" xml:space="preserve">
+    <value>Овој кориниск нема да може да става повеќе пораки во овој круг. </value>
+  </data>
+  <data name="ConfirmRemoveFact" xml:space="preserve">
+    <value>Сите поврзани информации со овие факти ќе бидат избришани</value>
+  </data>
+  <data name="ConfirmRemoveJob" xml:space="preserve">
+    <value>Оваа задача ќе биде избришана.</value>
+  </data>
+  <data name="ConfirmRemoveMarketplaceItem" xml:space="preserve">
+    <value>Бришењето на овој оглас не може да се отповика.</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessage" xml:space="preserve">
+    <value>Бришењето на оваа вест не може да се отповика.</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessageReaction" xml:space="preserve">
+    <value>Оваа реакција не може да се избрише</value>
+  </data>
+  <data name="ConfirmRemoveOrganization" xml:space="preserve">
+    <value>Оваа орагнизација и сите поврзани информации ќе бидат избришани.</value>
+  </data>
+  <data name="ConfirmRemoveOrganizationMember" xml:space="preserve">
+    <value>Овој кориниск нема да може да става повеќе пораки во име на организацијата. </value>
+  </data>
+  <data name="ConfirmRemovePhoto" xml:space="preserve">
+    <value>Оваа акција не може да се отповика. </value>
+  </data>
+  <data name="ConfirmRemovePhotoAlbum" xml:space="preserve">
+    <value>Сите слики од овој албум ќе бидат избришани.</value>
+  </data>
+  <data name="ConfirmRemoveReaction" xml:space="preserve">
+    <value>Оваа реакција ќе биде избришана</value>
+  </data>
+  <data name="ConfirmRemoveSubject" xml:space="preserve">
+    <value>Овој предмет ќе биде избришан</value>
+  </data>
+  <data name="ConfirmReportReaction" xml:space="preserve">
+    <value>Администраторите ќе ја видат оваа реакција што поскоро можат</value>
+  </data>
+  <data name="ConfirmSetCirclePrivate" xml:space="preserve">
+    <value>Пораките од овој круг можат да бидат прочитани само од неговите членови.</value>
+  </data>
+  <data name="ConfirmSetCirclePublic" xml:space="preserve">
+    <value>Сите пораки од овој круг ќе бидат јавни</value>
+  </data>
+  <data name="ConfirmVoteAction" xml:space="preserve">
+    <value>Можете да гласате само еднаш</value>
+  </data>
+  <data name="ConfirmZipCodeDelete" xml:space="preserve">
+    <value>Корисници со избришани поштенски кодови не можата повеќе да присуствуваат на овој плоштад</value>
+  </data>
+  <data name="ConfirmZuiderlingTransaction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CreateAccountDescription" xml:space="preserve">
+    <value>Направи нов профил</value>
+  </data>
+  <data name="DistanceFromYou" xml:space="preserve">
+    <value>км е одалечен од тебе</value>
+  </data>
+  <data name="EditItemExplanation" xml:space="preserve">
+    <value>Кратко објаснување. Овде може да видите кратко објаснување за овој формулар.</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Вашата е-маил адреса е потврдена</value>
+  </data>
+  <data name="FactsEmpty" xml:space="preserve">
+    <value>Моментално нема додадено факти на овој плоштад</value>
+  </data>
+  <data name="FooterAllRightsReserved" xml:space="preserve">
+    <value>ЖивеемеЗаедно ги задржува сите права</value>
+  </data>
+  <data name="FooterFollowUsOnTwitter" xml:space="preserve">
+    <value>Следи не на Твитер</value>
+  </data>
+  <data name="FooterFollowUsOnYouTube" xml:space="preserve">
+    <value>Следи не на ЈуТјуб</value>
+  </data>
+  <data name="FooterSendUsAnEmail" xml:space="preserve">
+    <value>Прати ни е-маил</value>
+  </data>
+  <data name="FooterTermsAndConditions" xml:space="preserve">
+    <value>Општи одредби и услови</value>
+  </data>
+  <data name="ForgotPasswordInstruction" xml:space="preserve">
+    <value>Пополнете ја вашата е-маил адреса од вашиот ЗаедноЖивееме профил и ќе ви ги пратиме инструкциите како да воспоставите нова лозинка</value>
+  </data>
+  <data name="ForgotPasswordInstructionError" xml:space="preserve">
+    <value>Е-маил адресата која ја внесовте е невалидна</value>
+  </data>
+  <data name="ForgotPasswordInstructionsSend" xml:space="preserve">
+    <value>Пратен ви е е-маил со информации како да поставите нова лозинка</value>
+  </data>
+  <data name="InfoActivities" xml:space="preserve">
+    <value>Знаете што се случува во вашето соседство? Погледнете ја агендата или поставите нова активност.</value>
+  </data>
+  <data name="InfoCircles" xml:space="preserve">
+    <value>Би сакале да формирате круг со луѓе околу одредена тема или активност? Или сакате да се формирате круг за  поддршка? Со создавање на кругот  корисницните можат лесно заедно да го организираат и менџираат кругот. Постојат две опции: Можете да се креират јавен или приватен круг. Јавниот круг е видлив за другите луѓе. Секој кој го гледа кругот може да се регистрира како член. Вие одлучувате дали некој може да стане член или не. Цпротивно, приватниот круг не е видлив на секој. Никој не може да се регистрира за приватен круг. Во тој случај, вие активно ги поканувате луѓето да се приклучат на вашиот приватен круг.</value>
+  </data>
+  <data name="InfoEditMessage" xml:space="preserve">
+    <value>Можете да ја измените вашата порака до</value>
+  </data>
+  <data name="InfoEditReaction" xml:space="preserve">
+    <value>Можете да ја измените вашата реакција до</value>
+  </data>
+  <data name="InfoInvitations" xml:space="preserve">
+    <value>Овде можете да ги најдете сите отворени покани за организации и кругови</value>
+  </data>
+  <data name="InfoMarketplace" xml:space="preserve">
+    <value>Имате ли нешто потребно? Сакате ли да позајмите нешто или да ви позајмат? Дали можете да помогнете или ви треба помош?  Се тоа можете да контролирате преку понудите или побарувањата </value>
+  </data>
+  <data name="InfoNeighborhoodMessages" xml:space="preserve">
+    <value>Прочитајте што вашите соседи, организации, клубови, здруженија и слично имаат објавено. Или објавите вие нешто!</value>
+  </data>
+  <data name="InfoOrganizations" xml:space="preserve">
+    <value>Сакате да знаете кои организации, клубови, асоцијации и слично работат во вашата близина? И сакате да дознаете што тие прават и какви производи и услуги нудат? Најди ги сите преку овој водич!</value>
+  </data>
+  <data name="IntroHome" xml:space="preserve">
+    <value>ЖивеемеЗаедно е бесплатна платформа која припаѓа на сите корсници</value>
+  </data>
+  <data name="InviteUsersToActivityInstruction" xml:space="preserve">
+    <value>Поканете луѓе за оваа активност. Луѓе кои немаат профил на ЖивеатЗаедно или кои не живеат во вашето соседство, можете да ги поканите преку e-mail. Луѓето кои веќе имаат профил, и живеат во вашето соседство, можете да поканите со кликнување на нивниот профил.</value>
+  </data>
+  <data name="InviteUsersToCircleInstruction" xml:space="preserve">
+    <value>Поканете луѓе за овој круг. Луѓе кои немаат профил на ЖивеатЗаедно или кои не живеат во вашето соседство, можете да поканите преку e-маил. Луѓето кои се во ваша близина можете да ги додадете преку пребарување низ околу вашето соседство.</value>
+  </data>
+  <data name="InviteUsersToOrganizationInstruction" xml:space="preserve">
+    <value>Поканете луѓе за оваа организација. Луѓе кои немаат профил на ЖивеатЗаедно или кои не живеат во вашето соседство, можете да поканите преку e-маил. Луѓето кои се во ваша близина можете да ги додадете преку пребарување низ околу вашето соседство.</value>
+  </data>
+  <data name="LatestItemIn" xml:space="preserve">
+    <value>Последниот оглас</value>
+  </data>
+  <data name="LockedOut" xml:space="preserve">
+    <value>Оваа сметака е заклучена, ве молам обидете се подоцна пак. </value>
+  </data>
+  <data name="LoginIntro" xml:space="preserve">
+    <value>Супер што направивте профил на ЖивеемеЗаедно. Се надеваме дека тука ќе најдете се што ви е потребно од вашето соседство. Правиме се што можеме за да ја подбриме оваа платформа. Доколку имате сугестии како да ја подобриме оваа платформа, можете да ги споделите преку кликнување на портокаловото копче насловено ПОНУДИ СУГЕСТИИ</value>
+  </data>
+  <data name="MarketPlaceItemIsPrivate" xml:space="preserve">
+    <value>Овој оглас е приватен</value>
+  </data>
+  <data name="NoAccountCreateOne" xml:space="preserve">
+    <value>Сеуште немате профил? Тогаш направете профил тука.</value>
+  </data>
+  <data name="NoForumSubjects" xml:space="preserve">
+    <value>Моментално нема зададено предмети</value>
+  </data>
+  <data name="NoMessagesFound" xml:space="preserve">
+    <value>Нема најдено пораки</value>
+  </data>
+  <data name="NoPhotosFound" xml:space="preserve">
+    <value>Сеуште нема слики во овој албум. </value>
+  </data>
+  <data name="NoReactions" xml:space="preserve">
+    <value>Моментално нема сеуште реакции</value>
+  </data>
+  <data name="NoReportedReactions" xml:space="preserve">
+    <value>Моментално нема пријавени реакции</value>
+  </data>
+  <data name="NotActiveInCity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NoTimelineNavigationTip" xml:space="preserve">
+    <value>Употребите го менито погоре за да ја пребарувате платфромата </value>
+  </data>
+  <data name="NotSendMessageToMarketplaceItemOwner" xml:space="preserve">
+    <value>Не можете да платите приватна порака</value>
+  </data>
+  <data name="NotYetItemsIn" xml:space="preserve">
+    <value>Нема огласи</value>
+  </data>
+  <data name="NotYetRegistered" xml:space="preserve">
+    <value>Немате профил на ЗаедноЖивееме?</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>или</value>
+  </data>
+  <data name="OrganisationThemesInstruction" xml:space="preserve">
+    <value>Можете една или повеќе теми да проверите.</value>
+  </data>
+  <data name="OrganisationThemesSettingsInstruction" xml:space="preserve">
+    <value>Наведете на кои теми се однесува вашата организација </value>
+  </data>
+  <data name="OrganizationActiveInDistrictsInstruction" xml:space="preserve">
+    <value>Можете да проверите една или повеќе области</value>
+  </data>
+  <data name="OrganizationActivityFeed" xml:space="preserve">
+    <value>Преглед на сите активности, поставен преку</value>
+  </data>
+  <data name="OrganizationContactInformationInstruction" xml:space="preserve">
+    <value>Внесете ги вашите контакт информации</value>
+  </data>
+  <data name="OrganizationGeneralInformationInstruction" xml:space="preserve">
+    <value>Општи информации за вашата организација</value>
+  </data>
+  <data name="OrganizationMessagesFeed" xml:space="preserve">
+    <value>Преглед на сите пораки, поставен преку</value>
+  </data>
+  <data name="OrganizationNeighborhoodSettingsInstruction" xml:space="preserve">
+    <value>Наведете во кои области е вашата организации активна</value>
+  </data>
+  <data name="OrganizationProductFullTextInstruction" xml:space="preserve">
+    <value>Овој опис е видлив на вашиот профил. Во овој опис можете да искоритите 600 карактери за да ги опишете детално вашите продукти</value>
+  </data>
+  <data name="OrganizationProductIntroductionTextInstruction" xml:space="preserve">
+    <value>Овој опис е видлив на страната за преглед. Опишете ја вашата услуга во 140 карактери. Со овој опис треба да ги заинтересирате клиентите за вашата услуга.</value>
+  </data>
+  <data name="OrganizationProductsInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OrganizationProductTitleInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OrganizationRequest" xml:space="preserve">
+    <value>Можете секогаш да овозможите вашата организација да биде на ЖивеемеЗаедно</value>
+  </data>
+  <data name="OrganizationServiceFullTextInstruction" xml:space="preserve">
+    <value>Овој опис е видлив на вашиот профил. Во овој опис можете да искоритите 600 карактери за да ги опишете детално вашите услуги</value>
+  </data>
+  <data name="OrganizationServiceIntroductionTextInstruction" xml:space="preserve">
+    <value>Овој опис е видлив на страната за преглед. Опишете ја вашата услуга во 140 карактери. Со овој опис треба да ги заинтересирате клиентите за вашата услуга.</value>
+  </data>
+  <data name="OrganizationServicesInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OrganizationServiceTitleInstruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OverviewInvited" xml:space="preserve">
+    <value>Дали корисникот ве поранил да будете член на овој круг</value>
+  </data>
+  <data name="OverviewJoinRequest" xml:space="preserve">
+    <value>сака да стане член на кругот</value>
+  </data>
+  <data name="OverviewNewMessage" xml:space="preserve">
+    <value>има ставено нова порака</value>
+  </data>
+  <data name="OverviewNewPhoto" xml:space="preserve">
+    <value>има ставено нова слика</value>
+  </data>
+  <data name="OverviewNewTask" xml:space="preserve">
+    <value>има ставено нова задача</value>
+  </data>
+  <data name="PasswordDescription" xml:space="preserve">
+    <value>Вашата лозинка може да минимум 8 карактери</value>
+  </data>
+  <data name="PinConfirmation" xml:space="preserve">
+    <value>Доколку ја пинувате оваа порака таа ќе се појавува секогаш најгоре на листата на пораки.</value>
+  </data>
+  <data name="PreferenceDelivery" xml:space="preserve">
+    <value>Доставување (јас доставувам до кај тебе)</value>
+  </data>
+  <data name="PreferencePickup" xml:space="preserve">
+    <value>Подигнување (ти можеш да го подигнеш од кај мене)</value>
+  </data>
+  <data name="ProfileImageDescription" xml:space="preserve">
+    <value>Избери јасна фотографија од себе, за да можат другите лесно да те препознаат</value>
+  </data>
+  <data name="ReactionDeleted" xml:space="preserve">
+    <value>Оваа рекација е избришана</value>
+  </data>
+  <data name="RemoveMemberCircleAdminRights" xml:space="preserve">
+    <value>Коринискот не може повеќе да управува со задачите и кругот. </value>
+  </data>
+  <data name="RemoveMemberOrganizationAdminRights" xml:space="preserve">
+    <value>Корисникот не може повеќе да го менува профилот на организацијата и да праќа пораки во име на организацијата. </value>
+  </data>
+  <data name="RemovePhotoAlbum" xml:space="preserve">
+    <value>Избриши го албумот</value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>Непожелно однесување, спам-пораки и други злоупотреби на оваа страна можете да ги пријавте тука. ЖивеемеЗаедно сериозно ги зиме во предвид сите пријави. </value>
+  </data>
+  <data name="SearchedOn" xml:space="preserve">
+    <value>Барање по</value>
+  </data>
+  <data name="SetNeighborhoodRadiusDescription" xml:space="preserve">
+    <value>Постави ја големината на вашето соседство</value>
+  </data>
+  <data name="ShareActivity" xml:space="preserve">
+    <value>Сподели ја оваа активност</value>
+  </data>
+  <data name="ShareMarketPlaceItem" xml:space="preserve">
+    <value>Сподели го овој оглас</value>
+  </data>
+  <data name="ShareNews" xml:space="preserve">
+    <value>Сподели ја оваа порака</value>
+  </data>
+  <data name="SingleReciever" xml:space="preserve">
+    <value>Единствено вие ја имате добено иоваа порака</value>
+  </data>
+  <data name="SquareCoverImageDescription" xml:space="preserve">
+    <value>Позадина за плоштад</value>
+  </data>
+  <data name="SquareProfileImageDescription" xml:space="preserve">
+    <value>Профил фотографии на плоштадот</value>
+  </data>
+  <data name="UnpinConfirmation" xml:space="preserve">
+    <value>Доколку ја ослободите пораката таа нема повеќе да стои најгоре на листата на пораки. (ќе биде најгоре додека нема нова порака)</value>
+  </data>
+  <data name="WelcomeUser" xml:space="preserve">
+    <value>Добредојдовте</value>
+  </data>
+  <data name="Within" xml:space="preserve">
+    <value>Во</value>
+  </data>
+  <data name="YouAreBuddyOf" xml:space="preserve">
+    <value>Овие корисници ви имаат дадено полномошно да праќате пораки во нивно име.</value>
+  </data>
+  <data name="YourBuddies" xml:space="preserve">
+    <value>Овие корисници ви имаат дадено полномошно да праќате пораки во нивно име.</value>
+  </data>
+  <data name="YourNeighborhoodInstruction" xml:space="preserve">
+    <value>Големината на вашето соседство определува кои пораки и соседи ви се видливи. Користете го менито и лизгачот за да ја одредите големината ан вашето соседство. </value>
+  </data>
+  <data name="ZuiderlingInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZuiderlingRequiredForTransaction" xml:space="preserve">
+    <value>За да платите за овој оглас потребна е сметка</value>
+  </data>
+  <data name="ZuiderlingServiceTransactionDescription" xml:space="preserve">
+    <value>ЖивеемеЗаедно уплата</value>
+  </data>
+  <data name="ZuiderlingTransactionPaid" xml:space="preserve">
+    <value>Огласот е платен</value>
+  </data>
+  <data name="CircleEmailNewGroup" xml:space="preserve">
+    <value>Тука можете да праќате пораки до одредени поединци во рамките на овој круг. &lt;br /&gt; Прво изберете едно или повеќе лица на кои сакате да им пишете порака и започнете разговор.</value>
+  </data>
+  <data name="ConfirmRemoveDocument" xml:space="preserve">
+    <value>Оваа акција не може да се откаже.</value>
+  </data>
+  <data name="ConfirmRemoveEmailGroup" xml:space="preserve">
+    <value>Нема да добивате повеќе пораки од овој разговор.</value>
+  </data>
+  <data name="ContinueReading" xml:space="preserve">
+    <value>Прочитај повеќе…</value>
+  </data>
+  <data name="InviteMultipleUsersByEmail" xml:space="preserve">
+    <value>Можете да поканите повеќе луѓе во исто време со одвојување на е-маил адреси со ;</value>
+  </data>
+  <data name="NoAlbumsFound" xml:space="preserve">
+    <value>Нема додадено албуми во овој круг.</value>
+  </data>
+  <data name="NoDocumentsFound" xml:space="preserve">
+    <value>Сеуште нема додадено документи во овој круг.</value>
+  </data>
+  <data name="ConfirmStartCircleEmails" xml:space="preserve">
+    <value>Ке бидете известени ако има нови активности во овој круг</value>
+  </data>
+  <data name="ConfirmStopCircleEmails" xml:space="preserve">
+    <value>Нема да бидете известени ако има нови активности во овој круг</value>
+  </data>
+  <data name="InviteUsersToWebsite" xml:space="preserve">
+    <value>Заедно ја градиме најдобрата населба! Покани ги соседите, семејството, пријателите и познаниците на ЖивеемеЗаедно! Така и тие ќе имаат можност да дознаат колку им е убава населбата во која живеат. Притисни на &lt;br /&gt;&lt;br /&gt;Vul , запиши ги нивните е-маил адреси и покани ги да се приклучат.</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Види</value>
+  </data>
+</root>

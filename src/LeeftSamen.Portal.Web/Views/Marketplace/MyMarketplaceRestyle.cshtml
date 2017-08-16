@@ -1,0 +1,180 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Extensions
+@model LeeftSamen.Portal.Web.Models.Marketplace.MyMarketplaceViewModel
+@{
+    ViewBag.Title = Title.MyMarketplace;
+}
+
+<div class="content-wide">
+
+    <div class="relative-inline-block pull-right hidden-xs">
+        <a class="btn btn-primary btn-small" href="@Url.Action("CreateItem")">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            @Button.CreateMarketplaceItem
+        </a>
+    </div>
+
+    <h1 class="page-title">@ViewBag.Title</h1>
+
+    @*@{
+        var items = new List<MenuItemModel>();
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Marketplace", action = "Overview" }),
+                Button.MarketplaceAll,
+                false
+            ));
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Marketplace", action = "Overview", Type = MarketplaceItem.MarketplaceItemType.Offered }),
+                Button.MarketplaceOffered,
+                false
+            ));
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Marketplace", action = "Overview", Type = MarketplaceItem.MarketplaceItemType.Asked }),
+                Button.MarketplaceAsked,
+                false
+            ));
+        items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "Marketplace", action = "MyMarketplace" }),
+            Button.MyMarketplaceItems,
+            true
+        ));
+    }
+    @Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)*@
+
+    @if (Model.MarketplaceItems.Count > 0)
+    {
+        <div class="panel panel-default my-marketplace-items">
+            <div class="panel-body">
+                <table class="table">
+                    @foreach (var item in Model.MarketplaceItems.OrderByDescending(i => i.CreationDateTime))
+                    {
+                        var editUrl = Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "EditItem", id = item.MarketplaceItemId, circleId = item.ShowInCircleId });
+                        var itemUrl = Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "Detail", id = item.MarketplaceItemId });
+                        if (item.ShowInCircleId.HasValue)
+                        {
+                            itemUrl = Url.RouteUrl("CircleMarketplaceDetail", new { controller = "Marketplace", action = "Detail", circleId = item.ShowInCircleId, id = item.MarketplaceItemId });
+                        }
+                        var label = item.Type.DisplayName();
+
+                        <tr>
+                            <td>
+                                <div class="my-marketplace-item">
+                                    <div class="col-md-1">
+                                        @if (item.Image1Id.HasValue)
+                                        {
+                                            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = item.MarketplaceItemId, mediaId = item.Image1Id, index = 1 })" alt="" class="img-circle profile-image-sm">
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm"/>
+                                        }
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <a href="@itemUrl"> @item.Title</a>
+                                        <label class="label label-info transparent">@label: @item.Category.Name</label>
+                                        <small>@item.CreationDateTime.ToTimeAgoString()</small>
+                                    </div>
+
+                                    <button type="button" class="pull-right btn btn-xs btn-danger"
+                                            data-toggle="modal"
+                                            data-target="#modal"
+                                            data-title="@Title.ConfirmRemoveMarketplaceItem"
+                                            data-body="@Text.ConfirmRemoveMarketplaceItem"
+                                            data-button="@Button.RemoveMarketplaceItem"
+                                            data-action="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "RemoveItem", id = item.MarketplaceItemId })">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+
+                                    <button type="button" class="pull-right btn btn-xs btn-default" data-action="@editUrl">
+                                        <a href="@editUrl"><span class="glyphicon glyphicon-edit"></span></a>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        @*<tr>
+                            <td>
+                                @if (item.Image1Id.HasValue)
+                                {
+                                    <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = item.MarketplaceItemId, mediaId = item.Image1Id, index = 1 })" alt="" class="img-circle profile-image-sm">
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+                                }
+                                <a href="@itemUrl"> @item.Title</a>
+                            </td>
+                            <td><label class="label label-info transparent">@label: @item.Category.Name</label></td>
+                            <td>@item.CreationDateTime.ToTimeAgoString()</td>
+                            <td><a href="@editUrl">@Button.EditMarketplaceItem</a></td>
+                            <td>
+                                <button type="button" class="pull-right btn btn-xs btn-danger"
+                                        data-toggle="modal"
+                                        data-target="#modal"
+                                        data-title="@Title.ConfirmRemoveMarketplaceItem"
+                                        data-body="@Text.ConfirmRemoveMarketplaceItem"
+                                        data-button="@Button.RemoveMarketplaceItem"
+                                        data-action="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "RemoveItem", id = item.MarketplaceItemId })">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                            </td>
+                        </tr>*@
+                    }
+                </table>
+                <div class="hidden">
+                    @foreach (var item in Model.MarketplaceItems.OrderByDescending(i => i.CreationDateTime))
+                    {
+                        <div class="mobile-marketplaceoverview-item">
+                            @{
+                        var editUrl = Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "EditItem", id = item.MarketplaceItemId });
+                        var itemUrl = Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "Detail", id = item.MarketplaceItemId });
+                        var label = item.Type.DisplayName();
+                            }
+
+                            @if (item.Image1Id.HasValue)
+                            {
+                                <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = item.MarketplaceItemId, mediaId = item.Image1Id, index = 1 })" alt="" class="img-circle profile-image-sm">
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+                            }
+                            <a href="@itemUrl"> @item.Title</a><br />
+
+                            <label class="label label-info transparent">@label: @item.Category.Name</label><br />
+                            @item.CreationDateTime.ToTimeAgoString()<br />
+                            <a class="btn btn-xs btn-secondary" href="@editUrl">@Button.EditMarketplaceItem</a>
+
+                            <button type="button" class="pull-right btn btn-xs btn-secondary"
+                                    data-toggle="modal"
+                                    data-target="#modal"
+                                    data-title="@Title.ConfirmRemoveMarketplaceItem"
+                                    data-body="@Text.ConfirmRemoveMarketplaceItem"
+                                    data-button="@Button.RemoveMarketplaceItem"
+                                    data-action="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "RemoveItem", id = item.MarketplaceItemId })">
+                                @Button.RemoveMarketplaceItem
+                            </button>
+                        </div>
+
+                        <br /><hr />
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>@Title.YouDontHaveMarketplaceItems</h3>
+    }
+</div>

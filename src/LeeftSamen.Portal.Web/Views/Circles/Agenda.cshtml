@@ -1,0 +1,54 @@
+﻿@model LeeftSamen.Portal.Web.Models.Circles.CircleAgendaViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Agenda</title>
+</head>
+
+<h1>Agenda</h1>
+   <div class="panel">
+
+    <div class="panel-body">
+
+        <div class="relative-inline-block pull-right hidden-xs">
+            <a class="btn btn-primary " href="@Url.Action("CreateActivity", Model.CircleId)">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                @Button.CreateActivity
+            </a>
+        </div>
+
+        @if (Model.CircleActivities.Count > 0)
+        {
+            <h3 class="panel-title">Activiteiten</h3>
+
+            <table class="table">
+                <tr style="border-bottom: groove"><th>Gemaakt door</th><th>Title</th><th>Wie er komen</th></tr>
+
+                @foreach (var activity in Model.CircleActivities)
+                {
+                    <tr class="clickAble">
+                        <td onclick="location.href ='@(Url.Action("Agenda", "Circles"))'" class="hoverAble clickAble">@activity.Creator.Name</td>
+                        <td onclick="location.href ='@(Url.Action("Agenda", "Circles"))'" class="hoverAble clickAble">@activity.Title</td>
+                        @foreach (var userThatComes in activity.Attendees)
+                        {
+                            <td onclick="location.href ='@(Url.Action("Agenda", "Circles"))'" class="hoverAble clickAble">@userThatComes.User.Name</td>
+                        }
+                        </tr>
+                }
+            </table>
+
+
+        }
+        else
+        {
+            <h3 class="panel-title" style="border-bottom: groove">Activiteiten</h3>
+            <p class="panel-title" style="text-align: center">Er zijn geen activiteiten gevonden</p>
+        }
+    </div>
+</div>
+

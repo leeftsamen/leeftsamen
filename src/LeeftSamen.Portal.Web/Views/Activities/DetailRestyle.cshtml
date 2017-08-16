@@ -1,0 +1,264 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Extensions
+@using LeeftSamen.Portal.Web.Models.Users
+@using Microsoft.Ajax.Utilities
+@using LeeftSamen.Portal.Web.Utils
+
+@model LeeftSamen.Portal.Web.Models.Activities.DetailViewModel
+@{
+    ViewBag.Title = Model.Activity.Title;
+
+    var overviewUrl = Url.RouteUrl("Default", new { controller = "Activities", action = "Index" });
+    if (ViewUtils.GetController(this.ViewContext).ToLower() == "organizations")
+    {
+        overviewUrl = Url.RouteUrl("DefaultDetail", new { action = "Activities", controller = "Organizations", id = Model.Activity.OrganizationMembership.Organization.OrganizationId });
+    }
+}
+
+@if (Model.ShownInCircle.HasValue)
+{
+    @Html.Action("DetailHeader", "Circles", new { id = Model.ShownInCircle })
+    overviewUrl = Url.RouteUrl("CircleActivities", new { controller = "Activities", action = "Index", circleId = Model.ShownInCircle });
+}
+
+<a class="btn btn-default" href="@overviewUrl">@Button.BackToOverview</a>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <div class="make-block shift-left">
+            <div class="panel-body">
+                @if (Model.UserCanEdit)
+                {
+                <div class="dropdown pull-right" style="margin-top: 15px;">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <a href="@Url.RouteUrl("DefaultDetail", new { controller = "Activities", action = "Edit", id = Model.Activity.ActivityId, circleId = Model.ShownInCircle })">@Button.EditActivity</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="javascript:void(0);"
+                               data-toggle="modal"
+                               data-target="#modal"
+                               data-title="@Title.ConfirmRemoveActivity"
+                               data-body="@Text.ConfirmRemoveActivity"
+                               data-button="@Button.RemoveActivity"
+                               data-action="@Url.RouteUrl("DefaultDetail", new { controller = "Activities", action = "Remove", id = Model.Activity.ActivityId, circleId = Model.ShownInCircle })">@Button.RemoveActivity</a>
+                        </li>
+                    </ul>
+                </div>
+                }
+                <div>
+                    <br />
+                    <h1>@ViewBag.Title</h1>
+                    <time datetime="@Model.Activity.StartDateTime.ToString("s")"
+                          title="@Model.Activity.StartDateTime.ToString("f")">
+                        @if (Model.Activity.OrganizationMembershipId.HasValue)
+                        {
+                        @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.Activity.OrganizationMembership.Organization.Name))
+                        }
+                        else
+                        {
+                        <text>@Label.By @Model.Activity.Creator.Name</text>
+                        }
+                    </time>
+                    <br />
+                    <br />
+                    @Html.Raw(Model.Activity.Description)
+                    <table class="table">
+                        @if (Model.Activity.AllDay)
+                        {
+                            var startDate = Model.Activity.StartDateTime.ToString("dddd d MMMM yyyy");
+                            var endDate = Model.Activity.EndDateTime.ToString("dddd d MMMM yyyy");
+                            var date = startDate + (startDate.Equals(endDate) ? string.Empty : " - " + endDate);
+                            <tr>
+                                <th>@Label.Date:</th>
+                                <td>@date</td>
+                            </tr>
+                        }
+                        else
+                        {
+                        <tr>
+                            <th>@Label.Date:</th>
+                            <td>@Model.Activity.StartDateTime.ToString("dddd d MMMM yyyy")</td>
+                        </tr>
+                        <tr>
+                            <th>@Label.ActivityStart:</th>
+                            <td>@Model.Activity.StartDateTime.ToString("HH:mm")</td>
+                        </tr>
+                            <tr>
+                                <th>@Label.ActivityEnd:</th>
+                                <td>@Model.Activity.EndDateTime.ToString(Model.Activity.EndDateTime.Date != Model.Activity.StartDateTime.Date ? "dddd d MMMM yyyy - HH:mm" : "HH:mm")</td>
+                            </tr>
+                        }
+                        @if (Model.Activity.Recurring != Activity.Recurrance.No)
+                        {
+                            var recurringEnd = Model.Activity.RecurringEnd.HasValue
+                                ? string.Format("{0} {1}", Label.ActivityEnd.ToLower(), Model.Activity.RecurringEnd.Value.ToString("dddd d MMMM yyyy"))
+                                : string.Empty;
+                        <tr>
+                            <th></th>
+                            <td><small>@Model.Activity.Recurring.DisplayName() @recurringEnd</small></td>
+                        </tr>
+                        }
+                        <tr>
+                            <th>@Label.Location:</th>
+                            <td>@Model.Activity.Location</td>
+                        </tr>
+                        <tr>
+                            <th>@Label.Age:</th>
+                            <td>
+                                @if (Model.Activity.AllAges)
+                                {
+                                @Label.AllAges
+                                }
+                                else
+                                {
+                                    if (Model.Activity.AgeFrom.HasValue)
+                                    {
+                                    @(string.Format("{0} {1} ", Label.FromAge, Model.Activity.AgeFrom.Value))
+                                    }
+                                    if (Model.Activity.AgeTo.HasValue)
+                                    {
+                                        var label = Model.Activity.AgeFrom.HasValue ? Label.ToAge.ToLower() : Label.ToAge;
+                                        @(string.Format("{0} {1}", label, Model.Activity.AgeTo.Value))
+                                    }
+                                    @(" " + Label.Year.ToLower())
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("CreateReaction", "Activities", new { circleId = Model.ShownInCircle }, FormMethod.Post))
+        {
+        @Html.AntiForgeryToken()
+
+            <div class="bg-warning">
+                @Html.ValidationMessageFor(m => m.NewReaction)
+            </div>
+
+            <div class="panel-blue shift-left">
+                <div class="panel-body">
+                    @Html.TextAreaFor(m => m.NewReaction, new { @class = "form-control", @placeholder = PlaceHolder.PostNewReaction })
+                    @Html.Hidden("activityId", Model.Activity.ActivityId)
+                </div>
+                <div class="panel-footer text-right">
+                    <button class="btn btn-primary" type="submit">@Button.PostReaction</button>
+                </div>
+            </div>
+        }
+
+        <br />
+
+        <div id="messages">
+            @foreach (var reaction in Model.Activity.Reactions.OrderByDescending(m => m.CreationDateTime).Take(20))
+            {
+                Html.RenderPartial("~/Views/Activities/_ReactionRestyle.cshtml", new LeeftSamen.Portal.Web.Models.Activities.ActivityReactionViewModel { Reaction = reaction });
+            }
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div>
+            @Html.Partial("~/Views/Activities/_AttendanceForm.cshtml", new LeeftSamen.Portal.Web.Models.Activities.AttendanceFormViewModel(Model.Activity.ActivityId, Model.ShownInCircle, Model.CurrentUserIsAttending, true))
+        </div>
+        <br />
+        <div class="make-block">
+            <div class="panel-heading">@PlaceHolder.AttendeesHeading <span class="green bold">@Model.Activity.Attendees.Count(a => a.Attending)</span></div>
+
+            <div class="panel-body">
+                @foreach (var attendee in Model.Activity.Attendees.Where(a => a.Attending).Take(5))
+                {
+                <div class="row">
+                    <div style="padding:0px 15px 5px 15px;">
+                        @if (attendee.User.ProfileImage == null)
+                        {
+                        <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+                        }
+                        else
+                        {
+                        @Html.Partial("_UserProfileImage", new UserProfileImage(attendee.User.ProfileImage.MediaId, attendee.User.Id, "profile-image-sm"))
+                        }
+                        <b>@attendee.User.Name</b>
+                    </div>
+                </div>
+                <br />
+                }
+
+                @if (Model.Activity.Attendees.Count(a => a.Attending) > 0)
+                {
+                <div class="text-center">
+                    <h4><a href="javascript:void(0);" data-toggle="modal" data-target="#modalAttendees">@PlaceHolder.AllAttendees</a></h4>
+                </div>
+                }
+                @if (!Model.ShownInCircle.HasValue)
+                {
+                    <div class="text-center">
+                        <h4><a href="javascript:void(0);" data-toggle="modal" data-target="#inviteUserModal">@PlaceHolder.InviteAttendees</a></h4>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="make-block">
+            <div class="panel-body">
+                @if (Model.Activity.AllowSharing)
+                {
+                <h4>@Text.ShareActivity</h4>
+                @Html.Partial("_ShareButtons")
+                }
+
+                @Html.Partial("_ReportAbuseLink")
+            </div>
+        </div>
+    </div>
+</div>
+@section modals {
+    <div class="modal fade" id="modalAttendees" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="@Button.Cancel"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">@PlaceHolder.AllAttendees</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach (var attendee in Model.Activity.Attendees.Where(a => a.Attending))
+                        {
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div style="padding:0px 15px 5px 15px;">
+                                    @if (attendee.User.ProfileImage == null)
+                                    {
+                                        <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+                                    }
+                                    else
+                                    {
+                                        @Html.Partial("_UserProfileImage", new UserProfileImage(attendee.User.ProfileImage.MediaId, attendee.User.Id, "profile-image-sm"))
+                                    }
+                                    <b>@attendee.User.Name</b>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @Html.Partial("_InviteUserModal", new InviteUserViewModel { Title = Title.InviteUsersToActivity, Instruction = Text.InviteUsersToActivityInstruction })
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_InviteUserModalScript")
+
+}

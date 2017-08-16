@@ -1,0 +1,147 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Organizations.IndexViewModel
+@{
+    var selectedTheme = Model.OrganizationThemes.FirstOrDefault(t => t.Selected);
+    ViewBag.Title = Title.Organizations;
+}
+
+<div class="content-wide">
+    <h1 class="page-title">@ViewBag.Title</h1>
+    <div class="page-buttons margin-bottom-10-px">
+        <div class="menu-background"></div>
+        <div class="bottom-display">
+            <div class="open-menu">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="buttons">
+            @if (Model.HelpIcons.Any(h => h.Type == "organization-create"))
+            {
+                var helpIcon = Model.HelpIcons.First(h => h.Type == "organization-create");
+                Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "organization-create", HelpText = helpIcon.Text });
+            }
+            <a class="btn btn-primary btn-small" href="@Url.Action("RequestNew")">@Button.RequestNewOrganization</a>
+        </div>
+    </div>
+
+    @*<div class="relative-inline-block button-margin visible-xs">
+        @if (Model.HelpIcons.Any(h => h.Type == "organization-create"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "organization-create");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "organization-create", HelpText = helpIcon.Text });
+        }
+        <a class="btn btn-default btn-small" href="@Url.Action("RequestNew")">@Button.RequestNewOrganization</a>
+    </div>*@
+
+    @*@if (selectedTheme != null)
+        {*@
+    <div class="make-block shift-left clear">
+        <div class="panel-body">
+            <form class="form-inline" id="filterform" action="@Url.RouteUrl("Default", new { controller = "Organizations", action = "Index" })" method="GET">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <label class="radio-inline">
+                        <input @(selectedTheme == null ? " checked=\"checked\"" : string.Empty) name="theme" value="" type="radio"> Alle
+                    </label>
+                </div>
+                @foreach (var theme in Model.OrganizationThemes)
+                {
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <label class="radio-inline">
+                            <input @(theme.Selected ? " checked=\"checked\"" : string.Empty) name="theme" value="@theme.ThemeId" type="radio"> @theme.Name
+                        </label>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Organizations.Count > 0)
+    {
+        <br />
+
+        <div class="shift-left">
+            <div class="row ">
+                @{
+                    const int Cols = 2;
+                }
+                @for (var col = 1; col <= Cols; col++)
+                {
+                    var index = -1 * col;
+                    <div class="col-lg-6 col-md-6 col-xs-12">
+                        @foreach (var organization in Model.Organizations)
+                {
+                    index++;
+                    if (index % Cols != 0)
+                    {
+                        continue;
+                    }
+
+                    var organizationUrl = Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "Detail", id = organization.OrganizationId });
+
+                            <div class="make-block">
+                                <label class="label-info pull-right small">@organization.OrganizationTypeName</label>
+                                <div class="panel-body">
+                                    @if (organization.LogoId.HasValue)
+                                    {
+                                        <a href="@organizationUrl" class="noDecoration">
+                                            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "Logo", id = organization.OrganizationId, mediaId = organization.LogoId })" alt="@organization.Name @Label.Logo" class="maxWidthFull" />
+                                        </a>
+                                        <br /> }
+                                    <h4>@organization.Name</h4>
+                                    <p style="white-space: normal">
+                                        @organization.Description.Truncate()
+                                        <br />
+                                        <a href="@organizationUrl">@Button.MoreInformation</a>
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+                    }
+                    else
+                    {
+                        if (selectedTheme != null)
+                        {
+                            <h3>@string.Format(Title.NoOrganizationsFoundTheme, selectedTheme.Name)</h3>
+                        }
+                        else
+                        {
+                            <h3>@Title.NoOrganizationsFound</h3>
+                        }
+                        <br />
+                    }
+</div>
+@*}
+    else
+    {
+        <h3>Kies een thema</h3>
+
+        <div class="row">
+            @foreach (var theme in Model.OrganizationThemes)
+            {
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <a href="@Url.RouteUrl("Default", new { controller = "Organizations", action = "Index", theme = theme.ThemeId })"><h4>@theme.Name</h4></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }*@
+
+@section scripts
+{
+    <script>
+        var elements = document.getElementsByName('theme');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].onchange = function () {
+                document.forms.filterform.submit();
+            }
+        }
+    </script>
+}

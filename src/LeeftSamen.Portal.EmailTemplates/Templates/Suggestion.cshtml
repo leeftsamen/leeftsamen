@@ -1,0 +1,15 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.SuggestionModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top: 0; margin-bottom: 16px">Suggestie van: @Model.SendByName (@Model.SendByEmail)</p>
+<p style="margin-top:0;margin-bottom:16px">Betreffende: @Model.SuggestionSubject</p>
+<br/>
+<p style="margin-top:0;margin-bottom:48px">@Model.Suggestion</p>
+<p style="margin-top: 0; margin-bottom: 16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    U ontvangt dit bericht omdat u een bericht heeft ontvangen in een cirkel
+}

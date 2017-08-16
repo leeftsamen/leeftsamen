@@ -1,0 +1,960 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Beheerder</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>Alle categorieën</value>
+  </data>
+  <data name="AllCircleMembers" xml:space="preserve">
+    <value>Alle kringleden</value>
+  </data>
+  <data name="Asked" xml:space="preserve">
+    <value>Gevraagd</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categorie</value>
+  </data>
+  <data name="ChooseCategory" xml:space="preserve">
+    <value>Kies een categorie</value>
+  </data>
+  <data name="CircleAdministrator" xml:space="preserve">
+    <value>Kringbeheerder</value>
+  </data>
+  <data name="CircleMember" xml:space="preserve">
+    <value>Kringlid</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Plaatsnaam</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Bevestig je nieuwe wachtwoord.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Bevestig je wachtwoord.</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Huidig wachtwoord</value>
+  </data>
+  <data name="CurrentProfileImage" xml:space="preserve">
+    <value>Huidige profielfoto</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Omschrijving</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mailadres</value>
+  </data>
+  <data name="ExpirationDateTime" xml:space="preserve">
+    <value>Verloopdatum</value>
+  </data>
+  <data name="FullText" xml:space="preserve">
+    <value>Volledige tekst</value>
+  </data>
+  <data name="HouseNumber" xml:space="preserve">
+    <value>Huisnummer</value>
+  </data>
+  <data name="IntroductionText" xml:space="preserve">
+    <value>Introductietekst</value>
+  </data>
+  <data name="InvitedToCircle" xml:space="preserve">
+    <value>Uitgenodigd voor kring</value>
+  </data>
+  <data name="JobVisibility" xml:space="preserve">
+    <value>Wie mogen de taak zien?</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="LongDescription" xml:space="preserve">
+    <value>Uitgebreide omschrijving</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Bericht</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Mijn profiel</value>
+  </data>
+  <data name="MyAccounts" xml:space="preserve">
+    <value>Mijn profielen</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naam:</value>
+  </data>
+  <data name="NameOfCircle" xml:space="preserve">
+    <value>Kringnaam:</value>
+  </data>
+  <data name="NeighborhoodSettings" xml:space="preserve">
+    <value>Buurtinstellingen</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nieuw</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nieuw wachtwoord</value>
+  </data>
+  <data name="NewProfileImage" xml:space="preserve">
+    <value>Nieuwe profielfoto</value>
+  </data>
+  <data name="NoJobsThisDay" xml:space="preserve">
+    <value>Voor deze dag zijn er geen taken.</value>
+  </data>
+  <data name="NoPublicCirclesInNeighborhoodFound" xml:space="preserve">
+    <value>Er zijn geen openbare kringen in je buurt gevonden.</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>Geen resultaat</value>
+  </data>
+  <data name="NoUserCircles" xml:space="preserve">
+    <value>Je bent nog geen lid van een kring.</value>
+  </data>
+  <data name="Offered" xml:space="preserve">
+    <value>Aangeboden</value>
+  </data>
+  <data name="OnlySelectedCircleMembers" xml:space="preserve">
+    <value>Alleen geselecteerde kringleden</value>
+  </data>
+  <data name="OrganizationMember" xml:space="preserve">
+    <value>Medewerker</value>
+  </data>
+  <data name="OrganizationName" xml:space="preserve">
+    <value>Naam van de organisatie</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Wachtwoord</value>
+  </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Persoonlijk</value>
+  </data>
+  <data name="PersonOfOrganization" xml:space="preserve">
+    <value>{0} van {1}</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Telefoonnummer</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Postcode</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Privé</value>
+  </data>
+  <data name="PrivateCircle" xml:space="preserve">
+    <value>Privékring</value>
+  </data>
+  <data name="PrivateSquare" xml:space="preserve">
+    <value>Besloten buurtplein</value>
+  </data>
+  <data name="ProfileImage" xml:space="preserve">
+    <value>Profielfoto</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Openbaar</value>
+  </data>
+  <data name="PublicCircle" xml:space="preserve">
+    <value>Openbare kring</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>Straal</value>
+  </data>
+  <data name="SearchUsers" xml:space="preserve">
+    <value>Mensen toevoegen uit jouw buurt</value>
+  </data>
+  <data name="SearchAdmins" xml:space="preserve">
+    <value>Beheerders toevoegen uit jouw buurt</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="TitleActivity" xml:space="preserve">
+    <value>Titel (max. 80 tekens)</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Vandaag</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Morgen</value>
+  </data>
+  <data name="TypeOfCircle" xml:space="preserve">
+    <value>Wat voor soort kring is het?</value>
+  </data>
+  <data name="TypeOfMarketplaceItem" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Je naam</value>
+  </data>
+  <data name="YourNeighborhood" xml:space="preserve">
+    <value>Je buurt</value>
+  </data>
+  <data name="RemoveOrganizationMember" xml:space="preserve">
+    <value>Medewerker verwijderen</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>Door</value>
+  </data>
+  <data name="CoverColor" xml:space="preserve">
+    <value>Heb je geen sfeerfoto? Kies een kleur</value>
+  </data>
+  <data name="CoverImage" xml:space="preserve">
+    <value>Sfeerfoto</value>
+  </data>
+  <data name="MessageExpires" xml:space="preserve">
+    <value>Dit bericht heeft een vervaldatum.</value>
+  </data>
+  <data name="RemoveCircleMember" xml:space="preserve">
+    <value>Kringlid verwijderen</value>
+  </data>
+  <data name="RemoveAdmin" xml:space="preserve">
+    <value>Beheerder verwijderen</value>
+  </data>
+  <data name="ActivityEnd" xml:space="preserve">
+    <value>Tot</value>
+  </data>
+  <data name="ActivityStart" xml:space="preserve">
+    <value>Aanvang</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Locatie</value>
+  </data>
+  <data name="AllDayActivity" xml:space="preserve">
+    <value>Deze activiteit duurt de hele dag</value>
+  </data>
+  <data name="ActivityEndDate" xml:space="preserve">
+    <value>Einddatum</value>
+  </data>
+  <data name="ActivityStartDate" xml:space="preserve">
+    <value>Aanvangsdatum</value>
+  </data>
+  <data name="InviteUsersByEmail" xml:space="preserve">
+    <value>Mensen uitnodigen via e-mail</value>
+  </data>
+  <data name="RemoveInvitation" xml:space="preserve">
+    <value>Uitnodiging intrekken</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Gisteren</value>
+  </data>
+  <data name="ChooseLogo" xml:space="preserve">
+    <value>Kies een logo</value>
+  </data>
+  <data name="OrganizationActiveInDistricts" xml:space="preserve">
+    <value>Omgeving waar de organisatie actief is</value>
+  </data>
+  <data name="OrganizationType" xml:space="preserve">
+    <value>Organisatietype</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>E-mailadres</value>
+  </data>
+  <data name="YourUsername" xml:space="preserve">
+    <value>Je e-mailadres</value>
+  </data>
+  <data name="ConfirmRemoveAccount" xml:space="preserve">
+    <value>Bevestig dat je je profiel wilt verwijderen.</value>
+  </data>
+  <data name="PrivacyPolicyAddress" xml:space="preserve">
+    <value>Je adres zal niet zichtbaar zijn voor anderen.</value>
+  </data>
+  <data name="PrivacyPolicyEmail" xml:space="preserve">
+    <value>Je e-mailadres zal niet zichtbaar zijn voor anderen.</value>
+  </data>
+  <data name="PrivacyPolicyPassword" xml:space="preserve">
+    <value>Het wachtwoord moet tenminste 8 tekens lang zijn en 1 hoofdletter en 1 cijfer bevatten. Je wachtwoord wordt versleuteld bewaard.</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Wachtwoord tonen</value>
+  </data>
+  <data name="OrganisationThemes" xml:space="preserve">
+    <value>Organisatiethema's</value>
+  </data>
+  <data name="MakeMePioneer" xml:space="preserve">
+    <value>Ik wil graag pionier voor LeeftSamen worden.</value>
+  </data>
+  <data name="DontMakeMePioneer" xml:space="preserve">
+    <value>Nee, bedankt</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Wijzig bericht</value>
+  </data>
+  <data name="In" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="ShareDescription" xml:space="preserve">
+    <value>Dit bericht mag door anderen gedeeld worden.</value>
+  </data>
+  <data name="Started" xml:space="preserve">
+    <value>Gestart</value>
+  </data>
+  <data name="ChangeEmailSettings" xml:space="preserve">
+    <value>E-mail instellingen</value>
+  </data>
+  <data name="ReceivesWeekMail" xml:space="preserve">
+    <value>Weekoverzicht</value>
+  </data>
+  <data name="ReceivesCircleJobMail" xml:space="preserve">
+    <value>Bericht ontvangen wanneer er een taak wordt geplaatst in een kring waar ik lid van ben.</value>
+  </data>
+  <data name="ReceivesCircleMessageMail" xml:space="preserve">
+    <value>Bericht ontvangen wanneer er een bericht wordt geplaatst in een kring waar ik lid van ben.</value>
+  </data>
+  <data name="ReceivesMarketplaceMail" xml:space="preserve">
+    <value>Bericht ontvangen wanneer iemand reageert op mijn advertentie.</value>
+  </data>
+  <data name="ReceivesCircleJobAssigned" xml:space="preserve">
+    <value>Bericht ontvangen wanneer mijn taak geaccepteerd word.</value>
+  </data>
+  <data name="RepeatJob" xml:space="preserve">
+    <value>Herhaal deze taak</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Vrijdag</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Maandag</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Zaterdag</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Zondag</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Donderdag</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Dinsdag</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Woensdag</value>
+  </data>
+  <data name="CompletionDateTime" xml:space="preserve">
+    <value>Herhaal de taak tot</value>
+  </data>
+  <data name="DueDateTime" xml:space="preserve">
+    <value>Wanneer de taak van start gaat</value>
+  </data>
+  <data name="RepeatWeekdays" xml:space="preserve">
+    <value>Herhaal deze taak elke</value>
+  </data>
+  <data name="Attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="RemoveAttachment" xml:space="preserve">
+    <value>Verwijder deze afbeelding bij het bericht.</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Eindtijd</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Starttijd</value>
+  </data>
+  <data name="ShareAllDescription" xml:space="preserve">
+    <value>Deze berichten mogen door anderen gedeeld worden.</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Beiden</value>
+  </data>
+  <data name="OrderByDate" xml:space="preserve">
+    <value>Op datum</value>
+  </data>
+  <data name="OrderByDistance" xml:space="preserve">
+    <value>Op afstand</value>
+  </data>
+  <data name="OrderByPrice" xml:space="preserve">
+    <value>Op prijs (oplopend)</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Prijs</value>
+  </data>
+  <data name="PreferenceDelivery" xml:space="preserve">
+    <value>Levering (Ik ga naar mijn buurtgenoot toe.)</value>
+  </data>
+  <data name="PreferenceMail" xml:space="preserve">
+    <value>Via de post</value>
+  </data>
+  <data name="PreferenceOnline" xml:space="preserve">
+    <value>Online afhandelen</value>
+  </data>
+  <data name="PreferencePickup" xml:space="preserve">
+    <value>Ophalen (Mijn buurtgenoot komt naar mij toe.)</value>
+  </data>
+  <data name="ShowLocation" xml:space="preserve">
+    <value>Toon mijn locatie bij advertenties.</value>
+  </data>
+  <data name="OrderByPriceDesc" xml:space="preserve">
+    <value>Op prijs (aflopend)</value>
+  </data>
+  <data name="IsPublic" xml:space="preserve">
+    <value>Openbaar</value>
+  </data>
+  <data name="PaymentOptionPlaceholder" xml:space="preserve">
+    <value>Vaste prijs</value>
+  </data>
+  <data name="ShowInCircle" xml:space="preserve">
+    <value>In kring</value>
+  </data>
+  <data name="PaymentOptionAuction" xml:space="preserve">
+    <value>Doe een bod!</value>
+  </data>
+  <data name="PaymentOptionFree" xml:space="preserve">
+    <value>Gratis!</value>
+  </data>
+  <data name="AgeFrom" xml:space="preserve">
+    <value>Leeftijd vanaf</value>
+  </data>
+  <data name="AgeTo" xml:space="preserve">
+    <value>Leeftijd tot en met</value>
+  </data>
+  <data name="AllAgesActivity" xml:space="preserve">
+    <value>Deze activiteit is geschikt voor alle leeftijden</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Leeftijd</value>
+  </data>
+  <data name="AllAges" xml:space="preserve">
+    <value>Alle leeftijden</value>
+  </data>
+  <data name="FromAge" xml:space="preserve">
+    <value>Vanaf</value>
+  </data>
+  <data name="ToAge" xml:space="preserve">
+    <value>T/m</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Jaar</value>
+  </data>
+  <data name="Recurring" xml:space="preserve">
+    <value>Herhaling</value>
+  </data>
+  <data name="OrganizationServiceFullText" xml:space="preserve">
+    <value>Uitgebreide omschijving</value>
+  </data>
+  <data name="OrganizationServiceIntroductionText" xml:space="preserve">
+    <value>Introductietekst</value>
+  </data>
+  <data name="RecurringDay" xml:space="preserve">
+    <value>Elke dag (ma-zo)</value>
+  </data>
+  <data name="OrganizationServiceTitle" xml:space="preserve">
+    <value>Naam van je dienst</value>
+  </data>
+  <data name="RecurringMonth" xml:space="preserve">
+    <value>Elke maand</value>
+  </data>
+  <data name="RecurringNo" xml:space="preserve">
+    <value>Geen herhaling</value>
+  </data>
+  <data name="OrganizationProductFullText" xml:space="preserve">
+    <value>Uitgebreide omschijving</value>
+  </data>
+  <data name="OrganizationProductIntroductionText" xml:space="preserve">
+    <value>Introductietekst</value>
+  </data>
+  <data name="RecurringTwoWeek" xml:space="preserve">
+    <value>Elke twee weken</value>
+  </data>
+  <data name="RecurringWeek" xml:space="preserve">
+    <value>Elke week</value>
+  </data>
+  <data name="OrganizationProductTitle" xml:space="preserve">
+    <value>Naam van je product</value>
+  </data>
+  <data name="RecurringWorkDay" xml:space="preserve">
+    <value>Elke werkdag (ma-vr)</value>
+  </data>
+  <data name="LessReactions" xml:space="preserve">
+    <value>Toon minder reacties</value>
+  </data>
+  <data name="MoreReactions" xml:space="preserve">
+    <value>Meer reacties</value>
+  </data>
+  <data name="RecurringYear" xml:space="preserve">
+    <value>Elk jaar</value>
+  </data>
+  <data name="OpeningHours" xml:space="preserve">
+    <value>Openingstijden</value>
+  </data>
+  <data name="Town" xml:space="preserve">
+    <value>Gemeente</value>
+  </data>
+  <data name="EarlierReactions" xml:space="preserve">
+    <value>Toon eerdere reacties</value>
+  </data>
+  <data name="AcceptTerms" xml:space="preserve">
+    <value>Ik ga akkoord met de algemene voorwaarden</value>
+  </data>
+  <data name="AcceptTermsName" xml:space="preserve">
+    <value>Voorwaarden</value>
+  </data>
+  <data name="DefaultRequiredSuffix" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="MessageText" xml:space="preserve">
+    <value>Tekst</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Onderwerp</value>
+  </data>
+  <data name="RecurringEndsAt" xml:space="preserve">
+    <value>Herhalen tot</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Verwijder bericht</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Geboortedatum</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Geslacht</value>
+  </data>
+  <data name="AcceptTermsHref" xml:space="preserve">
+    <value>Ik ga akkoord met de &lt;a onclick="_paq.push(['trackEvent', 'Footer', 'TermsAndConditions']);" href="/page/termsandconditions"&gt;algemene voorwaarden&lt;/a&gt;</value>
+  </data>
+  <data name="RegisterEmail" xml:space="preserve">
+    <value>Wat is je e-mailadres?</value>
+  </data>
+  <data name="RegisterName" xml:space="preserve">
+    <value>Wat is je naam?</value>
+  </data>
+  <data name="RegisterPassword" xml:space="preserve">
+    <value>Verzin een wachtwoord</value>
+  </data>
+  <data name="JobCreateDescriptionInfo" xml:space="preserve">
+    <value>Je kunt maximaal 4000 karakters gebruiken in je omschrijving. Resterend: </value>
+  </data>
+  <data name="ChangeZuiderling" xml:space="preserve">
+    <value>Zuiderling koppelen</value>
+  </data>
+  <data name="ZuiderlingPassword" xml:space="preserve">
+    <value>Wachtwoord</value>
+  </data>
+  <data name="ZuiderlingAccount" xml:space="preserve">
+    <value>Account (mobiel nummer)</value>
+  </data>
+  <data name="PaymentCurrencyEuro" xml:space="preserve">
+    <value>Euro's</value>
+  </data>
+  <data name="PaymentCurrencyZuiderling" xml:space="preserve">
+    <value>Zuiderlingen</value>
+  </data>
+  <data name="SendCircleInvitationReminder" xml:space="preserve">
+    <value>Opnieuw uitnodigen</value>
+  </data>
+  <data name="PaymentOptionPrice" xml:space="preserve">
+    <value>Vaste prijs</value>
+  </data>
+  <data name="IntroductionImage" xml:space="preserve">
+    <value>Introductiefoto</value>
+  </data>
+  <data name="ShowlocationMarketplaceItem" xml:space="preserve">
+    <value>Toon mijn locatie bij deze advertentie</value>
+  </data>
+  <data name="InvitationExpired" xml:space="preserve">
+    <value>Uitnodiging verlopen</value>
+  </data>
+  <data name="Reaction" xml:space="preserve">
+    <value>Reactie</value>
+  </data>
+  <data name="Forum" xml:space="preserve">
+    <value>Forum</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="NameOfSquare" xml:space="preserve">
+    <value>Naam buurtplein</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Tekst</value>
+  </data>
+  <data name="ZipCode" xml:space="preserve">
+    <value>Postcode</value>
+  </data>
+  <data name="ZipCodes" xml:space="preserve">
+    <value>Postcodes</value>
+  </data>
+  <data name="PlacedBy" xml:space="preserve">
+    <value>Geplaatst door</value>
+  </data>
+  <data name="ReportedBy" xml:space="preserve">
+    <value>Gerapporteerd door</value>
+  </data>
+  <data name="Reported" xml:space="preserve">
+    <value>Gerapporteerd</value>
+  </data>
+  <data name="SubTitle" xml:space="preserve">
+    <value>Ondertitel</value>
+  </data>
+  <data name="InvitedToOrganization" xml:space="preserve">
+    <value>Uitgenodigd voor organisatie</value>
+  </data>
+  <data name="SendOrganizationInvitationReminder" xml:space="preserve">
+    <value>Opnieuw uitnodigen</value>
+  </data>
+  <data name="ActiveLast24Hours" xml:space="preserve">
+    <value>Actief afgelopen 24 uur</value>
+  </data>
+  <data name="ActiveLast7Days" xml:space="preserve">
+    <value>Actief afgelopen 7 dagen</value>
+  </data>
+  <data name="ActiveLastHour" xml:space="preserve">
+    <value>Actief afgelopen uur</value>
+  </data>
+  <data name="Association" xml:space="preserve">
+    <value>Vereniging</value>
+  </data>
+  <data name="AverageActivityAttendees" xml:space="preserve">
+    <value>Gemiddeld aantal deelnemers</value>
+  </data>
+  <data name="AverageNeighborhoodRadius" xml:space="preserve">
+    <value>Gemiddelde buurtstraal</value>
+  </data>
+  <data name="Collected" xml:space="preserve">
+    <value>Opgehaald</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>Verwijderd</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Bestanden</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Van</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Afbeeldingen</value>
+  </data>
+  <data name="InstructionVideos" xml:space="preserve">
+    <value>Instructievideo's</value>
+  </data>
+  <data name="LastEdited" xml:space="preserve">
+    <value>Laatst bewerkt</value>
+  </data>
+  <data name="LastMessage" xml:space="preserve">
+    <value>Laatste bericht</value>
+  </data>
+  <data name="MainImage" xml:space="preserve">
+    <value>Afbeelding 1 &lt;small&gt;Hoofdafbeelding&lt;/small&gt;</value>
+  </data>
+  <data name="Members" xml:space="preserve">
+    <value>Leden</value>
+  </data>
+  <data name="MessageReplied" xml:space="preserve">
+    <value>RE: </value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Berichten</value>
+  </data>
+  <data name="Meter" xml:space="preserve">
+    <value>Meter</value>
+  </data>
+  <data name="MeterAway" xml:space="preserve">
+    <value>{0} meter bij jou vandaan</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Geen</value>
+  </data>
+  <data name="OnAverage" xml:space="preserve">
+    <value>Gemiddeld</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Foto's</value>
+  </data>
+  <data name="Professional" xml:space="preserve">
+    <value>Professional</value>
+  </data>
+  <data name="Receivers" xml:space="preserve">
+    <value>Ontvangers</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>Ingediend op</value>
+  </data>
+  <data name="RotatePhoto" xml:space="preserve">
+    <value>Niet tevreden? Je kunt je foto &lt;a href="{0}" style="text-decoration: underline"&gt;roteren&lt;/a&gt;.</value>
+  </data>
+  <data name="Subjects" xml:space="preserve">
+    <value>Onderwerpen</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Taken</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Naar</value>
+  </data>
+  <data name="Toggle" xml:space="preserve">
+    <value>Toggle</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Totaal</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Gebruikers</value>
+  </data>
+  <data name="Volunteer" xml:space="preserve">
+    <value>Vrijwilligersorganisatie</value>
+  </data>
+  <data name="ZuiderlingAmount" xml:space="preserve">
+    <value>Je hebt op dit moment {0} Zuiderlingen te besteden.</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Onderwerp gesprek</value>
+  </data>
+  <data name="IAmSearchingfor" xml:space="preserve">
+    <value>Ik ben op zoek naar (een)</value>
+  </data>
+  <data name="IRequireHelpWith" xml:space="preserve">
+    <value>Ik heb hulp nodig met (een)</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Deelnemers</value>
+  </data>
+  <data name="EarlierEmails" xml:space="preserve">
+    <value>Toon eerdere berichten</value>
+  </data>
+  <data name="LessEmails" xml:space="preserve">
+    <value>Toon minder berichten</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Dag</value>
+  </data>
+  <data name="DayAgo" xml:space="preserve">
+    <value>{0} dag geleden</value>
+  </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>{0} dagen geleden</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Vrouw</value>
+  </data>
+  <data name="HasNoDueDate" xml:space="preserve">
+    <value>Tijd maakt niet uit</value>
+  </data>
+  <data name="HourAgo" xml:space="preserve">
+    <value>{0} uur geleden</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>{0} uren geleden</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Man</value>
+  </data>
+  <data name="MinuteAgo" xml:space="preserve">
+    <value>{0} minuut geleden</value>
+  </data>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>{0} minuten geleden</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Maand</value>
+  </data>
+  <data name="MonthAgo" xml:space="preserve">
+    <value>{0} maand geleden</value>
+  </data>
+  <data name="MonthsAgo" xml:space="preserve">
+    <value>{0} maanden geleden</value>
+  </data>
+  <data name="MovieTip" xml:space="preserve">
+    <value>Tip: je kunt hier ook leuke filmpjes uploaden!</value>
+  </data>
+  <data name="NoStartTime" xml:space="preserve">
+    <value>Tijd maakt niet uit</value>
+  </data>
+  <data name="SecondAgo" xml:space="preserve">
+    <value>{0} seconde geleden</value>
+  </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>{0} seconden geleden</value>
+  </data>
+  <data name="YearAgo" xml:space="preserve">
+    <value>{0} jaar geleden</value>
+  </data>
+  <data name="YearsAgo" xml:space="preserve">
+    <value>{0} jaren geleden</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="PriceType" xml:space="preserve">
+    <value>Prijstype</value>
+  </data>
+  <data name="ReceiveMailOff" xml:space="preserve">
+    <value>Notificaties uit</value>
+  </data>
+  <data name="ReceiveMailOn" xml:space="preserve">
+    <value>Notificaties aan</value>
+  </data>
+  <data name="Emails" xml:space="preserve">
+    <value>E-mailadressen</value>
+  </data>
+  <data name="CircleProfile" xml:space="preserve">
+    <value>Schrijf hier iets over jezelf. Wie ben je? Wat doe je? Wat vind je leuk?</value>
+  </data>
+  <data name="IntroductionTextNeighborhoodMessage" xml:space="preserve">
+    <value>Introductietekst (max. 250 tekens)</value>
+  </data>
+  <data name="TitleNeighborhoodMessage" xml:space="preserve">
+    <value>Titel (max. 70 tekens)</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Activiteiten</value>
+  </data>
+  <data name="DisplayAs" xml:space="preserve">
+    <value>Toon als</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Lijst</value>
+  </data>
+  <data name="SortBy" xml:space="preserve">
+    <value>Sorteer op</value>
+  </data>
+  <data name="Tiles" xml:space="preserve">
+    <value>Tegels</value>
+  </data>
+  <data name="ReceivesNewMarketplaceItemMail" xml:space="preserve">
+    <value>Ontvang een bericht bij een nieuw leen of hulp verzoek</value>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Verloopdatum</value>
+  </data>
+  <data name="ChangeNotifications" xml:space="preserve">
+    <value>Notificatie instellingen</value>
+  </data>
+</root>

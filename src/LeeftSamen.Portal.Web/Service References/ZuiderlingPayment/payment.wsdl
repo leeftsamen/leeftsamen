@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://payments.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="payment" targetNamespace="http://payments.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://payments.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="chargeback" type="tns:chargeback" />
+      <xs:element name="chargebackResponse" type="tns:chargebackResponse" />
+      <xs:element name="confirmPayment" type="tns:confirmPayment" />
+      <xs:element name="confirmPaymentResponse" type="tns:confirmPaymentResponse" />
+      <xs:element name="doBulkChargeback" type="tns:doBulkChargeback" />
+      <xs:element name="doBulkChargebackResponse" type="tns:doBulkChargebackResponse" />
+      <xs:element name="doBulkPayment" type="tns:doBulkPayment" />
+      <xs:element name="doBulkPaymentResponse" type="tns:doBulkPaymentResponse" />
+      <xs:element name="doBulkReverse" type="tns:doBulkReverse" />
+      <xs:element name="doBulkReverseResponse" type="tns:doBulkReverseResponse" />
+      <xs:element name="doPayment" type="tns:doPayment" />
+      <xs:element name="doPaymentResponse" type="tns:doPaymentResponse" />
+      <xs:element name="expireTicket" type="tns:expireTicket" />
+      <xs:element name="expireTicketResponse" type="tns:expireTicketResponse" />
+      <xs:element name="requestPaymentConfirmation" type="tns:requestPaymentConfirmation" />
+      <xs:element name="requestPaymentConfirmationResponse" type="tns:requestPaymentConfirmationResponse" />
+      <xs:element name="reverse" type="tns:reverse" />
+      <xs:element name="reverseResponse" type="tns:reverseResponse" />
+      <xs:element name="simulatePayment" type="tns:simulatePayment" />
+      <xs:element name="simulatePaymentResponse" type="tns:simulatePaymentResponse" />
+      <xs:complexType name="confirmPayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:confirmPaymentParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="confirmPaymentParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ticket" type="xs:string" />
+          <xs:element minOccurs="0" name="credentials" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="confirmPaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:paymentResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="paymentResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="status" type="tns:paymentStatus" />
+          <xs:element minOccurs="0" name="transfer" type="tns:transfer" />
+          <xs:element minOccurs="0" name="fromAccountStatus" type="tns:accountStatus" />
+          <xs:element minOccurs="0" name="toAccountStatus" type="tns:accountStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transfer">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:basePaymentVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="transactionNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="traceNumber" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="basePaymentVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:basePaymentDataVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="transferType" type="tns:transferType" />
+              <xs:element minOccurs="0" name="description" type="xs:string" />
+              <xs:element minOccurs="0" name="fromMember" type="tns:member" />
+              <xs:element minOccurs="0" name="member" type="tns:member" />
+              <xs:element minOccurs="0" name="fromSystemAccountName" type="xs:string" />
+              <xs:element minOccurs="0" name="systemAccountName" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:fieldValue" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="basePaymentDataVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="formattedDate" type="xs:string" />
+              <xs:element minOccurs="0" name="processDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="formattedProcessDate" type="xs:string" />
+              <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+              <xs:element minOccurs="0" name="formattedAmount" type="xs:string" />
+              <xs:element minOccurs="0" name="status" type="tns:paymentStatusVO" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="entityVO" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transferType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="from" type="tns:accountType" />
+              <xs:element minOccurs="0" name="to" type="tns:accountType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="accountType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="currency" type="tns:currency" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="currency">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="symbol" type="xs:string" />
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="pattern" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="member">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityWithCustomFieldsVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="username" type="xs:string" />
+              <xs:element minOccurs="0" name="email" type="xs:string" />
+              <xs:element minOccurs="0" name="groupId" type="xs:long" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="images" nillable="true" type="tns:image" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="entityWithCustomFieldsVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:fieldValue" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="image">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="caption" type="xs:string" />
+              <xs:element minOccurs="0" name="thumbnailUrl" type="xs:string" />
+              <xs:element minOccurs="0" name="fullUrl" type="xs:string" />
+              <xs:element minOccurs="0" name="lastModified" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="fieldValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="internalName" type="xs:string" />
+          <xs:element minOccurs="0" name="fieldId" type="xs:long" />
+          <xs:element minOccurs="0" name="displayName" type="xs:string" />
+          <xs:element minOccurs="0" name="value" type="xs:string" />
+          <xs:element minOccurs="0" name="possibleValueId" type="xs:long" />
+          <xs:element minOccurs="0" name="memberValueId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accountStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="balance" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedBalance" type="xs:string" />
+          <xs:element minOccurs="0" name="availableBalance" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedAvailableBalance" type="xs:string" />
+          <xs:element minOccurs="0" name="reservedAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedReservedAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="creditLimit" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedCreditLimit" type="xs:string" />
+          <xs:element minOccurs="0" name="upperCreditLimit" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedUpperCreditLimit" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="requestPaymentConfirmation">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:requestPaymentParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="requestPaymentParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:abstractPaymentParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="destinationChannel" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="abstractPaymentParameters" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fromMemberPrincipalType" type="xs:string" />
+          <xs:element minOccurs="0" name="fromMember" type="xs:string" />
+          <xs:element minOccurs="0" name="toMemberPrincipalType" type="xs:string" />
+          <xs:element minOccurs="0" name="toMember" type="xs:string" />
+          <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="description" type="xs:string" />
+          <xs:element minOccurs="0" name="currency" type="xs:string" />
+          <xs:element minOccurs="0" name="traceNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="traceData" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="requestPaymentConfirmationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:requestPaymentResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="requestPaymentResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="status" type="tns:paymentRequestStatus" />
+          <xs:element minOccurs="0" name="ticket" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doPayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:paymentParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="paymentParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:abstractPaymentParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="transferTypeId" type="xs:long" />
+              <xs:element minOccurs="0" name="fromSystem" type="xs:boolean" />
+              <xs:element minOccurs="0" name="toSystem" type="xs:boolean" />
+              <xs:element minOccurs="0" name="credentials" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="customValues" nillable="true" type="tns:fieldValue" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fromMemberFieldsToReturn" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="toMemberFieldsToReturn" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" name="returnStatus" type="xs:boolean" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="doPaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:paymentResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkReverse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="traceNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkReverseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:chargebackResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="chargebackResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="status" type="tns:chargebackStatus" />
+          <xs:element minOccurs="0" name="originalTransfer" type="tns:transfer" />
+          <xs:element minOccurs="0" name="chargebackTransfer" type="tns:transfer" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="expireTicket">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ticket" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="expireTicketResponse">
+        <xs:sequence>
+          <xs:element name="return" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkChargeback">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="transferId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkChargebackResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:chargebackResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="simulatePayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:paymentParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="simulatePaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:paymentStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="reverse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="traceNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="reverseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:chargebackResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="chargeback">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="transferId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="chargebackResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:chargebackResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkPayment">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="params" type="tns:paymentParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doBulkPaymentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:paymentResult" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="paymentStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PROCESSED" />
+          <xs:enumeration value="PENDING_AUTHORIZATION" />
+          <xs:enumeration value="INVALID_CREDENTIALS" />
+          <xs:enumeration value="BLOCKED_CREDENTIALS" />
+          <xs:enumeration value="INVALID_CHANNEL" />
+          <xs:enumeration value="INVALID_PARAMETERS" />
+          <xs:enumeration value="FROM_NOT_FOUND" />
+          <xs:enumeration value="TO_NOT_FOUND" />
+          <xs:enumeration value="NOT_ENOUGH_CREDITS" />
+          <xs:enumeration value="MAX_DAILY_AMOUNT_EXCEEDED" />
+          <xs:enumeration value="RECEIVER_UPPER_CREDIT_LIMIT_REACHED" />
+          <xs:enumeration value="NOT_PERFORMED" />
+          <xs:enumeration value="UNKNOWN_ERROR" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="paymentStatusVO">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PENDING" />
+          <xs:enumeration value="PROCESSED" />
+          <xs:enumeration value="DENIED" />
+          <xs:enumeration value="CANCELED" />
+          <xs:enumeration value="SCHEDULED" />
+          <xs:enumeration value="FAILED" />
+          <xs:enumeration value="BLOCKED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="paymentRequestStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="REQUEST_RECEIVED" />
+          <xs:enumeration value="FROM_INVALID_CHANNEL" />
+          <xs:enumeration value="TO_INVALID_CHANNEL" />
+          <xs:enumeration value="INVALID_PARAMETERS" />
+          <xs:enumeration value="FROM_NOT_FOUND" />
+          <xs:enumeration value="TO_NOT_FOUND" />
+          <xs:enumeration value="NOT_ENOUGH_CREDITS" />
+          <xs:enumeration value="MAX_DAILY_AMOUNT_EXCEEDED" />
+          <xs:enumeration value="RECEIVER_UPPER_CREDIT_LIMIT_REACHED" />
+          <xs:enumeration value="UNKNOWN_ERROR" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="chargebackStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SUCCESS" />
+          <xs:enumeration value="TRANSFER_NOT_FOUND" />
+          <xs:enumeration value="TRANSFER_ALREADY_CHARGEDBACK" />
+          <xs:enumeration value="INVALID_PARAMETERS" />
+          <xs:enumeration value="TRANSFER_CANNOT_BE_CHARGEDBACK" />
+          <xs:enumeration value="NOT_PERFORMED" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="doBulkChargebackResponse">
+    <wsdl:part name="parameters" element="tns:doBulkChargebackResponse" />
+  </wsdl:message>
+  <wsdl:message name="doBulkReverseResponse">
+    <wsdl:part name="parameters" element="tns:doBulkReverseResponse" />
+  </wsdl:message>
+  <wsdl:message name="doBulkChargeback">
+    <wsdl:part name="parameters" element="tns:doBulkChargeback" />
+  </wsdl:message>
+  <wsdl:message name="requestPaymentConfirmation">
+    <wsdl:part name="parameters" element="tns:requestPaymentConfirmation" />
+  </wsdl:message>
+  <wsdl:message name="reverseResponse">
+    <wsdl:part name="parameters" element="tns:reverseResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmPaymentResponse">
+    <wsdl:part name="parameters" element="tns:confirmPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="doBulkPaymentResponse">
+    <wsdl:part name="parameters" element="tns:doBulkPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="doPayment">
+    <wsdl:part name="parameters" element="tns:doPayment" />
+  </wsdl:message>
+  <wsdl:message name="chargeback">
+    <wsdl:part name="parameters" element="tns:chargeback" />
+  </wsdl:message>
+  <wsdl:message name="doPaymentResponse">
+    <wsdl:part name="parameters" element="tns:doPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="doBulkReverse">
+    <wsdl:part name="parameters" element="tns:doBulkReverse" />
+  </wsdl:message>
+  <wsdl:message name="reverse">
+    <wsdl:part name="parameters" element="tns:reverse" />
+  </wsdl:message>
+  <wsdl:message name="simulatePayment">
+    <wsdl:part name="parameters" element="tns:simulatePayment" />
+  </wsdl:message>
+  <wsdl:message name="confirmPayment">
+    <wsdl:part name="parameters" element="tns:confirmPayment" />
+  </wsdl:message>
+  <wsdl:message name="simulatePaymentResponse">
+    <wsdl:part name="parameters" element="tns:simulatePaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="requestPaymentConfirmationResponse">
+    <wsdl:part name="parameters" element="tns:requestPaymentConfirmationResponse" />
+  </wsdl:message>
+  <wsdl:message name="expireTicket">
+    <wsdl:part name="parameters" element="tns:expireTicket" />
+  </wsdl:message>
+  <wsdl:message name="doBulkPayment">
+    <wsdl:part name="parameters" element="tns:doBulkPayment" />
+  </wsdl:message>
+  <wsdl:message name="expireTicketResponse">
+    <wsdl:part name="parameters" element="tns:expireTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="chargebackResponse">
+    <wsdl:part name="parameters" element="tns:chargebackResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PaymentWebService">
+    <wsdl:operation name="confirmPayment">
+      <wsdl:input name="confirmPayment" message="tns:confirmPayment" />
+      <wsdl:output name="confirmPaymentResponse" message="tns:confirmPaymentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="requestPaymentConfirmation">
+      <wsdl:input name="requestPaymentConfirmation" message="tns:requestPaymentConfirmation" />
+      <wsdl:output name="requestPaymentConfirmationResponse" message="tns:requestPaymentConfirmationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doPayment">
+      <wsdl:input name="doPayment" message="tns:doPayment" />
+      <wsdl:output name="doPaymentResponse" message="tns:doPaymentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doBulkReverse">
+      <wsdl:input name="doBulkReverse" message="tns:doBulkReverse" />
+      <wsdl:output name="doBulkReverseResponse" message="tns:doBulkReverseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="expireTicket">
+      <wsdl:input name="expireTicket" message="tns:expireTicket" />
+      <wsdl:output name="expireTicketResponse" message="tns:expireTicketResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doBulkChargeback">
+      <wsdl:input name="doBulkChargeback" message="tns:doBulkChargeback" />
+      <wsdl:output name="doBulkChargebackResponse" message="tns:doBulkChargebackResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="simulatePayment">
+      <wsdl:input name="simulatePayment" message="tns:simulatePayment" />
+      <wsdl:output name="simulatePaymentResponse" message="tns:simulatePaymentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="reverse">
+      <wsdl:input name="reverse" message="tns:reverse" />
+      <wsdl:output name="reverseResponse" message="tns:reverseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="chargeback">
+      <wsdl:input name="chargeback" message="tns:chargeback" />
+      <wsdl:output name="chargebackResponse" message="tns:chargebackResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="doBulkPayment">
+      <wsdl:input name="doBulkPayment" message="tns:doBulkPayment" />
+      <wsdl:output name="doBulkPaymentResponse" message="tns:doBulkPaymentResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="paymentSoapBinding" type="tns:PaymentWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="confirmPayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="confirmPayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="confirmPaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doPayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="doPayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="doPaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="requestPaymentConfirmation">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="requestPaymentConfirmation">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="requestPaymentConfirmationResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkReverse">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="doBulkReverse">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="doBulkReverseResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="expireTicket">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="expireTicket">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="expireTicketResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkChargeback">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="doBulkChargeback">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="doBulkChargebackResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="chargeback">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="chargeback">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="chargebackResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reverse">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="reverse">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="reverseResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="simulatePayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="simulatePayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="simulatePaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doBulkPayment">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="doBulkPayment">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="doBulkPaymentResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="payment">
+    <wsdl:port name="paymentPort" binding="tns:paymentSoapBinding">
+      <soap:address location="https://zuiderling-stage.tradeqoin.com/cc2/services/payment" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

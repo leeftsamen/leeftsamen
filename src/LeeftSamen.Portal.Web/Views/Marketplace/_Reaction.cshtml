@@ -1,0 +1,25 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Data.Models.MarketplaceItemReaction
+<article id="reaction-@Model.ReactionId">
+    <header>
+        <h4>
+            @if (Model.OrganizationMembershipId.HasValue)
+            {
+                @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.OrganizationMembership.Organization.Name))
+            }
+            else
+            {
+                @Html.Partial("_UserProfileImage", new UserProfileImage(@Model.Creator.ProfileImageId, @Model.Creator.Id, "profile-image-sm"))
+                @Model.Creator.Name
+            }
+        </h4>
+        <small>
+            <time datetime="@Model.CreationDateTime.ToString("s")"
+                  title="@Model.CreationDateTime.ToString("f")">
+                @Model.CreationDateTime.ToTimeAgoString()
+            </time>
+        </small>
+    </header>
+    <p>@Model.Text</p>
+</article>

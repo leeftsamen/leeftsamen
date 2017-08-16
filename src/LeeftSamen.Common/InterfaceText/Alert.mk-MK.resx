@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionExpired" xml:space="preserve">
+    <value>За жал, оваа акција е завршена</value>
+  </data>
+  <data name="ActivitiesCreated" xml:space="preserve">
+    <value>{0}' активности ставени</value>
+  </data>
+  <data name="ActivityAttending" xml:space="preserve">
+    <value>Сега си пријавен за активноста '{0}'.</value>
+  </data>
+  <data name="ActivityCreated" xml:space="preserve">
+    <value>Активирањето е направено </value>
+  </data>
+  <data name="ActivityInvitationExpired" xml:space="preserve">
+    <value>Поканата за оваа активност е измината</value>
+  </data>
+  <data name="ActivityNotAttending" xml:space="preserve">
+    <value>Сега си одјавен за активноста '{0}'.</value>
+  </data>
+  <data name="AddZipCodeSuccess" xml:space="preserve">
+    <value>Поштенскиот код е успешно внесен </value>
+  </data>
+  <data name="AskToJoinCircleSuccess" xml:space="preserve">
+    <value>Твоето барање да станеш дел од кругот e пратено на администраторите. Тие одлучуваат дали ке станеш член на кругот.</value>
+  </data>
+  <data name="CantCreatePhotoAlbum" xml:space="preserve">
+    <value>Фотоалбумот не може да биде направен</value>
+  </data>
+  <data name="ChangeEmailSettingsSuccess" xml:space="preserve">
+    <value>Вашите е- маил податоци се сменети</value>
+  </data>
+  <data name="ChangeForumSuccess" xml:space="preserve">
+    <value>Податоците за форум се сменети</value>
+  </data>
+  <data name="ChangeNameSuccess" xml:space="preserve">
+    <value>Вашето име  е сменето</value>
+  </data>
+  <data name="ChangeNeighborhoodSuccess" xml:space="preserve">
+    <value>Вашата населбата е сменета</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>Вашата лозинка е сменета</value>
+  </data>
+  <data name="ChangeProfilePictureSuccess" xml:space="preserve">
+    <value>Вашата профил фотографија е сменета</value>
+  </data>
+  <data name="ChangeUsernameSuccess" xml:space="preserve">
+    <value>Вашата е-маил адреса е сменета</value>
+  </data>
+  <data name="CircleCreated" xml:space="preserve">
+    <value>Кругот е направен</value>
+  </data>
+  <data name="CircleMessageCreated" xml:space="preserve">
+    <value>Вашата пораката е пратена</value>
+  </data>
+  <data name="CircleMessageDeleted" xml:space="preserve">
+    <value>Пораката е избришана</value>
+  </data>
+  <data name="CircleMessageEdited" xml:space="preserve">
+    <value>Вашата пораката е успешно сменета</value>
+  </data>
+  <data name="CircleMessageEditEmpy" xml:space="preserve">
+    <value>Пораката мора да е најмалку 1 карактер долга</value>
+  </data>
+  <data name="CircleMessageEditTimeExpired" xml:space="preserve">
+    <value>Поминаа преку 10 минути. Пораката не можете да ја смените.</value>
+  </data>
+  <data name="CircleMessageReactionCreated" xml:space="preserve">
+    <value>Вашата реакција е пратена</value>
+  </data>
+  <data name="CirclePhotoAlbumCreated" xml:space="preserve">
+    <value>Фотоалбумот {0} е ставен</value>
+  </data>
+  <data name="CirclePhotoAlbumRemoved" xml:space="preserve">
+    <value>Фотоалбумот {0} е избришан</value>
+  </data>
+  <data name="CirclePhotoRemoved" xml:space="preserve">
+    <value>Сликата ја избришавте</value>
+  </data>
+  <data name="CirclePhotoUploaded" xml:space="preserve">
+    <value>Сликата ви е ставена</value>
+  </data>
+  <data name="CircleUserAdminGiven" xml:space="preserve">
+    <value>{0} има сега администраторски права за кругот.</value>
+  </data>
+  <data name="CircleUserAdminRevoked" xml:space="preserve">
+    <value>Администраторските права за кругот на {0} се повлечени</value>
+  </data>
+  <data name="DeclinedCircleRequest" xml:space="preserve">
+    <value>Поканата ја одбивте</value>
+  </data>
+  <data name="DeselectOrganizationSuccess" xml:space="preserve">
+    <value>Сега ставате пораки со вашиот профил</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Вашата е-маил адреса е потврдена</value>
+  </data>
+  <data name="IncorrectFileType" xml:space="preserve">
+    <value>Неточен формат на фајл</value>
+  </data>
+  <data name="InvitationRejected" xml:space="preserve">
+    <value>Поканата од кругот '{0}' ја негиравте</value>
+  </data>
+  <data name="JobAssignedToCurrentUser" xml:space="preserve">
+    <value>Оваа задача  на вас ви е дадена </value>
+  </data>
+  <data name="JobCreated" xml:space="preserve">
+    <value>Задачата е направена</value>
+  </data>
+  <data name="JobEdited" xml:space="preserve">
+    <value>Вашата задача е прилагодена</value>
+  </data>
+  <data name="JobRemoved" xml:space="preserve">
+    <value>Задачата е избришана</value>
+  </data>
+  <data name="JoinRequestAccepted" xml:space="preserve">
+    <value>Вашето барање е прифатено</value>
+  </data>
+  <data name="JoinRequestRejected" xml:space="preserve">
+    <value>Вашето барање е одбиено</value>
+  </data>
+  <data name="LeaveCircleSuccess" xml:space="preserve">
+    <value>Го напуштивте кругот</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Сега сте пријавени</value>
+  </data>
+  <data name="MessageRemovedFromInbox" xml:space="preserve">
+    <value>Пораката е избришана од Избришани пораки</value>
+  </data>
+  <data name="MessageRemovedFromSend" xml:space="preserve">
+    <value>Пораката е избришана од Пратени пораки</value>
+  </data>
+  <data name="MessageSendSuccess" xml:space="preserve">
+    <value>Пораката е пратена</value>
+  </data>
+  <data name="NeighborhoodMessageReactionCreated" xml:space="preserve">
+    <value>Реакцијата е пратена</value>
+  </data>
+  <data name="OrganizationEditSuccess" xml:space="preserve">
+    <value>Податоците на организацијата се сменети</value>
+  </data>
+  <data name="OrganizationRequestSuccess" xml:space="preserve">
+    <value>Барањето пратено. Еден од администраторите од ЖивеемеЗаедно ќе го процесира вашето барање што е возможно поскоро.</value>
+  </data>
+  <data name="OrganizationUserAdminGiven" xml:space="preserve">
+    <value>{0} има сега администраторски права за организацијата</value>
+  </data>
+  <data name="OrganizationUserAdminRevoked" xml:space="preserve">
+    <value>Администраторските права за организацијата на {0} се повлечени</value>
+  </data>
+  <data name="RemoveAccountSuccess" xml:space="preserve">
+    <value>Барањето пратено. Еден од администраторите од ЖивеемеЗаедно ќе го процесира вашето барање што е возможно поскоро.</value>
+  </data>
+  <data name="RemoveAdminFromSquareSuccess" xml:space="preserve">
+    <value>Администраторот е избришан од соседството</value>
+  </data>
+  <data name="RemoveCircleSuccess" xml:space="preserve">
+    <value>Кругот е избришан</value>
+  </data>
+  <data name="RemoveFactSuccess" xml:space="preserve">
+    <value>Фактот е сменет</value>
+  </data>
+  <data name="RemoveMemberFromCircleSuccess" xml:space="preserve">
+    <value>Членот на кругот е избришан од кругот</value>
+  </data>
+  <data name="RemoveMemberFromOrganizationSuccess" xml:space="preserve">
+    <value>Соработникот е избришан)</value>
+  </data>
+  <data name="RemoveReactionReportSuccess" xml:space="preserve">
+    <value>Пријавената реакција е негирана</value>
+  </data>
+  <data name="RemoveReactionSuccess" xml:space="preserve">
+    <value>Реакцијата е избришана</value>
+  </data>
+  <data name="RemoveSubjectSuccess" xml:space="preserve">
+    <value>Предметот е избришан</value>
+  </data>
+  <data name="RemoveZipCodeSuccess" xml:space="preserve">
+    <value>Поштенскиот код е избришан</value>
+  </data>
+  <data name="ReportAbuseReported" xml:space="preserve">
+    <value>Вашето пријавување на злоупотреба е испратено.</value>
+  </data>
+  <data name="ReportReactionSuccess" xml:space="preserve">
+    <value>Реакцијата е пријавена</value>
+  </data>
+  <data name="ResetPasswordSuccess" xml:space="preserve">
+    <value>Вашата лозинка е сменета</value>
+  </data>
+  <data name="SelectOrganizationSuccess" xml:space="preserve">
+    <value>Ставате пораки како соработник на '{0}'</value>
+  </data>
+  <data name="SetCirclePrivateSuccess" xml:space="preserve">
+    <value>Кругот е сега приватен</value>
+  </data>
+  <data name="SetCirclePublicSuccess" xml:space="preserve">
+    <value>Кругот е сега јавен </value>
+  </data>
+  <data name="SuggestionSend" xml:space="preserve">
+    <value>Вашата сугестија е пратена на ЖивеемеЗаедно- тимот. Благодариме!</value>
+  </data>
+  <data name="UserInvitedForActivity" xml:space="preserve">
+    <value>Имате {0} поканети да учествуваат во вашата активност. {0} ќе добијат е- маил со вашата покана</value>
+  </data>
+  <data name="UserIsInvitedForTheActivityByEmail" xml:space="preserve">
+    <value>Имате {0} поканети да учествуваат во вашата активност. {0} ќе добијат е- маил со вашата покана</value>
+  </data>
+  <data name="UserIsInvitedForTheCircle" xml:space="preserve">
+    <value>Имате {0} успешно поканети да станат член на вашиот круг. {0} ке добијат е- маил со вашата покана</value>
+  </data>
+  <data name="UserIsInvitedForTheOrganization" xml:space="preserve">
+    <value>Имате {0} успешно поканети да станат член на вашата организација. {0} ке добијат е- маил со вашата покана</value>
+  </data>
+  <data name="UserIsInvitedForTheSquare" xml:space="preserve">
+    <value>Имаш {0}  успешно ставено како администратор на ова соседство</value>
+  </data>
+  <data name="UsersInvitedByEmailFailed" xml:space="preserve">
+    <value>Испраќањето на поканите не успеа, обидете се подоцна</value>
+  </data>
+  <data name="UsersInvitedByOrganizationUserFailed" xml:space="preserve">
+    <value>Како соработник неможeш да поканиш лица за оваа активност </value>
+  </data>
+  <data name="UsersInvitedForTheCircleByEmail" xml:space="preserve">
+    <value>Имате {0} успешно поканети да станат член на вашиот круг. {0} ке добијат е- маил со вашата покана</value>
+  </data>
+  <data name="UsersInvitedForTheOrganizationByEmail" xml:space="preserve">
+    <value>Имате {0} успешно поканети да станат член на вашата организација. {0} ке добијат е- маил со вашата покана</value>
+  </data>
+  <data name="VoteActionFailure" xml:space="preserve">
+    <value>Вашиот глас неможеше да биде изработен</value>
+  </data>
+  <data name="VoteActionSuccess" xml:space="preserve">
+    <value>Ви благодариме за вашиот глас</value>
+  </data>
+  <data name="YouAreNowACircleMember" xml:space="preserve">
+    <value>Сега сте член на кругот '{0}'</value>
+  </data>
+  <data name="YouAreNowAOrganizationMember" xml:space="preserve">
+    <value>Сега сте член на организацијата '{0}'</value>
+  </data>
+  <data name="ZuiderlingAccountLinked" xml:space="preserve">
+    <value>Вашата … сметка е вклучена</value>
+  </data>
+  <data name="ZuiderlingTransactionDailyLimit" xml:space="preserve">
+    <value>Оваа трансакција го преминува вашиот дневен лимит на сметката </value>
+  </data>
+  <data name="ZuiderlingTransactionError" xml:space="preserve">
+    <value>Се случи грешка во трансакција</value>
+  </data>
+  <data name="ZuiderlingTransactionReceiverLimit" xml:space="preserve">
+    <value>Приемникот не можe да прими волку  јужњaци</value>
+  </data>
+  <data name="ZuiderlingTransactionShortage" xml:space="preserve">
+    <value>Вашата сметка нема доволно јужнаци за оваа трансакција</value>
+  </data>
+  <data name="ZuiderlingTransactionSuccess" xml:space="preserve">
+    <value>Јужнаците се препишани</value>
+  </data>
+  <data name="CircleDocsUploaded" xml:space="preserve">
+    <value>Документите {0} се поставени.</value>
+  </data>
+  <data name="CircleDocumentRemoved" xml:space="preserve">
+    <value>Вашиот документ е избришан</value>
+  </data>
+  <data name="CircleDocUploaded" xml:space="preserve">
+    <value>Вашиот документ е поставен. </value>
+  </data>
+  <data name="CircleEmailGroupRemoved" xml:space="preserve">
+    <value>Избришани сте од разговорот</value>
+  </data>
+  <data name="CirclePhotosUploaded" xml:space="preserve">
+    <value>{0} фотографијата е ставена.</value>
+  </data>
+  <data name="JobAssignedToOtherUser" xml:space="preserve">
+    <value>Добро е што сакате да помогнете, меѓутоа некој друг веќе ја има преземено оваа задача.</value>
+  </data>
+  <data name="JobUnassigned" xml:space="preserve">
+    <value>Задачата е повторно достапна.</value>
+  </data>
+  <data name="MessageGroupCreatedSuccess" xml:space="preserve">
+    <value>Групата е креирана</value>
+  </data>
+  <data name="CircleUserEmailStarted" xml:space="preserve">
+    <value>Сѐ уште добиваш пораки од овој круг</value>
+  </data>
+  <data name="CircleUserEmailStopped" xml:space="preserve">
+    <value>Не добиваш повеќе пораки од овој круг</value>
+  </data>
+  <data name="UsersInvitedforWebsite" xml:space="preserve">
+    <value>Поканата е успешно пратена</value>
+  </data>
+</root>

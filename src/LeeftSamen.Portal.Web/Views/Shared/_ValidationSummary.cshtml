@@ -1,0 +1,20 @@
+﻿@using LeeftSamen.Common.InterfaceText
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @if (ViewData.ModelState.Values.SelectMany(x => x.Errors).Count() == 1)
+        {
+            <h4>@Title.SummaryError</h4>
+        }
+        else if (ViewData.ModelState.Values.SelectMany(x => x.Errors).Count() > 1)
+        {
+            <h4>@Title.SummaryErrors</h4>
+        }
+        <p>
+            @Html.ValidationSummary()
+        </p>
+
+    </div>
+}

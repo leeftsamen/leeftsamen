@@ -1,0 +1,29 @@
+﻿@using LeeftSamen.Portal.Web.Models;
+@model IEnumerable<LeeftSamen.Portal.Data.Models.HelpIcon>
+
+<div class="page-buttons">
+    <div class="menu-background"></div>
+    <div class="bottom-display">
+        <div class="open-menu">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+    <div class="buttons">
+        @if (Model.Any(h => h.Type == "marketplace-create"))
+        {
+            var helpIcon = Model.First(h => h.Type == "marketplace-create");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-create", HelpText = helpIcon.Text });
+        }
+        <a class="btn btn-primary btn-small" href="@Url.Action("CreateItem")">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            @Button.CreateMarketplaceItem
+        </a>
+        @*<a class="btn btn-default btn-small" href="@Url.Action("MyMarketplace")">@Button.MyMarketplace</a>
+        @if (Model.Any(h => h.Type == "marketplace-ads"))
+        {
+            var helpIcon = Model.First(h => h.Type == "marketplace-ads");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-ads", HelpText = helpIcon.Text });
+        }*@
+    </div>
+</div>
+<div class="clear margin-bottom-10-px"></div>

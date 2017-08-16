@@ -1,0 +1,16 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.CircleEmailMessageModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, Model.ReceiverName)</p>
+<p style="margin-top:0;margin-bottom:16px">@string.Format("{0} heeft je een bericht gestuurd in de kring '{1}'", Model.InvitedByName, Model.CircleName)</p>
+<p style="margin-top:0;margin-bottom:48px;text-align:center">
+    <a href="@Model.UrlToGoToWebsite" style="font-size:24px">Ga naar postvak</a>
+</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    U ontvangt dit bericht omdat u een bericht heeft ontvangen in een cirkel
+}

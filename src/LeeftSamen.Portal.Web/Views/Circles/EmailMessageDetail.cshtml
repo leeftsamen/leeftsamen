@@ -1,0 +1,105 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using WebGrease
+@model LeeftSamen.Portal.Web.Models.Circles.CircleEmailMessageDetailModel
+@{
+    ViewBag.Title = Model.EmailMessage.Subject;
+}
+<a class="btn btn-default" href="@Url.Action("InboxReceived", "Circles", new { id = Model.EmailMessage.CircleId })">@Button.BackToOverview</a>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading labeled">
+
+                <h1>Onderwerp: @ViewBag.Title</h1>
+
+                @if (Model.EmailMessage.Recipients.Count > 0)
+                {
+                    string receiverNames = null;
+                    int i = 0;
+
+                    foreach (var receiver in Model.EmailMessage.Recipients)
+                    {
+                        if (receiver.Receiver != null)
+                        {
+                            receiverNames += receiver.Receiver.Name;
+                        }
+                        else
+                        {
+                            receiverNames += string.Format("[{0}]", Label.Deleted);
+                        }
+
+                        if (i < Model.EmailMessage.Recipients.Count - 1)
+                        {
+                            receiverNames += ", ";
+                        }
+
+                        i++;
+                    }
+
+                    <h5>@Label.Receivers: @receiverNames</h5>
+                }
+                else
+                {
+                    <h5>@Text.SingleReciever</h5>
+                }
+
+                <time datetime="@Model.EmailMessage.CreationDateTime.ToString("s")" title="@Model.EmailMessage.CreationDateTime.ToString("f")">
+                    Verzonden: @Model.EmailMessage.CreationDateTime.ToString("dd/MM/yyyy HH:mm")
+                </time>
+
+            </div>
+            <div class="panel-body">
+
+                @Html.Raw(Model.EmailMessage.Text)
+
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Afzender</h3>
+                <h4>
+                    @if (Model.EmailMessage.Creator != null)
+                    {
+                        @Html.Partial("_UserProfileImage", new UserProfileImage(Model.EmailMessage.Creator.ProfileImageId, Model.EmailMessage.Creator.Id, "profile-image-sm"));
+                        @Model.EmailMessage.Creator.Name<br/>
+                    }
+                    else
+                    {
+                        @Html.Raw(string.Format("[{0}]", Label.Deleted));
+                    }
+                </h4>
+                @if (Model.EmailMessage.Creator != null)
+                {
+                    <div class="text-center margin-bottom-10-px">
+                        <a href="@Url.Action("CreateEmailMessage", new {id = Model.EmailMessage.CircleId, messageId = Model.EmailMessage.MessageId, reactToAll = false})"
+                           class="btn btn-primary">
+                            @Button.Reply
+                        </a>
+                    </div>
+                }
+                @if (Model.EmailMessage.Recipients.Count > 1)
+                {
+                    <div class="text-center">
+                        <a href="@Url.Action("CreateEmailMessage", new {id = Model.EmailMessage.CircleId, messageId = Model.EmailMessage.MessageId, reactToAll = true})"
+                           class="btn btn-default">
+                            @Button.ReplyAll
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Partial("_ReportAbuseLink")
+            </div>
+        </div>
+
+    </div>
+</div>

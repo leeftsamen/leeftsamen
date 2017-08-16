@@ -1,0 +1,12 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using System.Configuration;
+@model LeeftSamen.Portal.Web.Models.Organizations.ActivitiesViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@Html.Action("DetailHeader", new { id = Model.OrganizationId })
+
+<div class="content-left">
+    @Html.Partial(string.Format("~/Views/Activities/ActivitiesOverview{0}.cshtml", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), Model.ActivitiesModel)
+</div>

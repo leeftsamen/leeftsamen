@@ -1,0 +1,60 @@
+﻿@model LeeftSamen.Portal.Web.Models.Search.IndexViewModel
+@{
+    ViewBag.Title = Title.Search;
+    var resultTitle = string.Format(Title.NoSearchResult, Model.Query);
+    if (Model.Results.Count == 1)
+    {
+        resultTitle = string.Format(Title.OneSearchResult, Model.Query);
+    }
+    if (Model.Results.Count > 1)
+    {
+        resultTitle = string.Format(Title.SearchResults, Model.Results.Count, Model.Query);
+    }
+}
+
+<h1>@ViewBag.Title</h1>
+
+<h2>@resultTitle</h2>
+
+@if (Model.UniqueCategories != null && Model.UniqueCategories.Length > 1)
+{
+    <br />
+    <div class="row">
+        <div class="col-md-6">
+            <select class="form-control" id="filter">
+                <option value="">Toon alles</option>
+                @foreach (var category in Model.UniqueCategories)
+                {
+                    <option>@category</option>
+                }
+            </select>
+            <script>
+                document.getElementById('filter').onchange = function () {
+                    var elements = document.getElementsByClassName('row result-row');
+                    for (var i = 0; i < elements.length; i++) {
+                        var display = this.value == '' || elements[i].dataset['category'] == this.value;
+                        elements[i].style.display = display ? 'block' : 'none';
+                    }
+                }
+            </script>
+        </div>
+    </div>
+    <br />
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @foreach (var result in Model.Results)
+                {
+                    <div class="row result-row" data-category="@result.Category">
+                        <div class="col-md-2">@result.Category</div>
+                        <div class="col-md-10"><a href="@result.Url">@result.Label</a></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

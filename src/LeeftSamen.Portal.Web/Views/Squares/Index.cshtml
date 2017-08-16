@@ -1,0 +1,13 @@
+﻿@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Squares.IndexViewModel
+@{
+    var title = Title.MySquares;
+    ViewBag.Title = title;
+}
+
+<h1>@title</h1>
+<div class="panel panel-default panel-overflow">
+    <div class="panel-body circle-overview">
+        @Html.Partial("_SquareOverviewTable", Model.Squares)
+    </div>
+</div>

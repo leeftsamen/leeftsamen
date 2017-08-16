@@ -1,0 +1,19 @@
+﻿@model LeeftSamen.Portal.Web.Models.FileUploadModel
+
+<div class="form-group profile-img-upload">
+    <label>@Html.Raw(Model.InputLabel)</label>
+
+    @if (Model.FileId.HasValue)
+    {
+        <img src="@Url.RouteUrl(Model.RouteName, Model.RouteValues)" alt="" class="uploaded-image">
+    }
+    <div class="input-group image-picker">
+        <b class="file-input-filename"></b>
+        &nbsp;
+        <span class="btn btn-default btn-small btn-file">
+            @Button.ChooseImageFromPC <input type="file" name="@Model.InputName" class="file-input" accept="image/gif, image/jpeg, image/png">
+        </span>
+    </div>
+    <div class="clear"></div>
+    @Html.ValidationMessage(Model.InputName, null, new { @class = "help-block" })
+</div>

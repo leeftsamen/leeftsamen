@@ -1,0 +1,209 @@
+﻿@using System.Linq
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.NeighborhoodMessages.IndexViewModel
+@{
+    ViewBag.Title = Title.NeighborhoodMessages;
+}
+
+
+@if (Model.UserCanCreateMessage)
+{
+    <div class="page-buttons">
+        <div class="menu-background"></div>
+        <div class="bottom-display">
+            <div class="open-menu">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="buttons">
+            <a class="btn btn-primary btn-small" href="@Url.Action("CreateMessage")">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                @Button.CreateNeighborhoodMessage
+            </a>
+            @if (Model.HelpIcons.Any(h => h.Type == "neighborhoodmessagecreate"))
+            {
+                var helpIcon = Model.HelpIcons.First(h => h.Type == "neighborhoodmessagecreate");
+                Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "neighborhood-message-create", HelpText = helpIcon.Text });
+            }
+        </div>
+    </div>
+}
+<h1 class="page-title">@ViewBag.Title</h1>
+@*@{
+    var items = new List<MenuItemModel>();
+    items.Add(
+    new MenuItemModel(
+        "Default",
+        new RouteValueDictionary(new { controller = "NeighborhoodMessages", action = "Index" }),
+        Button.AllMessages,
+        Model.MessageType == NeighborhoodMessage.MessageTypes.Any
+    ));
+    items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "NeighborhoodMessages", action = "NeighborMessages" }),
+            Button.NeighborMessages,
+            Model.MessageType == NeighborhoodMessage.MessageTypes.NeighborMessages
+        ));
+    items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "NeighborhoodMessages", action = "AssociationMessages" }),
+            Button.AssociationMessages,
+            Model.MessageType == NeighborhoodMessage.MessageTypes.AssociationMessages
+        ));
+    items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "NeighborhoodMessages", action = "OrganizationMessages" }),
+            Button.OrganizationMessages,
+            Model.MessageType == NeighborhoodMessage.MessageTypes.OrganizationMessages
+        ));
+}
+@Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)*@
+
+<div class="content-wide">
+
+
+    @*<div class="panel panel-default has-nav">
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li role="presentation" @Html.Raw(Model.MessageType == NeighborhoodMessage.MessageTypes.Any ? " class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "Index" })">@Button.AllMessages</a>
+                </li>
+                <li role="presentation" @Html.Raw(Model.MessageType == NeighborhoodMessage.MessageTypes.NeighborMessages ? " class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "NeighborMessages" })">@Button.NeighborMessages</a>
+                </li>
+                <li role="presentation" @Html.Raw(Model.MessageType == NeighborhoodMessage.MessageTypes.AssociationMessages ? " class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "AssociationMessages" })">@Button.AssociationMessages</a>
+                </li>
+                <li role="presentation" @Html.Raw(Model.MessageType == NeighborhoodMessage.MessageTypes.OrganizationMessages ? " class=\"active\"" : string.Empty)>
+                    <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "NeighborhoodMessages", action = "OrganizationMessages" })">@Button.OrganizationMessages</a>
+                </li>
+                <li role="presentation" class="neighborhoodmessage-helpicon">
+                    @{
+                        if (Model.HelpIcons.Any(h => h.Type == "neighborhoodmessage"))
+                        {
+                            var helpIcon = Model.HelpIcons.First(h => h.Type == "neighborhoodmessage");
+                            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "neighborhood-message", HelpText = helpIcon.Text });
+                        }
+
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>*@
+
+    <br />
+
+    @if (Model.Messages.Count > 0)
+    {
+        <div id="message-items" class="tileable-items shift-left">
+
+            @foreach (var message in Model.Messages.OrderByDescending(i => i.IsPinned).ThenByDescending(i => i.CreationDateTime))
+            {
+                var messageType = NeighborhoodMessage.MessageTypes.NeighborMessages;
+                if (message.OrganizationMembershipId.HasValue)
+                {
+                    switch (message.OrganizationMembership.Organization.OrganizationType.Type)
+                    {
+                        case OrganizationType.Types.Professional:
+                        case OrganizationType.Types.Volunteer:
+                            messageType = NeighborhoodMessage.MessageTypes.OrganizationMessages;
+                            break;
+                        case OrganizationType.Types.Association:
+                            messageType = NeighborhoodMessage.MessageTypes.AssociationMessages;
+                            break;
+                    }
+                }
+
+                var itemUrl = Url.RouteUrl("NeighborhoodMessage", new { action = "MessageDetail", messageType, messageId = message.MessageId });
+                var hasImage = message.Image1Id.HasValue;
+                var isOrganizationMessage = message.OrganizationMembershipId.HasValue;
+                message.FullText = message.FullText.StripHtmlAndNormalize();
+
+                <div class="tile @(isOrganizationMessage ? " " + message.OrganizationMembership.Organization.OrganizationType.Type.ToString().ToLower() : string.Empty)">
+
+                    <div class="tape"></div>
+
+                    <div class="panel-header">
+                        <span class="time">
+                            <time datetime="@message.CreationDateTime.ToString("s")"
+                                  title="@message.CreationDateTime.ToString("f")">
+                                @message.CreationDateTime.ToTimeAgoString()
+                            </time>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        @if (message.IsPinned)
+                        {
+                            <a href="javascript:void(0);"
+                               data-toggle="modal"
+                               data-target="#modal"
+                               data-title="@(message.IsPinned ? Title.UnpinConfirmation : Title.PinConfirmation)"
+                               data-body="@(message.IsPinned ? Text.UnpinConfirmation : Text.PinConfirmation)"
+                               data-button="@(message.IsPinned ? Button.UnpinConfirmation : Button.PinConfirmation)"
+                               data-action="@Url.RouteUrl("NeighborhoodMessage", new { controller = "NeighborhoodMessages", action = "PinMessage", messageType, messageId = message.MessageId, pin = !message.IsPinned })">
+                                <span class="glyphicon glyphicon-pushpin pull-right"></span>
+                            </a>
+                        }
+
+                        <a href="@itemUrl" class="title">
+                            <h4>@message.Title</h4>
+                        </a>
+
+                        @if (!string.IsNullOrEmpty(message.IntroductionText))
+                        {
+                            <p>@(message.IntroductionText.Length > 180 ? message.IntroductionText.Substring(0, 140) + "..." : message.IntroductionText)</p>
+                        }
+
+                        @if (hasImage)
+                        {
+                            <div class="tile panel-image-cover">
+                                <div class="tile panel-image">
+                                    <a href="@itemUrl">
+                                        <div class="panel-image-inner" style="background-image: url(@Url.RouteUrl("NeighborhoodMessage", new { action = "MessageImage", messageType, messageId = message.MessageId, mediaId = message.Image1Id }))"></div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
+                        <a href="@itemUrl">@Text.ContinueReading</a>
+                    </div>
+                    <div class="panel-footer @(messageType != NeighborhoodMessage.MessageTypes.NeighborMessages ? "green" : string.Empty)">
+                        @if (isOrganizationMessage)
+                        {
+                            <div class="panel-information">
+                                <span class="creator">
+                                    @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, message.OrganizationMembership.Organization.Name))
+                                </span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="panel-avatar">@Html.Partial("_UserProfileImage", new UserProfileImage(message.Creator.ProfileImageId, message.Creator.Id, "profile-image-sm"))</div>
+                            <div class="panel-information organization-message">
+                                <span class="creator">@message.Creator.Name</span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <h3 class="make-block">@Title.NoMessagesFound</h3>
+    }
+
+</div>
+
+
+
+@section scripts
+{
+            @Scripts.Render("~/bundles/item-tiler")
+        }

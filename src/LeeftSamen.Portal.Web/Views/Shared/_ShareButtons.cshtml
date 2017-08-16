@@ -1,0 +1,26 @@
+﻿@{
+    var url = Request.Url != null ? Request.Url.AbsoluteUri : "https://app.leeftsamen.nl/";
+    var twitterText = (string)ViewBag.ShareText ?? string.Empty;
+    if (twitterText.Length > 140)
+    {
+        twitterText = twitterText.Substring(0, 137) + "...";
+    }
+}
+<div class="share-buttons">
+    @*<a onclick="_paq.push(['trackEvent', 'ShareButtons', 'Facebook']);"
+       class="share-icon share-facebook"
+       href="https://www.facebook.com/sharer.php?u=@url&t=@Url.Encode(Subject.LeeftSamenShare)"
+       target="_blank"></a>
+    <a onclick="_paq.push(['trackEvent', 'ShareButtons', 'Twitter']);"
+       class="share-icon share-twitter"
+       href="http://twitter.com/intent/tweet?text=@Url.Encode(twitterText)&url=@url"
+       target="_blank"></a>*@
+    <a onclick="_paq.push(['trackEvent', 'ShareButtons', 'Google+']);"
+       class="share-icon share-googleplus"
+       href="https://plus.google.com/share?url=@url&hl=nl"
+       target="_blank"></a>
+    <a onclick="_paq.push(['trackEvent', 'ShareButtons', 'Email']);"
+       class="share-icon share-email"
+       href="mailto:?subject=@Url.Encode(ViewBag.ShareText)&body=@url"
+       target="_blank"></a>
+</div>

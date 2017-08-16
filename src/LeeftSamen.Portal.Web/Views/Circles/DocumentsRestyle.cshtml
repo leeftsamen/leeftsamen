@@ -1,0 +1,180 @@
+﻿@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Circles
+@model CirclePhotosViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+    int? albumId = null;
+
+    if (Model.CurrentPhotoAlbum != null)
+    {
+        albumId = Model.CurrentPhotoAlbum.CirclePhotoAlbumId;
+    }
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId, albumId = albumId })
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="panel shift-left">
+            <div class="panel-heading" style="padding-right:0px;">
+                @*@if (Model.CurrentUserIsCircleAdministrator)
+                {*@
+                    @using (Html.BeginForm("AddDocuments", "Circles", FormMethod.Post, new { enctype = "multipart/form-data", @id = "circle-photo-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal pull-right">
+
+                            @Html.ValidationMessage("circle-photo-upload", null, new { @class = "help-block" })
+
+                            @if (Model.CurrentPhotoAlbum != null)
+                            {
+                                @Html.Hidden("albumId", Model.CurrentPhotoAlbum.CirclePhotoAlbumId)
+                            }
+
+                            <input id="circle-photo-input" name="circle-photo-upload" type="file" accept="application/excel, application/pdf, text/plain, application/msword, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.spreadsheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+                                   video/x-ms-wmv, video/x-msvideo, video/quicktime, video/mp4" multiple />
+                            <label for="circle-photo-input" class="btn btn-primary">@Button.AddDocuments</label>
+                        </div>
+                    }
+                @*}*@
+                <h3 class="panel-title">@Title.CircleDocuments</h3>
+                @Label.MovieTip
+            </div>
+
+            <div class="panel-body" id="circle-photos">
+                @if (Model.Documents.Count == 0)
+                {
+                    <p>@Text.NoDocumentsFound</p>
+                }
+                else
+                {
+                    var lastMonth = DateTime.MinValue.Month;
+                    var tableOpened = false;
+
+                    foreach (var photo in Model.Documents.OrderByDescending(m => m.Item.CreationDate).Take(20))
+                    {
+                        var fontAwesome = photo.Item.FontAwesomeClass();
+
+                        if (lastMonth != photo.Item.CreationDate.Month)
+                        {
+                            lastMonth = photo.Item.CreationDate.Month;
+
+                            if (tableOpened)
+                            {
+                                @Html.Raw("</div></div>")
+                            }
+
+                            @Html.Raw("<div class='circle-photo-month-row'>")
+                            tableOpened = true;
+
+                            <h4>@photo.Item.CreationDate.ToString("MMMM")</h4>
+                            @Html.Raw("<div class='file-list'>")
+                        }
+                        <div>
+                            @if (Model.CurrentUserIsCircleAdministrator || Model.CurrentUserId == photo.OwnerId)
+                            {
+                                <div class="dropdown pull-right circle-photo-dropdown">
+
+                                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </button>
+
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="#"
+                                               data-toggle="modal" data-target="#modal"
+                                               data-title="@Title.ConfirmRemoveDocument" data-body="@Text.ConfirmRemoveDocument" data-button="@Button.RemoveDocument"
+                                               data-action="@Url.Action("RemoveCircleDocument", new { circleId = @Model.CircleId, photoId = photo.Item.MediaId, photoAlbumId = albumId })">
+                                                @Button.RemoveDocument
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(fontAwesome))
+                            {
+                            @Html.Raw("<a class='file' href='" + @Url.Action("DownloadDocument", new { id = Model.CircleId, mediaId = photo.Item.MediaId }) + "'>")
+                            }
+                            else
+                            {
+                            @Html.Raw("<a class='file' data-lightbox='photos' href='" + @Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "PhotoLarge", id = Model.CircleId, mediaId = photo.Item.MediaId }) + "'>")
+                            }
+                            <div class="image">
+                                @if (!string.IsNullOrEmpty(fontAwesome))
+                                {
+                                    <i class="fa @fontAwesome"></i>
+                                }
+                                else
+                                {
+                                    <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "Photo", id = Model.CircleId, mediaId = photo.Item.MediaId })" alt="" />
+                                }
+                            </div>
+                            <div class="name">
+                                @photo.Item.Name.Truncate(25)
+                            </div>
+                            @Html.Raw("</a>")
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section modals
+                            {
+    <div class="modal fade" id="createPhotoAlbum" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @using(Html.BeginForm("AddPhotoAlbum", "Circles", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="modal-header">
+                        <button type = "button" class="close" data-dismiss="modal" aria-label="@Button.Cancel">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">@Button.CreatePhotoAlbum</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-horizontal">
+                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                    @*                                @Html.ValidationSummary()*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">@Button.CreatePhotoAlbum</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@Button.Cancel</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts
+{
+    @Styles.Render("~/Content/lightbox")
+    @Scripts.Render("~/bundles/lightbox")
+
+    <script>
+
+        //$(document).on("click", "#circle-photo-submit", function(e) {
+        //    $("#circle-photo-input").click();
+        //});
+
+        $(document).on("change", "#circle-photo-input", function() {
+            $("#circle-photo-form").submit();
+        });
+
+
+    </script>
+}

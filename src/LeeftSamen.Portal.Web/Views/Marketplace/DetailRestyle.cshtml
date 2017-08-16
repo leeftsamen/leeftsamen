@@ -1,0 +1,409 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Extensions
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models.Marketplace
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Marketplace.DetailViewModel
+@{
+    ViewBag.Title = Model.MarketplaceItem.Title;
+    var overviewRoute = Model.ShownInCircle.HasValue ? Url.RouteUrl("CircleMarketplace", new { controller = "Marketplace", action = "Overview", circleId = Model.ShownInCircle })
+        : Url.RouteUrl("Default", new { controller = "Marketplace", action = "Overview", Category = (int)Model.MarketplaceItem.Category.Alias });
+}
+
+
+<div class="content-wide">
+
+    @if (Model.ShownInCircle.HasValue)
+    {
+        @Html.Action("DetailHeader", "Circles", new { id = Model.ShownInCircle })
+    }
+    <div class="relative-inline-block button-margin pull-right hidden-xs clear" style="margin-top: 8px;">
+        <a class="btn btn-primary btn-small" href="@overviewRoute">
+            @Button.BackToOverview
+        </a>
+    </div>
+    
+    @if (Model.CurrentUserCanVIew)
+    {
+        <h1 class="page-title-small">@ViewBag.Title</h1>
+
+        <br/>
+        
+        <div id="marketplace-item" class="row marketplace-item">
+            <div class="col-md-8">
+                <div class="make-block shift-left">
+                    <div class="panel-heading">
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.CurrentUserCanEdit)
+                        {
+                            <div class="dropdown pull-right" style="margin-top: 15px;">
+                                <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a href="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "EditItem", id = Model.MarketplaceItem.MarketplaceItemId, circleId = Model.ShownInCircle })">@Button.EditMarketplaceItem</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="javascript:void(0);"
+                                           data-toggle="modal"
+                                           data-target="#modal"
+                                           data-title="@Title.ConfirmRemoveMarketplaceItem"
+                                           data-body="@Text.ConfirmRemoveMarketplaceItem"
+                                           data-button="@Button.RemoveMarketplaceItem"
+                                           data-action="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "RemoveItem", id = Model.MarketplaceItem.MarketplaceItemId })">@Button.RemoveMarketplaceItem</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        <label class="label label-info">@Model.MarketplaceItem.Type.DisplayName(): @Model.MarketplaceItem.Category.Name</label><small>@Model.MarketplaceItem.CreationDateTime.ToTimeAgoString()</small>
+                        <div class="row clear" style="padding-top:10px;">
+                            <div class="col-md-8">
+                                @if (Model.MarketplaceItem.HasAnyImage())
+                                {
+                                    var hasImageCount = 0;
+                                    for (var i = 0; i < MarketplaceItem.ImageCount; i++)
+                                    {
+                                        if (Model.MarketplaceItem.HasImage(i + 1))
+                                        {
+                                            hasImageCount++;
+                                        }
+                                    }
+
+                                    var hasAnyImage = false;
+                                    <a class="btn btn-default pull-right" style="position:absolute; right: 15px; z-index:999;" data-toggle="modal" href="#SelfModal" data-modal-content="#marketplaceitem-carousel" data-modal-title="@Title.Images">
+                                        <span class="glyphicon glyphicon-fullscreen transparent"></span>
+                                    </a>
+                                    <div id="marketplaceitem-carousel" class="carousel slide marketplaceitem-carousel">
+                                        @if (hasImageCount > 1)
+                                        {
+                                    <!-- Indicators -->
+                                            <ul class="carousel-indicators">
+                                                @{
+                                            for (var i = 0; i < MarketplaceItem.ImageCount; i++)
+                                            {
+                                                if (Model.MarketplaceItem.HasImage(i + 1))
+                                                {
+                                                    <li data-target=".marketplaceitem-carousel" data-slide-to="@(i)" @Html.Raw(hasAnyImage ? string.Empty : " class=\"active\"")></li>
+                                                    hasAnyImage = true;
+                                                }
+                                            }
+                                                }
+                                            </ul>
+                                        }
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            @{
+                                        hasAnyImage = false;
+                                        for (var i = 1; i <= MarketplaceItem.ImageCount; i++)
+                                        {
+                                            if (Model.MarketplaceItem.HasImage(i))
+                                            {
+                                                <div class="item@(hasAnyImage ? string.Empty : " active")">
+                                                    <span class="carousel-image-wrapper">
+                                                        <img class="carousel-image" src="@Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItem.MarketplaceItemId, mediaId = Model.MarketplaceItem.ImageId(i), index = i })" />
+                                                    </span>
+                                                </div>
+                                                hasAnyImage = true;
+                                            }
+                                        }
+                                            }
+                                        </div>
+                                        @if (hasImageCount > 1)
+                                        {
+                                    <!-- Controls -->
+                                            <a class="left carousel-control" href="#marketplaceitem-carousel" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">@Button.Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#marketplaceitem-carousel" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">@Button.Next</span>
+                                            </a>
+                                        }
+                                    </div>
+                                }
+
+                                <h4>@Title.Description</h4>
+                                @Html.Raw(Model.MarketplaceItem.Description)
+                            </div>
+                            <div class="col-md-4">
+                                @if (Model.MarketplaceItem.PaymentOption.HasValue)
+                                {
+                                    <div class="price">@Model.MarketplaceItem.PaymentOption.Value.DisplayName()</div>
+                                }
+                                else if (Model.MarketplaceItem.Price.HasValue)
+                                {
+                                    if (Model.MarketplaceItem.Currency == MarketplaceItem.MarketplaceCurrency.Euro)
+                                    {
+                                        <div class="price">@Model.MarketplaceItem.Price.Value.ToString("c")</div>
+                                    }
+                                    if (Model.MarketplaceItem.Currency == MarketplaceItem.MarketplaceCurrency.Zuiderling)
+                                    {
+                                        <div class="price">
+                                            @Model.MarketplaceItem.Price.Value
+                                        <span class="currency">@Label.PaymentCurrencyZuiderling</span>
+                                    </div>
+                                    }
+                                }
+                                <ul class="list-unstyled preferences">
+                                    @if (Model.MarketplaceItem.PreferenceDelivery)
+                                    {
+                                        <li><span class="glyphicon glyphicon-ok"></span> @Text.PreferenceDelivery</li>
+                                    }
+                                    @if (Model.MarketplaceItem.PreferencePickup)
+                                    {
+                                        <li><span class="glyphicon glyphicon-ok"></span> @Text.PreferencePickup</li>
+                                    }
+                                    @if (Model.MarketplaceItem.PreferenceMail)
+                                    {
+                                        <li><span class="glyphicon glyphicon-ok"></span> @Label.PreferenceMail</li>
+                                    }
+                                    @if (Model.MarketplaceItem.PreferenceOnline)
+                                    {
+                                        <li><span class="glyphicon glyphicon-ok"></span> @Label.PreferenceOnline</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading profile-map relative">
+                        @if ((!Model.MarketplaceItem.ShowLocation.HasValue && Model.MarketplaceItem.Owner.ShowLocation) || (Model.MarketplaceItem.ShowLocation.HasValue && Model.MarketplaceItem.ShowLocation.Value))
+                        {
+                            <div id="map" style="width:100%;height:200px"></div>
+                        }
+                        @if (Model.MarketplaceItem.Distance.HasValue)
+                        {
+                            <div class="label label-info distance-label">@String.Format(Text.DistanceFromYou, Model.MarketplaceItem.Distance)</div>
+                        }
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.MarketplaceItem.OrganizationMembershipId.HasValue)
+                        {
+                            @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.MarketplaceItem.OrganizationMembership.Organization.Name))
+                        }
+                        else
+                        {
+                            <h4>
+                                @Html.Partial("_UserProfileImage", new UserProfileImage(Model.MarketplaceItem.Owner.ProfileImageId, Model.MarketplaceItem.Owner.Id, "profile-image-sm"))
+                                @Model.MarketplaceItem.Owner.Name<br />
+                            </h4>
+                            if (Model.CurrentUserCanPlaceBaseReaction)
+                            {
+                                <div class="text-center margin-bottom-10-px">
+                                    <button class="btn btn-primary btn-fontresize-xs" data-toggle="modal" data-target="#SendReaction">@Button.SendMessageToMarketplaceItemOwner</button>
+                                </div>
+                            }
+                            else
+                            {
+                                @*<div>
+                                        @Text.NotSendMessageToMarketplaceItemOwner
+                                    </div>*@
+                            }
+                            if (Model.MarketplaceItem.Currency == MarketplaceItem.MarketplaceCurrency.Zuiderling)
+                            {
+                                if (Model.UserTransactionStatus == DetailViewModel.TransactionStatus.NotPaid)
+                                {
+                                    var title = string.Format(Title.ConfirmZuiderlingTransaction, Model.MarketplaceItem.Price);
+                                    var body = Text.ConfirmZuiderlingTransaction;
+                                    //var routeValues = new RouteValueDictionary(new { marketplaceItemId = Model.MarketplaceItem.MarketplaceItemId, circleId = Model.ShownInCircle });
+                                    <div class="text-center margin-bottom-10-px">
+                                        @*@using (Html.BeginForm("Transaction", "Marketplace", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-primary">@Button.TransferZuiderlings</button>
+                                            }*@
+                                        <a role="menuitem" href="#" class="btn btn-primary"
+                                           data-toggle="modal" data-target="#modal"
+                                           data-title="@title"
+                                           data-body="@body"
+                                           data-button="@Button.TransferZuiderlings"
+                                           data-hidden='{"marketplaceItemId": "@Model.MarketplaceItem.MarketplaceItemId","circleId": "@Model.ShownInCircle"}'
+                                           data-action="@Url.Action("Transaction")">@Button.TransferZuiderlings</a>
+                                    </div>
+                                }
+                                else if (Model.UserTransactionStatus == DetailViewModel.TransactionStatus.NoZuiderlingAccount)
+                                {
+                                    <div class="margin-bottom-10-px">
+                                        @Text.ZuiderlingRequiredForTransaction
+                                    </div>
+                                    if (Model.AllowZuiderling)
+                                    {
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="@Url.Action("changezuiderlingsettings", "account")">@Button.AddZuiderlingAccount</a>
+                                        </div>
+                                    }
+                                }
+                                else if (Model.UserTransactionStatus == DetailViewModel.TransactionStatus.Paid)
+                                {
+                                    <div class="margin-bottom-10-px">
+                                        @Text.ZuiderlingTransactionPaid
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="panel-footer">
+                        @*Sharing disabled until further notice
+                            @if (Model.MarketplaceItem.AllowSharing)
+                            {
+                            <h4>@Text.ShareMarketPlaceItem</h4>
+                            @Html.Partial("_ShareButtons")
+                            }
+                        *@
+
+                        @Html.Partial("_ReportAbuseLink")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                @foreach (var reaction in Model.Reactions.OrderByDescending(r => r.CreationDateTime))
+                {
+                    if (reaction.ParentId.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var parentId = reaction.ReactionId;
+                    <div class="make-block shift-left">
+                        <div class="panel-body labeled">
+                            <label class="label label-info"><span class="glyphicon glyphicon-lock"></span> @Label.Private</label>
+
+                            <br />
+                            <br />
+
+                            @Html.Partial("_Reaction", reaction)
+                            @foreach (var childReaction in Model.Reactions.Where(r => r.ParentId == parentId).OrderBy(r => r.CreationDateTime))
+                            {
+                                @Html.Partial("_Reaction", childReaction)
+                            }
+                        </div>
+                        <div class="panel-footer clearfix" id="SendReaction">
+                            @using (Html.BeginForm("CreateReaction", "Marketplace", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="circleId" value="@Model.ShownInCircle" />
+                                <input type="hidden" name="NewReactionParentId" value="@parentId" />
+                                @Html.TextAreaFor(m => m.NewReaction, new { @class = "form-control" })
+                                <div class="text-right">
+                                    <br /><button class="btn btn-primary fire-once" type="submit">@Button.PostReaction</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        if (Model.CurrentUserCanPlaceBaseReaction)
+        {
+            <div class="modal fade" id="SendReaction" tabindex="-1" role="dialog" aria-labelledby="SendReactionModalTitle">
+                <div class="modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h3 class="modal-title" id="AddFundItemModalTitle">
+                                @Title.SendMessageToMarketplaceItemOwner
+                                <small>@Title.SendMessageToMarketplaceItemOwnerSub</small>
+                            </h3>
+                        </div>
+                        @using (Html.BeginForm("CreateReaction", "Marketplace", FormMethod.Post))
+                        {
+                            <input type="hidden" name="circleId" value="@Model.ShownInCircle" />
+                            <div class="modal-body">
+                                @Html.AntiForgeryToken()
+                                @Html.TextAreaFor(m => m.NewReaction, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.NewReaction, null, new { @class = "help-block" })
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary pull-right">@Button.SendMessage</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="modal fade" id="SelfModal" tabindex="-1" role="dialog" aria-labelledby="SelfModalTitle">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header hidden">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title" id="SelfModalTitle"></h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1>@Text.MarketPlaceItemIsPrivate</h1>
+    }
+</div>
+
+@section stylesheets
+{
+    @Styles.Render("~/Content/leaflet")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/marketplace")
+    @if ((!Model.MarketplaceItem.ShowLocation.HasValue && Model.MarketplaceItem.Owner.ShowLocation) || (Model.MarketplaceItem.ShowLocation.HasValue && Model.MarketplaceItem.ShowLocation.Value))
+    {
+        <script>
+        var map = L.map('map').setView([@Model.MarketplaceItem.Owner.Latitude.ToString().Replace(",", "."), @Model.MarketplaceItem.Owner.Longitude.ToString().Replace(",", ".")], 13);
+        L.tileLayer('/ResourceProxy/Proxy.ashx?http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        // Disable drag and zoom handlers.
+        if (map.dragging) map.dragging.disable();
+        if (map.touchZoom) map.touchZoom.disable();
+        if (map.doubleClickZoom) map.doubleClickZoom.disable();
+        if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+        if (map.keyboard) map.keyboard.disable();
+        if (map.boxZoom) map.boxZoom.disable();
+        if (map.tap) map.tap.disable();
+        </script>
+    }
+    <script>
+        $('#SelfModal').on('show.bs.modal', function (e) {
+            var modalContent = $($(e.relatedTarget).data('modal-content')).clone(true);
+            var carouselId = $(modalContent).attr('id');
+            $(modalContent).attr('id', carouselId + "-popup");
+            $(modalContent).find('.carousel-control').each(function () {
+                var href = $(this).attr('href');
+                if (href == '#' + carouselId)
+                    $(this).attr('href', href + '-popup');
+            });
+
+            var modalTitle = $(e.relatedTarget).data('modal-title');
+            var header = $(this).find('.modal-header');
+            if (modalTitle && modal.length > 0) {
+                $(this).find('.modal-title').val(modalTitle);
+                $(header).removeClass('hidden');
+            } else if (!$(header).hasClass('header')) {
+                $(header).addClass('hidden');
+            }
+            if ($(this).find('.modal-body').children().length == 0) {
+                $(this).find('.modal-body').append(modalContent); // Logs the clicked element that opened the modal
+            }
+            $('#marketplaceitem-carousel-popup').carousel();
+        });
+    </script>
+}
+
+

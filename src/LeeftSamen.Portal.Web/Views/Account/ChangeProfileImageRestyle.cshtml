@@ -1,0 +1,42 @@
+﻿@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Account.ChangeProfileImageViewModel
+@{
+    ViewBag.Title = Title.ChangeProfileImage;
+}
+
+<h1>@ViewBag.Title.</h1>
+
+@using (Html.BeginForm("ChangeProfileImage", "Account", FormMethod.Post, new { @class = "", role = "form", enctype = "multipart/form-data" }))
+{
+<div class="panel-edit">
+    <div class="panel-heading">
+        <h2 class="panel-title">@Text.ProfileImageDescription</h2>
+    </div>
+    <div class="panel-body">
+            @Html.AntiForgeryToken()
+            <div class="form-group no-border">
+                <label class="control-label">@Label.CurrentProfileImage</label>
+                <div class="input-group">
+                    @Html.Partial("_UserProfileImage", new UserProfileImage(Model.ProfileImageId, Model.Id, "profile-image"))
+                </div>
+            </div>           
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <span class="privacy-info">@Html.Raw(String.Format(Label.RotatePhoto, Url.Action("RotateProfileImage", "Account")))</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            @Html.Partial("_ImageUploadRestyle", new FileUploadModel(null, null, null, Label.NewProfileImage, "ProfileImage"))
+    </div>
+</div>
+
+<div class="panel panel-default edit-buttons">
+    <div class="panel-body">
+        <button type="submit" class="btn btn-primary">@Button.ChangeProfileImage</button>
+        <a class="btn btn-link" href="@Url.Action("Index", "Account")">@Button.Cancel</a>
+    </div>
+</div>
+}

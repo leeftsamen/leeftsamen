@@ -1,0 +1,28 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Register.BecomePioneerPostModel
+@{
+    ViewBag.Title = Title.RegisterPioneer;
+}
+
+<h1>@ViewBag.Title</h1>
+@Html.Raw(Text.BecomePioneerDescription)
+<hr />
+
+@using (Html.BeginForm("BecomePioneer", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    using (Html.BeginFormGroupFor(m => m.MakeMePioneer))
+    {
+        <label class="col-md-6">
+            @Html.RadioButton("MakeMePioneer", "True", Model.MakeMePioneer) @Label.MakeMePioneer
+        </label>
+        <label class="col-md-6">
+            @Html.RadioButton("MakeMePioneer", "False", !Model.MakeMePioneer) @Label.DontMakeMePioneer
+        </label>
+    }
+
+    <div class="col-md-12 text-right">
+        <input type="submit" class="btn btn-primary" value="@Button.RealFinish" />
+    </div>
+}

@@ -1,0 +1,29 @@
+﻿@using LeeftSamen.Portal.Web.Utils
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding-bottom: 0">
+
+                <ul class="nav nav-tabs" style="border-bottom: none">
+                    <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Circles", "InboxReceived") ? "class=\"active\"" : string.Empty)>
+                        <a href="@Url.Action("InboxReceived", "Circles", new { id = Model.CircleId })">
+                            @Button.Received
+                        </a>
+                    </li>
+                    <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Circles", "InboxSend") ? "class=\"active\"" : string.Empty)>
+                        <a href="@Url.Action("InboxSend", "Circles", new { id = Model.CircleId })">
+                            @Button.WasSend
+                        </a>
+                    </li>
+                    <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Circles", "CreateEmailMessage") ? "class=\"active\"" : string.Empty)>
+                        <a href="@Url.Action("CreateEmailMessage", "Circles", new { id = Model.CircleId })">
+                            <span class="glyphicon-envelope"></span>
+                            @Button.NewMessage
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

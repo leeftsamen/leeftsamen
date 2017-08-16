@@ -1,0 +1,94 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.ForumViewModel
+@{
+    ViewBag.Title = "Forum";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+    </div>
+</div>
+@*@if (Model.CurrentUserIsAdministrator)
+{*@
+    <div class="row margin-bottom-10-px">
+        <div class="col-md-offset-10 col-md-2">
+            <a href="@Url.Action("CreateSubject", "Squares", new {id = Model.SquareId})"
+               class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                @Button.CreateForumSubject
+            </a>
+        </div>
+    </div>
+@*}*@
+@if (!string.IsNullOrEmpty(Model.Title) || !string.IsNullOrEmpty(Model.Text))
+{
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4>@Model.Title</h4>
+                @Html.Raw(Model.Text)
+            </div>
+        </div>
+    </div>
+</div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-7 col-xs-12">
+                        @Label.Subjects
+                    </div>
+                    <div class="col-sm-2 hidden-xs text-center">
+                        @Label.Messages
+                    </div>
+                    <div class="col-sm-3 hidden-xs text-center">
+                        @Label.LastMessage
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body forum">
+                @if (Model.Subjects.Count > 0)
+                {
+                    foreach (var subject in Model.Subjects)
+                    {
+                        var itemUrl = Url.RouteUrl("SquareForumSubject", new { controller = "Squares", action = "ForumSubject", id = Model.SquareId, subjectId = subject.SubjectId });
+                    <div class="row forum-item">
+                        <div class="col-sm-7">
+                            <a href="@itemUrl" class="forum-subject">@subject.Title</a>
+                            <div class="forum-description">@subject.Description</div>
+                        </div>
+                        <div class="col-sm-2 forum-messagecount sm-text-center">
+                            @subject.ReactionCount <span class="visible-xs-inline">berichten</span>
+                        </div>
+                        <div class="col-sm-3 forum-lastmessage sm-text-center">
+                            <h4 class="visible-xs">@Label.LastMessage:</h4>
+                            @if (!subject.LastMessageDate.HasValue && string.IsNullOrEmpty(subject.LastMessageName))
+                            {
+                                <span>- @Label.None -</span>
+                            }
+                            @(subject.LastMessageDate.HasValue ? subject.LastMessageDate.Value.ToString("d MMM yyyy, HH:mm uur") : string.Empty)<br/>
+                            @subject.LastMessageName
+                        </div>
+                    </div>
+                    }
+                }
+                else
+                {
+                    <div class="row margin-bottom-10-px">
+                        <div class="col-sm-12 margin-top-10-px">
+                            @Text.NoForumSubjects
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

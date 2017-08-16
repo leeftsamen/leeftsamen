@@ -1,0 +1,66 @@
+﻿@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Activities.IndexViewModel
+@{
+    ViewBag.Title = Title.Activities;
+}
+
+<div class="relative-inline-block pull-right hidden-xs">
+    <a class="btn btn-primary " href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Create" })">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        @Button.CreateActivity
+    </a>
+    <a class="btn btn-primary " href="@Url.RouteUrl("Default", new { controller = "Activities", action = "CreateBulk" })">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        @Button.CreateActivities
+    </a>
+    @if (Model.HelpIcons.Any(h => h.Type == "activity-create"))
+    {
+        var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-create");
+        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-create", HelpText = helpIcon.Text });
+    }
+</div>
+
+
+<h1>@ViewBag.Title</h1>
+
+<div class="relative-inline-block button-margin visible-xs">
+    <a class="btn btn-primary" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Create" })">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        @Button.CreateActivity
+    </a>
+    @if (Model.HelpIcons.Any(h => h.Type == "activity-create"))
+    {
+        var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-create");
+        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-create", HelpText = helpIcon.Text });
+    }
+</div>
+
+<ul class="nav nav-tabs">
+    <li>
+        @if (Model.HelpIcons.Any(h => h.Type == "activity-upcoming"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-upcoming");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-upcoming", HelpText = helpIcon.Text });
+        }
+    </li>
+    <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Activities", "Index") ? "class=\"active\"" : string.Empty)>
+        <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "Index" })">@Button.ActivitiesUpcoming</a>
+    </li>
+    <li role="presentation" @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Activities", "MyActivities") ? "class=\"active\"" : string.Empty)>
+        <a class="type-tab" href="@Url.RouteUrl("Default", new { controller = "Activities", action = "MyActivities" })">@Button.ActivitiesSelfOrganized</a>
+    </li>
+    <li>
+        @if (Model.HelpIcons.Any(h => h.Type == "activity-self-organized"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-self-organized");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-self-organized", HelpText = helpIcon.Text });
+        }
+    </li>
+</ul>
+<br/>
+
+@Html.Action("ActivitiesOverview", Model)
+            

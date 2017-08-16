@@ -1,0 +1,63 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Account.ChangeZuiderlingSettingsViewModel
+
+@{
+    var action = "ChangeZuiderlingSettings";
+    var submitButton = Button.Save;
+    ViewBag.Title = Title.ZuiderlingSettings;
+}
+
+@using (Html.BeginForm(action, "Account", FormMethod.Post, new { @automcomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.ZuiderlingSettings</h2>
+        </div>
+
+        <div class="panel-body">
+            <div class="col-md-12 margin-bottom-10-px">
+                @Html.Raw(Text.ZuiderlingInfo)
+            </div>
+            <input style="display:none;" type="text" name="fakeaccount" />
+            <input style="display:none;" type="password" name="fakepassword" />
+            @using (Html.BeginFormGroupFor(m => m.ZA))
+            {
+                @Html.LabelFor(m => m.ZA, new { @class = "control-label" })
+                if (Model.AccountVerified)
+                {
+                    @Html.TextBoxFor(m => m.ZA, new { @class = "form-control", @readonly = Model.AccountVerified.ToString().ToLower() })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.ZA, new { @class = "form-control", @autocomplete = "zuiderling-a" })
+                }
+                @Html.ValidationMessageFor(m => m.ZA, null, new { @class = "help-block" })
+            }
+            @using (Html.BeginFormGroupFor(m => m.ZP))
+            {
+                @Html.LabelFor(m => m.ZP, new { @class = "control-label" })
+                if (Model.AccountVerified)
+                {
+                    @Html.PasswordFor(m => m.ZP, new { @class = "form-control", value = "********", @readonly = Model.AccountVerified.ToString().ToLower() })
+                }
+                else
+                {
+                    @Html.PasswordFor(m => m.ZP, new { @class = "form-control", @autocomplete = "zuiderling-p" })
+                }
+                @Html.ValidationMessageFor(m => m.ZP, null, new {@class = "help-block"})
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default edit-buttons">
+        <div class="panel-body">
+            @if (!Model.AccountVerified)
+            {
+                <button type="submit" class="btn btn-primary">@submitButton</button>
+            }
+            <a class="btn btn-link" href="@Url.Action("Index", "Account")">@Button.Cancel</a>
+        </div>
+    </div>
+}

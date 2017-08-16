@@ -1,0 +1,228 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Forums.SubjectViewModel
+@{
+    ViewBag.Title = Model.SubjectName;
+    var forumReaction = new LeeftSamen.Portal.Web.Models.Forums.ForumReaction()
+    {
+        Type = Model.Type,
+        TypeId = Model.TypeId,
+        CurrentUserId = Model.CurrentUserId,
+        IsCurrentUserAdmin = Model.IsCurrentUserAdmin
+    };
+    var accordionSize = 3;
+}
+
+@if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Squares.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Squares", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+else if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Circles.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Circles", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+<div class="col-md-12">
+    <a class="btn btn-default hidden-md hidden-lg" href="@Url.Action("Index", new { type = Model.Type, typeId = Model.TypeId})">@Button.BackToOverview</a>
+    <div class="md-pull-right margin-top-10-px-xs">
+        @{
+            var url = Url.RouteUrl("Forum", new
+            { controller = "Forums", action = "Subject", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId });
+        }
+        <a href="@url" class="page @(Model.Page == 1 ? "active" : string.Empty)">1</a>
+        @if (Model.PageCount > 9 && Model.Page >= 6)
+        {
+            <span class="page inactive">...</span>
+        }
+
+        @{ 
+            var from = 2;
+            if (Model.Page >= 6 && Model.PageCount > 9)
+            {
+                from = Model.Page - 2;
+            }
+            var to = Model.PageCount - 1;
+            if (Model.Page <= Model.PageCount - 5 && Model.PageCount > 9)
+            {
+                to = Model.Page + 2;
+            }
+            if (to < 7)
+            {
+                to = Math.Min(7, Model.PageCount - 1);
+            }
+            if (from > Model.PageCount - 6)
+            {
+                from = Math.Max(Model.PageCount - 6, 2);
+            }
+
+        }
+        @for (int i = from; i <= to; i++)
+        {
+            url = Url.RouteUrl("Forum", new
+            { controller = "Forums", action = "Subject", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId, page = i });
+            <a href="@url" class="page @(Model.Page == i ? "active" : string.Empty)">@i</a>
+        }
+        @if (Model.PageCount > 9 && Model.Page < Model.PageCount - 4)
+        {
+            <span class="page inactive">...</span>
+        }
+        @if (Model.PageCount > 1)
+        {
+            url = Url.RouteUrl("Forum", new
+            { controller = "Forums", action = "Subject", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId, page = Model.PageCount });
+            <a href="@url" class="page @(Model.Page == Model.PageCount ? "active" : string.Empty)">@Model.PageCount</a>
+        }
+    </div>
+    <br/>
+    <br/>
+</div>
+<div class="shift-left">
+    <div class="row">
+        <div class="col-md-4 hidden-xs hidden-sm">
+            <div class="make-block">
+                <div class="panel-body text-center">
+                    <a class="btn btn-default" href="@Url.Action("Index", new { type = Model.Type, typeId = Model.TypeId})">@Button.BackToOverview</a>
+                    @if (Model.Subjects.Count > 0)
+                    {
+                        <div>
+                            @foreach (var subject in Model.Subjects)
+                {
+                                <a class="col-md-12 forum-subject-link" href="@Url.RouteUrl("Forum", new
+                    { controller = "Forums", action = "Subject", type = Model.Type, typeId = Model.TypeId, id = subject.SubjectId })">
+                                    <h4> @subject.Title </h4>
+                                    <span class="forum-small">@((subject.LastReactionDate ?? subject.CreatedDate).ToTimeAgoString())</span>
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="page-buttons">
+                                <div class="menu-background"></div>
+                                <div class="bottom-display">
+                                    <div class="open-menu">
+                                        <i class="fa fa-times"></i>
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                    <a class="btn btn-primary" href="@Url.RouteUrl("Forum", new
+                    { controller = "Forums", action ="CreateReaction", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId})">@Button.NewContribution</a>
+                        </div>
+                        </div>
+                            <h1 class="no-padding">@Model.SubjectName</h1>
+                            @*@Model.SubjectText<br />
+                            <span class="small-text">@Model.SubjectDate.ToTimeAgoString()</span>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    @if (Model.Reactions.Count > 0)
+                    {
+                        foreach (var reaction in Model.Reactions)
+                        {
+                            <div class="tile" style="margin-bottom:20px;">
+                                <div class="panel-body">
+                                    <div class="row forum-message">
+                                        <div class="col-md-12">
+                                            @{
+                                                forumReaction.Reaction = reaction;
+                                            }
+                                            @Html.Partial("_ForumReaction", forumReaction)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer forum-child-messages">
+                                    <div class="row">
+                                        @if (reaction.ChildReactions.Count > accordionSize)
+                                        {
+                                            <div class="accordion closed">
+                                                @for (int i = 0; i < reaction.ChildReactions.Count - accordionSize; i++)
+                                                {
+                                                    forumReaction.Reaction = reaction.ChildReactions[i];
+                                                    <div class="col-md-12 forum-child-message">
+                                                        @Html.Partial("_ForumReaction", forumReaction)
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="col-md-12 forum-child-message">
+                                                <span class="forum-show-all" onclick="accordion.Open(this)">Toon alle @reaction.ChildReactions.Count reacties</span>
+                                            </div>
+                                        }
+                                        @for (int i = Math.Max(0, reaction.ChildReactions.Count - accordionSize); i < reaction.ChildReactions.Count; i++)
+                                        {
+                                            forumReaction.Reaction = reaction.ChildReactions[i];
+                                            <div class="col-md-12 forum-child-message">
+                                                @Html.Partial("_ForumReaction", forumReaction)
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row margin-top-10-px">
+                                        @{
+                                            var routeValues = new RouteValueDictionary();
+                                            routeValues.Add("type", Model.Type);
+                                            routeValues.Add("typeId", Model.TypeId);
+                                            routeValues.Add("id", reaction.ReactionId);
+                                            //routeValues.Add("page", Model.Page);
+                                        }
+                                        @using (Html.BeginForm("ReactToReaction", "Forums", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="">
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(m => m.ReactionText, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.ReactionText, null, new { @class = "help-block" })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-primary">@Button.ForumReact</button>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="row forum-message">
+                                                            <div class="col-md-12">
+                                                                @Text.NoReactions
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                    @*<div class="panel panel-default">
+                        <div class="panel-body">
+                            <a class="btn btn-primary" href="@Url.RouteUrl("Forum", new
+                                    { controller = "Forums", action ="CreateReaction", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId})">Nieuwe reactie plaatsen</a>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+
+@section scripts
+{
+    @Styles.Render("~/Content/lightbox")
+    @Scripts.Render("~/bundles/lightbox")
+}
+

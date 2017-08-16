@@ -1,0 +1,15 @@
+﻿@model LeeftSamen.Portal.Web.Models.Activities.AttendanceFormViewModel
+
+@using (Html.BeginForm("Attendance", "Activities", new { id = Model.ActivityId, redirectToDetailPage = Model.RedirectToDetail, circleId = Model.CircleId }, FormMethod.Post, new { @style = "display:inline" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="attending" value="@(Model.IsAttending ? "False" : "True")" />
+    if (Model.IsAttending)
+    {
+        <button type="submit" class="btn btn-danger fire-once">@Button.NotAttendingActivity</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary fire-once">@Button.AttendingActivity</button>
+    }
+}

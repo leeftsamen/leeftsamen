@@ -1,0 +1,10 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.InviteUserModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:48px">@Raw(Model.Message != null ? Model.Message.Replace("\n", "<br />") : string.Empty)</p>
+<a href="@Model.PortalUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Email.SeeWebsite
+</a>

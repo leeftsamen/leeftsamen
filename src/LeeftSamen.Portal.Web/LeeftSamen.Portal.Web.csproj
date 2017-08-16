@@ -1,0 +1,1117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54A15533-2517-4759-A454-3C3B49E1BED1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeeftSamen.Portal.Web</RootNamespace>
+    <AssemblyName>LeeftSamen.Portal.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>true</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject, Version=3.0.2.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\LightInject.3.0.2.6\lib\net45\LightInject.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject.Mvc">
+      <HintPath>..\..\packages\LightInject.Mvc.1.0.0.4\lib\net45\LightInject.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="LightInject.Web, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\LightInject.Web.1.0.0.7\lib\net45\LightInject.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mindscape.Raygun4Net, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mindscape.Raygun4Net.Core.5.0.1\lib\net40\Mindscape.Raygun4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mindscape.Raygun4Net.Mvc, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mindscape.Raygun4Net.Mvc.5.0.1\lib\net40\Mindscape.Raygun4Net.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mindscape.Raygun4Net4, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mindscape.Raygun4Net.Mvc.5.0.1\lib\net40\Mindscape.Raygun4Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.7.2.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RazorEngine.3.7.2\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Owin">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\AutomapperConfig.cs" />
+    <Compile Include="Attributes\MandatoryAttribute.cs" />
+    <Compile Include="Attributes\ValidateProfileAttribute.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Attributes\CurrentUserMustBeInActiveCityExceptionAttribute.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BuddiesController.cs" />
+    <Compile Include="Controllers\CirclesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ForumsController.cs" />
+    <Compile Include="Controllers\HelpIconController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\InvitationsController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
+    <Compile Include="Controllers\MarketplaceController.cs" />
+    <Compile Include="Controllers\NeighborhoodMessagesController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\SquaresController.cs" />
+    <Compile Include="Controllers\SuggestionController.cs" />
+    <Compile Include="Controllers\ReportAbuseController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\ColorExtension.cs" />
+    <Compile Include="Attributes\CurrentUserMustBeInActiveCityAttribute.cs" />
+    <Compile Include="Extensions\HttpPostedFileBaseExtensions.cs" />
+    <Compile Include="Extensions\LabelExtensions.cs" />
+    <Compile Include="Helpers\AtomResult.cs" />
+    <Compile Include="Helpers\BootstrapHelper.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\DecimalModelBinder.cs" />
+    <Compile Include="Helpers\HandleAntiForgeryTokenErrorAttribute.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\SettingHelper.cs" />
+    <Compile Include="Helpers\TempDataHelper.cs" />
+    <Compile Include="Helpers\ZuiderlingHelper.cs" />
+    <Compile Include="Managers\ApplicationSignInManager.cs" />
+    <Compile Include="Models\Account\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Account\ChangeNamePostModel.cs" />
+    <Compile Include="Models\Account\ChangeNotificationViewModel.cs" />
+    <Compile Include="Models\Account\ChangeZuiderlingSettingsViewModel.cs" />
+    <Compile Include="Models\Account\ChangePasswordViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Account\ChangeProfileImageViewModel.cs" />
+    <Compile Include="Models\Account\ChangeProfileImagePostModel.cs" />
+    <Compile Include="Models\Account\ChangeUsernamePostModel.cs" />
+    <Compile Include="Models\Account\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Models\Account\ChangeEmailSetttingsViewModel.cs" />
+    <Compile Include="Models\Account\FactorViewModel.cs" />
+    <Compile Include="Models\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Account\HeaderViewModel.cs" />
+    <Compile Include="Models\Account\IndexViewModel.cs" />
+    <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Account\ManageLoginsViewModel.cs" />
+    <Compile Include="Models\Account\MenuViewModel.cs" />
+    <Compile Include="Models\Account\RemoveAccountPostModel.cs" />
+    <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Account\SendCodeViewModel.cs" />
+    <Compile Include="Models\Account\SetPasswordViewModel.cs" />
+    <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Account\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Action\IndexVoteModel.cs" />
+    <Compile Include="Models\Action\ActionsMenuModel.cs" />
+    <Compile Include="Models\Activities\AttendanceFormViewModel.cs" />
+    <Compile Include="Models\Activities\CreateBulkPostModel.cs" />
+    <Compile Include="Models\Activities\DetailViewModel.cs" />
+    <Compile Include="Models\Activities\IndexViewModel.cs" />
+    <Compile Include="Models\Activities\PostViewModel.cs" />
+    <Compile Include="Models\Activities\ActivityReactionViewModel.cs" />
+    <Compile Include="Models\Admin\OrganizationsPostModel.cs" />
+    <Compile Include="Models\Admin\OrganizationsViewModel.cs" />
+    <Compile Include="Models\Circles\ChangeMemberProfileModel.cs" />
+    <Compile Include="Models\Circles\CircleAgendaViewModel.cs" />
+    <Compile Include="Models\Circles\CircleCreateEmailMessageModel.cs" />
+    <Compile Include="Models\Circles\CircleEmailMessageDetailModel.cs" />
+    <Compile Include="Models\Circles\CircleInboxSendViewModel.cs" />
+    <Compile Include="Models\Circles\CircleInboxViewModel.cs" />
+    <Compile Include="Models\Circles\CircleMessagesViewModel.cs" />
+    <Compile Include="Models\Circles\CirclePhotosViewModel.cs" />
+    <Compile Include="Models\Circles\CreateActivityModel.cs" />
+    <Compile Include="Models\Circles\CreateEmailGroupModel.cs" />
+    <Compile Include="Models\Circles\CreateEmailModel.cs" />
+    <Compile Include="Models\Circles\CreatePhotoViewModel.cs" />
+    <Compile Include="Models\Circles\DetailHeaderViewModel.cs" />
+    <Compile Include="Models\Circles\EditModel.cs" />
+    <Compile Include="Models\Circles\FeaturedCirclesModel.cs" />
+    <Compile Include="Models\Circles\JoinRequestsViewModel.cs" />
+    <Compile Include="Models\Circles\MemberDetailModel.cs" />
+    <Compile Include="Models\Circles\MemberSearchModel.cs" />
+    <Compile Include="Models\Circles\MembersViewModel.cs" />
+    <Compile Include="Models\Circles\MessagesViewModel.cs" />
+    <Compile Include="Models\Circles\IndexViewModel.cs" />
+    <Compile Include="Models\Circles\CreatePostModel.cs" />
+    <Compile Include="Models\Circles\MessagingGroupModel.cs" />
+    <Compile Include="Models\Circles\MessagingViewModel.cs" />
+    <Compile Include="Models\Circles\SearchMemberViewModel.cs" />
+    <Compile Include="Models\Circles\SearchUserViewModel.cs" />
+    <Compile Include="Models\Forums\CreateReactionPostModel.cs" />
+    <Compile Include="Models\Forums\CreateReactionViewModel.cs" />
+    <Compile Include="Models\Forums\CreateSubjectPostModel.cs" />
+    <Compile Include="Models\Forums\CreateSubjectViewModel.cs" />
+    <Compile Include="Models\Forums\EditSubjectModel.cs" />
+    <Compile Include="Models\Forums\EditReactionModel.cs" />
+    <Compile Include="Models\Forums\ForumReaction.cs" />
+    <Compile Include="Models\Forums\ReportedReactionsModel.cs" />
+    <Compile Include="Models\Forums\SubjectViewModel.cs" />
+    <Compile Include="Models\Forums\IndexViewModel.cs" />
+    <Compile Include="Models\Jobs\EditPostModel.cs" />
+    <Compile Include="Models\MultiFileUploadModel.cs" />
+    <Compile Include="Models\Register\IndexRegisterAccountViewModel.cs" />
+    <Compile Include="Models\InviteUserViewModel.cs" />
+    <Compile Include="Models\HelpIconViewModel.cs" />
+    <Compile Include="Models\Home\IndexAuthenticatedViewModel.cs" />
+    <Compile Include="Models\FileUploadModel.cs" />
+    <Compile Include="Models\Invitations\IndexViewModel.cs" />
+    <Compile Include="Models\Invitations\InvitationsViewModel.cs" />
+    <Compile Include="Models\Jobs\AssignedJobsViewModel.cs" />
+    <Compile Include="Models\Jobs\IndexViewModel.cs" />
+    <Compile Include="Models\Circles\DetailViewModel.cs" />
+    <Compile Include="Models\Jobs\CreatePostModel.cs" />
+    <Compile Include="Models\Jobs\CreateViewModel.cs" />
+    <Compile Include="Models\Marketplace\DetailViewModel.cs" />
+    <Compile Include="Models\Marketplace\OverviewViewModel.cs" />
+    <Compile Include="Models\Marketplace\ItemPostModel.cs" />
+    <Compile Include="Models\Marketplace\ItemViewModel.cs" />
+    <Compile Include="Models\Marketplace\IndexViewModel.cs" />
+    <Compile Include="Models\Marketplace\MyMarketplaceViewModel.cs" />
+    <Compile Include="Models\Marketplace\ReactionPostModel.cs" />
+    <Compile Include="Models\Marketplace\SearchModel.cs" />
+    <Compile Include="Models\MenuItemModel.cs" />
+    <Compile Include="Models\NeighborhoodMessages\IndexViewModel.cs" />
+    <Compile Include="Models\NeighborhoodMessages\MessageDetailViewModel.cs" />
+    <Compile Include="Models\NeighborhoodMessages\PostMessageViewModel.cs" />
+    <Compile Include="Models\NeighborhoodMessages\ReactionPostModel.cs" />
+    <Compile Include="Models\Notifications\IndexViewModel.cs" />
+    <Compile Include="Models\Notifications\NotificationViewModel.cs" />
+    <Compile Include="Models\Organizations\DetailHeaderViewModel.cs" />
+    <Compile Include="Models\Organizations\DetailViewModel.cs" />
+    <Compile Include="Models\Organizations\ActivitiesViewModel.cs" />
+    <Compile Include="Models\Organizations\ServiceViewModel.cs" />
+    <Compile Include="Models\Organizations\ProductViewModel.cs" />
+    <Compile Include="Models\Organizations\DistrictViewModel.cs" />
+    <Compile Include="Models\Organizations\EditPostModel.cs" />
+    <Compile Include="Models\Organizations\EditViewModel.cs" />
+    <Compile Include="Models\Organizations\IndexViewModel.cs" />
+    <Compile Include="Models\Organizations\MembersViewModel.cs" />
+    <Compile Include="Models\Organizations\OrganizationThemeViewModel.cs" />
+    <Compile Include="Models\Organizations\RequestViewModel.cs" />
+    <Compile Include="Models\Organizations\TownViewModel.cs" />
+    <Compile Include="Models\Register\AddressViewModel.cs" />
+    <Compile Include="Models\Register\BecomePioneerPostModel.cs" />
+    <Compile Include="Models\Register\NeighborhoodRadiusViewModel.cs" />
+    <Compile Include="Models\Register\NeighborhoodViewModel.cs" />
+    <Compile Include="Models\Register\RegisterAccountViewModel.cs" />
+    <Compile Include="Models\ReportAbuse\ReportAbusePostModel.cs" />
+    <Compile Include="Models\Search\IndexViewModel.cs" />
+    <Compile Include="Models\Squares\ChangeForumModel.cs" />
+    <Compile Include="Models\Squares\ChangeGeneralModel.cs" />
+    <Compile Include="Models\Squares\ChangeZipCodesModel.cs" />
+    <Compile Include="Models\Squares\CreateFactPostModel.cs" />
+    <Compile Include="Models\Squares\CreateFactViewModel.cs" />
+    <Compile Include="Models\Squares\CreateReactionPostModel.cs" />
+    <Compile Include="Models\Squares\CreateReactionViewModel.cs" />
+    <Compile Include="Models\Squares\CreateSubjectPostModel.cs" />
+    <Compile Include="Models\Squares\CreateSubjectViewModel.cs" />
+    <Compile Include="Models\Squares\DetailHeaderViewModel.cs" />
+    <Compile Include="Models\Squares\EditFactModel.cs" />
+    <Compile Include="Models\Squares\EditReactionModel.cs" />
+    <Compile Include="Models\Squares\FactDetailModel.cs" />
+    <Compile Include="Models\Squares\FactsViewModel.cs" />
+    <Compile Include="Models\Squares\ForumSubjectViewModel.cs" />
+    <Compile Include="Models\Squares\ForumViewModel.cs" />
+    <Compile Include="Models\Squares\DetailViewModel.cs" />
+    <Compile Include="Models\Squares\IndexViewModel.cs" />
+    <Compile Include="Models\Squares\MembersViewModel.cs" />
+    <Compile Include="Models\Squares\MenuSquaresModel.cs" />
+    <Compile Include="Models\Squares\ReportedReactionsModel.cs" />
+    <Compile Include="Models\Squares\SearchUserViewModel.cs" />
+    <Compile Include="Models\Squares\SettingsModel.cs" />
+    <Compile Include="Models\Stats\IndexViewModel.cs" />
+    <Compile Include="Models\Suggestion\SuggestionModalViewModel.cs" />
+    <Compile Include="Models\Users\InviteModel.cs" />
+    <Compile Include="Models\Users\PostalCodeViewModel.cs" />
+    <Compile Include="Models\Users\UserProfileImage.cs" />
+    <Compile Include="ResourceProxy\Proxy.ashx.cs">
+      <DependentUpon>Proxy.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\LightInjectConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Service References\ZuiderlingAccess\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ZuiderlingAccount\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ZuiderlingPayment\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CurrentUserInformation.cs" />
+    <Compile Include="Utils\ICurrentUserInformation.cs" />
+    <Compile Include="Utils\LinkGenerator.cs" />
+    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils\ViewUtils.cs" />
+    <Compile Include="Models\NeighborhoodMessages\ReactionViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Audio\notification.mp3" />
+    <Content Include="Content\bootstrap-colorselector.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\banner_clubactie_renswoude.png" />
+    <Content Include="Content\Images\banner_clubactie_renswoude_large.png" />
+    <Content Include="Content\Images\bar.png" />
+    <Content Include="Content\Images\comunios_logo.png" />
+    <Content Include="Content\Images\enveloppe.png" />
+    <Content Include="Content\Images\glyph_plus.png" />
+    <Content Include="Content\Images\header-bg-repeat.png" />
+    <Content Include="Content\Images\header-bg-yellow-repeat.png" />
+    <Content Include="Content\Images\header-bg-yellow.png" />
+    <Content Include="Content\Images\header-bg.png" />
+    <Content Include="Content\Images\hero.jpg" />
+    <Content Include="Content\Images\hero3.jpg" />
+    <Content Include="Content\Images\icon-share-email.png" />
+    <Content Include="Content\Images\icon-share-facebook.png" />
+    <Content Include="Content\Images\icon-share-googleplus.png" />
+    <Content Include="Content\Images\icon-share-twitter.png" />
+    <Content Include="Content\Images\layers-2x.png" />
+    <Content Include="Content\Images\layers.png" />
+    <Content Include="Content\Images\leeftsamen_logo.png" />
+    <Content Include="Content\Images\leeftsamen_logo_old.png" />
+    <Content Include="Content\Images\loader16.gif" />
+    <Content Include="Content\Images\logo_icon.png" />
+    <Content Include="Content\Images\marker-icon-2x.png" />
+    <Content Include="Content\Images\marker-icon.png" />
+    <Content Include="Content\Images\marker-shadow.png" />
+    <Content Include="Content\Images\menu-icons-large-active.png" />
+    <Content Include="Content\Images\menu-icons-large.png" />
+    <Content Include="Content\Images\menu-icons-sprite.png" />
+    <Content Include="Content\Images\menu_bg_repeater.gif" />
+    <Content Include="Content\Images\newsletterlogo.jpg" />
+    <Content Include="Content\Images\placeholder-image.png" />
+    <Content Include="Content\Images\placeholder-image_logo.jpg" />
+    <Content Include="Content\Images\placeholder-image.jpg" />
+    <Content Include="Content\Images\placeholder-image_old.jpg" />
+    <Content Include="Content\Images\profile-image.jpg" />
+    <Content Include="Content\Images\tipbutton.png" />
+    <Content Include="Content\Images\user-neighborhood.jpg" />
+    <Content Include="Content\Images\zuiderlinglogo.png" />
+    <Content Include="Content\img\comunios_logo.png" />
+    <Content Include="Content\img\leeftsamen_header_tmp.jpg" />
+    <Content Include="Content\img\leeftsamen_logo.png" />
+    <Content Include="Content\img\mail-logo.png" />
+    <Content Include="Content\img\pattern-ls.png" />
+    <Content Include="Content\leaflet.css" />
+    <Content Include="Content\restyle.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\Images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap-colorselector.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ResourceProxy\proxy.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+    <None Include="ResourceProxy\proxy.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ResourceProxy\README.md" />
+    <Content Include="ResourceProxy\Web.config" />
+    <Content Include="ResourceProxy\Proxy.ashx" />
+    <Content Include="Scripts\font.js" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <None Include="Scripts\jquery-1.11.2.intellisense.js" />
+    <Content Include="Scripts\item-tiler.js" />
+    <Content Include="Scripts\jquery-1.11.2.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.js" />
+    <Content Include="Scripts\jquery-1.11.2.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.ui.touch-punch.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\leaflet-0.7.3.js" />
+    <Content Include="Scripts\leaflet-0.7.3.min.js" />
+    <Content Include="Scripts\leeftsamen.js" />
+    <Content Include="Scripts\lightbox\css\lightbox.css" />
+    <Content Include="Scripts\lightbox\images\close.png" />
+    <Content Include="Scripts\lightbox\images\loading.gif" />
+    <Content Include="Scripts\lightbox\images\next.png" />
+    <Content Include="Scripts\lightbox\images\prev.png" />
+    <Content Include="Scripts\lightbox\js\lightbox-plus-jquery.js" />
+    <Content Include="Scripts\lightbox\js\lightbox-plus-jquery.min.js" />
+    <Content Include="Scripts\lightbox\js\lightbox.js" />
+    <Content Include="Scripts\lightbox\js\lightbox.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\neighborhoodGmap.js" />
+    <Content Include="Scripts\neighborhood.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Scripts\tinymce\langs\mk_MK.js" />
+    <Content Include="Scripts\tinymce\langs\nl.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example\dialog.html" />
+    <Content Include="Scripts\tinymce\plugins\example\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <None Include="Service References\ZuiderlingAccess\configuration91.svcinfo" />
+    <None Include="Service References\ZuiderlingAccess\configuration.svcinfo" />
+    <Content Include="Service References\ZuiderlingAccess\LeeftSamen.Portal.Web.ZuiderlingAccess.changeChannelsStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccess\LeeftSamen.Portal.Web.ZuiderlingAccess.changeCredentialsStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccess\LeeftSamen.Portal.Web.ZuiderlingAccess.credentialsStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ZuiderlingAccess\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ZuiderlingAccount\configuration91.svcinfo" />
+    <None Include="Service References\ZuiderlingAccount\configuration.svcinfo" />
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.accountHistoryResultPage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.getMemberAccountsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.loadTransferResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.memberAccount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.searchAccountHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.searchMultipleAccountHistoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.searchTransferTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.transfer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingAccount\LeeftSamen.Portal.Web.ZuiderlingAccount.transferType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ZuiderlingAccount\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.chargebackResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.chargebackResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.confirmPaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.doBulkChargebackResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.doBulkPaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.doBulkReverseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.doPaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.expireTicketResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.paymentResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.paymentStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.requestPaymentConfirmationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.requestPaymentResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.reverseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ZuiderlingPayment\LeeftSamen.Portal.Web.ZuiderlingPayment.simulatePaymentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ZuiderlingAccount\account.wsdl" />
+    <None Include="Service References\ZuiderlingPayment\payment.wsdl" />
+    <None Include="Service References\ZuiderlingPayment\configuration91.svcinfo" />
+    <None Include="Service References\ZuiderlingPayment\configuration.svcinfo" />
+    <None Include="Service References\ZuiderlingPayment\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Marketplace\_HelpIconsRestyle.cshtml" />
+    <Content Include="Views\Squares\ChangeForum.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_NeighborhoodPartial.cshtml" />
+    <Content Include="Views\Circles\Index.cshtml" />
+    <Content Include="Views\Circles\Detail.cshtml" />
+    <Content Include="Views\Circles\Create.cshtml" />
+    <Content Include="Views\Circles\_CircleOverviewTable.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Circles\Messages.cshtml" />
+    <Content Include="Views\Circles\_Message.cshtml" />
+    <Content Include="Views\Circles\Members.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Circles\_DetailHeader.cshtml" />
+    <Content Include="Views\Shared\_ValidationSummary.cshtml" />
+    <Content Include="Views\Shared\_Notification.cshtml" />
+    <Content Include="Views\Shared\_Modal.cshtml" />
+    <Content Include="Views\Account\_Header.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\ChangeProfileImage.cshtml" />
+    <Content Include="Views\Jobs\_AssignedJobs.cshtml" />
+    <Content Include="Views\Account\ChangeNeighborhood.cshtml" />
+    <Content Include="Views\Circles\Edit.cshtml" />
+    <Content Include="Views\Organizations\Index.cshtml" />
+    <Content Include="Views\Organizations\Detail.cshtml" />
+    <Content Include="Views\Marketplace\Index.cshtml" />
+    <Content Include="Views\Marketplace\MyMarketplace.cshtml" />
+    <Content Include="Views\Marketplace\EditItem.cshtml" />
+    <Content Include="Views\Marketplace\Detail.cshtml" />
+    <Content Include="Views\Shared\_UserProfileImage.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\Index.cshtml" />
+    <Content Include="Views\Organizations\Request.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\MessageDetail.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\EditMessage.cshtml" />
+    <Content Include="Views\Organizations\Members.cshtml" />
+    <Content Include="Views\Organizations\_DetailHeader.cshtml" />
+    <Content Include="Views\Organizations\Edit.cshtml" />
+    <Content Include="Views\Marketplace\_Reaction.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\_MessageDetailEditMenu.cshtml" />
+    <Content Include="Views\Shared\_ImageUpload.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\Detail.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\Home\IndexAuthenticated.cshtml" />
+    <Content Include="Views\Circles\JoinRequests.cshtml" />
+    <Content Include="Views\Shared\_HelpIcon.cshtml" />
+    <Content Include="Views\Account\ChangeName.cshtml" />
+    <Content Include="Views\Invitations\Index.cshtml" />
+    <Content Include="Views\Account\ChangeUsername.cshtml" />
+    <Content Include="Views\Account\RemoveAccount.cshtml" />
+    <Content Include="Views\Shared\_ReportAbuseLink.cshtml" />
+    <Content Include="Views\Shared\_ModalReportAbuse.cshtml" />
+    <Content Include="Views\Buddies\Index.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Register\Address.cshtml" />
+    <Content Include="Views\Register\NeighborhoodRadius.cshtml" />
+    <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\Stats\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Users\_PostalCode.cshtml" />
+    <Content Include="Views\Register\BecomePioneer.cshtml" />
+    <Content Include="Views\Home\_Header.cshtml" />
+    <Content Include="Views\Shared\_ShareButtons.cshtml" />
+    <Content Include="Views\Account\ChangeEmailSettings.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\_Reaction.cshtml" />
+    <Content Include="Views\Activities\CreateBulk.cshtml" />
+    <Content Include="Views\Circles\Photos.cshtml" />
+    <Content Include="Views\Activities\_Reaction.cshtml" />
+    <Content Include="Views\Shared\_HiddenImageUpload.cshtml" />
+    <Content Include="Views\Marketplace\Overview.cshtml" />
+    <Content Include="Views\Marketplace\_DisplayItem.cshtml" />
+    <Content Include="Views\Marketplace\_HelpIcons.cshtml" />
+    <Content Include="Views\Marketplace\_OverviewItems.cshtml" />
+    <Content Include="Views\Circles\Inbox.cshtml" />
+    <Content Include="Views\Activities\_AttendanceForm.cshtml" />
+    <Content Include="Views\Organizations\Activities.cshtml" />
+    <Content Include="Views\Activities\ActivitiesOverview.cshtml" />
+    <Content Include="Views\Circles\CreateEmailMessage.cshtml" />
+    <Content Include="Views\Circles\InboxSend.cshtml" />
+    <Content Include="Views\Circles\EmailMessageDetail.cshtml" />
+    <Content Include="Views\Circles\Agenda.cshtml" />
+    <Content Include="Views\Circles\CreateActivity.cshtml" />
+    <Content Include="Views\Page\TermsAndConditions.cshtml" />
+    <Content Include="Views\Organizations\_CityDistrictScript.cshtml" />
+    <Content Include="Views\Circles\_InboxMenu.cshtml" />
+    <Content Include="Scripts\lightbox\js\lightbox-plus-jquery.min.map" />
+    <Content Include="Scripts\lightbox\js\lightbox.min.map" />
+    <Content Include="Views\Shared\_InviteUserModal.cshtml" />
+    <Content Include="Views\Shared\_InviteUserModalScript.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Organizations.cshtml" />
+    <Content Include="Views\Shared\_LoginBox.cshtml" />
+    <Content Include="Views\Shared\_SuggestionModal.cshtml" />
+    <Content Include="Views\Action\Index.cshtml" />
+    <Content Include="Views\Action\_MenuActions.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Account\ChangeZuiderlingSettings.cshtml" />
+    <None Include="Service References\ZuiderlingAccess\access.wsdl" />
+    <Content Include="Views\Circles\_CircleInvitationTable.cshtml" />
+    <Content Include="Views\Squares\_DetailHeader.cshtml" />
+    <Content Include="Views\Squares\Facts.cshtml" />
+    <Content Include="Views\Squares\CreateFact.cshtml" />
+    <Content Include="Views\Shared\_FileUpload.cshtml" />
+    <Content Include="Views\Circles\ProfileNotAllowed.cshtml" />
+    <Content Include="Views\Shared\_MultiFileUpload.cshtml" />
+    <Content Include="Views\Squares\FactDetail.cshtml" />
+    <Content Include="Views\Squares\Members.cshtml" />
+    <Content Include="Views\Squares\_InviteUserModal.cshtml" />
+    <Content Include="Views\Squares\CreateSubject.cshtml" />
+    <Content Include="Views\Squares\CreateReaction.cshtml" />
+    <Content Include="Views\Shared\_MultiImageUpload.cshtml" />
+    <Content Include="Views\Squares\Settings.cshtml" />
+    <Content Include="Views\Squares\ChangeZipCodes.cshtml" />
+    <Content Include="Views\Squares\ChangeGeneral.cshtml" />
+    <Content Include="Views\Squares\Detail.cshtml" />
+    <Content Include="Views\Squares\EditReaction.cshtml" />
+    <Content Include="Views\Squares\EditFact.cshtml" />
+    <Content Include="Views\Squares\_MenuSquares.cshtml" />
+    <Content Include="Views\Squares\Index.cshtml" />
+    <Content Include="Views\Squares\_SquareOverviewTable.cshtml" />
+    <Content Include="Views\Circles\_FeaturedCircles.cshtml" />
+    <Content Include="Views\Squares\ReportedReactions.cshtml" />
+    <Content Include="Views\Forums\Index.cshtml" />
+    <Content Include="Views\Forums\Subject.cshtml" />
+    <Content Include="Views\Forums\CreateSubject.cshtml" />
+    <Content Include="Views\Forums\CreateReaction.cshtml" />
+    <Content Include="Views\Forums\EditReaction.cshtml" />
+    <Content Include="Views\Forums\ReportedReactions.cshtml" />
+    <Content Include="Views\Forums\_ForumReaction.cshtml" />
+    <Content Include="Views\Forums\EditSubject.cshtml" />
+    <Content Include="Views\Shared\_LayoutRestyle.cshtml" />
+    <Content Include="Views\Shared\_CurrentUserProfileImage.cshtml" />
+    <Content Include="Views\Circles\Messaging.cshtml" />
+    <Content Include="Views\Circles\MessageGroup.cshtml" />
+    <Content Include="Views\Circles\CreateEmailGroup.cshtml" />
+    <Content Include="Views\Circles\Documents.cshtml" />
+    <Content Include="Views\Home\IndexAuthenticatedRestyle.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\_HeaderRestyle.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\IndexRestyle.cshtml" />
+    <Content Include="Views\Activities\ActivitiesOverviewRestyle.cshtml" />
+    <Content Include="Views\Activities\IndexRestyle.cshtml" />
+    <Content Include="Views\Marketplace\IndexRestyle.cshtml" />
+    <Content Include="Views\Shared\_NeighborhoodPartialGmap.cshtml" />
+    <Content Include="Views\Register\AddressGmap.cshtml" />
+    <Content Include="Views\Account\_HeaderRestyle.cshtml" />
+    <Content Include="Views\Circles\_CircleOverviewTableRestyle.cshtml" />
+    <Content Include="Views\Circles\IndexRestyle.cshtml" />
+    <Content Include="Views\Organizations\IndexRestyle.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\EditMessageRestyle.cshtml" />
+    <Content Include="Views\Activities\EditRestyle.cshtml" />
+    <Content Include="Views\Activities\CreateBulkRestyle.cshtml" />
+    <Content Include="Views\Marketplace\EditItemRestyle.cshtml" />
+    <Content Include="Views\Organizations\EditRestyle.cshtml" />
+    <Content Include="Views\Organizations\RequestRestyle.cshtml" />
+    <Content Include="Views\Circles\CreateRestyle.cshtml" />
+    <Content Include="Views\Circles\EditRestyle.cshtml" />
+    <Content Include="Views\Marketplace\MyMarketplaceRestyle.cshtml" />
+    <Content Include="Views\Marketplace\DetailRestyle.cshtml" />
+    <Content Include="Views\Marketplace\OverviewRestyle.cshtml" />
+    <Content Include="Views\Marketplace\_DisplayItemRestyle.cshtml" />
+    <Content Include="Views\Users\Invite.cshtml" />
+    <Content Include="Views\Shared\_ImageUploadRestyle.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\MessageDetailRestyle.cshtml" />
+    <Content Include="Views\Action\_MenuActionsRestyle.cshtml" />
+    <Content Include="Views\Activities\DetailRestyle.cshtml" />
+    <Content Include="Views\Circles\MessagesRestyle.cshtml" />
+    <Content Include="Views\Circles\_MessageRestyle.cshtml" />
+    <Content Include="Views\Circles\MembersRestyle.cshtml" />
+    <Content Include="Views\Circles\JoinRequestsRestyle.cshtml" />
+    <Content Include="Views\Circles\_DetailHeaderRestyle.cshtml" />
+    <Content Include="Views\Circles\MessageGroupRestyle.cshtml" />
+    <Content Include="Views\Circles\CreateEmailGroupRestyle.cshtml" />
+    <Content Include="Views\Circles\MessagingRestyle.cshtml" />
+    <Content Include="Views\Jobs\CreateRestyle.cshtml" />
+    <Content Include="Views\Circles\DetailRestyle.cshtml" />
+    <Content Include="Views\Squares\_DetailHeaderRestyle.cshtml" />
+    <Content Include="Views\Squares\DetailRestyle.cshtml" />
+    <Content Include="Views\Squares\FactsRestyle.cshtml" />
+    <Content Include="Views\Squares\FactDetailRestyle.cshtml" />
+    <Content Include="Views\Squares\CreateFactRestyle.cshtml" />
+    <Content Include="Views\Squares\EditFactRestyle.cshtml" />
+    <Content Include="Views\Squares\MembersRestyle.cshtml" />
+    <Content Include="Views\Squares\SettingsRestyle.cshtml" />
+    <Content Include="Views\Squares\ChangeGeneralRestyle.cshtml" />
+    <Content Include="Views\Squares\ChangeZipCodesRestyle.cshtml" />
+    <Content Include="Views\Forums\IndexRestyle.cshtml" />
+    <Content Include="Views\Forums\CreateSubjectRestyle.cshtml" />
+    <Content Include="Views\Forums\EditSubjectRestyle.cshtml" />
+    <Content Include="Views\Forums\SubjectRestyle.cshtml" />
+    <Content Include="Views\Forums\EditReactionRestyle.cshtml" />
+    <Content Include="Views\Forums\CreateReactionRestyle.cshtml" />
+    <Content Include="Views\Forums\ReportedReactionsRestyle.cshtml" />
+    <Content Include="Views\Squares\ChangeForumRestyle.cshtml" />
+    <Content Include="Views\Jobs\EditRestyle.cshtml" />
+    <Content Include="Views\Jobs\IndexRestyle.cshtml" />
+    <Content Include="Views\NeighborhoodMessages\_ReactionRestyle.cshtml" />
+    <Content Include="Views\Activities\_ReactionRestyle.cshtml" />
+    <Content Include="Views\Search\IndexRestyle.cshtml" />
+    <Content Include="Views\Jobs\_AssignedJobsRestyle.cshtml" />
+    <Content Include="Views\Organizations\DetailRestyle.cshtml" />
+    <Content Include="Views\Organizations\_DetailHeaderRestyle.cshtml" />
+    <Content Include="Views\Organizations\MembersRestyle.cshtml" />
+    <Content Include="Views\Organizations\ActivitiesRestyle.cshtml" />
+    <Content Include="Views\Circles\ProfileNotAllowedRestyle.cshtml" />
+    <Content Include="Views\Circles\PhotosRestyle.cshtml" />
+    <Content Include="Views\Circles\DocumentsRestyle.cshtml" />
+    <Content Include="Views\Shared\_MultiFileUploadRestyle.cshtml" />
+    <Content Include="Views\Shared\_MultiImageUploadRestyle.cshtml" />
+    <Content Include="Views\Account\IndexRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeEmailSettingsRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeNameRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeNeighborhoodRestyle.cshtml" />
+    <Content Include="Views\Account\ChangePasswordRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeProfileImageRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeUsernameRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeZuiderlingSettingsRestyle.cshtml" />
+    <Content Include="Views\Shared\_NeighborhoodPartialRestyle.cshtml" />
+    <Content Include="Views\Account\RemoveAccountRestyle.cshtml" />
+    <Content Include="Views\Circles\ChangeMemberProfile.cshtml" />
+    <Content Include="Views\Shared\_TabMenu.cshtml" />
+    <Content Include="Views\Circles\_CircleInvitationTableRestyle.cshtml" />
+    <Content Include="Views\Circles\MemberDetail.cshtml" />
+    <Content Include="Views\Circles\_MessageRestyle2.cshtml" />
+    <Content Include="Views\Marketplace\OverviewRestyle_old.cshtml" />
+    <Content Include="Views\Users\InviteRestyle.cshtml" />
+    <Content Include="Views\Marketplace\OverviewAddRestyle.cshtml" />
+    <Content Include="Views\Account\ChangeNotificationsRestyle.cshtml" />
+    <Content Include="Views\Account\_Menu.cshtml" />
+    <Content Include="Views\Shared\_FileUploadRestyle.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Filters\" />
+    <Folder Include="Views\Media\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LeeftSamen.Common\LeeftSamen.Common.csproj">
+      <Project>{10a750ca-261c-42bb-ae8a-36c481926317}</Project>
+      <Name>LeeftSamen.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeeftSamen.Portal.Data\LeeftSamen.Portal.Data.csproj">
+      <Project>{ADF24EFE-6759-4EBA-92FE-01A0F88A038F}</Project>
+      <Name>LeeftSamen.Portal.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeeftSamen.Portal.EmailTemplates\LeeftSamen.Portal.EmailTemplates.csproj">
+      <Project>{0235D021-981C-4CC5-BD70-1C5B53C10057}</Project>
+      <Name>LeeftSamen.Portal.EmailTemplates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeeftSamen.Portal.Services\LeeftSamen.Portal.Services.csproj">
+      <Project>{02730336-A461-45A4-8D42-AEE7DF72B5B8}</Project>
+      <Name>LeeftSamen.Portal.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ZuiderlingAccess\" />
+    <WCFMetadataStorage Include="Service References\ZuiderlingAccount\" />
+    <WCFMetadataStorage Include="Service References\ZuiderlingPayment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

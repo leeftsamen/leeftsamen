@@ -1,0 +1,72 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Home.IndexAuthenticatedViewModel
+
+<div class="content-wide">
+    
+    <h1 class="page-title">@Title.MyNeighborhood</h1>
+
+    @{ 
+        var items = new List<MenuItemModel>();
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Home", action = "Index" }),
+                Button.Overview,
+                ViewUtils.IsActiveAction(ViewContext, "Home", "Index")
+            ));
+        items.Add(
+        new MenuItemModel(
+            "Default",
+            new RouteValueDictionary(new { controller = "Home", action = "Jobs" }),
+            Button.Jobs,
+            ViewUtils.IsActiveAction(ViewContext, "Home", "Jobs")
+        ));
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Home", action = "NeighborhoodMessages" }),
+                Button.NeighborhoodMessages,
+                ViewUtils.IsActiveAction(ViewContext, "Home", "NeighborhoodMessages")
+            ));
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Home", action = "Activities" }),
+                Button.Activities,
+                ViewUtils.IsActiveAction(ViewContext, "Home", "Activities")
+            ));
+        items.Add(
+            new MenuItemModel(
+                "Default",
+                new RouteValueDictionary(new { controller = "Home", action = "Marketplace" }),
+                Button.Marketplace,
+                ViewUtils.IsActiveAction(ViewContext, "Home", "Marketplace")
+            ));
+    }
+
+    @Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)
+
+    @*<div class="panel panel-default has-nav">
+        <div class="panel-body">
+            <ul class="nav nav-tabs pull-left">
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Index") ? "class=\"active\"" : string.Empty)>
+                    <a href="~/#start">@Button.Overview</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Jobs") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new { controller = "Home", action = "Jobs" })#start">@Button.Jobs</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "NeighborhoodMessages") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new { controller = "Home", action = "NeighborhoodMessages" })#start">@Button.NeighborhoodMessages</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Activities") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new { controller = "Home", action = "Activities" })#start">@Button.Activities</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Marketplace") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new { controller = "Home", action = "Marketplace" })#start">@Button.Marketplace</a>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+</div>

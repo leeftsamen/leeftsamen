@@ -1,0 +1,73 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Circles.DetailViewModel
+@{
+
+    ViewBag.Title = Model.Name;                          
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">@Html.Raw(Model.Description)</div>
+        </div>
+
+@if (Model.TimeLineItems.Count > 0)
+{ 
+    var lastDate = DateTime.MinValue.Date;
+
+    foreach (var item in Model.TimeLineItems.OrderByDescending(i => i.Date).Take(100))
+    {
+        if (item.Date > DateTime.Now.AddDays(-7))
+        {
+        
+            if (item.Date.Date != lastDate)
+            {
+                lastDate = item.Date.Date;
+                var dateLabel = lastDate.ToShortDateString();
+                if (lastDate.IsToday())
+                {
+                    dateLabel = Label.Today;
+                }
+                else if (lastDate.IsYesterday())
+                {
+                    dateLabel = Label.Yesterday;
+                }
+                else
+                {
+                    dateLabel = @lastDate.ToString("dddd d MMMM yyyy");
+                }
+                <br />
+                <time class="label label-block label-default" datetime="@lastDate.ToString("s")"
+                      title="@lastDate.ToString("f")">@dateLabel</time>
+            }
+
+            <div class="panel circle-info-panel startpage-item" data-link="@item.Url">
+                <div class="panel-heading">
+                    @if (item.User != null)
+                    {
+                        <div class="img-circle-wrapper">
+                            <span></span>
+                            @Html.Partial("_UserProfileImage", new UserProfileImage(item.User.ProfileImageId, item.User.Id, "profile-image-sm"))
+                        </div>
+                    }
+
+                    <label class="label label-info">@Label.In @item.Category</label>
+                    <h4><a href="@item.Url">@Html.Raw(item.Action)</a></h4>
+                </div>
+            </div>
+        }
+    }
+}
+else
+{
+    if (Model.IsCurrentUserMember)
+    {
+        <h2>@Title.NoTimelineFound</h2>
+    }
+}
+    </div>
+</div>

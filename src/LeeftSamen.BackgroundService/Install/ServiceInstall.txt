@@ -1,0 +1,10 @@
+﻿Manual service install
+
+installutil <path_to_project>\src\<exe>
+ 
+
+
+
+Manual service uninstall
+
+installutil /u <path_to_project>\src\<exe>

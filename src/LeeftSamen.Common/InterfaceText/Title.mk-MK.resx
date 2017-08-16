@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutThisCircle" xml:space="preserve">
+    <value>За кругот</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Забранет влез</value>
+  </data>
+  <data name="AccountLocationLabel" xml:space="preserve">
+    <value>Покажи локација</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Активности во соседството</value>
+  </data>
+  <data name="Activity" xml:space="preserve">
+    <value>Активности</value>
+  </data>
+  <data name="AddAdminToSquare" xml:space="preserve">
+    <value>Направи корисници да бидат администратори на твојот плоштад</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Админ</value>
+  </data>
+  <data name="Agenda" xml:space="preserve">
+    <value>Агенда</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>ЖивеемеЗаедно</value>
+  </data>
+  <data name="BadRequest" xml:space="preserve">
+    <value>Погрешно барање</value>
+  </data>
+  <data name="Buddies" xml:space="preserve">
+    <value>Пријатели</value>
+  </data>
+  <data name="BulkActivities" xml:space="preserve">
+    <value>Активности</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Категорија</value>
+  </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Смени податоци за профил</value>
+  </data>
+  <data name="ChangeForum" xml:space="preserve">
+    <value>Смени податоци за форум</value>
+  </data>
+  <data name="ChangeName" xml:space="preserve">
+    <value>Промени име</value>
+  </data>
+  <data name="ChangeNeighborhood" xml:space="preserve">
+    <value>Смени податоци за соседство </value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Смени ја лозинката</value>
+  </data>
+  <data name="ChangePasswordForm" xml:space="preserve">
+    <value>Безбедна лозинка сочинува што повеќе различни карактери</value>
+  </data>
+  <data name="ChangeProfileImage" xml:space="preserve">
+    <value>Смени профил слика</value>
+  </data>
+  <data name="ChangeSquare" xml:space="preserve">
+    <value>Смени го плоштадот</value>
+  </data>
+  <data name="ChangeSquareSettings" xml:space="preserve">
+    <value>Смени ги податоците за плоштадот</value>
+  </data>
+  <data name="ChangeUsername" xml:space="preserve">
+    <value>промени е-маил адреса</value>
+  </data>
+  <data name="ChangeZipCodes" xml:space="preserve">
+    <value>Промени дозволени поштенски кодови</value>
+  </data>
+  <data name="CircleData" xml:space="preserve">
+    <value>Податоци за круг</value>
+  </data>
+  <data name="CircleDesign" xml:space="preserve">
+    <value>Одлучете како да изгледа вашиот профил</value>
+  </data>
+  <data name="CirclePhotos" xml:space="preserve">
+    <value>Слики</value>
+  </data>
+  <data name="CircleRemoveMessage" xml:space="preserve">
+    <value>Избриши порака</value>
+  </data>
+  <data name="Circles" xml:space="preserve">
+    <value>Кругови</value>
+  </data>
+  <data name="ConfirmGiveMemberAdminRights" xml:space="preserve">
+    <value>Сигурни сте дека сакате да доделите администраторски права на овој корисник?</value>
+  </data>
+  <data name="ConfirmInvitationReminder" xml:space="preserve">
+    <value>Потврди потсетник</value>
+  </data>
+  <data name="ConfirmLeaveCircle" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го напуштите овој круг?</value>
+  </data>
+  <data name="ConfirmRemoveActivity" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа активност?</value>
+  </data>
+  <data name="ConfirmRemoveAdmin" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го отстраните овој администратор?</value>
+  </data>
+  <data name="ConfirmRemoveCircle" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој круг</value>
+  </data>
+  <data name="ConfirmRemoveCircleMember" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го остраните овој член од кругот?</value>
+  </data>
+  <data name="ConfirmRemoveFact" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој факт</value>
+  </data>
+  <data name="ConfirmRemoveJob" xml:space="preserve">
+    <value>Сигруни сте дека сакате да ја избришете оваа задача?</value>
+  </data>
+  <data name="ConfirmRemoveMarketplaceItem" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој оглас?</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessage" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа новост?</value>
+  </data>
+  <data name="ConfirmRemoveNeighborhoodMessageReaction" xml:space="preserve">
+    <value>сигурни сте дека сакате да ја избришете оваа реакција</value>
+  </data>
+  <data name="ConfirmRemoveOrganization" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа организација</value>
+  </data>
+  <data name="ConfirmRemoveOrganizationMember" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го остраните овој соработник?</value>
+  </data>
+  <data name="ConfirmRemovePhoto" xml:space="preserve">
+    <value>Сигурни сте дека сакате оваа слика да ја избришете</value>
+  </data>
+  <data name="ConfirmRemovePhotoAlbum" xml:space="preserve">
+    <value>сигурни сте дека сакате да го избришете овој албум</value>
+  </data>
+  <data name="ConfirmRemoveReaction" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја избришете оваа реакција</value>
+  </data>
+  <data name="ConfirmRemoveSubject" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој предмет</value>
+  </data>
+  <data name="ConfirmReportReaction" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја пријавите оваа реакција</value>
+  </data>
+  <data name="ConfirmSetCirclePrivate" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го направите овој круг приватен?</value>
+  </data>
+  <data name="ConfirmSetCirclePublic" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го направите овој круг јавен?</value>
+  </data>
+  <data name="ConfirmVoteAction" xml:space="preserve">
+    <value>Сигурни сте дека сакате да гласате за {0}</value>
+  </data>
+  <data name="ConfirmZipCodeDelete" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој поштенски код</value>
+  </data>
+  <data name="ConfirmZuiderlingTransaction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ContactAndAddress" xml:space="preserve">
+    <value>Контакт адреса</value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>Контакт информации</value>
+  </data>
+  <data name="CreateActivity" xml:space="preserve">
+    <value>Постави активност</value>
+  </data>
+  <data name="CreateBulkActivity" xml:space="preserve">
+    <value>Постави активност</value>
+  </data>
+  <data name="CreateFact" xml:space="preserve">
+    <value>Додади нови факти</value>
+  </data>
+  <data name="CreateMarketplaceItem" xml:space="preserve">
+    <value>Постави оглас</value>
+  </data>
+  <data name="CreateNeighborhoodMessage" xml:space="preserve">
+    <value>Постави нова новост</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Постави нов профил</value>
+  </data>
+  <data name="CreateNewCircle" xml:space="preserve">
+    <value>Постави нов круг</value>
+  </data>
+  <data name="CreateNewJob" xml:space="preserve">
+    <value>Постави нова задача</value>
+  </data>
+  <data name="CreateNewJobDetails" xml:space="preserve">
+    <value>Податоци</value>
+  </data>
+  <data name="CreateNewJobVisibility" xml:space="preserve">
+    <value>Видливост</value>
+  </data>
+  <data name="CreateReaction" xml:space="preserve">
+    <value>Додади нова реакција</value>
+  </data>
+  <data name="CreateSubject" xml:space="preserve">
+    <value>Додади нов предмет</value>
+  </data>
+  <data name="DateAndTime" xml:space="preserve">
+    <value>Датум и време</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>опис</value>
+  </data>
+  <data name="DetailInformation" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="EditCircle" xml:space="preserve">
+    <value>Промени го твојот круг</value>
+  </data>
+  <data name="EditFact" xml:space="preserve">
+    <value>Промени факт</value>
+  </data>
+  <data name="EditJob" xml:space="preserve">
+    <value>Промени задача</value>
+  </data>
+  <data name="EditOrganization" xml:space="preserve">
+    <value>Промни ја твојата организација</value>
+  </data>
+  <data name="EditReaction" xml:space="preserve">
+    <value>Променете ја реакцијата</value>
+  </data>
+  <data name="EditSubject" xml:space="preserve">
+    <value>Промени предмет</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Вашиот е-маил е потврден</value>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Податоци за е-маил</value>
+  </data>
+  <data name="Facts" xml:space="preserve">
+    <value>Факти</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Не е најдено</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Фајлови</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Заборавена лозинка?</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>Општи податоци</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Добредојдовте во ЖивеемеЗаедно</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Слики</value>
+  </data>
+  <data name="InternalServerError" xml:space="preserve">
+    <value>Грешка во среверот</value>
+  </data>
+  <data name="IntroductionInformation" xml:space="preserve">
+    <value>Податоци за претставување</value>
+  </data>
+  <data name="Invitations" xml:space="preserve">
+    <value>Покани</value>
+  </data>
+  <data name="InviteUsersToActivity" xml:space="preserve">
+    <value>Покани луѓе за твојата активност</value>
+  </data>
+  <data name="InviteUsersToCircle" xml:space="preserve">
+    <value>Покани луѓе за твојот круг</value>
+  </data>
+  <data name="InviteUsersToOrganization" xml:space="preserve">
+    <value>Покани луѓе за твојата организација</value>
+  </data>
+  <data name="ItemVisibility" xml:space="preserve">
+    <value>Каде да се прикаже</value>
+  </data>
+  <data name="Jobs" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="LatestMessages" xml:space="preserve">
+    <value>Последни пораки</value>
+  </data>
+  <data name="LockedOut" xml:space="preserve">
+    <value>Исклучен</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Пријави се</value>
+  </data>
+  <data name="LoginUsingYourAccount" xml:space="preserve">
+    <value>Пријави се со твојот профил</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Измени го својот профил</value>
+  </data>
+  <data name="ManageSquare" xml:space="preserve">
+    <value>Менаџирај го плоштадот</value>
+  </data>
+  <data name="Marketplace" xml:space="preserve">
+    <value>Побарај понуда</value>
+  </data>
+  <data name="MyCircleInvites" xml:space="preserve">
+    <value>Мои покани</value>
+  </data>
+  <data name="MyCircles" xml:space="preserve">
+    <value>Моите Кругови</value>
+  </data>
+  <data name="MyMarketplace" xml:space="preserve">
+    <value>Моето прашање и понуда</value>
+  </data>
+  <data name="MyMarketplaceItems" xml:space="preserve">
+    <value>Моите  огласи</value>
+  </data>
+  <data name="MyNeighborhood" xml:space="preserve">
+    <value>Моето соседство</value>
+  </data>
+  <data name="MySquares" xml:space="preserve">
+    <value>Мојот плоштад</value>
+  </data>
+  <data name="NbrAdmin" xml:space="preserve">
+    <value>{0} администратор</value>
+  </data>
+  <data name="NbrAdmins" xml:space="preserve">
+    <value>{0} адиминистратори</value>
+  </data>
+  <data name="NbrCircleJoinRequest" xml:space="preserve">
+    <value>{0} сака да стане член на овој круг</value>
+  </data>
+  <data name="NbrCircleJoinRequests" xml:space="preserve">
+    <value>{0} закат да станат член на овој круг</value>
+  </data>
+  <data name="NbrCircleMember" xml:space="preserve">
+    <value>{0}член на круг</value>
+  </data>
+  <data name="NbrCircleMembers" xml:space="preserve">
+    <value>{0}членови на круг</value>
+  </data>
+  <data name="NbrOrganizationMember" xml:space="preserve">
+    <value>{0} учесник</value>
+  </data>
+  <data name="NbrOrganizationMembers" xml:space="preserve">
+    <value>{0} учесници</value>
+  </data>
+  <data name="NeighborhoodMessages" xml:space="preserve">
+    <value>Новости</value>
+  </data>
+  <data name="NeighborhoodSettings" xml:space="preserve">
+    <value>Податоци за соседство</value>
+  </data>
+  <data name="NoActivitiesFound" xml:space="preserve">
+    <value>Нема најдено активности</value>
+  </data>
+  <data name="NoMarketplaceItemsFound" xml:space="preserve">
+    <value>Нема најдено огласи</value>
+  </data>
+  <data name="NoMessagesFound" xml:space="preserve">
+    <value>Нема најдено новости</value>
+  </data>
+  <data name="NoNotificationsFound" xml:space="preserve">
+    <value>Нема најдено нотификации</value>
+  </data>
+  <data name="NoOrganizationsFound" xml:space="preserve">
+    <value>Нема најдено организации</value>
+  </data>
+  <data name="NoOrganizationsFoundTheme" xml:space="preserve">
+    <value>Нема најдено организации околу темата</value>
+  </data>
+  <data name="NoSearchResult" xml:space="preserve">
+    <value>Нема резултати за</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Нотификации</value>
+  </data>
+  <data name="NoTimelineFound" xml:space="preserve">
+    <value>Нема никто на вашата временска линија</value>
+  </data>
+  <data name="NumberOfUnassignedJob" xml:space="preserve">
+    <value>{0} слободна задача</value>
+  </data>
+  <data name="NumberOfUnassignedJobs" xml:space="preserve">
+    <value>{0} слободни задачи</value>
+  </data>
+  <data name="OneSearchResult" xml:space="preserve">
+    <value>Има резултати за </value>
+  </data>
+  <data name="OrganisationThemes" xml:space="preserve">
+    <value>Теми</value>
+  </data>
+  <data name="OrganizationActivityFeed" xml:space="preserve">
+    <value>Преглед на активности</value>
+  </data>
+  <data name="OrganizationMessagesFeed" xml:space="preserve">
+    <value>преглед на пораки</value>
+  </data>
+  <data name="OrganizationProducts" xml:space="preserve">
+    <value>Додади продукти</value>
+  </data>
+  <data name="Organizations" xml:space="preserve">
+    <value>Организации</value>
+  </data>
+  <data name="OrganizationServices" xml:space="preserve">
+    <value>Додади услуги</value>
+  </data>
+  <data name="PinConfirmation" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја зацврстите оваа порака</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Како сакате да ви помогнеме со вашето прашање</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Политика на приватност</value>
+  </data>
+  <data name="ProfileNotAllowed" xml:space="preserve">
+    <value>Вашиот сегашен профиля не е дозволен</value>
+  </data>
+  <data name="PublicCirclesInMyNeighborhood" xml:space="preserve">
+    <value>Јавни кругови во моето соседство </value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Направи профил</value>
+  </data>
+  <data name="RegisterHome" xml:space="preserve">
+    <value>Регистрирајте се</value>
+  </data>
+  <data name="RegisterNeighborhood" xml:space="preserve">
+    <value>Регистрирај го твоето соседство </value>
+  </data>
+  <data name="RegisterPioneer" xml:space="preserve">
+    <value>Регистрирајте се. Уште едно прашање</value>
+  </data>
+  <data name="RegisterStep1" xml:space="preserve">
+    <value>Регистрација, чекор 1.3: Направи профил</value>
+  </data>
+  <data name="RegisterStep2" xml:space="preserve">
+    <value>Регистрација, чекор 2.3: Вашата адреса</value>
+  </data>
+  <data name="RegisterStep3" xml:space="preserve">
+    <value>Регистрација, чекор 3.3: Вашето соседство</value>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Избриши профил</value>
+  </data>
+  <data name="RemoveMemberAdminRights" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ги остраните правата на администратор на овој корисник</value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>Пријави злоупотреба</value>
+  </data>
+  <data name="ReportedReactions" xml:space="preserve">
+    <value>Пријавени реакции</value>
+  </data>
+  <data name="RequestOrganization" xml:space="preserve">
+    <value>Побарај нова организација</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Промени лозинка</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Барај</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>{0} резултати за</value>
+  </data>
+  <data name="SelectCircleMember" xml:space="preserve">
+    <value>Селектирај член на кругот </value>
+  </data>
+  <data name="SendMessageToMarketplaceItemOwner" xml:space="preserve">
+    <value>Прати приватна порака </value>
+  </data>
+  <data name="SendMessageToMarketplaceItemOwnerSub" xml:space="preserve">
+    <value>Единствено вашето име и профил-слика се видливи за примачот</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Сподели</value>
+  </data>
+  <data name="Showlocation" xml:space="preserve">
+    <value>Покажи локација за овој оглас</value>
+  </data>
+  <data name="SquareData" xml:space="preserve">
+    <value>Податоци за плоштадот</value>
+  </data>
+  <data name="SquareInfo" xml:space="preserve">
+    <value>Информации за плоштадот</value>
+  </data>
+  <data name="StartPage" xml:space="preserve">
+    <value>Добредојдовте во ЗаедноЖивееме</value>
+  </data>
+  <data name="SuggestionModalSubtitle" xml:space="preserve">
+    <value>Со ЖивеемеЗаедно платформа се развиваме заедно. Доколку имате сугестии како да се подобри оваа платформа, ве молиме оставете ја подолу. Искрено ви благодариме.</value>
+  </data>
+  <data name="SuggestionModalTitle" xml:space="preserve">
+    <value>Дадете сугестија</value>
+  </data>
+  <data name="SummaryError" xml:space="preserve">
+    <value>Грешка</value>
+  </data>
+  <data name="SummaryErrors" xml:space="preserve">
+    <value>Грешки</value>
+  </data>
+  <data name="TermsAndConditions" xml:space="preserve">
+    <value>Одредби и услови</value>
+  </data>
+  <data name="UnpinConfirmation" xml:space="preserve">
+    <value>Сигурни сте дека сакате да ја отпуштите оваа порака</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Добредојде</value>
+  </data>
+  <data name="WelcomeMarketplaceOverview" xml:space="preserve">
+    <value>Добродојдовте во прашања и понуди. Можете да додаете или да пребарувате огласи</value>
+  </data>
+  <data name="WorkingArea" xml:space="preserve">
+    <value>Работно поле</value>
+  </data>
+  <data name="YouAreBuddyOf" xml:space="preserve">
+    <value>Луѓе на кои си пријател</value>
+  </data>
+  <data name="YouDontHaveMarketplaceItems" xml:space="preserve">
+    <value>Немате огласи</value>
+  </data>
+  <data name="YourBuddies" xml:space="preserve">
+    <value>Луѓе кои ти се пријатели</value>
+  </data>
+  <data name="ZuiderlingSettings" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CircleAlbums" xml:space="preserve">
+    <value>Албуми</value>
+  </data>
+  <data name="CircleDocuments" xml:space="preserve">
+    <value>Документи</value>
+  </data>
+  <data name="ConfirmRemoveDocument" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го избришете овој документ? </value>
+  </data>
+  <data name="ConfirmRemoveEmailGroup" xml:space="preserve">
+    <value>Сигурни сте дека сакате да го напуштите овој разговор? </value>
+  </data>
+  <data name="Conversations" xml:space="preserve">
+    <value>Разговори</value>
+  </data>
+  <data name="Meals" xml:space="preserve">
+    <value>Оброци</value>
+  </data>
+  <data name="NeighbourHelp" xml:space="preserve">
+    <value>Соседска помош</value>
+  </data>
+  <data name="NewConversation" xml:space="preserve">
+    <value>Нов разговор</value>
+  </data>
+  <data name="StartConversation" xml:space="preserve">
+    <value>Започни нов разговор со</value>
+  </data>
+  <data name="StuffForSale" xml:space="preserve">
+    <value>Нешта за продавање</value>
+  </data>
+  <data name="StuffToBorrow" xml:space="preserve">
+    <value>Нешта за позајмување</value>
+  </data>
+  <data name="WelcomeMarketplaceMeals" xml:space="preserve">
+    <value>Дали зготовивте премногу? Или немате време сами да готвите? Тука можете лесно да споделите или добиете оброк во вашето соседство.</value>
+  </data>
+  <data name="WelcomeMarketplaceNeighbourHelp" xml:space="preserve">
+    <value>Би сакале да направите некаква услуга за некој друг или имате потреба од мала помош? Преку соседска помош можете лесно да ги понудите вашите услуги или побарате помош од вашите соседи.</value>
+  </data>
+  <data name="WelcomeMarketplaceStuffForSale" xml:space="preserve">
+    <value>Добредојдовте на пазарот во вашето соседство. Овде можете лесно да продавате и купувате различни нешта.</value>
+  </data>
+  <data name="WelcomeMarketplaceStuffToBorrow" xml:space="preserve">
+    <value>Позајмете различни нешта од вашите соседи или понудете нешта кои вие би можеле да ги позајмите на нив.</value>
+  </data>
+  <data name="ConfirmStartCircleEmails" xml:space="preserve">
+    <value>Weet je zeker dat je weer emails van deze kring  wilt ontvangen?</value>
+    <comment>Сигурни сте дека сакате да добивате известувања на вашата е-маил адреса од овој круг?</comment>
+  </data>
+  <data name="ConfirmStopCircleEmails" xml:space="preserve">
+    <value>Weet je zeker dat je geen emails van deze kring meer wilt ontvangen?</value>
+    <comment>Сигурни сте дека не сакате да добивате известувања на вашата е-маил адреса од овој круг?</comment>
+  </data>
+  <data name="InviteUsersToWebsite" xml:space="preserve">
+    <value>Anderen uitnodigen</value>
+    <comment>Поканете други</comment>
+  </data>
+  <data name="PublicCircles" xml:space="preserve">
+    <value>Openbare kringen</value>
+    <comment>Јавни кругови</comment>
+  </data>
+</root>

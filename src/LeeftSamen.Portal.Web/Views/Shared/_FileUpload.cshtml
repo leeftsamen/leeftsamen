@@ -1,0 +1,14 @@
+﻿@model LeeftSamen.Portal.Web.Models.FileUploadModel
+
+<div class="form-group profile-img-upload">
+    <label class="control-label col-md-3">@Html.Raw(Model.InputLabel)</label>
+
+    <div class="col-md-9">
+        <span class="btn btn-default btn-file">
+            @Button.ChooseFileFromPC <input type="file" name="@Model.InputName" class="file-input" accept="image/gif, image/jpeg, image/png, application/excel, application/pdf, text/plain, application/msword, application/vnd.oasis.opendocument.text, application/vnd.oasis.opendocument.spreadsheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </span>
+        &nbsp;
+        <b class="file-input-filename"></b>
+        @Html.ValidationMessage(Model.InputName, null, new { @class = "help-block" })
+    </div>
+</div>

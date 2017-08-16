@@ -1,0 +1,154 @@
+﻿@using System.Web.UI.HtmlControls
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Marketplace.IndexViewModel
+@{
+    ViewBag.Title = Title.Marketplace;
+    var placeholderImageUrl = Url.RouteUrl("Default", new { controller = "Marketplace", action = "PlaceholderItemImage" });
+}
+
+<div class="content-wide">
+
+    @Html.Partial("_HelpIconsRestyle", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "hidden-xs" } })
+    <h1 class="page-title">@ViewBag.Title</h1>
+    @*@Html.Partial("_HelpIcons", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "visible-xs" } })*@
+
+    @if (Model.HelpIcons.Any(h => h.Type == "marketplace-all"))
+    {
+        var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-all");
+        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-all", HelpText = helpIcon.Text });
+    }
+
+    <div style="position: relative">
+        @{ var formId = "filterform"; }
+        <form method="get" action="@Url.RouteUrl("Default", new { controller = "Marketplace", action = "Overview" })#start" id="@formId">
+            <div class="panel panel-default has-nav">
+                <div class="row panel-body filterrow">
+                    <div class="col-md-7 col-xs-12">
+                        @Html.TextBox("Query", null, new { placeholder = PlaceHolder.IAmSearchingfor, @class = "form-control" })
+                    </div>
+                    <div class="col-md-3 col-sm-8 clear-xs">
+                        @Html.DropDownList("Category", Model.CategoriesForSelect, new { @class = "trigger-submit form-control" })
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <button type="submit" class="btn btn-search form-control">@Button.Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        @if (Model.HelpIcons.Any(h => h.Type == "marketplace-filters"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-filters");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-filters", HelpText = helpIcon.Text });
+        }
+    </div>
+
+    <div id="marketplace-home" class="tileable-items" data-tile-width="350">
+        @foreach (var category in Model.Categories)
+        {
+            var hasItem = Model.Items.ContainsKey(category.CategoryId);
+
+            var categoryUrl = Url.RouteUrl("Default", new { action = "Overview", controller = "Marketplace", category = category.CategoryId });
+            var createAddUrl = Url.RouteUrl("Default", new { action = "CreateItem", controller = "Marketplace", categoryId = category.CategoryId });
+
+            <div class="tile">
+                <div class="tape"></div>
+
+                <div class="panel panel-default" style="margin-bottom: 0">
+                    <div class="panel-heading">
+                        <a href="@categoryUrl">
+                            <h2 class="panel-title">@category.Title</h2>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <p>@category.Description</p>
+                        @if (hasItem)
+                        {
+                            var item = Model.Items[category.CategoryId];
+                            item.Description = item.Description.StripHtmlAndNormalize();
+                            var itemUrl = Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = string.Empty, id = item.MarketplaceItemId });
+                            var imageUrl = item.Image1Id.HasValue ? Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = item.MarketplaceItemId, mediaId = item.Image1Id, index = 1, width = 150, height = 100, crop = true }) : placeholderImageUrl;
+                            <label class="label label-info">@Text.LatestItemIn @category.Name</label>
+                            <div class="latest-item row">
+                                @if (imageUrl != null)
+                                {
+                                    <div class="col-sm-4">
+                                        <a href="@itemUrl">
+                                            <img src="@imageUrl"/>
+                                        </a>
+                                    </div>
+                                }
+                                <div class="col-sm-@(imageUrl != null ? "8" : "12")">
+                                    <a href="@itemUrl">
+                                        @item.Title
+                                        <br/>
+                                        
+                                        @if (!string.IsNullOrEmpty(item.Description))
+                                        {
+                                            <small>
+                                                @(item.Description.Length > 180 ? item.Description.Substring(0, 140) + "..." : item.Description)
+                                            </small>
+                                        }
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <label class="label label-info pull-left">@Text.NotYetItemsIn @category.Name</label>
+                            <div class="panel-footer">
+@*                                <label class="label label-info">@Text.NotYetItemsIn @category.Name</label>*@
+@*                                <div class="latest-item row">*@
+@*                                    <div class="col-sm-12">*@
+@*                                        <a href="@createAddUrl" class="pull-right">@Button.MarketplaceCreateAddFirst</a>*@
+@*                                    </div>*@
+                                @*                                </div>*@
+                                <a class="pull-right" href="@createAddUrl">@Button.MarketplaceCreateAddFirst</a>
+                            </div>
+                        }
+                            </div>
+                        @if (hasItem)
+                        {
+                            <div class="panel-footer">
+                                <a href="@categoryUrl">@Button.MarketplaceShowAll</a>
+                                <a class="pull-right" href="@createAddUrl">@Button.MarketplaceCreateAdd</a>
+                                <div class="clear"></div>
+                            </div>
+                        }
+                </div>
+            </div>
+        }
+    </div>
+
+    @*@if (ViewBag.Preview.Count > 0)
+        {
+            <div id="marketplace-items" class="row" pagesize="10">
+                <div class="tileable-items marketplace-item-placeholder" style="margin: 0 15px;">
+                    @foreach (var item in ViewBag.Preview)
+                    {
+                        @PartialExtensions.Partial(Html, "_DisplayItem", item, new ViewDataDictionary() { { "ListView", false } })
+                    }
+                </div>
+            </div>
+            if (ViewBag.Preview.Count == 10)
+            {
+                <div class="row">
+                    <a href="@Url.Action("Overview")">
+                        <button class="btn btn-default col-md-4 col-md-offset-4">@Button.MarketplaceShowMore</button>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <h3>@Title.NoMarketplaceItemsFound</h3>
+        }*@
+
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/item-tiler")
+}

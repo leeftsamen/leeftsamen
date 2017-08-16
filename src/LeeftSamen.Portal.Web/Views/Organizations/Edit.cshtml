@@ -1,0 +1,312 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@using Microsoft.Ajax.Utilities
+@model LeeftSamen.Portal.Web.Models.Organizations.EditViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h1>@Title.EditOrganization</h1>
+
+@using (Html.BeginForm("Edit", "Organizations", new { id = Model.OrganizationId }, FormMethod.Post, new { @ng_app = "OrganizationApp", id = "OrganizationApp", enctype = "multipart/form-data", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.GeneralInformation</h2>
+            <p>@Text.OrganizationGeneralInformationInstruction</p>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Name))
+            {
+                @Html.RequiredLabelFor(m => m.Name, new { @class = "control-label col-md-3" })
+
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Description))
+            {
+            @Html.RequiredLabelFor(m => m.Description, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(m => m.Description, 8, 0, new { @class = "form-control", @rows = "5" })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.OrganizationTypeType))
+            {
+            @Html.RequiredLabelFor(m => m.OrganizationTypeType, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="OrganizationTypeType" value="@OrganizationType.Types.Professional" @(Model.OrganizationTypeType == OrganizationType.Types.Professional ? "checked" : string.Empty) /> @Label.Professional
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="OrganizationTypeType" value="@OrganizationType.Types.Association" @(Model.OrganizationTypeType == OrganizationType.Types.Association ? "checked" : string.Empty) /> @Label.Association
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="OrganizationTypeType" value="@OrganizationType.Types.Volunteer" @(Model.OrganizationTypeType == OrganizationType.Types.Volunteer ? "checked" : string.Empty) /> @Label.Volunteer
+                    </label>
+                    @Html.ValidationMessageFor(m => m.OrganizationTypeType, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @Html.Partial("_ImageUpload", new FileUploadModel(Model.LogoId, "DefaultDetail", new { controller = "Organizations", action = "Logo", id = Model.OrganizationId, mediaId = Model.LogoId }, Label.ChooseLogo, Label.Logo))
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.OrganisationThemes</h2>
+            <p>@Text.OrganisationThemesSettingsInstruction</p>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.ActiveOrganizationThemes))
+            {
+            <label class="control-label col-md-3">
+                @Label.OrganisationThemes<br />
+                <small>@Text.OrganisationThemesInstruction</small>
+            </label>
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (var theme in Model.OrganizationThemes)
+                    {
+                    <div class="col-md-6">
+                        <label>
+                            <input type="checkbox" name="ActiveOrganizationThemes" value="@theme.ThemeId" @(theme.Selected ? "checked" : string.Empty) />
+                            @theme.Name
+                        </label>
+                    </div>
+                    }
+                </div>
+                @Html.ValidationMessageFor(m => m.ActiveOrganizationThemes, null, new { @class = "help-block" })
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.NeighborhoodSettings</h2>
+            <p>@Text.OrganizationNeighborhoodSettingsInstruction</p>
+        </div>
+        <div class="panel-body" id="DefineNeighborhoodPanel" ng-controller="DefineNeighborhoodController">
+            @using (Html.BeginFormGroupFor(m => m.Address))
+                {
+                @Html.RequiredLabelFor(m => m.Address, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.PostalCode))
+                {
+                @Html.RequiredLabelFor(m => m.PostalCode, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PostalCode, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.City))
+                {
+                @Html.RequiredLabelFor(m => m.City, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control auto-complete-cities", @ng_model = "city", @ng_change = "getDistricts()", autocomplete = "false" })
+                    @Html.ValidationMessageFor(m => m.City, null, new { @class = "help-block" })
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.ActiveInDistricts))
+                {
+                <label class="control-label col-md-3">
+                    @Label.OrganizationActiveInDistricts<br />
+                    <small>@Text.OrganizationActiveInDistrictsInstruction</small>
+                </label>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6" ng-repeat="district in districtsInCity">
+                            <label>
+                                <input type="checkbox" name="ActiveInDistricts" ng-model="district.Selected" value="{{ district.DistrictId }}" />
+                                {{ district.DistrictName }}
+                            </label>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.ActiveInDistricts, null, new { @class = "help-block" })
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.ContactInformation</h2>
+            <p>@Text.OrganizationContactInformationInstruction</p>
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginFormGroupFor(m => m.Phone))
+                {
+            @Html.RequiredLabelFor(m => m.Phone, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "help-block" })
+            </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Email))
+                {
+            @Html.RequiredLabelFor(m => m.Email, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+            </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Website))
+                {
+            @Html.RequiredLabelFor(m => m.Website, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Website, null, new { @class = "help-block" })
+            </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.OpeningHours))
+                {
+            @Html.RequiredLabelFor(m => m.OpeningHours, new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(m => m.OpeningHours, 8, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.OpeningHours, null, new { @class = "help-block" })
+            </div>
+            }
+        </div>
+    </div>
+
+    @* Adding products and services on hold..
+
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.OrganizationServices</h2>
+                <p>@Text.OrganizationServicesInstruction</p>
+            </div>
+            <div class="panel-body" id="DefineServicesPanel" ng-controller="ServicesController">
+                <div class="col-md-12" ng-repeat="service in services">
+
+                    @Html.Hidden("Services[{{ $index }}].OrganizationServiceId", "{{ service.OrganizationServiceId }}", new { @ng_model = "service.OrganizationServiceId", id = string.Empty })
+
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Services))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationServiceTitle<br />
+                            <small>@Text.OrganizationServiceTitleInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextBox("Services[{{ $index }}].Title", "{{ service.Title }}", new { @ng_model = "service.Title", @class = "form-control", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Services))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationServiceIntroductionText<br />
+                            <small>@Text.OrganizationServiceIntroductionTextInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextArea("Services[{{ $index }}].IntroductionText", "{{ service.IntroductionText }}", new { @ng_model = "service.IntroductionText", @class = "form-control", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Services))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationServiceFullText<br />
+                            <small>@Text.OrganizationServiceFullTextInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextArea("Services[{{ $index }}].FullText", "{{ service.FullText }}", 8, 0, new { @ng_model = "service.FullText", @class = "form-control text-editor", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Services, null, new { @class = "help-block" })
+                    <a href="" class="btn pull-right" ng-click="deleteService(service)">'{{ service.Title }}' @Button.Remove</a>
+                </div>
+                <button type="button" class="btn pull-right" ng-click="addService()">@Button.OrganizationAddService</button>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.OrganizationProducts</h2>
+                <p>@Text.OrganizationProductsInstruction</p>
+            </div>
+            <div class="panel-body" id="DefineProductsPanel" ng-controller="ProductsController">
+                <div class="col-md-12" ng-repeat="product in products">
+
+                    @Html.Hidden("Products[{{ $index }}].OrganizationProductId", "{{ product.OrganizationProductId }}", new { @ng_model = "product.OrganizationProductId", id = string.Empty })
+
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Products))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationProductTitle<br />
+                            <small>@Text.OrganizationProductTitleInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextBox("Products[{{ $index }}].Title", "{{ product.Title }}", new { @ng_model = "product.Title", @class = "form-control", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Products))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationProductIntroductionText<br />
+                            <small>@Text.OrganizationProductIntroductionTextInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextArea("Products[{{ $index }}].IntroductionText", "{{ product.IntroductionText }}", new { @ng_model = "product.IntroductionText", @class = "form-control", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    <div class="row">
+                        @using (Html.BeginFormGroupFor(m => m.Products))
+                        {
+                        <label class="control-label col-md-3">
+                            @Label.OrganizationProductFullText<br />
+                            <small>@Text.OrganizationProductFullTextInstruction</small>
+                        </label>
+                        <div class="col-md-9">
+                            @Html.TextArea("Products[{{ $index }}].FullText", "{{ product.FullText }}", 8, 0, new { @ng_model = "product.FullText", @class = "form-control text-editor", id = string.Empty })
+                        </div>
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Products, null, new { @class = "help-block" })
+                    <a href="" class="btn pull-right" ng-click="deleteProduct(product)">'{{ product.Title }}' @Button.Remove</a>
+                </div>
+                <button type="button" class="btn pull-right" ng-click="addProduct()">@Button.OrganizationAddProduct</button>
+            </div>
+        </div>*@
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@Button.Save</button>
+            <a class="btn btn-link" href="@Url.Action("Detail", "Organizations", new { id = Model.OrganizationId })">@Button.Cancel</a>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_CityDistrictScript")
+}

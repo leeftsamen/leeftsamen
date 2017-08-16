@@ -1,0 +1,57 @@
+﻿@model LeeftSamen.Portal.Web.Models.Register.NeighborhoodViewModel
+@{
+    ViewBag.Title = Title.ChangeNeighborhood;
+}
+
+<h1>@Title.ManageAccount.</h1>
+
+@using (Html.BeginForm("ChangeNeighborhood", "Account", FormMethod.Post, new { @class = "", role = "form", enctype = "multipart/form-data" }))
+{
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">@ViewBag.Title.</h2>
+        </div>
+        <div class="panel-body">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
+                @if (System.Web.Configuration.WebConfigurationManager.AppSettings["Company"] == "comunios")
+                {
+                    @Html.Partial("~/Views/Shared/_NeighborhoodPartialGmap.cshtml", Model)
+                }
+                else
+                {
+                    @Html.Partial("~/Views/Shared/_NeighborhoodPartialRestyle.cshtml", Model)
+                }
+        </div>
+    </div>
+
+    <div class="panel panel-default edit-buttons">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@Button.ChangeNeighborhood</button>
+            <a class="btn btn-link" href="@Url.Action("Index", "Account")">@Button.Cancel</a>
+        </div>
+    </div>
+}
+
+@section stylesheets
+{
+    @Styles.Render("~/Content/leaflet")
+}
+
+@section scripts
+{
+    @if (System.Web.Configuration.WebConfigurationManager.AppSettings["Company"] == "comunios")
+    {
+        @Scripts.Render("~/bundles/neighborhoodGmap")
+    }
+    else
+    {
+        @Scripts.Render("~/bundles/neighborhood")
+    }
+
+    <script>
+        $(function() {
+            $(".neighborhood-control").neighborhood();
+        });
+    </script>
+}

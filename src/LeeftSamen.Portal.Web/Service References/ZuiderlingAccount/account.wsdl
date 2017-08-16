@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://accounts.webservices.cyclos.strohalm.nl/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="account" targetNamespace="http://accounts.webservices.cyclos.strohalm.nl/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://accounts.webservices.cyclos.strohalm.nl/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getMemberAccounts" type="tns:getMemberAccounts" />
+      <xs:element name="getMemberAccountsResponse" type="tns:getMemberAccountsResponse" />
+      <xs:element name="loadTransfer" type="tns:loadTransfer" />
+      <xs:element name="loadTransferResponse" type="tns:loadTransferResponse" />
+      <xs:element name="searchAccountHistory" type="tns:searchAccountHistory" />
+      <xs:element name="searchAccountHistoryResponse" type="tns:searchAccountHistoryResponse" />
+      <xs:element name="searchMultipleAccountHistories" type="tns:searchMultipleAccountHistories" />
+      <xs:element name="searchMultipleAccountHistoriesResponse" type="tns:searchMultipleAccountHistoriesResponse" />
+      <xs:element name="searchTransferTypes" type="tns:searchTransferTypes" />
+      <xs:element name="searchTransferTypesResponse" type="tns:searchTransferTypesResponse" />
+      <xs:complexType name="searchAccountHistory">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:accountHistorySearchParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accountHistorySearchParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:searchParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="principalType" type="xs:string" />
+              <xs:element minOccurs="0" name="principal" type="xs:string" />
+              <xs:element minOccurs="0" name="accountTypeId" type="xs:long" />
+              <xs:element minOccurs="0" name="currency" type="xs:string" />
+              <xs:element minOccurs="0" name="relatedMemberPrincipalType" type="xs:string" />
+              <xs:element minOccurs="0" name="relatedMember" type="xs:string" />
+              <xs:element minOccurs="0" name="beginDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:fieldValue" />
+              <xs:element minOccurs="0" name="reverseOrder" type="xs:boolean" />
+              <xs:element minOccurs="0" name="credentials" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="searchParameters" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currentPage" type="xs:int" />
+          <xs:element minOccurs="0" name="pageSize" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="fieldValue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="internalName" type="xs:string" />
+          <xs:element minOccurs="0" name="fieldId" type="xs:long" />
+          <xs:element minOccurs="0" name="displayName" type="xs:string" />
+          <xs:element minOccurs="0" name="value" type="xs:string" />
+          <xs:element minOccurs="0" name="possibleValueId" type="xs:long" />
+          <xs:element minOccurs="0" name="memberValueId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchAccountHistoryResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:accountHistoryResultPage" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accountHistoryResultPage">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:resultPage">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="accountStatus" type="tns:accountStatus" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="transfers" type="tns:transfer" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="resultPage" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currentPage" type="xs:int" />
+          <xs:element minOccurs="0" name="pageSize" type="xs:int" />
+          <xs:element minOccurs="0" name="totalCount" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="accountStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="balance" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedBalance" type="xs:string" />
+          <xs:element minOccurs="0" name="availableBalance" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedAvailableBalance" type="xs:string" />
+          <xs:element minOccurs="0" name="reservedAmount" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedReservedAmount" type="xs:string" />
+          <xs:element minOccurs="0" name="creditLimit" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedCreditLimit" type="xs:string" />
+          <xs:element minOccurs="0" name="upperCreditLimit" type="xs:decimal" />
+          <xs:element minOccurs="0" name="formattedUpperCreditLimit" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transfer">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:basePaymentVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="transactionNumber" type="xs:string" />
+              <xs:element minOccurs="0" name="traceNumber" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="basePaymentVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:basePaymentDataVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="transferType" type="tns:transferType" />
+              <xs:element minOccurs="0" name="description" type="xs:string" />
+              <xs:element minOccurs="0" name="fromMember" type="tns:member" />
+              <xs:element minOccurs="0" name="member" type="tns:member" />
+              <xs:element minOccurs="0" name="fromSystemAccountName" type="xs:string" />
+              <xs:element minOccurs="0" name="systemAccountName" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:fieldValue" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="basePaymentDataVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="formattedDate" type="xs:string" />
+              <xs:element minOccurs="0" name="processDate" type="xs:dateTime" />
+              <xs:element minOccurs="0" name="formattedProcessDate" type="xs:string" />
+              <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+              <xs:element minOccurs="0" name="formattedAmount" type="xs:string" />
+              <xs:element minOccurs="0" name="status" type="tns:paymentStatusVO" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="entityVO" abstract="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transferType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="from" type="tns:accountType" />
+              <xs:element minOccurs="0" name="to" type="tns:accountType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="accountType">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="currency" type="tns:currency" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="currency">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="symbol" type="xs:string" />
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="pattern" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="member">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityWithCustomFieldsVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="name" type="xs:string" />
+              <xs:element minOccurs="0" name="username" type="xs:string" />
+              <xs:element minOccurs="0" name="email" type="xs:string" />
+              <xs:element minOccurs="0" name="groupId" type="xs:long" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="images" nillable="true" type="tns:image" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="entityWithCustomFieldsVO" abstract="true">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="fields" nillable="true" type="tns:fieldValue" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="image">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="caption" type="xs:string" />
+              <xs:element minOccurs="0" name="thumbnailUrl" type="xs:string" />
+              <xs:element minOccurs="0" name="fullUrl" type="xs:string" />
+              <xs:element minOccurs="0" name="lastModified" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="searchMultipleAccountHistories">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:accountHistorySearchParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchMultipleAccountHistoriesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:accountHistoryResultPage" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchTransferTypes">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:transferTypeSearchParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transferTypeSearchParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="currency" type="xs:string" />
+          <xs:element minOccurs="0" name="fromMemberPrincipalType" type="xs:string" />
+          <xs:element minOccurs="0" name="fromMember" type="xs:string" />
+          <xs:element minOccurs="0" name="fromAccountTypeId" type="xs:long" />
+          <xs:element minOccurs="0" name="toMemberPrincipalType" type="xs:string" />
+          <xs:element minOccurs="0" name="toMember" type="xs:string" />
+          <xs:element minOccurs="0" name="toAccountTypeId" type="xs:long" />
+          <xs:element minOccurs="0" name="toSystem" type="xs:boolean" />
+          <xs:element minOccurs="0" name="fromSystem" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="searchTransferTypesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:transferType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="loadTransfer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:loadTransferParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="loadTransferParameters">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:principalParameters">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="credentials" type="xs:string" />
+              <xs:element minOccurs="0" name="transferId" type="xs:long" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="principalParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="principalType" type="xs:string" />
+          <xs:element minOccurs="0" name="principal" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="loadTransferResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:transfer" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMemberAccounts">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="params" type="tns:principalParameters" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getMemberAccountsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:memberAccount" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="memberAccount">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:entityVO">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="isDefault" type="xs:boolean" />
+              <xs:element minOccurs="0" name="type" type="tns:accountType" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:simpleType name="paymentStatusVO">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PENDING" />
+          <xs:enumeration value="PROCESSED" />
+          <xs:enumeration value="DENIED" />
+          <xs:enumeration value="CANCELED" />
+          <xs:enumeration value="SCHEDULED" />
+          <xs:enumeration value="FAILED" />
+          <xs:enumeration value="BLOCKED" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="searchMultipleAccountHistories">
+    <wsdl:part name="parameters" element="tns:searchMultipleAccountHistories" />
+  </wsdl:message>
+  <wsdl:message name="getMemberAccounts">
+    <wsdl:part name="parameters" element="tns:getMemberAccounts" />
+  </wsdl:message>
+  <wsdl:message name="searchTransferTypesResponse">
+    <wsdl:part name="parameters" element="tns:searchTransferTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchAccountHistory">
+    <wsdl:part name="parameters" element="tns:searchAccountHistory" />
+  </wsdl:message>
+  <wsdl:message name="getMemberAccountsResponse">
+    <wsdl:part name="parameters" element="tns:getMemberAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchTransferTypes">
+    <wsdl:part name="parameters" element="tns:searchTransferTypes" />
+  </wsdl:message>
+  <wsdl:message name="searchMultipleAccountHistoriesResponse">
+    <wsdl:part name="parameters" element="tns:searchMultipleAccountHistoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="loadTransferResponse">
+    <wsdl:part name="parameters" element="tns:loadTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchAccountHistoryResponse">
+    <wsdl:part name="parameters" element="tns:searchAccountHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="loadTransfer">
+    <wsdl:part name="parameters" element="tns:loadTransfer" />
+  </wsdl:message>
+  <wsdl:portType name="AccountWebService">
+    <wsdl:operation name="searchAccountHistory">
+      <wsdl:input name="searchAccountHistory" message="tns:searchAccountHistory" />
+      <wsdl:output name="searchAccountHistoryResponse" message="tns:searchAccountHistoryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchMultipleAccountHistories">
+      <wsdl:input name="searchMultipleAccountHistories" message="tns:searchMultipleAccountHistories" />
+      <wsdl:output name="searchMultipleAccountHistoriesResponse" message="tns:searchMultipleAccountHistoriesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchTransferTypes">
+      <wsdl:input name="searchTransferTypes" message="tns:searchTransferTypes" />
+      <wsdl:output name="searchTransferTypesResponse" message="tns:searchTransferTypesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="loadTransfer">
+      <wsdl:input name="loadTransfer" message="tns:loadTransfer" />
+      <wsdl:output name="loadTransferResponse" message="tns:loadTransferResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMemberAccounts">
+      <wsdl:input name="getMemberAccounts" message="tns:getMemberAccounts" />
+      <wsdl:output name="getMemberAccountsResponse" message="tns:getMemberAccountsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="accountSoapBinding" type="tns:AccountWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="searchAccountHistory">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchAccountHistory">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchAccountHistoryResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchMultipleAccountHistories">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchMultipleAccountHistories">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchMultipleAccountHistoriesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchTransferTypes">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="searchTransferTypes">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="searchTransferTypesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loadTransfer">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="loadTransfer">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="loadTransferResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMemberAccounts">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getMemberAccounts">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getMemberAccountsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="account">
+    <wsdl:port name="accountPort" binding="tns:accountSoapBinding">
+      <soap:address location="https://zuiderling-stage.tradeqoin.com/cc2/services/account" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

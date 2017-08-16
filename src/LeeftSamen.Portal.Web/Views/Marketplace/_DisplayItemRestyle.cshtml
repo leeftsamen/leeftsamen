@@ -1,0 +1,185 @@
+﻿@using System
+@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Data.Models.MarketplaceItem
+
+@{
+    // NOTICE: Changing markup within this view will change the Pictureview as well as the Listview in the marketplace.
+
+    // default behavior is non-listview
+    var listView = ViewData.ContainsKey("ListView") ? (bool)ViewData["ListView"] : false;
+    int? overviewCircleId = null;
+    int tempCircleId = 0;
+    if (ViewData.ContainsKey("CircleId") && ViewData["CircleId"] != null && Int32.TryParse(ViewData["CircleId"].ToString(), out tempCircleId))
+    {
+        overviewCircleId = tempCircleId;
+    }
+    var label = Model.Type.DisplayName();
+
+    var itemUrl = overviewCircleId.HasValue ? Url.RouteUrl("CircleMarketplaceDetail", new { controller = "Marketplace", action = "Detail", circleId = overviewCircleId, id = Model.MarketplaceItemId }) :
+        Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = string.Empty, id = Model.MarketplaceItemId });
+    var hasImage = Model.Image1Id.HasValue;
+    var isOrganizationMessage = Model.OrganizationMembershipId.HasValue;
+    var headerColSize = listView ? "col-md-4" : null;
+    var bodyColSize = listView ? "col-md-8" : null;
+    var itemColSize = listView ? "col-md-12" : null;
+    var organizationClass = isOrganizationMessage ? " " + Model.OrganizationMembership.Organization.OrganizationType.Type.ToString().ToLower() : string.Empty;
+}
+
+@if (listView)
+{
+    <div class="panel marketplace-row-item">
+        <div class="panel-heading col-md-4">
+
+            @if (hasImage || listView)
+            {
+                var imageUrl = hasImage ? (listView ? Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1, width = 300, height = 200, crop = true }) : Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1 })) : Url.RouteUrl("Default", new { controller = "Marketplace", action = "PlaceholderItemImage", width = 300, height = 200, crop = true });
+                if (imageUrl != null)
+                {
+                    <div class="panel-image-cover">
+                        <div class="panel-image">
+                            <div class="panel-image-inner" style="background-image: url(@imageUrl)"></div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="panel-body col-md-8">
+
+            <label class="label">
+                <span>@label: @Model.Category.Name</span>
+            </label>
+
+            <a href="@itemUrl" class="title"><h4>@Model.Title</h4></a>
+
+            <h5>
+                @Html.Raw(Model.Description.StripHtml().Truncate())
+            </h5>
+
+            @if (Model.PaymentOption.HasValue)
+            {
+                <span class="price">@Model.PaymentOption.DisplayName()</span>
+            }
+            else if (Model.Price.HasValue)
+            {
+                if (Model.Currency == MarketplaceItem.MarketplaceCurrency.Euro)
+                {
+                    <span class="price">@Model.Price.Value.ToString("c")</span>
+                }
+                if (Model.Currency == MarketplaceItem.MarketplaceCurrency.Zuiderling)
+                {
+                    <span class="price">
+                        @Model.Price.Value
+                        <span class="currency">@Label.PaymentCurrencyZuiderling</span>
+                    </span>
+                }
+            }
+
+            <br/>
+            <label class="label label-info small">@Model.CreationDateTime.ToDateString() | @Model.CreationDateTime.ToShortTimeString() | @(Model.Distance.HasValue ? String.Format(Text.DistanceFromYou, Model.Distance) : null)</label>
+            
+        </div>
+
+        <a href="@itemUrl" class="btn btn-primary">@Text.View</a>
+
+        <div class="clear"></div>
+</div>
+}
+else
+{
+    <div class="tile @itemColSize @organizationClass">
+
+        <div class="tape"></div>
+
+        <div class="panel-header">
+            <span>@label: @Model.Category.Name</span>
+        </div>
+
+        @*@if (hasImage || listView)
+{
+    var imageUrl = hasImage
+        ? (listView ? Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1, width = 300, height = 200, crop = true })
+            : Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1 }))
+        : Url.RouteUrl("Default", new { controller = "Marketplace", action = "PlaceholderItemImage", width = 300, height = 200, crop = true });
+    <div class="panel-heading relative @headerColSize">
+        <a href="@itemUrl">
+            @if (imageUrl != null)
+            {
+                <img src="@imageUrl" alt="">
+            }
+            else
+            {
+                <div style="background: #eeeeee; width: 100%; height: 200px; vertical-align: middle;"></div>
+            }
+            <label class="label label-info category">@label: @Model.Category.Name</label>
+        </a>
+    </div>
+}*@
+        <div class="panel-body @bodyColSize @(hasImage || listView ? String.Empty : "labeled")">
+
+            <a href="@itemUrl" class="title"><h4>@Model.Title</h4></a>
+
+            <p>
+                @Html.Raw(Model.Description.StripHtml().Truncate())
+            </p>
+        </div>
+        @if (!listView)
+        {
+            <div class="panel-body panel-meta @bodyColSize">
+                @if (hasImage)
+                {
+                    var imageUrl = hasImage ? (listView ? Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1, width = 300, height = 200, crop = true }) : Url.RouteUrl("DefaultDetail", new { controller = "Marketplace", action = "ItemImage", id = Model.MarketplaceItemId, mediaId = Model.Image1Id, index = 1 })) : Url.RouteUrl("Default", new { controller = "Marketplace", action = "PlaceholderItemImage", width = 300, height = 200, crop = true });
+                    if (imageUrl != null)
+                    {
+                        <div class="tile panel-image-cover">
+                            <div class="tile panel-image">
+                                <a href="@itemUrl">
+                                    <div class="panel-image-inner" style="background-image: url(@imageUrl)"></div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                }
+
+                <label class="label label-info">@Model.CreationDateTime.ToDateString() | @Model.CreationDateTime.ToShortTimeString() | @(Model.Distance.HasValue ? String.Format(Text.DistanceFromYou, Model.Distance) : null)</label>
+
+                @if (Model.PaymentOption.HasValue)
+                {
+                    <span class="price">@Model.PaymentOption.DisplayName()</span>
+                }
+                else if (Model.Price.HasValue)
+                {
+                    if (Model.Currency == MarketplaceItem.MarketplaceCurrency.Euro)
+                    {
+                        <span class="price">@Model.Price.Value.ToString("c")</span>
+                    }
+                    if (Model.Currency == MarketplaceItem.MarketplaceCurrency.Zuiderling)
+                    {
+                        <span class="price">
+                            @Model.Price.Value
+                            <span class="currency">@Label.PaymentCurrencyZuiderling</span>
+                        </span>
+                    }
+                }
+            </div>
+        }
+        <div class="panel-footer bottom-footer @bodyColSize">
+            @if (listView)
+            {
+                <div class="col-md-6">
+                    <label class="label label-info">@Model.CreationDateTime.ToDateString() | @Model.CreationDateTime.ToShortTimeString() | @(Model.Distance.HasValue ? String.Format(Text.DistanceFromYou, Model.Distance) : null)</label>
+                </div>
+            }
+            @if (isOrganizationMessage)
+            {
+                @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.OrganizationMembership.Organization.Name))
+            }
+            else
+            {
+                @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Owner.ProfileImageId, Model.Owner.Id, "profile-image-sm"))
+                <span class="creator">@Model.Owner.Name</span>
+            }
+        </div>
+    </div>
+}

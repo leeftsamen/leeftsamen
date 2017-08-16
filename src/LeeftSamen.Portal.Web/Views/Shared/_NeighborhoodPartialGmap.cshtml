@@ -1,0 +1,55 @@
+﻿@using System.Globalization
+@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Register.NeighborhoodViewModel
+
+<div class="neighborhood-control">
+
+    @using (Html.BeginFormGroupFor(m => m.Address))
+    {
+        @Html.RequiredLabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control adress" })
+            @Html.ValidationMessageFor(m => m.Address, null, new { @class = "help-block" })
+            <span class="btn btn-primary searchButton">Барај</span>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-9 col-md-offset-3">
+            <div id="NotFoundAlert" class="text-danger @(!Model.HasError ? "hidden" : "")">@Error.AddressNotFound</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-3 text-right">
+            <img id="Loader" class="hidden" src="~/Content/Images/loader16.gif" />
+        </div>
+        <div class="col-md-9">
+            @Html.TextBoxFor(m => m.Street, new { @class = "form-control street", @readonly = "true", @style = "width:400px;float:left;margin-right:20px;" })
+            @Html.TextBoxFor(m => m.HouseNumber, new { @class = "form-control housenumber", @readonly = "true", @style = "float:left; width:100px;" })
+            @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control postalcode", @readonly = "true" })
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control city", @readonly = "true" })
+        </div>
+    </div>
+    @using (Html.BeginFormGroupFor(m => m.ShowLocation))
+    {
+        <label class="col-md-3 control-label">@Title.AccountLocationLabel</label>
+        <div class="col-md-9">
+            @Html.CheckBoxFor(m => m.ShowLocation)
+            @Html.LabelFor(m => m.ShowLocation, new { @class = "value-label" })
+            @Html.ValidationMessageFor(m => m.ShowLocation, null, new { @class = "help-block" })
+        </div>
+    }
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Label.YourNeighborhood</label>
+        <div class="col-md-9">
+            @Html.Raw(Text.YourNeighborhoodInstruction)
+            <div class="radius-slider" style="margin: 0.5em 0" data-min="25" data-max="100000" data-step="50"></div>
+            @Label.Radius: <span class="radius-label"></span> @Label.Meter.ToLower()
+            <div class="map" style="height: 500px; width: 100%; margin: 0.5em 0;"></div>
+            @Html.HiddenFor(m => m.NeighborhoodRadius, new { @class = "radius-value" })
+            <input type="hidden" name="Latitude" class="latitude" value="@Model.Latitude.ToString(CultureInfo.InvariantCulture)" />
+            <input type="hidden" name="Longitude" class="longitude" value="@Model.Longitude.ToString(CultureInfo.InvariantCulture)" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@model LeeftSamen.Portal.Web.Models.Account.LoginViewModel
+
+@using LeeftSamen.Portal.Web.Helpers
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="partial-login hidden-xs">
+        @Html.AntiForgeryToken()
+
+        <li>
+            @Html.TextBoxFor(md => md.Email, new {@class = "form-control", @type = "email", @tabindex = "1", @placeholder = Label.Email + "..."})
+        </li>
+
+        <li>
+            @Html.PasswordFor(md => md.Password, new {@class = "form-control", @tabindex = "2", @placeholder = Label.Password + "..."})
+            <p><a href="/account/forgotpassword">@Button.ForgotPassword?</a>
+            </p>
+            @*<p>@Html.ActionLink(Button.ForgotPassword + "?", Url.RouteUrl(new {Area = "", controller = "Account", action = "ForgotPassword"}))</p>*@
+        </li>
+
+        <input type="submit" value="@Button.Login" class="btn btn-secondary" tabindex="3"/>
+    </div>
+
+    <div class="partial-login partial-login-xs visible-xs">
+        <a href="/account/login" class="btn btn-primary btn-login">@Button.Login &raquo;</a>
+    </div>
+}

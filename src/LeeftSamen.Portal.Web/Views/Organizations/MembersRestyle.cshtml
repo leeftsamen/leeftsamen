@@ -1,0 +1,122 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Organizations.MembersViewModel
+@{
+    ViewBag.Title = Model.Name;
+}
+
+@Html.Action("DetailHeader", new { id = Model.OrganizationId })
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @if (Model.CurrentUserIsOrganizationAdministrator)
+                {
+                <div class="btn btn-default pull-right" data-target="#inviteUserModal" data-toggle="modal">@Button.InviteUsers</div>
+                }
+                <h3 class="panel-title">
+                    @string.Format(Model.Members.Count == 1 ? Title.NbrOrganizationMember : Title.NbrOrganizationMembers, Model.Members.Count)
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 shift-left">
+        <div id="members" class="row">
+            @foreach (var member in Model.Members)
+            {
+            <div class="col-lg-3 col-md-4 col-xs-6 col-xxs-12">
+                <div class="tile panel-member">
+                    <div class="panel-body text-center">
+                        @if (Model.CurrentUserIsOrganizationAdministrator && (!member.IsAdministrator || Model.NumberOfAdmins > 1))
+                        {
+                        <div class="dropdown" style="position: absolute; right: 30px">
+                            <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                @if (!member.HasBeenInvited)
+                                {
+                                    <li>
+                                        @{
+                                            var title = Title.ConfirmGiveMemberAdminRights;
+                                            var body = Text.ConfirmGiveMemberOrganizationAdminRights;
+                                            var button = Button.GiveMemberAdminRights;
+                                            var action = "GiveAdmin";
+                                            if (member.IsAdministrator)
+                                            {
+                                                title = Title.RemoveMemberAdminRights;
+                                                body = Text.RemoveMemberOrganizationAdminRights;
+                                                button = Button.RemoveMemberAdminRights;
+                                                action = "RevokeAdmin";
+                                            }
+                                        }
+                                        <a role="menuitem" href="#"
+                                           data-toggle="modal" data-target="#modal"
+                                           data-title="@title"
+                                           data-body="@body"
+                                           data-button="@button"
+                                           data-hidden='{"userId": "@member.UserId"}'
+                                           data-action="@Url.Action(action, new { id = Model.OrganizationId })">@button</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li role="presentation">
+                                        <button type="button" class="btn btn-link"
+                                                data-toggle="modal" data-target="#modal"
+                                                data-title="@Title.ConfirmInvitationReminder" data-body="@String.Format(Text.ConfirmInvitationReminder, member.UserName)" data-button="@Button.SendMessage"
+                                                data-action="@Url.Action("SendInvitationReminder", new { id = Model.OrganizationId })" data-hidden='{"memberId": "@member.UserId", "email": "@member.Email" }'>
+                                            @(Label.SendOrganizationInvitationReminder)
+                                        </button>
+                                    </li>
+                                }
+                                <li role="presentation">
+                                    <button type="button" class="btn btn-link"
+                                            data-toggle="modal" data-target="#modal"
+                                            data-title="@Title.ConfirmRemoveOrganizationMember" data-body="@Text.ConfirmRemoveOrganizationMember" data-button="@Button.RemoveOrganizationMember"
+                                            data-action="@Url.Action("RemoveMember", new { id = Model.OrganizationId })" data-hidden='{"memberId": "@member.UserId" }'>
+                                        @(member.HasBeenInvited ? Label.RemoveInvitation : Label.RemoveOrganizationMember)
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                                        }
+
+                        @Html.Partial("_UserProfileImage", new UserProfileImage(member.UserProfileImageId, member.UserId, "profile-image"))
+                        <h4>@member.UserName</h4>
+                        @member.UserCity<br />
+                    </div>
+                    <div class="panel-footer">
+                        @if (member.HasBeenInvited)
+                        {
+                        <label class="label label-info">@Label.InvitedToOrganization</label>
+                        }
+                        else if (member.IsAdministrator)
+                        {
+                        <label class="label label-primary">@Label.Administrator</label>
+                        }
+                        else
+                        {
+                        <label class="label label-default">@Label.OrganizationMember</label>
+                        }
+                    </div>
+                </div>
+
+            </div>
+                                        }
+        </div>
+    </div>
+</div>
+
+@section modals {
+    @Html.Partial("_InviteUserModal", new InviteUserViewModel { Title = Title.InviteUsersToOrganization, Instruction = Text.InviteUsersToOrganizationInstruction })
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/angular")
+    @Html.Partial("_InviteUserModalScript")
+}

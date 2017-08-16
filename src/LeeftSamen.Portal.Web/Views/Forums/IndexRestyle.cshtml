@@ -1,0 +1,134 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Forums.IndexViewModel
+@{
+    ViewBag.Title = "Forum";
+}
+@if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Squares.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Squares", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+else if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Circles.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Circles", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+<div class="page-buttons margin-bottom-10-px">
+    <div class="menu-background"></div>
+    <div class="bottom-display">
+        <div class="open-menu">
+            <i class="fa fa-times"></i>
+        </div>
+    </div>
+    <div class="buttons">
+        <a href="@Url.RouteUrl("ForumNoId", new { controller = "Forums", action = "CreateSubject", type = Model.Type, typeId = Model.TypeId})"
+           class="btn btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus"></span>
+            @Button.CreateForumSubject
+        </a>
+    </div>
+</div>
+@if (!string.IsNullOrEmpty(Model.Title) || !string.IsNullOrEmpty(Model.Text))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-blue shift-left" style="margin-bottom:25px;">
+                <div class="panel-body">
+                    <h4>@Model.Title</h4>
+                    @Html.Raw(Model.Text)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="make-block shift-left">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-7 col-xs-12">
+                        @Label.Subjects
+                    </div>
+                    <div class="col-sm-2 hidden-xs text-center">
+                        @Label.Messages
+                    </div>
+                    <div class="col-sm-3 hidden-xs text-center">
+                        @Label.LastMessage
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body forum">
+                @if (Model.Subjects.Count > 0)
+                {
+                    var adminCorrection = 0;
+                    foreach (var subject in Model.Subjects)
+                    {
+                        var itemUrl = Url.RouteUrl("Forum", new { controller = "Forums", action = "Subject", id = subject.SubjectId, type = Model.Type, typeId = Model.TypeId });
+                        <div class="row forum-item">
+                            @if (Model.IsCurrentUserAdmin)
+                            {
+                                adminCorrection = 1;
+                                <div class="col-sm-1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("Forum", new { controller = "Forums", action = "EditSubject", type = Model.Type, typeId = Model.TypeId, id = subject.SubjectId })">@Button.EditSubject</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" href="#"
+                                                   data-toggle="modal" data-target="#modal"
+                                                   data-title="@Title.ConfirmRemoveSubject"
+                                                   data-body="@Text.ConfirmRemoveSubject"
+                                                   data-button="@Button.Remove"
+                                                   data-hidden='{"type": "@Model.Type","typeId": "@Model.TypeId","id": "@subject.SubjectId"}'
+                                                   data-action="@Url.Action("RemoveSubject")">
+                                                    @Button.DeleteSubject
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-sm-@(7-adminCorrection)">
+                                <a href="@itemUrl" class="forum-subject">@subject.Title</a>
+                                <div class="forum-description">@subject.Description</div>
+                            </div>
+                            <div class="col-sm-2 forum-messagecount sm-text-center">
+                                @subject.ReactionCount <span class="visible-xs-inline">@Label.Messages.ToLower()</span>
+                            </div>
+                            <div class="col-sm-3 forum-lastmessage sm-text-center">
+                                <h4 class="visible-xs">@Label.LastMessage:</h4>
+                                @if (!subject.LastMessageDate.HasValue && string.IsNullOrEmpty(subject.LastMessageName))
+                                {
+                                    <span>- @Label.None -</span>
+                                }
+                                @(subject.LastMessageDate.HasValue ? subject.LastMessageDate.Value.ToString("d MMM yyyy, HH:mm uur") : string.Empty)<br />
+                                @subject.LastMessageName
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="row margin-bottom-10-px">
+                        <div class="col-sm-12 margin-top-10-px">
+                            @Text.NoForumSubjects
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

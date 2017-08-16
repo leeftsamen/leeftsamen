@@ -1,0 +1,28 @@
+﻿@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Activities.ActivityReactionViewModel
+           
+<article class="panel panel-default" id="reaction-@Model.Reaction.ReactionId">
+    <div class="panel-body">
+        <header>
+            <h4>
+                @Html.Partial("_UserProfileImage", new UserProfileImage(Model.Reaction.Creator.ProfileImageId, Model.Reaction.Creator.Id, "profile-image-xs"))
+                @if (Model.Reaction.OrganizationMembershipId.HasValue)
+                {
+                    @(string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.Reaction.OrganizationMembership.Organization.Name))
+                }
+                else
+                {                  
+                    @Model.Reaction.Creator.Name
+                }
+            </h4>
+            <small>
+                <time datetime="@Model.Reaction.CreationDateTime.ToString("s")"
+                      title="@Model.Reaction.CreationDateTime.ToString("f")">
+                    @Model.Reaction.CreationDateTime.ToTimeAgoString()
+                </time>
+            </small>
+        </header>
+        <p>@Model.Reaction.Text</p>
+    </div>
+</article>

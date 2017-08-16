@@ -1,0 +1,79 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.CreatePostModel
+@{
+    ViewBag.Title = Title.CreateNewCircle;
+}
+
+<div class="content-wide">
+    <h1 class="page-title-small">@ViewBag.Title</h1>
+
+    @using (Html.BeginForm("Create", "Circles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="panel-edit">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.CircleData</h2>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginFormGroupFor(m => m.Name))
+                {
+                    @Html.RequiredLabelFor(m => m.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
+                }
+
+                @using (Html.BeginFormGroupFor(m => m.IsPrivate))
+                {
+                    @Html.LabelFor(m => m.IsPrivate)<br />
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(m => m.IsPrivate, true) @Label.PrivateCircle
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(m => m.IsPrivate, false) @Label.PublicCircle
+                    </label>
+                }
+
+                @using (Html.BeginFormGroupFor(m => m.Description))
+                {
+                    @Html.RequiredLabelFor(m => m.Description, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Description, 8, 0, new { @class = "form-control text-editor" })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                }
+            </div>
+        </div>
+
+        <div class="panel-edit">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.CircleDesign</h2>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    @Html.Partial("_ImageUploadRestyle", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.ProfileImage, Text.CircleProfileImageDescription), "ProfileImage"))
+                    @Html.Partial("_ImageUploadRestyle", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.CoverImage, Text.CircleCoverImageDescription), "CoverImage"))
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <label class="control-label" for="colorselector">@Label.CoverColor:</label>
+                    <select id="colorselector" name="CoverColor">
+                        @foreach (var color in Model.CoverColors)
+                        {
+                            var selected = Model.CoverColor == color ? " selected" : "";
+                            <option value="@color" data-color="@ColorTranslator.ToHtml(Color.FromArgb(color))" @selected></option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default edit-buttons">
+            <div class="panel-body">
+                <button type="submit" class="btn btn-primary">@Button.Save</button>
+                <a class="btn btn-link" href="@Url.Action("Index", "Circles")">@Button.Cancel</a>
+            </div>
+        </div>
+    }
+</div>

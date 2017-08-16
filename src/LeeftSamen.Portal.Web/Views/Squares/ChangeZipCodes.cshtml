@@ -1,0 +1,58 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.ChangeZipCodesModel
+@{
+    var action = "ChangeZipCodes";
+    var title = Title.ChangeZipCodes;
+    var submitButton = Button.Add;
+    var routeValues = new RouteValueDictionary();
+    routeValues.Add("squareId", Model.SquareId);
+    var cancelUrl = Url.RouteUrl("Default", new { controller = "Squares", action = "Settings", id = Model.SquareId });
+    ViewBag.Title = title;
+}
+<h1>@title</h1>
+
+@using (Html.BeginForm(action, "Squares", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.NewZipCode))
+            {
+                @Html.RequiredLabelFor(m => m.NewZipCode, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.NewZipCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NewZipCode, null, new { @class = "help-block" })
+            }
+            <button type="submit" class="btn btn-primary">@submitButton</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Back</a>
+        </div>
+    </div>
+
+    if (Model.Zipcodes.Count > 0)
+    {
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @foreach (var zipcode in Model.Zipcodes)
+            {
+                <div class="zipcode">
+                    @zipcode.ZipCode
+                    <a role="menuitem" href="#" class="close"
+                       data-toggle="modal" data-target="#modal"
+                       data-title="@Title.ConfirmZipCodeDelete"
+                       data-body="@Text.ConfirmZipCodeDelete"
+                       data-button="@Button.Remove"
+                       data-hidden='{"id": "@Model.SquareId","zipcodeId": "@zipcode.ZipcodeId"}'
+                       data-action="@Url.Action("RemoveZipcode")">
+                        <i class="fa fa-times"></i>
+                    </a>
+</div>
+            }
+        </div>
+    </div>
+    }
+}
+

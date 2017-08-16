@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{10A750CA-261C-42BB-AE8A-36C481926317}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeeftSamen.Common</RootNamespace>
+    <AssemblyName>LeeftSamen.Common</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\src\LeeftSamen.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="InterfaceText\Alert.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Alert.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Alert.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Alert.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Button.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Button.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Button.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Button.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Email.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Email.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Email.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Email.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Error.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Label.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Label.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Label.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Label.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Notification.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Notification.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Notification.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Notification.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Placeholder.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Placeholder.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\PlaceHolder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PlaceHolder.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Subject.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Subject.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Subject.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Subject.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Text.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Text.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Text.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Text.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Title.mk-MK.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Title.mk-MK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfaceText\Title.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Title.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="InterfaceText\Alert.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Alert.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Alert.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Alert.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Button.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Button.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Button.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Button.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Email.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Email.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Email.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Email.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Error.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Label.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Label.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Label.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Label.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Notification.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Notification.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Notification.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Notification.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\PlaceHolder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlaceHolder.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Placeholder.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Placeholder.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Subject.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subject.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Subject.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subject.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Text.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Text.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Text.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Text.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Title.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Title.resx</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceText\Title.mk-MK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Title.mk-MK.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.1.16.0\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

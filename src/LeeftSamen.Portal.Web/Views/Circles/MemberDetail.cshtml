@@ -1,0 +1,24 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Circles.MemberDetailModel
+@{
+    ViewBag.Title = Model.UserName;
+
+    var overviewUrl = Url.RouteUrl("DefaultDetail", new { id = Model.CircleId, controller = "Circles", action = "Members" }); ;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+    </div>
+</div>
+<a class="btn btn-default margin-bottom-10-px" href="@overviewUrl">@Button.BackToOverview</a>
+<div class="make-block shift-left margin-top-10-px">
+    <h1>@ViewBag.Title</h1>
+    @if (!string.IsNullOrEmpty(Model.ProfileText))
+    {
+        @Html.Raw(Model.ProfileText.Replace("\n", "<br />"))
+    }
+</div>

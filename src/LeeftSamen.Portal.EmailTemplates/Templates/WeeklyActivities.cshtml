@@ -1,0 +1,645 @@
+﻿@using System
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.WeeklyActivitiesModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<div style="max-width: 600px; background-color: white; margin-bottom: 40px">
+<table width="600" align="center" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+<tr>
+<td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+<table align="center" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; Margin: 0 auto; width: 100%; max-width: 600px;">
+
+@*<tr>
+    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+        <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+            <tr>
+                <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                    <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                        <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                            <tr>
+                                <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+
+                                    <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+                                        <tr>
+                                            <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 10px; text-align: left; width: 100%; max-width: 300px;">
+                                                <img src="@(Model.PortalUrl)Content/img/leeftsamen_logo.png" alt="" width="146" height="36" border="0"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                </td><td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                    <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                        <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                            <tr>
+                                <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
+                                    <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 11px; text-align: left;">
+
+                                        <tr>
+                                            <td style="padding-top: 20px; padding-bottom: 10px; font-family: Arial; padding-right: 10px; font-size: 13px; font-style: italic; padding-left: 10px; text-align: right; width: 100%; max-width: 300px;">@DateTime.Now.ToString("dd MMMM yyyy")</td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>*@
+
+@if (Model.Messages != null && Model.Messages.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Afgelopen week in jouw buurt</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5; -ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)neighborhoodmessages/createmessage">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuw nieuwsbericht</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach(var message in Model.Messages)
+                    {
+                        var itemUrl = Model.PortalUrl + "neighborhoodmessages/organizationmessages/" + message.MessageId;
+                        var profileImageUrl = message.Creator.ProfileImageId != null ? Model.PortalUrl + "users/" + message.Creator.Id + "/profileimage/" + message.Creator.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                <tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (message.Image1Id == null)
+                                                            {
+                                                                <img style="width: 264px; height: 175px; background-color: white" src="@(Model.PortalUrl)/Content/img/mail-logo.png"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div style="width: 264px; height: 175px; background-color: lightgray">
+                                                                    <img src="@(Model.PortalUrl)neighborhoodmessages/organizationmessages/@(message.MessageId)/messageimage/@(message.Image1Id)" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                                </div>
+                                                            }
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px; text-transform: lowercase;">@message.CreationDateTime.ToString("D")</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="text-decoration: underline; margin: 0; font-weight: bold; font-size: 16px; Margin-bottom: 10px; color: #2d2d2d">@message.Title</a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%;float: left; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray;" src="@profileImageUrl"/>
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0; text-align: left; font-weight: lighter">@(message.Creator.Name)</p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)neighborhoodmessages" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+@if (Model.Activities != null && Model.Activities.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 15px; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; float: left; font-weight: bold; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Buurtagenda voor aankomende week</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)activities/create">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuwe activiteit</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 30px; padding-right: 0; padding-left: 20px;">
+            <table width="100%" style="border-collapse: collapse; margin-top: -25px; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                @foreach (var activity in Model.Activities)
+                {
+                    <tr style="">
+                        <td style="padding-top: 34px;">
+                            <a href="@(Model.PortalUrl)activities/@(activity.ActivityId)" style="font-weight: bold; font-size: 14px; text-decoration: underline;">
+                                @activity.StartDateTime.ToString("ddd dd-MM") vanaf @activity.CreationDate.ToString("HH:mm") - @activity.Title
+                            </a>
+                            <p style="font-weight: normal; margin-top: 0px !important; text-decoration: none !important; font-size: 12px;">@activity.Creator.Name, @activity.Location</p>
+                        </td>
+                        <td style="padding-top: 23px; padding-right: 40px;">
+                            <a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)activities/@(activity.ActivityId)/attendance">
+                                <span>Ik ben erbij!</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)activities" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+@if (Model.ForSale != null && Model.ForSale.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Nieuw bij spullen te koop</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)marketplace/createitem?CategoryId=2">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuwe advertentie</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach (var item in Model.ForSale)
+                    {
+                        var itemUrl = Model.PortalUrl + "marketplace/" + item.MarketplaceItemId;
+                        var profileImageUrl = item.Owner.ProfileImageId != null ? Model.PortalUrl + "users/" + item.Owner.Id + "/profileimage/" + item.Owner.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+                        
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                <tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (item.Image1Id == null)
+                                                            {
+                                                                <img style="width: 264px; height: 175px; background-color: white" src="@(Model.PortalUrl)/Content/img/mail-logo.png"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@(Model.PortalUrl)marketplace/@(item.MarketplaceItemId)/itemimage/@(item.Image1Id)?index=1" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                        </a>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px">@(item.Type == LeeftSamen.Portal.Data.Models.MarketplaceItem.MarketplaceItemType.Offered ? "Aangeboden:" : "Gevraagd:") @item.Category.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="text-decoration: underline; margin: 0; font-weight: bold; font-size: 16px; Margin-bottom: 10px; color: #2d2d2d">@item.Title</a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray; float: left;" src="@profileImageUrl"/>
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0px; text-align: left;">@item.Owner.Name</p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)marketplace/overview?Category=2" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+@if (Model.ToBorrow != null && Model.ToBorrow.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Nieuw bij spullen te leen</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)marketplace/createitem">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuwe advertentie</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach (var item in Model.ToBorrow)
+                    {
+                        var itemUrl = Model.PortalUrl + "marketplace/" + item.MarketplaceItemId;
+                        var profileImageUrl = item.Owner.ProfileImageId != null ? Model.PortalUrl + "users/" + item.Owner.Id + "/profileimage/" + item.Owner.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                <tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (item.Image1Id == null)
+                                                            {
+                                                                <img style="width: 264px; height: 175px; background-color: white" src="@(Model.PortalUrl)/Content/img/mail-logo.png"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@(Model.PortalUrl)marketplace/@(item.MarketplaceItemId)/itemimage/@(item.Image1Id)?index=1" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                        </a>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px">@(item.Type == LeeftSamen.Portal.Data.Models.MarketplaceItem.MarketplaceItemType.Offered ? "Aangeboden:" : "Gevraagd:") @item.Category.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="text-decoration: underline; margin: 0; font-weight: bold; font-size: 16px; Margin-bottom: 10px; color: #2d2d2d">@item.Title</a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray; float: left;" src="@profileImageUrl" />
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0px; text-align: left;">@item.Owner.Name</p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)marketplace/overview?Category=3" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+@if (Model.Meals != null && Model.Meals.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Nieuw bij maaltijden</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)marketplace/createitem?CategoryId=1">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuwe advertentie</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach (var item in Model.Meals)
+                    {
+                        var itemUrl = Model.PortalUrl + "marketplace/" + item.MarketplaceItemId;
+                        var profileImageUrl = item.Owner.ProfileImageId != null ? Model.PortalUrl + "users/" + item.Owner.Id + "/profileimage/" + item.Owner.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                <tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (item.Image1Id == null)
+                                                            {
+                                                                <img style="width: 264px; height: 175px; background-color: white" src="@(Model.PortalUrl)/Content/img/mail-logo.png"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@(Model.PortalUrl)marketplace/@(item.MarketplaceItemId)/itemimage/@(item.Image1Id)?index=1" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                        </a>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px">@(item.Type == LeeftSamen.Portal.Data.Models.MarketplaceItem.MarketplaceItemType.Offered ? "Aangeboden:" : "Gevraagd:") @item.Category.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="text-decoration: underline; margin: 0; font-weight: bold; font-size: 16px; Margin-bottom: 10px; color: #2d2d2d">@item.Title</a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray; float: left;" src="@profileImageUrl" />
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0px; text-align: left;">@item.Owner.Name</p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </table>
+            
+        </td>
+    </tr>
+    <tr>
+        <td><a href="@(Model.PortalUrl)marketplace/overview?Category=1" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a></td>
+    </tr>
+}
+
+@if (Model.NeighborHelp != null && Model.NeighborHelp.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Nieuw bij burenhulp</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)marketplace/createitem?Category=0">
+                            <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                            <span>Nieuwe advertentie</span>
+                        </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach (var item in Model.NeighborHelp)
+                    {
+                        var itemUrl = Model.PortalUrl + "marketplace/" + item.MarketplaceItemId;
+                        var profileImageUrl = item.Owner.ProfileImageId != null ? Model.PortalUrl + "users/" + item.Owner.Id + "/profileimage/" + item.Owner.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                <tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (item.Image1Id == null)
+                                                            {
+                                                                <img style="width: 264px; height: 175px; background-color: white" src="@(Model.PortalUrl)/Content/img/mail-logo.png"/>
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@(Model.PortalUrl)marketplace/@(item.MarketplaceItemId)/itemimage/@(item.Image1Id)?index=1" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                        </a>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px">@(item.Type == LeeftSamen.Portal.Data.Models.MarketplaceItem.MarketplaceItemType.Offered ?  "Aangeboden:" : "Gevraagd:") @item.Category.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="text-decoration: underline; margin: 0; font-weight: bold; font-size: 16px; Margin-bottom: 10px; color: #2d2d2d">@item.Title</a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray; float: left;" src="@profileImageUrl" />
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0px; text-align: left;">@item.Owner.Name</p>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)marketplace/overview?Category=0" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+@if (Model.Circles != null && Model.Circles.Count != 0)
+{
+    <tr style="border-top: 1px solid #DBDEE5">
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                <tr>
+                    <td style="padding-top: 30px; padding-bottom: 10px; padding-right: 20px; padding-left: 20px; width: 100%; text-align: left;">
+                        <p style="Margin: 0; font-weight: bold; float: left; font-size: 20px; Margin-bottom: 10px; color: #2d2d2d">Nieuwe kringen</p>
+                        @*<a style="float: right; text-decoration: none; color: #ffffff;background-color: #0da7a3;border-color: #0b8f8c;display: inline-block;margin-bottom: 0;font-weight: normal;text-align: center;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 16px;line-height: 1.5;-ms-border-radius: 4px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" href="@(Model.PortalUrl)marketplace/createitem?Category=0">
+                                <span style="float: left; padding-top: 2px; margin-bottom: -2px;"><img style="top: 2px; height: 16px; width: 16px;" src="@(Model.PortalUrl)Content/Images/glyph_plus.png" /></span>
+                                <span>Nieuwe advertentie</span>
+                            </a>*@
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; text-align: center; font-size: 0;">
+            <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+                <tr>
+                    @foreach (var item in Model.Circles)
+                    {
+                        var itemUrl = Model.PortalUrl + "circles/" + item.CircleId;
+                        var profileImageUrl = item.Creator.ProfileImageId != null ? Model.PortalUrl + "users/" + item.Creator.Id + "/profileimage/" + item.Creator.ProfileImageId : Model.PortalUrl + "Content/Images/profile-image.jpg";
+
+
+                        <td width="50%" valign="top" style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+
+                            <div style="width: 100%; max-width: 300px; display: inline-block; vertical-align: top;">
+                                <table width="100%" style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d;">
+
+                                    <tr>
+                                        <td style="padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 20px;">
+                                            <table style="border-collapse: collapse; border-spacing: 0; font-family: Arial; color: #2d2d2d; width: 100%; font-size: 14px; text-align: left;">
+
+                                                @*<tr>
+                                                    <td style="padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0;">
+                                                        <a href="@itemUrl">
+                                                            @if (item.ProfileImageId == null)
+                                                            {
+                                                                <img src="@(Model.PortalUrl)Content/Images/profile-image.jpg" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="@(Model.PortalUrl)circles/@(item.CircleId)/profileimage/@(item.ProfileImageId)" alt="" style="border-width: 0; width: 264px; height: 175px;" />
+                                                            }
+                                                        </a>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px; font-size: 12px">Openbare kringen</td>
+                                                </tr>*@
+                                                <tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 10px;">
+                                                        <a href="@itemUrl" style="font-weight: bold; font-size: 20px; text-decoration: underline;">@item.Name</a>
+                                                    </td>
+                                                </tr>
+
+                                                @*<tr>
+                                                    <td style="padding-bottom: 0; padding-right: 0; padding-left: 0; padding-top: 12px;">
+                                                        <img style="width: 32px; height: 32px; margin: 0 10px 0 0; border-radius: 50%; ms-border-radius: 50%; moz-border-radius: 50%; webkit-border-radius: 50%; vertical-align: middle; border: 1px solid lightgray; float: left;" src="@profileImageUrl" />
+                                                        <p style="margin-top: 5px; padding-bottom: 0; float: left; padding-right: 0; padding-left: 15px; padding-top: 0px; text-align: left;">@item.Creator.Name</p>
+                                                    </td>
+                                                </tr>*@
+
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="@(Model.PortalUrl)circles/public" style="font-weight: bold; font-size: 18px; text-decoration: underline;">Meer</a>
+        </td>
+    </tr>
+}
+
+</table>
+</td>
+</tr>
+</table>
+</div>
+@section reason {
+<a href="@(Model.PortalUrl)account/changeemailsettings" style="Margin: 0; font-size: 10px; text-align: right; text-decoration: underline; Margin-bottom: 10px; color: gray">E-mailinstellingen wijzigen / Uitschrijven</a>
+}

@@ -1,0 +1,89 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Activities.IndexViewModel
+
+@if (Model.Activities.Count > 0)
+{
+    var lastDate = DateTime.MinValue.Date;
+
+    foreach (var activity in Model.Activities.OrderBy(i => i.StartDateTime.Date).ThenBy(i => !i.AllDay).ThenBy(i => i.StartDateTime.TimeOfDay))
+    {
+        var activityUrl = Url.RouteUrl("DefaultDetail", new { controller = "Activities", action = "Detail", id = activity.ActivityId });
+        if (ViewUtils.GetController(ViewContext).ToLower() == "organizations" && activity.OrganizationMembership != null)
+        {
+            activityUrl = Url.RouteUrl("OrganizationActivity", new { activityId = activity.ActivityId, id = activity.OrganizationMembership.Organization.OrganizationId });
+        }
+        if (Model.ShownInCircle.HasValue)
+        {
+            activityUrl = Url.RouteUrl("CircleActivitiesDetail", new { controller = "Activities", action = "Detail", id = activity.ActivityId, circleId = Model.ShownInCircle });
+        }
+
+        <div class="panel startpage-item activity" style="margin-top: @(activity.StartDateTime.Date != lastDate ? "60px" : "")" data-link="@activityUrl">
+            <div class="panel-heading">
+
+                <label class="label label-info"><strong>@Html.Raw(activity.Title)</strong></label>
+                <h4>
+                    <a href="@activityUrl">@activity.Location</a>
+                </h4>
+
+                <small>
+                    @if (activity.AllAges)
+                    {
+                        @Label.AllAges
+                    }
+                    else
+                    {
+                        if (activity.AgeFrom.HasValue)
+                        {
+                            @(string.Format("{0} {1} ", Label.FromAge, activity.AgeFrom.Value))
+                        }
+                        if (activity.AgeTo.HasValue)
+                        {
+                            var ageTo = activity.AgeFrom.HasValue ? Label.ToAge.ToLower() : Label.ToAge;
+                            @(string.Format("{0} {1}", ageTo, activity.AgeTo.Value))
+                        }
+                        @(" " + Label.Year.ToLower())
+                    }
+                </small>
+
+                @Html.Partial("~/Views/Activities/_AttendanceForm.cshtml", new LeeftSamen.Portal.Web.Models.Activities.AttendanceFormViewModel(activity.ActivityId, Model.ShownInCircle, activity.Attending.HasValue && activity.Attending.Value, false))
+
+                @{
+                    var count = 0;
+                    if (Model.HelpIcons.Any(h => h.Type == "activity-participate") && count == 0)
+                    {
+                        var helpIcon = Model.HelpIcons.First(h => h.Type == "activity-participate");
+                        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "activity-participate", HelpText = helpIcon.Text });
+                    }
+                    count++;
+                }
+
+                @if (activity.StartDateTime.Date != lastDate)
+                {
+                    lastDate = activity.StartDateTime.Date;
+                    var dateLabel = lastDate.ToShortDateString();
+                    if (lastDate.IsToday())
+                    {
+                        dateLabel = Label.Today;
+                    }
+                    else if (lastDate.IsYesterday())
+                    {
+                        dateLabel = Label.Yesterday;
+                    }
+                    else
+                    {
+                        dateLabel = @lastDate.ToString("dddd<br />d MMMM yyyy");
+                    }
+                    <time datetime="@lastDate.ToString("s")" title="@lastDate.ToString("f")">@Html.Raw(dateLabel)</time>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h3>@Title.NoActivitiesFound</h3>
+}

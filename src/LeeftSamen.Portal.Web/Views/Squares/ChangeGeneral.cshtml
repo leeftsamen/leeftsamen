@@ -1,0 +1,75 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Squares.ChangeGeneralModel
+@{
+    ViewBag.Title = Title.ChangeSquare;
+    var cancelUrl = Url.RouteUrl("Default", new { controller = "Squares", action = "Settings", id = Model.Square.SquareId });
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("ChangeGeneral", "Squares", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.SquareData</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Name))
+            {
+                @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
+            }
+        </div>
+        <div class="panel-footer">
+            <div class="form-horizontal">
+                @Html.Partial("_ImageUpload", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.ProfileImage, Text.SquareProfileImageDescription), "ProfileImage"))
+                @Html.Partial("_ImageUpload", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.CoverImage, Text.SquareCoverImageDescription), "CoverImage"))
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label class="control-label" for="colorselector">@Label.CoverColor:</label>
+                <select id="colorselector" name="CoverColor">
+                    @foreach (var color in Model.CoverColors)
+                    {
+                        var selected = Model.CoverColor == color ? " selected" : "";
+                        <option value="@color" data-color="@ColorTranslator.ToHtml(Color.FromArgb(color))" @selected></option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.SquareInfo</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.InfoTitle))
+            {
+                @Html.LabelFor(m => m.InfoTitle, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.InfoTitle, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.InfoTitle, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.InfoText))
+            {
+                @Html.LabelFor(m => m.InfoText, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.InfoText, 8, 0, new { @class = "form-control text-editor" })
+                @Html.ValidationMessageFor(m => m.InfoText, null, new { @class = "help-block" })
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@Button.Save</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Cancel</a>
+        </div>
+    </div>
+}

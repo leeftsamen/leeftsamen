@@ -1,0 +1,183 @@
+﻿@using System.Linq
+@using System.Web
+@using AutoMapper.Internal
+@using LeeftSamen.Portal.Web.Helpers
+@using Button = LeeftSamen.Common.InterfaceText.Button
+@using Placeholder = LeeftSamen.Common.InterfaceText.PlaceHolder
+@model LeeftSamen.Portal.Web.Models.Register.IndexRegisterAccountViewModel
+
+@{
+    ViewBag.Title = Title.Home;
+}
+<div class="row homepage">
+    @if (DateTime.Now.Date < new DateTime(2016, 4, 8).Date)
+    {
+    <div class="homepage-banner">
+
+        <a href="http://www.leeftsamen.nl/clubactie-renswoude/">
+            <span class="banner-container">
+                <img src="~/Content/Images/bar.png" />
+                <span onclick="return homepage.CloseBanner();"></span>
+            </span>
+        </a>
+    </div>
+    }
+    <div class="col-sm-6 col-xs-12 homepage-left">
+        @*<p style="font-size:2em;font-weight: bold;max-width: 400px;">@Text.AppLead</p>*@
+        <h1>@Text.AppLead</h1>
+
+        @if (System.Web.Configuration.WebConfigurationManager.AppSettings["Company"] == "leeftsamen")
+        {
+            <a id="register_scrollpoint" class="btn btn-primary" href="https://www.leeftsamen.nl/leeftsamen/" style="width: 200px;">@Button.DiscoverPlatform</a>
+            <div class="margin-right-10-px-xs">
+                <div class="home-video">
+                    <iframe src="https://www.youtube.com/embed/mSiU9-nc3Z0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        }
+        else
+        {
+            <a id="register_scrollpoint" class="btn btn-primary" href="https://www.comunios.com/comunios/" style="width: 300px;">@Button.DiscoverPlatform</a>
+        }
+        <p style="font-size: 1.2em; font-weight: bold; max-width: 400px;">@Text.AppLeadSubText</p>
+        @*<div style="margin-right:20px;">
+            <a id="register_scrollpoint" class="btn btn-primary" href="https://www.leeftsamen.nl/leeftsamen/">@Button.DiscoverPlatform</a>
+        </div>*@
+    </div>
+
+    <div class="panel col-sm-6 col-xs-12 homepage-right">
+        <div class="panel-body">
+            <h2>@Title.RegisterHome</h2>
+            <p>@Text.IntroHome</p>
+            
+            @using (Html.BeginForm("QuickRegister", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="row">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label col-xs-12" })
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control", @tabindex = "3", @autofocus = "autofocus", @placeholder = Placeholder.FirstName })
+                    </div>
+                    <div class="col-sm-8 col-xs-12">
+                        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", @tabindex = "3", @placeholder = Placeholder.LastName })
+                    </div>                                       
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">@Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "text-danger" })</div>
+                </div>
+
+                @*<div class="row">
+                    <div class="col-xs-12">@Html.ValidationMessageFor(m => m.LastName, null, new { @class = "text-danger" })</div>
+                </div>*@
+
+                <div class="row">
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label col-xs-12" })
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @tabindex = "4", @placeholder = Placeholder.EnterEmail })
+                    </div>
+                </div>
+                      
+                <div class="row">
+                    <div class="col-xs-12">@Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })</div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label col-xs-12" })
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @tabindex = "4", @placeholder = Placeholder.Password, autocomplete = "off" })
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @tabindex = "5", @placeholder = Placeholder.RepeatPassword })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12"><span class="privacy-info">@Label.PrivacyPolicyPassword</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">@Html.ValidationMessageFor(m => m.Password, null, new {@class = "text-danger"})</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">@Html.ValidationMessageFor(m => m.ConfirmPassword, null, new {@class = "text-danger"})</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8 col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(m => m.DateOfBirthD, new { @class = "control-label label-with-info" })
+                                <span class="info-extend hidden-xs">
+                                        <i class="fa fa-question-circle"
+                                            data-toggle="tooltip" 
+                                            data-original-title="@Text.BirthDayDescription" 
+                                           data-placement="right"
+                                           data-submit="false"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="padding: 0px 0px 15px 15px;">
+                            <div class="col-xs-4" style="padding: 0; width: 28%">
+                                @Html.DropDownListFor(m => m.DateOfBirthD, Model.DateOfBirthDays, new { @class = "form-control form-control-fontresize-xs", @tabindex = "6", @placeholder = "D" })
+                            </div>
+                            <div class="col-xs-4" style="padding: 0px 7px 0px 7px; width: 39%">
+                                @Html.DropDownListFor(m => m.DateOfBirthM, Model.DateOfBirthMonths, new { @class = "form-control form-control-fontresize-xs", @tabindex = "7", @placeholder = "M" })
+                            </div>
+                            <div class="col-xs-4" style="padding: 0; width: 33%">
+                                @Html.DropDownListFor(m => m.DateOfBirthY, Model.DateOfBirthYears, new { @class = "form-control form-control-fontresize-xs", @tabindex = "8", @placeholder = "J" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="row">
+                            @Html.LabelFor(m => m.Gender, new {@class = "control-label col-xs-12"})
+                        </div>
+
+                        <div class="row radios">
+                            <div class="col-xs-6" style="padding-right: 0;">
+                                <label for="Male">                                    
+                                    @Html.RadioButtonFor(m => m.Gender, "Male", new { @class = "form-control", @tabindex = "9", id = "Male", @checked = "checked" })
+                                    @Label.Male
+                                </label>
+                            </div>
+                            <div class="col-xs-6" style="padding-left: 0;">
+                                <label for="Female">
+                                    @Html.RadioButtonFor(m => m.Gender, "Female", new { @class = "form-control", @tabindex = "10", id = "Female" })
+                                    @Label.Female
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <hr/>
+                
+                <div class="row">
+                    <div class="col-xs-12 radios">
+                        @Html.CheckBoxFor(m => m.AcceptTerms, new { @tabindex = "11" }) @Html.Raw(HttpUtility.HtmlDecode(Html.Label("AcceptTerms", Label.AcceptTermsHref).ToNullSafeString()))
+                        @Html.ValidationMessageFor(m => m.AcceptTerms, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-5">
+                    <input type="submit" class="btn btn-primary" value="@Button.Register" tabindex="12" style="margin-top: 10px;" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

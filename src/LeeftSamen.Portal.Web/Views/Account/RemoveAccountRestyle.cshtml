@@ -1,0 +1,34 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Account.RemoveAccountPostModel
+@{
+    ViewBag.Title = Title.RemoveAccount;
+}
+
+<h1>@Title.ManageAccount.</h1>
+
+@using (Html.BeginForm("RemoveAccount", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+<div class="panel-edit">
+    <div class="panel-heading">
+        <h2 class="panel-title">@ViewBag.Title.</h2>
+    </div>
+    <div class="panel-body">
+        <p>@Text.ConfirmRemoveAccount</p>
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginFormGroupFor(m => m.RemovalConfirmation))
+            {
+                @Html.LabelFor(m => m.RemovalConfirmation, new { @class = "control-label" })
+                @Html.CheckBoxFor(m => m.RemovalConfirmation, new { @class = "" })
+                @Html.ValidationMessageFor(m => m.RemovalConfirmation, null, new { @class = "help-block" })
+            }
+    </div>
+</div>
+
+<div class="panel panel-default edit-buttons">
+    <div class="panel-body">
+        <button type="submit" class="btn btn-primary">@Button.RemoveAccount</button>
+        <a class="btn btn-link" href="@Url.Action("Index", "Account")">@Button.Cancel</a>
+    </div>
+</div>
+}

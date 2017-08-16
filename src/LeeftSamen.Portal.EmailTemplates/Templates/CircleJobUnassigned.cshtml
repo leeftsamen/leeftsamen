@@ -1,0 +1,21 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.CircleJobUnassignedModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@Email.CircleJobUnassignedSalutation</p>
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.CircleJobUnassigned, Model.Unassignee, Model.JobName, Model.CircleName)</p>
+<p>@Email.TakeJob</p>
+<a href="@Model.JobUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.AssignJobToMe
+</a>
+&nbsp;
+<a href="@Model.JobOverviewUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.MoreInfo
+</a>
+<p style="margin-top:16px;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    @Email.CircleJobUnassignedReason
+}

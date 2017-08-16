@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActivityInvitationAcceptLinkText" xml:space="preserve">
+    <value>Прифати покана</value>
+  </data>
+  <data name="ActivityInvitationInstruction" xml:space="preserve">
+    <value>Поканети сте да учествувате во активноста  '{1}'. Кликнете на линкот подолу за да ја видите поканата.</value>
+  </data>
+  <data name="CircleInvitationAcceptLinkText" xml:space="preserve">
+    <value>Прифати покана</value>
+  </data>
+  <data name="CircleInvitationInstruction" xml:space="preserve">
+    <value>{0} ве покани да бидете член на кругот {1}’ Кликнете на линкот подолу за да ја прифатите поканата. Доколку не реагирате до {2} поканата ќе биде неважечка.</value>
+  </data>
+  <data name="CircleInvitationInstruction1" xml:space="preserve">
+    <value>ве покани за кругот</value>
+  </data>
+  <data name="CircleInvitationInstruction2" xml:space="preserve">
+    <value>Дали би сакале да станете член на овој круг? Кликнете на копчето подолу за да ја прифатите поканата.</value>
+  </data>
+  <data name="CircleInvitationNoUser" xml:space="preserve">
+    <value>Сѐ уште не сте член на ЖивеемеЗаедно? Нема проблем! Притиснете на линкот и направете профил. Потоа преку овој е-маил прифатете ја поканата од кругот.</value>
+  </data>
+  <data name="CircleInvitationReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што сте поканети во круг. </value>
+  </data>
+  <data name="CircleInvitationWarningReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што наскоро истекува поканата за круг</value>
+  </data>
+  <data name="CircleJobAssigned" xml:space="preserve">
+    <value>{0} ви даде задача да извршите во кругот {1}</value>
+  </data>
+  <data name="CircleJobAssignedReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што сте администратор на кругот.</value>
+  </data>
+  <data name="CircleJobCreated" xml:space="preserve">
+    <value>Нова задача во кругот {0}</value>
+  </data>
+  <data name="CircleJobLinkText" xml:space="preserve">
+    <value>Погледни ја задачата</value>
+  </data>
+  <data name="CircleJobReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што некој има поставено нова задача во круг во кој членувате. </value>
+  </data>
+  <data name="CircleJobUnassigned" xml:space="preserve">
+    <value>… кој ја презема задачата … во кругот… за жал не може повеќе да ја изврши</value>
+  </data>
+  <data name="CircleJobUnassignedReason" xml:space="preserve">
+    <value>Ја добивте оваа порака бидејќи некој не може повеќе да изврши задача во кругот во кој сте член. </value>
+  </data>
+  <data name="CircleJobUnassignedSalutation" xml:space="preserve">
+    <value>Почитиван член на круг,</value>
+  </data>
+  <data name="CircleJoinRequestAcceptLinkText" xml:space="preserve">
+    <value>Одобри барање</value>
+  </data>
+  <data name="CircleJoinRequestInstruction" xml:space="preserve">
+    <value>{0} прати барање за членство во кругот {1}. Кликнете на линкот подолу за да го одобрите барањето. Доколку не сакате да не го одобрите барањето, игнорирајте ја оваа порака.</value>
+  </data>
+  <data name="CircleJoinRequestReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што сте администратор на кругот.</value>
+  </data>
+  <data name="CircleJoinRequestSaluation" xml:space="preserve">
+    <value>Почитуван администратор</value>
+  </data>
+  <data name="CircleMarketPlaceItemCreated" xml:space="preserve">
+    <value>Почитуван член на круг, {0} постави нов пост во понудата споделена во кругот.</value>
+  </data>
+  <data name="CircleMarketplaceItemLinkText" xml:space="preserve">
+    <value>Погледнете прашање и посуда</value>
+  </data>
+  <data name="CircleMessageCreated" xml:space="preserve">
+    <value>Почитуван член на круг, {0} поставил нова порака во кругот.</value>
+  </data>
+  <data name="CircleMessageLinkText" xml:space="preserve">
+    <value>Погледни ја пораката</value>
+  </data>
+  <data name="DefaultCloseHtml" xml:space="preserve">
+    <value>Срдечни поздрави, тимот на ЖивеемеЗаедно</value>
+  </data>
+  <data name="DefaultSaluation" xml:space="preserve">
+    <value>Почитуван-а {0},</value>
+  </data>
+  <data name="InvitationExpireWarningText" xml:space="preserve">
+    <value>Поканата од кругот {0} ќе истече после 2 дена.Можете да реагирате до {1}. Потоа покатана нема повеќе да важи.</value>
+  </data>
+  <data name="MarketplaceLenditemAsked" xml:space="preserve">
+    <value>Мене ми треба {0}. Дали можеш да ми го/ја позајмиш</value>
+  </data>
+  <data name="MarketplaceLendRequestInCircleReason" xml:space="preserve">
+    <value>Добивте порака затоа што поставен е оглас во твојот круг </value>
+  </data>
+  <data name="MarketplaceLendRequestInNeighboorhoudReason" xml:space="preserve">
+    <value>Добивте порака затоа што поставен е оглас во твојата населба</value>
+  </data>
+  <data name="MarketplaceReaction" xml:space="preserve">
+    <value>{0} одговори на {1}. Кликнете на линкот подолу да го погледнете одговорот.</value>
+  </data>
+  <data name="MarketplaceReactionLinkText" xml:space="preserve">
+    <value>Погледнете го одговорот</value>
+  </data>
+  <data name="MarketplaceReactionReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што има одговор на оглас</value>
+  </data>
+  <data name="MarketplaceTransaction" xml:space="preserve">
+    <value>{0}извршивте исплата за {1}. Кликнете на линкот подолу за да го побледнеете огласот.</value>
+  </data>
+  <data name="MarketplaceTransactionLinkText" xml:space="preserve">
+    <value>Погледни оглас</value>
+  </data>
+  <data name="MarketplaceTransactionReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што е направена исплата за оглас</value>
+  </data>
+  <data name="NoTime" xml:space="preserve">
+    <value>Неважечко</value>
+  </data>
+  <data name="OrganizationInvitationAcceptLinkText" xml:space="preserve">
+    <value>Прифати покана </value>
+  </data>
+  <data name="OrganizationInvitationInstruction" xml:space="preserve">
+    <value>{0}ве покани да станете член на организацијата {1}. Кликнете на линкот подолу за да ја прифатите поканата.</value>
+  </data>
+  <data name="OrganizationInvitationReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што сте поканети да станете член на организација</value>
+  </data>
+  <data name="OrganizationRequestInstruction" xml:space="preserve">
+    <value>{0}ја додаде организацијата {1}. Контактирајте го сервисот за клиенти на ЖивеемеЗаедно за да ја направите организацијата видлива на платформата.</value>
+  </data>
+  <data name="PortalAdmin" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што сте администратор на порталот.</value>
+  </data>
+  <data name="ReactionParentRemoved" xml:space="preserve">
+    <value>Вашата порака не е веќе видлива, бидејќи е отстранета. Вашата порака не е во согласност со правилата на форумот. Тоа ги вклучува следните прилози : &lt;br /&gt; {0} &lt;br /&gt; &lt;br /&gt; Се надеваме дека наскоро повторно ќе го посетите форумот.</value>
+  </data>
+  <data name="ReactionRemoved" xml:space="preserve">
+    <value>Вашата порака е за жал отстранета поради тоа што не е во согласност со правилата на форумот. Тоа се однесува на следната порака : &lt;br /&gt; {0} &lt;br /&gt; &lt;br /&gt; Се надеваме дека наскоро повторно ќе го посетите форумот.</value>
+  </data>
+  <data name="ReactionRemovedReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што администраторот избриша ваша порака. </value>
+  </data>
+  <data name="ReportAbuse" xml:space="preserve">
+    <value>{0} &lt;{1}&gt; има пријавено злоупотреба на платформата ЖивеемеЗаедно</value>
+  </data>
+  <data name="ReportAbuseReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што е пријавена некаква форма на злоупотреба.</value>
+  </data>
+  <data name="ResetPasswordInstruction" xml:space="preserve">
+    <value>Побаравте е нова лозинка. Кликнете на линкот подолу за да ја поставите вашата нова лозинка. </value>
+  </data>
+  <data name="ResetPasswordLinkText" xml:space="preserve">
+    <value>Постави нова лозинка</value>
+  </data>
+  <data name="ResetPasswordReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што имате побарано нова лозинка. </value>
+  </data>
+  <data name="SeeWebsite" xml:space="preserve">
+    <value>Види ја ЖивеемеЗаедно веб- страницата</value>
+  </data>
+  <data name="StopSendingMails" xml:space="preserve">
+    <value>Доколку не сакате повеќе да ги добивате овие пораки кликнете на &lt;a href=“{0}"&gt;hier&lt;/a&gt; за да ги смените вашите преференци.</value>
+  </data>
+  <data name="TakeJob" xml:space="preserve">
+    <value>Дали имате време да ја завршите оваа задача?</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Време</value>
+  </data>
+  <data name="UserCloseHtml" xml:space="preserve">
+    <value>Срдечни поздрави, {0} </value>
+  </data>
+  <data name="ViewInvitationLinkText" xml:space="preserve">
+    <value>Погледни покана</value>
+  </data>
+  <data name="WelcomeInstruction" xml:space="preserve">
+    <value>Добредојдовте во ЖивеемеЗаедно! Ви честитаме на вашиот нов профил. За да го задржите вашиот профил, ве молиме потврдете ја вашата е-маил адреса со кликнување на линкот подолу.</value>
+  </data>
+  <data name="WelcomeReason" xml:space="preserve">
+    <value>Ја добивте оваа порака затоа што направивте профил</value>
+  </data>
+  <data name="WelcomeVerifyEmailLinkText" xml:space="preserve">
+    <value>Потврди е-маил адреса</value>
+  </data>
+</root>

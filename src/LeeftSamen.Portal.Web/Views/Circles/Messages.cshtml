@@ -1,0 +1,67 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Circles
+@model MessagesViewModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+<div class="row">
+    <div class="col-md-10">
+
+        <div class="panel circle-message-container">
+
+            @using (Html.BeginForm("CreateMessage", "Circles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel-body">
+                    
+                    <div class="input-group">
+                        @Html.TextAreaFor(m => m.NewMessage, 10, 100, new { @class = "form-control", @id = "circle-message", @placeholder = PlaceHolder.PostNewMessage })
+                    </div>
+                    @Html.ValidationMessageFor(m => m.NewMessage, null, new { @class = "help-block" })
+                </div>
+
+                <div class="panel-footer">
+                    <div class="form-horizontal">
+                        <span>
+                            <button class="btn btn-primary circle-message-btn" type="submit">@Button.PostMessage</button>
+                        </span>
+                        <div class="md-margin-button margin-top-10-px">
+                            @*@Html.Partial("_ImageUpload", new FileUploadModel(null, null, null, string.Format("{0} <br><small>{1}</small>", Label.Attachment, Text.AttachmentDescription), "Attachment"))*@
+
+                            <div class="form-group profile-img-upload">
+                                <div class="col-md-9">
+                                    <span class="btn btn-default btn-file">
+                                        <i class="fa fa-picture-o"></i> @Button.ChooseImageFromPC <input type="file" name="Attachment" class="file-input" accept="image/gif, image/jpeg, image/png">
+                                    </span>
+                                    &nbsp;
+                                    <b class="file-input-filename"></b>
+                                    @Html.ValidationMessage("Attachment", null, new { @class = "help-block" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+            <br/>
+
+        <div id="messages">
+            @foreach (var message in Model.Messages.OrderByDescending(m => m.LatestReactionDateTime ?? m.CreationDateTime).Take(20))
+            {
+                Html.RenderPartial("_Message", message);
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Styles.Render("~/Content/lightbox")
+    @Scripts.Render("~/bundles/lightbox")
+}

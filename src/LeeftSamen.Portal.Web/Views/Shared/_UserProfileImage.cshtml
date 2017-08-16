@@ -1,0 +1,10 @@
+﻿@model LeeftSamen.Portal.Web.Models.Users.UserProfileImage
+
+@if (Model.HasProfileImage)
+{
+    <img src="@Url.RouteUrl("UserProfileImage", new { controller = "Users", action = "ProfileImage", userId = Model.UserId, mediaId = Model.MediaId })" alt="" class="img-circle @Model.Size" />
+}
+else
+{
+    <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle @Model.Size" />
+}

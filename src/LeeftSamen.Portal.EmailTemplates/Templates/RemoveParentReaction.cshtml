@@ -1,0 +1,13 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.RemoveParentReactionModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, (string.IsNullOrWhiteSpace(Model.Name) ? "heer/mevrouw" : Model.Name))</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(string.Format(Email.ReactionParentRemoved, Model.ParentReactionText))</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(string.Format(Email.UserCloseHtml, Model.RemovedByName))</p>
+
+@section reason {
+    @Email.ReactionRemovedReason
+}

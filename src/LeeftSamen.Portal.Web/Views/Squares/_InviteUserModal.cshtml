@@ -1,0 +1,49 @@
+﻿@model dynamic
+<div class="modal fade" id="inviteUserModal" tabindex="-1" role="dialog" aria-hidden="true" ng-app="InviteUserApp" ng-controller="SearchUserController">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="@Button.Cancel"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Model.Title</h4>
+                <div class="row">
+                    <div class="col-md-10">
+                        <p>@Model.Instruction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div ng-repeat="notification in notifications" class="alert alert-{{notification.state}}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{notification.message}}
+                </div>
+                <div class="form-group">
+                    <label for="contactSearch" class="control-label">@Label.SearchAdmins</label>
+                    <input id="contactSearch" class="form-control" type="text" ng-model="searchQuery" ng-keyup="search()" tags autocomplete="off" placeholder="@PlaceHolder.SearchByNameInNeighborhood">
+                </div>
+                <span ng-show="searchQuery.length && !searchResult.length" class="ng-hide">@Label.NoResult</span>
+                <ul id="user-search-results" class="row" style="max-height: 450px; overflow-y: auto">
+                    <li class="col-lg-3 col-md-4 col-sm-6 col-xs-6" ng-repeat="user in searchResult">
+                        <div class="panel panel-default relative">
+                            <div class="panel-body text-center hasBottomButton">
+                                <img ng-show="user.HasProfileImage" ng-src="{{user.ProfileImageUrl}}" alt="@Label.ProfileImage" class="ng-hide img-circle profile-image" />
+                                <img ng-hide="user.HasProfileImage" src="@Url.Content("~/Content/Images/profile-image.jpg")" class="img-circle profile-image" />
+                                <h4>{{user.Name}}</h4>
+                                <p>{{user.City}}</p>
+
+                                @using (Html.BeginForm("AddUser", null, null, FormMethod.Post, new { @ng_submit = "submit($event)" }))
+                                {
+                                @Html.AntiForgeryToken()
+                                    <input type="hidden" name="userId" value="{{user.UserId}}" />
+                                    <button class="btn btn-primary btn-bottom" type="submit">@Button.Add</button>
+                                }
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Button.Close</button>
+            </div>
+        </div>
+    </div>
+</div>

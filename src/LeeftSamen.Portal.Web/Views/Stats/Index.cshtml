@@ -1,0 +1,238 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@model LeeftSamen.Portal.Web.Models.Stats.IndexViewModel
+@{
+    ViewBag.Title = "Statistieken " + Model.StatDate;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.NeighborhoodMessages</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>Totaal</th>
+                        <td>@Model.NeighborhoodMessagesTotal</td>
+                        <td>100 %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.NeighborMessages</th>
+                        <td>@Model.NeighborhoodNeighborMessages</td>
+                        <td>@Math.Round((Model.NeighborhoodNeighborMessages / (float)Model.NeighborhoodMessagesTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.AssociationMessages</th>
+                        <td>@Model.NeighborhoodAssociationMessages</td>
+                        <td>@Math.Round((Model.NeighborhoodAssociationMessages / (float)Model.NeighborhoodMessagesTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.OrganizationMessages</th>
+                        <td>@Model.NeighborhoodOrganizationMessages</td>
+                        <td>@Math.Round((Model.NeighborhoodOrganizationMessages / (float)Model.NeighborhoodMessagesTotal) * 100f, 2) %</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.Organizations</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>Totaal</th>
+                        <td>@Model.OrganisationsTotal</td>
+                        <td>100 %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.OrganizationsProfessional</th>
+                        <td>@Model.OrganisationProfessionals</td>
+                        <td>@Math.Round((Model.OrganisationProfessionals / (float)Model.OrganisationsTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.OrganizationsAssociation</th>
+                        <td>@Model.OrganisationAssociations</td>
+                        <td>@Math.Round((Model.OrganisationAssociations / (float)Model.OrganisationsTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.OrganizationsVolunteer</th>
+                        <td>@Model.OrganisationVolunteers</td>
+                        <td>@Math.Round((Model.OrganisationVolunteers / (float)Model.OrganisationsTotal) * 100f, 2) %</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.Circles</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>Totaal</th>
+                        <td>@Model.CirclesTotal</td>
+                        <td>100 %</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.Public</th>
+                        <td>@Model.CirclesPublic</td>
+                        <td>@Math.Round((Model.CirclesPublic / (float)Model.CirclesTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.Private</th>
+                        <td>@Model.CirclesPrivate</td>
+                        <td>@Math.Round((Model.CirclesPrivate / (float)Model.CirclesTotal) * 100f, 2) %</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <th>@Button.Members</th>
+                        <td>@Model.CircleMembers</td>
+                        <td>(@Math.Round(Model.CircleMembers / (float)Model.CirclesTotal, 2) @Label.OnAverage.ToLower())</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.Messages</th>
+                        <td>@Model.CircleMessages</td>
+                        <td>(@Math.Round(Model.CircleMessages / (float)Model.CirclesTotal, 2) @Label.OnAverage.ToLower())</td>
+                    </tr>
+                    <tr>
+                        <th>@Button.Jobs</th>
+                        <td>@Model.CircleJobs</td>
+                        <td>(@Math.Round(Model.CircleJobs / (float)Model.CirclesTotal, 2) @Label.OnAverage.ToLower())</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.Marketplace</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th colspan="2">Totaal</th>
+                        <td>@Model.MarketplaceItemsTotal</td>
+                        <td>100 %</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">@Button.MarketplaceOffered</th>
+                        <td>@Model.MarketplaceItemsOffered</td>
+                        <td>@Math.Round((Model.MarketplaceItemsOffered / (float)Model.MarketplaceItemsTotal) * 100f, 2) %</td>
+                    </tr>
+                    @foreach (var category in Model.MarketplaceItemsPerCategory.Where(m => m.Type == MarketplaceItem.MarketplaceItemType.Offered).OrderByDescending(m => m.Count))
+                    {
+                        <tr>
+                            <td></td>
+                            <th>@category.Category</th>
+                            <td>@category.Count</td>
+                            <td>@Math.Round((category.Count / (float)Model.MarketplaceItemsTotal) * 100f, 2) %</td>
+                        </tr>
+                    }
+                    <tr>
+                        <th colspan="2">@Button.MarketplaceAsked</th>
+                        <td>@Model.MarketplaceItemsAsked</td>
+                        <td>@Math.Round((Model.MarketplaceItemsAsked / (float)Model.MarketplaceItemsTotal) * 100f, 2) %</td>
+                    </tr>
+                    @foreach (var category in Model.MarketplaceItemsPerCategory.Where(m => m.Type == MarketplaceItem.MarketplaceItemType.Asked).OrderByDescending(m => m.Count))
+                    {
+                        <tr>
+                            <td></td>
+                            <th>@category.Category</th>
+                            <td>@category.Count</td>
+                            <td>@Math.Round((category.Count / (float)Model.MarketplaceItemsTotal) * 100f, 2) %</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Label.Users</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>@Label.Total</th>
+                        <td>@Model.UsersTotal</td>
+                        <td>100 %</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.ActiveLast7Days</th>
+                        <td>@Model.UsersActiveDays</td>
+                        <td>@Math.Round((Model.UsersActiveDays / (float)Model.UsersTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.ActiveLast24Hours</th>
+                        <td>@Model.UsersActiveHours</td>
+                        <td>@Math.Round((Model.UsersActiveHours / (float)Model.UsersTotal) * 100f, 2) %</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.ActiveLastHour</th>
+                        <td>@Model.UsersActiveHour</td>
+                        <td>@Math.Round((Model.UsersActiveHour / (float)Model.UsersTotal) * 100f, 2) %</td>
+                    </tr>
+                </table>
+                <table class="table">
+                    @foreach (var city in Model.UsersPerCity.OrderByDescending(c => c.Count))
+                    {
+                        <tr>
+                            <th>@(string.IsNullOrWhiteSpace(city.City) ? "?" : city.City)</th>
+                            <td>@city.Count</td>
+                            <td>@Math.Round((city.Count / (float)Model.UsersTotal) * 100f, 2) %</td>
+                        </tr>
+                    }
+                </table>
+                <table class="table">
+                    <tr>
+                        <th>@Label.AverageNeighborhoodRadius</th>
+                        <td>@Model.UsersAvgNeighborhoodRadius m</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">@Title.Activities</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>@Label.Total</th>
+                        <td>@Model.ActivitiesTotal</td>
+                    </tr>
+                    <tr>
+                        <th>@Label.AverageActivityAttendees</th>
+                        <td>@Math.Round((Model.ActivitiesAttendees / (float)Model.ActivitiesTotal), 2)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>

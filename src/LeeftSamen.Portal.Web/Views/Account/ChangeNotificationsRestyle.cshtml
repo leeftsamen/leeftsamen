@@ -1,0 +1,86 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Account.ChangeNotificationViewModel
+@{
+    ViewBag.Title = Title.ChangeNotification;
+}
+
+<h1>@Title.ManageAccount.</h1>
+
+@using (Html.BeginForm("ChangeNotifications", "Account", FormMethod.Post, new { @class = "", role = "form" }))
+{
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h2 class="panel-title">@ViewBag.Title.</h2>
+        </div>
+        <div class="panel-body">
+            @Html.AntiForgeryToken()
+            <p>
+                @Text.NotificationSettings
+            </p>
+            <table style="width:100%;">
+                <tr>
+                    <td></td><td class="center">Notificaties</td><td class="center">Mobiel</td>
+                </tr>
+                @foreach (var name in Model.Names)
+                {
+                    var website = Model.Settings.FirstOrDefault(s => s.Group == SettingHelper.WebsiteGroup && s.Name == name);
+                    var mobile = Model.Settings.FirstOrDefault(s => s.Group == SettingHelper.MobileGroup && s.Name == name);
+
+                    if (website == null || mobile == null)
+                    {
+                        continue;
+                    }
+
+                    var websiteValue = Model.Values.FirstOrDefault(v => v.SettingId == website.SettingId);
+                    var websiteChecked = website.DefaultValue == "true";
+                    if (websiteValue != null)
+                    {
+                        websiteChecked = websiteValue.Value == "true";
+                    }
+
+                    var mobileValue = Model.Values.FirstOrDefault(v => v.SettingId == mobile.SettingId);
+                    var mobileChecked = mobile.DefaultValue == "true";
+                    if (mobileValue != null)
+                    {
+                        mobileChecked = mobileValue.Value == "true";
+                    }
+                    <tr>
+                        <td>@website.Text</td>
+                        <td class="center">
+                            @if (websiteChecked)
+                            {
+                                <input type="checkbox" name="website-@website.SettingId" checked value="true" />
+                                <input type="hidden" name="website-@website.SettingId" value="false" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="website-@website.SettingId" value="true" />
+                                <input type="hidden" name="website-@website.SettingId" value="false" />
+                            }
+                        </td>
+                        <td class="center">
+                            @if (mobileChecked)
+                            {
+                                <input type="checkbox" name="mobile-@mobile.SettingId" checked value="true" />
+                                <input type="hidden" name="mobile-@mobile.SettingId" value="false" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="mobile-@mobile.SettingId" value="true" />
+                                <input type="hidden" name="mobile-@mobile.SettingId" value="false" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-default edit-buttons">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@Button.ChangeNeighborhood</button>
+            <a class="btn btn-link" href="@Url.Action("Index", "Account")">@Button.Cancel</a>
+        </div>
+    </div>
+}
+

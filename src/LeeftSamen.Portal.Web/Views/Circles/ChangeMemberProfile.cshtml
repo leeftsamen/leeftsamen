@@ -1,0 +1,37 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.ChangeMemberProfileModel
+@{
+    ViewBag.Title = Title.ChangeMemberProfile;
+}
+
+<div class="content-wide">
+    <h1 class="page-title-small">@ViewBag.Title</h1>
+
+    @using (Html.BeginForm("ChangeMemberProfile", "Circles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="panel-edit">
+            @*<div class="panel-heading">
+                <h2 class="panel-title">@Title.Description</h2>
+            </div>*@
+            <div class="panel-body">
+                @using (Html.BeginFormGroupFor(m => m.ProfileText))
+                {
+                    @Html.RequiredLabelFor(m => m.ProfileText, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.ProfileText, new { @class = "form-control", style = "min-height:140px;" })
+                    @Html.ValidationMessageFor(m => m.ProfileText, null, new { @class = "help-block" })
+                }
+            </div>
+        </div>
+
+        <div class="panel panel-default edit-buttons">
+            <div class="panel-body">
+                <button type="submit" class="btn btn-primary">@Button.Save</button>
+                <a class="btn btn-link" href="@Url.Action("Members", "Circles")">@Button.Cancel</a>
+            </div>
+        </div>
+    }
+</div>

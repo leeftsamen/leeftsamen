@@ -1,0 +1,61 @@
+﻿@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@model System.Collections.Generic.List<LeeftSamen.Portal.Web.Models.Circles.IndexViewModel.CircleInvitationViewModel> 
+@{
+    var helpIconShown = false;
+}
+
+<table class="table">
+    @foreach (var circle in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Detail", "Circles", new {id = circle.CircleId})" style="text-decoration: none">
+                    @if (circle.ProfileImageId.HasValue)
+                    {
+                        <img src="@Url.RouteUrl("DefaultDetail", new {controller = "Circles", action = "ProfileImage", id = circle.CircleId, mediaId = circle.ProfileImageId})" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med hidden-xs" style="margin-right: 16px;" />
+                    }
+                    <span class="visible-xs-inline-block pull-left">
+                        @if (circle.ProfileImageId.HasValue)
+                        {
+                            <img src="@Url.RouteUrl("DefaultDetail", new {controller = "Circles", action = "ProfileImage", id = circle.CircleId, mediaId = circle.ProfileImageId})" alt="" class="img-circle profile-image-med block" />
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-med block" />
+                        }
+                        <span class="circlemembercount">@circle.MemberCount @Label.Members.ToLower()</span>
+                    </span>
+                    <strong style="margin-right: 16px;">@circle.Name</strong>
+                    @if (circle.IsPrivate)
+                    {
+                        <span class="label label-info">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                            @Label.Private
+                        </span>
+                    }
+                </a>
+
+                <div class="circle-details relative-inline-block hidden-xs">
+                    <span class="circlemembercount">@circle.MemberCount @Label.Members.ToLower()</span>
+                </div>
+
+                <div class="relative-inline-block pull-right mobilebutton">
+
+                    @*@using (Html.BeginForm("AcceptInvitation", "Circles", new {id = circle.CircleId, code = circle.Token}, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-default">@Button.BecomeMember</button>
+            }*@
+                    <a class="btn btn-default" href="@Url.Action("RejectInvitation", "Circles", new {id = circle.CircleId, code = circle.Token})">@Button.Decline</a>
+                    <a class="btn btn-default" href="@Url.Action("AcceptInvitation", "Circles", new {id = circle.CircleId, code = circle.Token})">@Button.AcceptInvite</a>
+
+                </div>
+</td>
+        </tr>
+    }
+</table>

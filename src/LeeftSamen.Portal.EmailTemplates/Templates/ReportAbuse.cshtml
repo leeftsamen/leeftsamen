@@ -1,0 +1,14 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.ReportAbuseModel>
+@{
+    Layout = "_Layout";
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.ReportAbuse, Model.SendByName, Model.SendByEmail)</p>
+<p style="margin-top:0;margin-bottom:16px">@Model.ReportDescription</p>
+<p style="margin-top:0;margin-bottom:48px">@Model.ForUrl</p>
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+
+@section reason {
+    @Email.ReportAbuseReason
+}

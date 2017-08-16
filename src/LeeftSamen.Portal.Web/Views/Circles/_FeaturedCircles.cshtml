@@ -1,0 +1,14 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Extensions
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.FeaturedCirclesModel
+
+@foreach (var circle in Model.Circles)
+{
+    <li @Html.Raw(circle.Selected ? "class=\"active\"" : string.Empty)>
+        <a href="@Url.Action("Detail", "Circles", new {id = circle.CircleId})">
+            <i class="fa fa-dot-circle-o"></i> @circle.CircleName
+        </a>
+    </li>
+}
+

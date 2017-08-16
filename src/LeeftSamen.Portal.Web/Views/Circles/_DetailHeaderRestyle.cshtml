@@ -1,0 +1,162 @@
+﻿@using System.Drawing
+@using LeeftSamen.Portal.Web.Extensions
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Circles.DetailHeaderViewModel
+@{
+    var bg = Model.CoverImageId.HasValue ? "style=\"background-image: url('" + Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "CoverImage", id = Model.CircleId, mediaId = Model.CoverImageId }) + "')\"" : string.Empty;
+    if (string.IsNullOrEmpty(bg))
+    {
+        var c = Color.FromArgb(Model.CoverColor);
+        var c1 = ColorTranslator.ToHtml(c);
+        var c2 = ColorTranslator.ToHtml(c.ChangeBrightness(-0.25f));
+        bg = "style=\"background: linear-gradient(to top, " + c1 + " 0%, " + c2 + " 100%)\"";
+    }
+}
+<div class="panel panel-default panel-overflow shift-left" id="circle-header" @Html.Raw(bg)>
+    <div class="panel-body">
+        
+        @if (!Model.CurrentUserCanOnlyView)
+        {
+            <div class="dropdown pull-right">
+                @if (Model.CurrentUserIsInvitedToJoin)
+                {
+                    <a class="btn btn-default" href="@Url.Action("RejectInvitation", "Circles", new {id = Model.CircleId, code = Model.InvitationToken})">@Button.Decline</a>
+                    <a class="btn btn-default" href="@Url.Action("AcceptInvitation", "Circles", new {id = Model.CircleId, code = Model.InvitationToken})">@Button.AcceptInvite</a>
+                }
+                else if (Model.CurrentUserHasRequestedToJoin)
+                {
+                    <button class="btn btn-default btn-sm disabled">@Button.RequestSent</button>
+                }
+                else if (!Model.IsPrivate && !Model.CurrentUserIsMember)
+                {
+                    <div class="relative-inline-block pull-right">
+                        @if (Model.HelpIcons.Any(h => h.Type == "circle-join"))
+                        {
+                            var helpIcon = Model.HelpIcons.First(h => h.Type == "circle-join");
+                            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel {Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "circle-create", HelpText = helpIcon.Text});
+                        }
+                        @using (Html.BeginForm("RequestToJoin", "Circles", new {id = Model.CircleId}, FormMethod.Post, new {@style = "display: inline-block"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-default btn-sm">@Button.BecomeMember</button>
+                        }
+                    </div>
+                }
+                @if (Model.CurrentUserCanLeaveCircle || Model.CurrentUserIsCircleAdministrator)
+                {
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        @if (Model.CurrentUserCanLeaveCircle)
+                        {
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#"
+                                   data-toggle="modal" data-target="#modal"
+                                   data-title="@Title.ConfirmLeaveCircle" data-body="@Text.ConfirmLeaveCircle" data-button="@Button.LeaveCircle"
+                                   data-action="@Url.Action("Leave", new {id = Model.CircleId})">@Button.LeaveCircle</a>
+                            </li>
+                        }
+                        @if (Model.CurrentUserIsCircleAdministrator)
+                        {
+                            if (Model.IsPrivate)
+                            {
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#"
+                                       data-toggle="modal" data-target="#modal"
+                                       data-title="@Title.ConfirmSetCirclePublic" data-body="@Text.ConfirmSetCirclePublic" data-button="@Button.SetCirclePublic"
+                                       data-action="@Url.Action("SetPublic", new {id = Model.CircleId})">@Button.SetCirclePublic</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#"
+                                       data-toggle="modal" data-target="#modal"
+                                       data-title="@Title.ConfirmSetCirclePrivate" data-body="@Text.ConfirmSetCirclePrivate" data-button="@Button.SetCirclePrivate"
+                                       data-action="@Url.Action("SetPrivate", new {id = Model.CircleId})">@Button.SetCirclePrivate</a>
+                                </li>
+                            }
+
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new {controller = "Circles", action = "Edit", id = Model.CircleId})">@Button.EditCircle</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="javascript:void(0);"
+                                   data-toggle="modal"
+                                   data-target="#modal"
+                                   data-title="@Title.ConfirmRemoveCircle"
+                                   data-body="@Text.ConfirmRemoveCircle"
+                                   data-button="@Button.RemoveCircle"
+                                   data-action="@Url.RouteUrl("DefaultDetail", new {controller = "Circles", action = "Remove", id = Model.CircleId})">@Button.RemoveCircle</a>
+                            </li>
+                        }
+                        @if (Model.ReceiveEmails)
+                        {
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#"
+                               data-toggle="modal" data-target="#modal"
+                               data-title="@Title.ConfirmStopCircleEmails" data-body="@Text.ConfirmStopCircleEmails" data-button="@Button.StopCircleEmails"
+                               data-action="@Url.Action("StopNotifications", new {id = Model.CircleId})">@Button.StopCircleEmails</a>
+                        </li>
+                        }
+                        else
+                        {
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#"
+                               data-toggle="modal" data-target="#modal"
+                               data-title="@Title.ConfirmStartCircleEmails" data-body="@Text.ConfirmStartCircleEmails" data-button="@Button.StartCircleEmails"
+                               data-action="@Url.Action("StartNotifications", new {id = Model.CircleId})">@Button.StartCircleEmails</a>
+                        </li>
+                        }
+                    </ul>
+                }
+            </div>
+        }
+        <div class="label-block">
+            <span class="label label-info">
+                <span class="glyphicon glyphicon-@(Model.IsPrivate ? "lock" : "globe")" aria-hidden="true"></span>
+                @(Model.IsPrivate ? Label.Private : Label.Public)
+            </span>
+            @if (Model.CurrentUserIsMember)
+            {
+                <span class="label label-info">
+                    <i class="fa fa-@(Model.ReceiveEmails ? "envelope" : "times")" aria-hidden="true"></i>
+                    @(Model.ReceiveEmails ? Label.ReceiveMailOn : Label.ReceiveMailOff)
+                </span>
+            }
+        </div>
+
+        @if (Model.ProfileImageId.HasValue)
+        {
+            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "ProfileImage", id = Model.CircleId, mediaId = Model.ProfileImageId })" alt="" class="img-circle profile-image-lg" />
+        }
+        else
+        {
+            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-lg" />
+        }
+        <h1> @Model.Name</h1>
+    </div>
+</div>
+@*<div class="panel panel-default has-nav">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li role="presentation">
+                @if (Model.HelpIcons.Any(h => h.Type == "circle-all"))
+                {
+                    var helpIcon = Model.HelpIcons.First(h => h.Type == "circle-all");
+                    Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "circle-all", HelpText = helpIcon.Text });
+                }
+            </li>
+            @foreach (var menuItem in Model.MenuItems)
+            {
+                <li role="presentation" class="@(menuItem.Selected ? "active" : string.Empty)"><a href="@Url.RouteUrl(menuItem.RouteName, menuItem.RouteValues)">@menuItem.Text</a></li>
+            }
+        </ul>
+    </div>
+</div>*@
+
+@Html.Partial("~/Views/Shared/_TabMenu.cshtml", Model.MenuItems)
+
+
+<div style="padding:0.5em 0; margin-top:-24px" class="text-right">@Html.Partial("_ReportAbuseLink")</div>

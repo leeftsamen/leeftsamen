@@ -1,0 +1,30 @@
+﻿@using LeeftSamen.Portal.Web.Models.Users
+@using LeeftSamen.Portal.Web.Utils
+@model LeeftSamen.Portal.Web.Models.Home.IndexAuthenticatedViewModel
+
+<div id="homeHeader">
+    @Html.Partial("_UserProfileImage", new UserProfileImage(Model.UserProfileImageId, Model.UserId, "profile-image-lg"))
+    <h1>@string.Format(Title.Welcome, Model.CurrentUserName)</h1>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="nav nav-tabs pull-left">
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Index") ? "class=\"active\"" : string.Empty)>
+                    <a href="~/#start">@Button.Overview</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Jobs") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new {controller = "Home", action = "Jobs"})#start">@Button.Jobs</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "NeighborhoodMessages") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new {controller = "Home", action = "NeighborhoodMessages"})#start">@Button.NeighborhoodMessages</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Activities") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new {controller = "Home", action = "Activities"})#start">@Button.Activities</a>
+                </li>
+                <li @Html.Raw(ViewUtils.IsActiveAction(ViewContext, "Home", "Marketplace") ? "class=\"active\"" : string.Empty)>
+                    <a href="@Url.RouteUrl("Default", new {controller = "Home", action = "Marketplace"})#start">@Button.Marketplace</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="start"></div>

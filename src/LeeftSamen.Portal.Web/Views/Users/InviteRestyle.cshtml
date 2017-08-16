@@ -1,0 +1,42 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models
+@model LeeftSamen.Portal.Web.Models.Users.InviteModel
+@{
+    ViewBag.Title = Title.InviteUsersToWebsite;
+}
+
+<h1>@Title.InviteUsersToWebsite</h1>
+
+@using (Html.BeginForm("Invite", "Users", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-edit">
+        <div class="panel-body">
+            <p>
+                @Html.Raw(Text.InviteUsersToWebsite)
+            </p>
+            @using (Html.BeginFormGroupFor(m => m.EmailAdresses))
+            {
+                @Html.RequiredLabelFor(m => m.EmailAdresses, new { @class = "control-label" })<br />
+                <i>@Text.InviteMultipleUsersByEmail</i>
+
+                @Html.TextBoxFor(m => m.EmailAdresses, new { @class = "form-control", style = "width:100%;" })
+                @Html.ValidationMessageFor(m => m.EmailAdresses, null, new { @class = "help-block" })
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.EmailText))
+            {
+                @Html.RequiredLabelFor(m => m.EmailText, new { @class = "control-label" })
+
+                @Html.TextAreaFor(m => m.EmailText, new { @class = "form-control", style = "height:180px;" })
+                @Html.ValidationMessageFor(m => m.EmailText, null, new { @class = "help-block" })
+            }
+        </div>
+        <div class="panel-footer edit-buttons">
+            <button type="submit" class="btn btn-primary">@Button.Send</button>
+            <a class="btn btn-link" href="/">@Button.Cancel</a>
+        </div>
+    </div>
+}
+

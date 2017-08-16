@@ -1,0 +1,127 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Squares.FactsViewModel
+@{
+    ViewBag.Title = "Feiten";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Action("DetailHeader", "Squares", new { id = Model.SquareId })
+    </div>
+</div>
+@if (Model.UserIsAdmin)
+{
+    <div class="page-buttons">
+        <div class="menu-background"></div>
+        <div class="bottom-display">
+            <div class="open-menu">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="buttons">
+            <a href="@Url.Action("CreateFact", "Squares", new {id = Model.SquareId})"
+               class="btn btn-primary pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                @Button.CreateFact
+            </a>
+        </div>
+    </div>
+}
+<h4 class="page-title-small">@Title.Facts</h4>
+
+@if (Model.Facts.Count > 0)
+{
+    <div class="shift-left">
+        <div id="facts" class="row">
+            @foreach (var fact in Model.Facts)
+            {
+                <div class="col-md-6">
+                    <div class="tile">
+                        @*@if (fact.OverviewImage != null)
+                            {
+                                var fontAwesome = fact.OverviewImage.FontAwesomeClass();
+                                if (!string.IsNullOrEmpty(fontAwesome))
+                                {
+                                    <div class="file-list">
+                                        <div class="file">
+                                            <div class="image">
+                                                <a href="@Url.Action("FactDetail", new { id = Model.SquareId, factId = fact.FactId })"><i class="fa @fontAwesome"></i></a>
+                                            </div>
+                                            <div class="name">
+                                                <a href="@Url.Action("FactDetail", new { id = Model.SquareId, factId = fact.FactId })">@fact.OverviewImage.Name</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="panel-heading">
+                                        <a href="@Url.Action("FactDetail", new {id = Model.SquareId, factId = fact.FactId})">
+                                            <img src="@Url.RouteUrl("SquareFactImage", new {action = "FactImage", mediaId = fact.OverviewImage.MediaId, factId = fact.FactId})" alt="">
+                                        </a>
+                                    </div>
+                                }
+                            }*@
+                        <div class="tape"></div>
+                        <div class="panel-body">
+                            <h4>@fact.Title</h4>
+                            @fact.IntroductionText
+                            <a href="@Url.Action("FactDetail", new { id = Model.SquareId, factId = fact.FactId })" class="highlight">@Button.ReadMore</a>
+                        </div>
+                        <div class="panel-footer">
+                            @if (Model.UserIsAdmin)
+                            {
+                                <div class="dropdown pull-right margin-left-10-px">
+                                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation">
+                                            <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Squares", action = "EditFact", id = Model.SquareId, factId = fact.FactId })">@Button.EditFact</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="javascript:void(0);"
+                                               data-toggle="modal"
+                                               data-target="#modal"
+                                               data-title="@Title.ConfirmRemoveFact"
+                                               data-body="@Text.ConfirmRemoveFact"
+                                               data-button="@Button.RemoveFact"
+                                               data-action="@Url.RouteUrl("DefaultDetail", new {controller = "Squares", action = "RemoveFact", id = Model.SquareId, factId = fact.FactId})">@Button.RemoveFact</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                            <div class="panel-avatar">@Html.Partial("_UserProfileImage", new UserProfileImage(fact.Creator.ProfileImageId, fact.Creator.Id, "profile-image-sm"))</div>
+                            <div class="panel-information">
+                                <span class="pull-right">
+                                    <time datetime="@fact.CreationDate.ToString("s")"
+                                          title="@fact.CreationDate.ToString("f")">
+                                        @fact.CreationDate.ToTimeAgoString()
+                                    </time>
+                                </span>
+                                <span class="creator">@fact.Creator.Name</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body" id="circle-photos">
+                    <p>@Text.FactsEmpty</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

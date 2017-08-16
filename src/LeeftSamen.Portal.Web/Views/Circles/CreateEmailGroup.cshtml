@@ -1,0 +1,53 @@
+﻿@model LeeftSamen.Portal.Web.Models.Circles.CreateEmailGroupModel
+@{
+    ViewBag.Title = Model.CircleName;
+}
+
+@Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+@using (Html.BeginForm("CreateEmailGroup", "Circles", new { id = Model.CircleId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="circleId" value="@Model.CircleId" />
+
+    <div class="panel">
+        <div class="panel-body">
+            <h3 class="panel-title">@Title.NewConversation</h3>
+            <p>
+                @Html.Raw(Text.CircleEmailNewGroup)
+            </p>
+
+            <label>@Title.StartConversation</label>
+            <div class="row">
+                @foreach (var member in Model.CircleUsers)
+                {
+                    if (member.User != Model.CurrentUser)
+                    {
+                        <h3 class="col-md-4">
+                            <span>
+                                <input class="" type="checkbox" name="checkedUsersIdList" value="@member.User.Id"
+                                       @(Model.CheckedUsers.Any(c => c == member.User.Id) ? "checked = \"checked\"" : string.Empty) />
+                            </span> @member.User.Name
+                        </h3>
+                    }
+                }
+            </div>
+            @Html.ValidationMessageFor(m => m.CircleUsers, null, new { @class = "help-block" })
+
+            @Html.RequiredLabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = Label.Subject })
+            @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
+        </div>
+
+        <div class="panel-footer">
+            <button class="btn btn-primary" type="submit">
+                @Button.CreateGroup
+            </button>
+            <a class="btn btn-link" href="@Url.Action("Messaging", "Circles", new { id = Model.CircleId })">@Button.Cancel</a>
+        </div>
+    </div>
+}
+
+
+

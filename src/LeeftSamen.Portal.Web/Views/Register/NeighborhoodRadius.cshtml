@@ -1,0 +1,67 @@
+﻿@using System.Globalization
+@model LeeftSamen.Portal.Web.Models.Register.NeighborhoodRadiusViewModel
+@{
+    ViewBag.Title = Title.RegisterStep3;
+}
+
+<h1>@ViewBag.Title</h1>
+<p>@Text.SetNeighborhoodRadiusDescription</p>
+<hr />
+
+@using (Html.BeginForm("NeighborhoodRadius", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="neighborhood-radius-control">
+        
+        @Html.HiddenFor(m => m.NeighborhoodRadius, new { @id = "radius-value" })
+        <input type="hidden" name="Latitude" id="Latitude" value="@Model.Latitude.ToString(CultureInfo.InvariantCulture)" />
+        <input type="hidden" name="Longitude" id="Longitude" value="@Model.Longitude.ToString(CultureInfo.InvariantCulture)" />
+        
+        <div class="form-group">
+            <div class="col-md-6">
+                <div id="map" style="height: 450px; width: 100%;"></div>
+            </div>
+            <div class="col-md-6">
+                @Html.Raw(Text.YourNeighborhoodInstruction)
+                
+                <h3>Jouw buurt heeft een straal van <span id="radius-label"></span> meter</h3>
+                
+                <div class="col-md-3">
+                    <select id="radius-menu" style="width: 100%" tabindex="1" autofocus="autofocus">
+                        @foreach (var step in Model.RadiusSteps)
+                        {
+                            <option value="@step">@step</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-9">
+
+                    <div id="radius-slider" style="margin: 0.5em 0" data-min="25" data-max="15000" data-step="50"></div>
+                </div>
+                <br />
+                <br />
+                <div class="text-right">
+                    <input type="submit" class="btn btn-primary" name="continueButton" value="@Button.Finish" tabindex="2"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+@section stylesheets
+{
+    @Styles.Render("~/Content/leaflet")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/neighborhood")
+
+    <script>
+        $(function() {
+            $("#neighborhood-radius-control").neighborhoodRadius();
+        });
+    </script>
+}

@@ -1,0 +1,79 @@
+﻿@using LeeftSamen.Common.InterfaceText
+@using System.Globalization
+@inherits RazorEngine.Templating.TemplateBase<LeeftSamen.Portal.EmailTemplates.Models.CircleJobModel>
+@{
+    Layout = "_Layout";
+
+    var info = CultureInfo.GetCultureInfo("nl-NL");
+}
+
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.DefaultSaluation, (string.IsNullOrWhiteSpace(Model.Name) ? "heer/mevrouw" : Model.Name))</p>
+<p style="margin-top:0;margin-bottom:16px">@string.Format(Email.CircleJobCreated, Model.CreatedBy, Model.JobDueDateTime.ToString("dddd d MMMM", info), Model.JobTitle)</p>
+<p style="margin-top:0;margin-bottom:16px">
+    @Email.Time
+    @if (Model.HasDueTime)
+    {
+        @Model.JobDueDateTime.ToString("H:mm")
+        if (Model.JobDueDateTimeEnd.HasValue)
+        {
+            @Model.JobDueDateTimeEnd.Value.ToString("-H:mm")
+        }
+    }
+    else
+    {
+        @Email.NoTime
+    }
+
+</p>
+<a href="@Model.JobUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.AssignJobToMe
+</a>
+&nbsp;
+<a href="@Model.JobOverviewUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:3px 6px;border-radius:4px;display:inline-block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+    @Button.MoreInfo
+</a>
+@*<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid #DADEE5;">
+    <tr>
+        <td colspan="2" style="padding:0px 16px;" width="100%">
+            <h1 style="color: #0da7a3;">@Model.JobTitle</h1>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:0px 16px 16px 16px;" width="60%" valign="top">
+            @Model.JobText
+            @if (!string.IsNullOrEmpty(Model.JobText))
+            {
+            <br />
+            <br />
+            }
+            <a href="@Model.JobUrl" style="color:#fff;background-color:#0da7a3;border-color:#0da7a3;border-style:solid;border-width:6px 12px;border-radius:4px;display:block;text-decoration:none;margin-top:10px;text-align:center;vertical-align:middle;">
+                @Button.AssignJobToMe
+            </a>
+        </td>
+        <td style="padding:0px 16px;" width="40%" valign="top">
+            @Model.JobDueDateTime.ToString("d MMMM yyyy")<br />
+            @if (Model.HasDueTime)
+            {
+                @Model.JobDueDateTime.ToString("HH:mm")
+                if (Model.JobDueDateTimeEnd.HasValue)
+                {
+                    @Model.JobDueDateTimeEnd.Value.ToString("-HH:mm")
+                }
+            }
+            else
+            {
+                if (Model.JobDueDateTimeEnd.HasValue)
+                {
+                    @:tot
+                    @Model.JobDueDateTimeEnd.Value.ToString("HH:mm")
+                }
+            }
+        </td>
+    </tr>
+</table>*@
+<p style="margin-top:0;margin-bottom:16px">@Raw(Email.DefaultCloseHtml)</p>
+@*<i style="font-size:12px;color:#999;">@Raw(string.Format(Email.StopSendingMails, Model.EmailSettingsUrl))</i>*@
+
+@section reason {
+    @Email.CircleJobReason
+}

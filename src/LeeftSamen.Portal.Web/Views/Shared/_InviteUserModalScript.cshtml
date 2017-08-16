@@ -1,0 +1,57 @@
+﻿<script>
+        angular.module('InviteUserApp', [])
+            .service('searchUserService', function ($http) {
+                return {
+                    search: function (url, query) {
+                        return $http.get(url + "?q=" + query);
+                    }
+                };
+            })
+            .controller('SearchUserController', [
+                'searchUserService', '$scope', function (searchUserService, $scope) {
+                    $scope.searchUrl = '';
+                    $scope.searchQuery = '';
+                    $scope.searchResult = [];
+                    $scope.notifications = [];
+
+                    $scope.search = function () {
+                        searchUserService.search($scope.searchUrl, $scope.searchQuery).then(function (result) {
+                            $scope.searchResult = result.data;
+                        });
+                    }
+                    $scope.submit = function (event) {
+                        var form = $(event.target);
+                        form.find("button").prop('disabled', true);
+                        $.ajax({
+                            url: form.attr('action'),
+                            type: form.attr('method'),
+                            data: form.serialize(),
+                            success: function (response) {
+                                $scope.notifications = [];
+                                $scope.notifications.push(response);
+                                event.target.reset();
+                                $scope.$apply();
+                                $scope.search();
+                                form.find("button").prop('disabled', false);
+                            }
+                        });
+                        event.preventDefault();
+                    }
+                }
+            ]);
+
+        $(function () {
+            $('#inviteUserModal').on('show.bs.modal', function () {
+                var scope = angular.element(document.getElementById('inviteUserModal')).scope();
+                scope.$apply(function () {
+                    scope.searchQuery = '';
+                    scope.searchResult = [];
+                    scope.notifications = [];
+                    scope.searchUrl = '@Html.Raw(Ajax.JavaScriptStringEncode(Url.RouteUrl("DefaultDetail", new { action = "SearchUsers" })))';
+                });
+                scope.search();
+            }).on('shown.bs.modal', function () {
+                $("#contactSearch").focus();
+            });
+        });
+</script>

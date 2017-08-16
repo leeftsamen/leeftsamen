@@ -1,0 +1,46 @@
+﻿@model LeeftSamen.Portal.Web.Models.Organizations.DetailHeaderViewModel
+
+<div class="panel-heading" style="padding-bottom: 0">
+    @if (Model.CurrentUserIsOrganizationAdministrator)
+    {
+        <div class="dropdown pull-right">
+            <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "Edit", id = Model.OrganizationId })">@Button.EditOrganization</a>
+                </li>
+                <li role="presentation">
+                    <a role="menuitem" href="#"
+                       data-toggle="modal" data-target="#modal"
+                       data-title="@Title.ConfirmRemoveOrganization"
+                       data-body="@Text.ConfirmRemoveOrganization"
+                       data-button="@Button.Remove"
+                       data-hidden='{"id": "@Model.OrganizationId"}'
+                       data-action="@Url.Action("RemoveOrganization")">
+                        @Button.DeleteOrganization
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+    <h1 class="panel-title">
+        @if (Model.LogoId.HasValue)
+        {
+            <img src="@Url.RouteUrl("DefaultDetail", new { controller = "Organizations", action = "Logo", id = Model.OrganizationId, mediaId = Model.LogoId })" alt="@Model.Name logo" style="margin-right: 25px; padding: 10px; background: white;" class="maxWidthFull" />
+        }
+        else
+        {
+            <img src="@Url.Content("~/Content/img/leeftsamen_logo.png")" alt="@Model.Name logo" style="margin-right: 25px; padding: 10px; background: white;" class="maxWidthFull" />
+        }
+        @Model.Name
+    </h1>
+
+    <ul class="nav nav-tabs" style="border-bottom: 0">
+        @foreach (var menuItem in Model.MenuItems)
+        {
+            <li role="presentation" class="@(menuItem.Selected ? "active" : string.Empty)"><a href="@Url.RouteUrl(menuItem.RouteName, menuItem.RouteValues)">@menuItem.Text</a></li>
+        }
+    </ul>
+</div>

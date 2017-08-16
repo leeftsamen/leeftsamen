@@ -1,0 +1,64 @@
+﻿@using LeeftSamen.Common.Extensions
+@model LeeftSamen.Portal.Web.Models.Invitations.IndexViewModel
+
+@{
+    ViewBag.Title = "Invitations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>@Title.Invitations</h1>
+<div class="row">
+    <div class="col-md-12">
+            @if (Model.Invitations.Any())
+            {
+                var lastDayDate = new DateTime();
+                var tableOpened = false;
+
+                foreach (var invitation in Model.Invitations.OrderBy(c => c.InvitationDateTime))
+                {
+                    if (lastDayDate.Date != invitation.InvitationDateTime.Date)
+                    {
+                        lastDayDate = invitation.InvitationDateTime;
+                        if (tableOpened)
+                        {
+                            @Html.Raw("</table>")
+                        }
+                        var label = invitation.InvitationDateTime.ToString("dddd d MMMM yyyy");
+                        if (invitation.InvitationDateTime.IsToday())
+                        {
+                            label = Label.Today;
+                        }
+                        if (invitation.InvitationDateTime.IsYesterday())
+                        {
+                            label = Label.Yesterday;
+                        }
+
+                        @Html.Raw("<span class=\"label label-block label-default\">" + label + "</span>")
+                        @Html.Raw("<table class=\"table inline-form custom-table\" style=\"background: white; border: 1px solid #ddd\">" + "<colgroup><col style=\"width:5%\"/><col style=\"width:72%\"/><col style=\"width:auto\"/></colgroup>")
+                        tableOpened = true;
+                    }
+                    <tr>
+                        <td class="vert-align">
+                            @invitation.InvitationDateTime.ToString("hh:mm")
+                        </td>
+                        <td class="vert-align">@string.Format(Text.CircleInvitationMessage, invitation.InvitedBy, invitation.Name)</td>
+                        <td class="vert-align">
+                            @using (Html.BeginForm("AcceptInvitation", "Invitations", new { id = invitation.Id, code = invitation.AcceptToken }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary">@Button.Accept</button>
+                            }
+                            @using (Html.BeginForm("DeclineInvitation", "Invitations", new { id = invitation.Id, code = invitation.AcceptToken }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">@Button.Decline</button>
+                            }
+                        </td>
+                    </tr>
+                }
+                if (tableOpened)
+                {
+                    @Html.Raw("</table>")
+                }
+            }
+    </div>
+</div>

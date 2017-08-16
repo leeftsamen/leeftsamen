@@ -1,0 +1,37 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@model LeeftSamen.Portal.Web.Models.NeighborhoodMessages.MessageDetailViewModel
+<div class="dropdown pull-right" style="margin-top: 15px;">
+    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" aria-label="Left Align">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        @if (Model.UserCanEditMessage)
+        {
+            <li role="presentation">
+                <a href="@Url.RouteUrl("NeighborhoodMessage", new { action = "EditMessage", messageId = Model.Message.MessageId })">@Button.EditNeighborhoodMessage</a>
+            </li>
+            <li role="presentation">
+                <a href="javascript:void(0);"
+                   data-toggle="modal"
+                   data-target="#modal"
+                   data-title="@Title.ConfirmRemoveNeighborhoodMessage"
+                   data-body="@Text.ConfirmRemoveNeighborhoodMessage"
+                   data-button="@Button.RemoveNeighborhoodMessage"
+                   data-action="@Url.RouteUrl("NeighborhoodMessage", new { action = "RemoveMessage", messageId = Model.Message.MessageId })">@Button.RemoveNeighborhoodMessage</a>
+            </li>
+        }
+        
+        @if (@Model.UserCanPinMessage)
+        {
+            <li role="presentation">
+                <a href="javascript:void(0);"
+                   data-toggle="modal"
+                   data-target="#modal"
+                   data-title="@(Model.Message.IsPinned ? Title.UnpinConfirmation : Title.PinConfirmation)"
+                   data-body="@(Model.Message.IsPinned ? Text.UnpinConfirmation : Text.PinConfirmation)"
+                   data-button="@(Model.Message.IsPinned ? Button.UnpinConfirmation : Button.PinConfirmation)"
+                   data-action="@Url.RouteUrl("NeighborhoodMessage", new { action = "PinMessage", messageId = Model.Message.MessageId, pin = !Model.Message.IsPinned })">@(Model.Message.IsPinned ? Button.UnpinListItemText : Button.PinListItemText)</a>
+            </li>
+        }
+    </ul>
+</div>           

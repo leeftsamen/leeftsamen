@@ -1,0 +1,152 @@
+﻿@using System.Linq
+@using LeeftSamen.Common.Extensions
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Account.HeaderViewModel
+
+@if (Model.AllowZuiderling)
+{
+    <li class="dropdown">
+        @if (Model.HasZuiderling)
+        {
+            if (Model.ZuiderlingAmount.HasValue)
+            {
+                <a title="@Model.ZuiderlingAmount.Value.ToString("00") zuiderlingen" data-toggle="dropdown" role="button" aria-expanded="false" onclick="_paq.push(['trackEvent', 'Click', 'Zuiderlingen']);">
+                    @if (Model.ZuiderlingAmount.HasValue)
+                    {
+                        <span class="" style="vertical-align: top; display:inline-block;font-weight:bold;margin-top:0px;margin-right:-2px;font-size: 20px;">@Model.ZuiderlingAmount.Value.ToString("0")</span>
+                    }
+                    <img src="~/Content/Images/zuiderlinglogo.png" width="24" />
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <span class="zuiderling-dropdown">@String.Format(Label.ZuiderlingAmount, Model.ZuiderlingAmount.Value.ToString("0"))</span>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <a>
+                    <img src="~/Content/Images/zuiderlinglogo.png" width="24" />
+                </a>
+            }
+        }
+        else
+        {
+            <a title="Zuiderling" href="@Url.Action("ChangeZuiderlingSettings", "Account")">
+                <img src="~/Content/Images/zuiderlinglogo.png" width="24" style="opacity:0.4;" />
+                <span class="badge" style="margin-left: -0.4em; vertical-align: top; display:inline-block;">?</span>
+            </a>
+        }
+    </li>
+}
+<li class="invite-user">
+    <a href="/users/invite">
+        <b>Anderen<br />uitnodigen!</b>
+    </a>
+</li>
+<li class="dropdown">
+    <div class="relative-inline-block" style="float: left;">
+        @if (Model.HelpIcons.Any(h => h.Type == "login"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "login");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "login", HelpText = helpIcon.Text });
+        }
+    </div>
+    <a href="#" class="dropdown-toggle notification-menu" data-toggle="dropdown" role="button" aria-expanded="false" onclick="_paq.push(['trackEvent', 'Click', 'Notifications']);">
+        <span class="notification-button"></span>
+        @{
+            var count = Model.LatestNotifications.Count(n => !n.Read);
+            <span id="unreadNotificationsBadge" style="margin-left: -0.75em; vertical-align: top; display:inline-block;">@count</span>
+
+        }
+    </a>
+    <ul class="dropdown-menu" role="menu" id="latestNotifications">
+        @foreach (var notification in Model.LatestNotifications)
+        {
+            var url = notification.Read ? notification.Url : Url.RouteUrl("DefaultDetail", new { controller = "Notifications", action = "RedirectAndSetRead", id = notification.NotificationId });
+            <li>
+                <a data-notification="@notification.NotificationId" href="@url">
+                    @if (!notification.Read)
+                    {
+                        <label class="label label-primary">@Label.New</label>
+                    }
+                    @Html.Raw(notification.Message.TruncateKeepHtml())
+                </a>
+            </li>
+            <li class="divider"></li>
+        }
+        <li>
+            <a href="@Url.RouteUrl("Default", new { controller = "Notifications" })">@Button.ShowAllNotifications</a>
+        </li>
+    </ul>
+</li>
+<li class="dropdown">
+    <div class="relative-inline-block" style="float: left;">
+        @if (Model.HelpIcons.Any(h => h.Type == "account"))
+        {
+            var helpIcon = Model.HelpIcons.First(h => h.Type == "account");
+            Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "login", HelpText = helpIcon.Text });
+        }
+    </div>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+        @if (Model.CurrentOrganization == null)
+        {
+            @Html.Partial("_UserProfileImage", new UserProfileImage(Model.ProfileImageId, Model.Id, "profile-image-sm"))
+            <b id="profile-name">@(Model.Name.Length >= 36 ? Model.Name.Substring(0, 36) : Model.Name)</b>
+        }
+        else
+        {
+            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+            <b id="profile-name">@string.Format(Label.PersonOfOrganization, Label.OrganizationMember, Model.CurrentOrganization.OrganizationName)</b>
+        }
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        @if (Model.Organizations.Any() || Model.CurrentOrganization != null)
+        {
+            <li class="dropdown-header">@Label.MyAccounts</li>
+            if (Model.CurrentOrganization != null)
+            {
+                <li>
+                    @using (Html.BeginForm("SelectOrganization", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("returnUrl", string.Join("?", Request.Url.PathAndQuery))
+                        <button type="submit" class="btn btn-link">
+                            @Html.Partial("_UserProfileImage", new UserProfileImage(Model.ProfileImageId, Model.Id, "profile-image-sm"))
+                            @Model.Name (@Label.Personal)
+                        </button>
+                    }
+                </li>
+            }
+
+            foreach (var organization in Model.Organizations)
+            {
+                <li>
+                    @using (Html.BeginForm("SelectOrganization", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("membershipId", organization.OrganizationMembershipId)
+                        @Html.Hidden("returnUrl", string.Join("?", Request.Url.PathAndQuery))
+                        <button type="submit" class="btn btn-link">
+                            <img src="@Url.Content("~/Content/Images/profile-image.jpg")" alt="" class="img-circle profile-image-sm" />
+                            @string.Format(Label.PersonOfOrganization, Label.OrganizationMember, organization.OrganizationName)
+                        </button>
+                    }
+                </li>
+            }
+
+            <li class="divider"></li>
+        }
+        <li><a href="@Url.RouteUrl("Default", new { controller = "Account", action = "Index" })">@Label.MyAccount</a></li>
+        @*        <li><a href="@Url.RouteUrl("Default", new { controller = "Buddies", action = "Index" })">Buddy's</a></li>*@
+        <li>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" onclick="JavaScriptHandler.CloseApplication()" class="btn btn-link">@Button.Logout</button>
+            }
+        </li>
+    </ul>
+</li> 

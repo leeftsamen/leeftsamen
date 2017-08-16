@@ -1,0 +1,200 @@
+﻿@using LeeftSamen.Portal.Web.Helpers
+@model LeeftSamen.Portal.Web.Models.Circles.CreateActivityModel
+@{
+    ViewBag.Title = "Activiteit aanmaken";
+}
+
+<script>
+    var Resources = { ActivityEndDateBeforeStartDate: "@Error.ActivityEndDateBeforeStartDate" };
+</script>
+
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>CreateActivity</title>
+</head>
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm("CreateCircleActivity", "Circles", new { circleId = Model.CircleId }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.GeneralInformation</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Title))
+            {
+                @Html.RequiredLabelFor(m => m.Title, new {@class = "control-label"})
+                @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Title, null, new {@class = "help-block"})
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Description))
+            {
+                @Html.RequiredLabelFor(m => m.Description, new {@class = "control-label"})
+                @Html.TextAreaFor(m => m.Description, 8, 0, new {@class = "form-control text-editor"})
+                @Html.ValidationMessageFor(m => m.Description, null, new {@class = "help-block"})
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.Location))
+            {
+                @Html.RequiredLabelFor(m => m.Location, new {@class = "control-label"})
+                @Html.TextBoxFor(m => m.Location, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Location, null, new {@class = "help-block"})
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.AllAges))
+            {
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AllAges) @Label.AllAgesActivity
+                    </label>
+                </div>
+            }
+
+            <div class="row" id="ageInputs">
+                <div class="col-md-3">
+                    @using (Html.BeginFormGroupFor(m => m.AgeFrom))
+                    {
+                        @Html.RequiredLabelFor(m => m.AgeFrom, new {@class = "control-label"})
+                        @Html.TextBoxFor(m => m.AgeFrom, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.AgeFrom, null, new {@class = "help-block"})
+                    }
+                </div>
+                <div class="col-md-3">
+                    @using (Html.BeginFormGroupFor(m => m.AgeTo))
+                    {
+                        @Html.RequiredLabelFor(m => m.AgeTo, new {@class = "control-label"})
+                        @Html.TextBoxFor(m => m.AgeTo, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.AgeTo, null, new {@class = "help-block"})
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.DateAndTime</h2>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.AllDay))
+            {
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AllDay) @Label.AllDayActivity
+                    </label>
+                </div>
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.StartDateTime))
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.RequiredLabelFor(m => m.StartDateTime, new {@class = "control-label"})
+                        <div class="input-group datepicker-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                            </span>
+                            @Html.TextBoxFor(m => m.StartDateTime, new {@class = "form-control", @Value = Model.StartDateTime.ToString("dd-MM-yyyy")})
+                        </div>
+                    </div>
+                    <div class="col-md-3 timeInput">
+                        <label class="control-label">@Label.Time</label>
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.StartDateHour, new {@class = "form-control", @Value = Model.StartDateHour.ToString("00")})
+                            <div class="input-group-addon" style="padding: 6px; border-right: 0; border-left: 0">:</div>
+                            @Html.TextBoxFor(m => m.StartDateMinute, new {@class = "form-control", @Value = Model.StartDateMinute.ToString("00")})
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.StartDateTime, null, new {@class = "help-block"})
+            }
+
+            @using (Html.BeginFormGroupFor(m => m.EndDateTime))
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.RequiredLabelFor(m => m.EndDateTime, new {@class = "control-label"})
+                        <div class="input-group datepicker-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </button>
+                            </span>
+                            @Html.TextBoxFor(m => m.EndDateTime, new {@class = "form-control", @Value = Model.EndDateTime.ToString("dd-MM-yyyy")})
+                        </div>
+                    </div>
+                    <div class="col-md-3 timeInput">
+                        <label class="control-label">@Label.Time</label>
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.EndDateHour, new {@class = "form-control", @Value = Model.EndDateHour.ToString("00")})
+                            <div class="input-group-addon" style="padding: 6px; border-right: 0; border-left: 0">:</div>
+                            @Html.TextBoxFor(m => m.EndDateMinute, new {@class = "form-control", @Value = Model.EndDateMinute.ToString("00")})
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.EndDateTime, null, new {@class = "help-block"})
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">@Title.Share</h2>
+        </div>
+
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.AllowSharing))
+            {
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AllowSharing) @Label.ShareDescription
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@Button.Save</button>
+            <a class="btn btn-link" href="@Url.RouteUrl("DefaultDetail", new { controller = "Circles", action = "Agenda", id = Model.CircleId })">@Button.Cancel</a>
+        </div>
+    </div>
+
+}
+
+@section scripts
+{
+    <script>
+        var allDayElement = document.getElementsByName('AllDay')[0];
+        var allAgesElement = document.getElementsByName('AllAges')[0];
+
+        function setTimeVisibility() {
+            var elements = document.getElementsByClassName('col-md-3 timeInput');
+            for (var i = 0; i < elements.length; i ++) {
+                elements[i].style.display = allDayElement.checked ? 'none' : 'block';
+            }
+        }
+
+        function setAgesVisibility() {
+            document.getElementById('ageInputs').style.display = allAgesElement.checked ? 'none' : 'block';
+        }
+
+        allDayElement.onchange = function() {
+            setTimeVisibility();
+        }
+
+        allAgesElement.onchange = function() {
+            setAgesVisibility();
+        }
+
+        setTimeVisibility();
+        setAgesVisibility();
+    </script>
+}

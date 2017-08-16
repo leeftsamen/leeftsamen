@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = Title.Admin;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="panel">
+    <div class="panel-body">
+        <ul>
+            <li>
+                <a href="@Url.RouteUrl("Default", new { controller = "Admin", action = "Organizations" })">@Button.Organizations</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

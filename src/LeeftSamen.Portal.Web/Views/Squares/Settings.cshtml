@@ -1,0 +1,38 @@
+﻿@model LeeftSamen.Portal.Web.Models.Squares.SettingsModel
+@{
+    ViewBag.Title = Title.ManageSquare;
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">@Title.ChangeSquareSettings</h2>
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>@Label.General</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeGeneral, "ChangeGeneral", new { id = Model.SquareId })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.ZipCodes:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeZipCodes, "ChangeZipCodes", new { id = Model.SquareId })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>@Label.Forum:</dt>
+            <dd>
+                @Html.ActionLink(Button.ChangeForum, "ChangeForum", new { id = Model.SquareId })
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>&nbsp;</dt>
+            <dd>
+                @Html.ActionLink(Button.Back, "Detail", new { id = Model.SquareId })
+            </dd>
+        </dl>
+    </div>
+</div>

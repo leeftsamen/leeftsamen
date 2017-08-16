@@ -1,0 +1,75 @@
+﻿@using System
+@using System.Linq
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Helpers
+@using LeeftSamen.Portal.Web.Models.Users
+@model LeeftSamen.Portal.Web.Models.Forums.EditReactionModel
+@{
+    var action = "EditReaction";
+    var title = Title.EditReaction;
+    var submitButton = Button.Save;
+    var routeValues = new RouteValueDictionary();
+    routeValues.Add("type", Model.Type);
+    routeValues.Add("typeId", Model.TypeId);
+    routeValues.Add("id", Model.ReactionId);
+    var cancelUrl = Url.RouteUrl("Forum", new { controller = "Forums", action = "Subject", type = Model.Type, typeId = Model.TypeId, id = Model.SubjectId });
+    ViewBag.Title = title;
+    var previewValues = new RouteValueDictionary();
+    previewValues.Add("type", Model.Type);
+    previewValues.Add("typeId", Model.TypeId);
+    previewValues.Add("action", "ReactionImage");
+    previewValues.Add("reactionId", Model.ReactionId);
+}
+@if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Squares.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Squares", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+else if (Model.Type.Equals(LeeftSamen.Portal.Data.Enums.ModelType.Circles.ToString(), StringComparison.CurrentCultureIgnoreCase))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Action("DetailHeader", "Circles", new { id = Model.TypeId })
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm(action, "Forums", routeValues, FormMethod.Post, new Dictionary<string, object> { { "enctype", "multipart/form-data" } }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel-edit">
+        <div class="panel-heading">
+            <h1 class="panel-title">@title</h1>
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginFormGroupFor(m => m.Text))
+            {
+                @Html.RequiredLabelFor(m => m.Text, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.Text, 8, 0, new { @class = "form-control text-editor" })
+                @Html.ValidationMessageFor(m => m.Text, null, new { @class = "help-block" })
+            }
+
+            @if (Model.AllowFiles)
+            {
+            <div id="FactFiles" class="edit-section">
+                <h4>@Title.Images</h4>
+                <div class="row">
+                    @Html.Partial("_MultiImageUpload", new MultiFileUploadModel(null, "Forum", previewValues, Label.Images, "Image1", Model.Files))
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="panel panel-default edit-buttons">
+        <div class="panel-body">
+            <button type="submit" class="btn btn-primary">@submitButton</button>
+            <a class="btn btn-link" href="@cancelUrl">@Button.Cancel</a>
+        </div>
+    </div>
+}
+

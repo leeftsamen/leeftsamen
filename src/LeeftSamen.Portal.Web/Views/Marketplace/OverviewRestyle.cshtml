@@ -1,0 +1,300 @@
+﻿@using LeeftSamen.Portal.Data.Models
+@using LeeftSamen.Portal.Web.Models
+@using LeeftSamen.Portal.Web.Models.Users
+@using System.Configuration
+@model LeeftSamen.Portal.Web.Models.Marketplace.OverviewViewModel
+@{
+    var titleTekst = string.Empty;
+    string searchPlaceholder = PlaceHolder.IAmSearchingfor, searchLabel = Title.Marketplace;
+    switch (Model.Category)
+    {
+        case 2:
+            ViewBag.Title = Title.StuffForSale;
+            titleTekst = Title.WelcomeMarketplaceStuffForSale;
+            searchPlaceholder = PlaceHolder.BuyStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 3:
+            ViewBag.Title = Title.StuffToBorrow;
+            titleTekst = Title.WelcomeMarketplaceStuffToBorrow;
+            searchPlaceholder = PlaceHolder.LendStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 1:
+            ViewBag.Title = Title.Meals;
+            titleTekst = Title.WelcomeMarketplaceMeals;
+            searchPlaceholder = PlaceHolder.MealStuff;
+            searchLabel = Label.IAmSearchingfor;
+            break;
+        case 0:
+            ViewBag.Title = Title.NeighbourHelp;
+            titleTekst = Title.WelcomeMarketplaceNeighbourHelp;
+            searchPlaceholder = PlaceHolder.NeighbourHelpStuff;
+            searchLabel = Label.IRequireHelpWith;
+            break;
+        default:
+            ViewBag.Title = Title.Marketplace;
+            titleTekst = Title.WelcomeMarketplaceOverview;
+            break;
+    }
+    if (Model.CircleId.HasValue)
+    {
+        titleTekst = Title.WelcomeMarketplaceOverview;
+        if (!string.IsNullOrEmpty(Model.OverviewText))
+        {
+            titleTekst = Model.OverviewText;
+        }
+    }
+    var searchDescription = !String.IsNullOrWhiteSpace(Model.SearchQuery) ? Model.SearchQuery : Text.All;
+    searchDescription += !String.IsNullOrWhiteSpace(Model.CurrentCategory) ? String.Concat(" ", Text.Within, " ", Model.CurrentCategory.ToLower()) : String.Empty;
+    searchDescription += Model.Type.HasValue ? Model.Type == MarketplaceItem.MarketplaceItemType.Offered ? String.Concat(" ", @Button.MarketplaceOffered.ToLower()) : String.Concat(" ", @Button.MarketplaceAsked.ToLower()) : String.Empty;
+    var formAction = Url.RouteUrl("Default", new { controller = "Marketplace" });
+}
+
+<div class="content-wide">
+
+    @if (Model.CircleId.HasValue)
+    {
+        formAction = Url.RouteUrl("CircleMarketplace", new { circleId = Model.CircleId, controller = "Marketplace", action = "Overview" });
+        @Html.Action("DetailHeader", "Circles", new { id = Model.CircleId })
+
+        <div class="page-buttons margin-bottom-10-px" style="margin-top:0px;">
+            <div class="menu-background"></div>
+            <div class="bottom-display">
+                <div class="open-menu">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+            <div class="buttons">
+                <a class="btn btn-primary" href="@Url.Action("CreateCircleItem", "Marketplace", new { circleId = Model.CircleId, categoryId = Model.Category })">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    @Button.CreateMarketplaceItem
+                </a>
+            </div>
+        </div>
+        @*<div class="make-block hidden-xs shift-left clear">
+            <div class="row panel-body">
+                <div class="col-md-9 col-xs-12">
+                    <h4>@titleTekst</h4>
+                </div>
+            </div>
+        </div>*@
+        <div class="clear"></div>
+    }
+    else
+    {
+        <h1 class="page-title">@ViewBag.Title</h1>
+        @*@Html.Partial("_HelpIconsRestyle", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "hidden-xs" } })*@
+        @*<div class="clear" style="margin-bottom:10px;"></div>
+        @Html.Partial("_HelpIcons", Model.HelpIcons, new ViewDataDictionary() { { "CssClass", "visible-xs" } })*@
+
+        <div class="page-buttons">
+            <div class="menu-background"></div>
+            <div class="bottom-display">
+                <div class="open-menu">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+            <div class="buttons">
+                @if (Model.HelpIcons.Any(h => h.Type == "marketplace-create"))
+                {
+                    var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-create");
+                    Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-create", HelpText = helpIcon.Text });
+                }
+                <a class="btn btn-primary btn-small" href="@Url.Action("CreateItem", new { CategoryId = Model.Category })">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    @Button.CreateMarketplaceItem
+                </a>
+                @*<a class="btn btn-default btn-small" href="@Url.Action("MyMarketplace")">@Button.MyMarketplace</a>
+                    @if (Model.Any(h => h.Type == "marketplace-ads"))
+                    {
+                        var helpIcon = Model.First(h => h.Type == "marketplace-ads");
+                        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-ads", HelpText = helpIcon.Text });
+                    }*@
+            </div>
+        </div>
+        <div class="clear margin-bottom-10-px"></div>
+    }
+
+    @if (Model.HelpIcons.Any(h => h.Type == "marketplace-all"))
+    {
+        var helpIcon = Model.HelpIcons.First(h => h.Type == "marketplace-all");
+        Html.RenderPartial("~/Views/Shared/_HelpIcon.cshtml", new HelpIconViewModel { Id = helpIcon.HelpIconId, Placement = helpIcon.TextPlacement, CssClass = "marketplace-all", HelpText = helpIcon.Text });
+    }
+
+    @*<div class="make-block hidden-xs shift-left clear">
+        <div class="row panel-body">
+            <div class="col-md-9 col-xs-12">
+                <h4>@titleTekst</h4>
+            </div>
+        </div>
+    </div>*@
+
+    @{ var formId = "filterform"; }
+    <form method="get" action="@formAction#start" id="@formId">
+        <div class="panel-blue shift-left search-box">
+            @Html.Hidden("ListView", Model.ListView)
+            @Html.HiddenFor(m => m.CircleId)
+            @Html.HiddenFor(m => m.Category)
+            @Html.HiddenFor(m => m.Type)
+            <label class="search-label">@searchLabel</label>
+            <div class="search-bar">
+                @Html.TextBox("Query", null, new { placeholder = searchPlaceholder, @class = "form-control" })
+                <div class="sort">
+                    @Label.SortBy:
+                    @Html.DropDownList("OrderBy", Model.OrderByOptions, new { @class = "trigger-submit" })
+                </div>
+                <div class="settings">
+                    <i class="fa fa-gear"></i>
+                </div>
+                <div class="settings-open">
+                    <div class="settings-background"></div>
+                    <div class="settings-block">
+                        <label class="header">@Label.SortBy</label>
+                        @if (!Model.OrderByOptions.Any(o =>o.Selected))
+                        {
+                            Model.OrderByOptions.First().Selected = true;
+                        }
+                        @foreach (var option in Model.OrderByOptions)
+                        {
+                            <div>
+                                @if (option.Selected)
+                                {
+                                    <label>@Html.RadioButton("Fake", option.Value, new { @class = "mirror-submit", @checked = "checked", data_mirror_id = "OrderBy" }) @option.Text</label>
+                                }
+                                else
+                                {
+                                    <label>@Html.RadioButton("Fake", option.Value, new { @class = "mirror-submit", data_mirror_id = "OrderBy" }) @option.Text</label>
+                                }
+                            </div>
+                        }
+                        <label class="header">@Label.DisplayAs</label>
+                        @if (Model.ListView)
+                        {
+                            <div>
+                                <label>@Html.RadioButton("Fake2", false, new { @class = "mirror-submit", data_mirror_id = "ListView" }) @Label.Tiles</label>
+                            </div>
+                            <div>
+                                <label>@Html.RadioButton("Fake2", true, new { @class = "mirror-submit", data_mirror_id = "ListView", @checked = "checked" }) @Label.List</label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <label>@Html.RadioButton("Fake2", false, new { @class = "mirror-submit", data_mirror_id = "ListView", @checked = "checked" }) @Label.Tiles</label>
+                            </div>
+                            <div>
+                                <label>@Html.RadioButton("Fake2", true, new { @class = "mirror-submit", data_mirror_id = "ListView" }) @Label.List</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-search"><i class="fa fa-plus"></i> @Button.Search</button>
+        </div>
+        @{
+            var items = new List<MenuItemModel>();
+            items.Add(
+            new MenuItemModel(
+                Button.MarketplaceAll,
+                string.Format("data-form-trigger=\"{0}\" data-val-target=\"{1}\" data-val=\"{2}\"", formId, Html.IdFor(m => Model.Type), string.Empty),
+                !Model.Type.HasValue
+            ));
+            items.Add(
+            new MenuItemModel(
+                Button.MarketplaceOffered,
+                string.Format("data-form-trigger=\"{0}\" data-val-target=\"{1}\" data-val=\"{2}\"", formId, Html.IdFor(m => Model.Type), MarketplaceItem.MarketplaceItemType.Offered),
+                Model.Type == MarketplaceItem.MarketplaceItemType.Offered
+            ));
+            items.Add(
+            new MenuItemModel(
+                Button.MarketplaceAsked,
+                string.Format("data-form-trigger=\"{0}\" data-val-target=\"{1}\" data-val=\"{2}\"", formId, Html.IdFor(m => Model.Type), MarketplaceItem.MarketplaceItemType.Asked),
+                Model.Type == MarketplaceItem.MarketplaceItemType.Asked
+            ));
+            if (!Model.CircleId.HasValue)
+            {
+                items.Add(
+                    new MenuItemModel(
+                        "Default",
+                        new RouteValueDictionary(new { controller = "Marketplace", action = "MyMarketplace" }),
+                        Button.MyMarketplaceItems,
+                        false
+                    ));
+            }
+        }
+        <div class="nav-with-icon">
+            @Html.Partial("~/Views/Shared/_TabMenu.cshtml", items)
+            <div class="icon-nav">
+                <a class="@(Model.ListView ? null : "active")" data-val-target="@Html.IdFor(m => Model.ListView)" data-val="@(false)" data-form-trigger="@formId">
+                    <i class="fa fa-th"></i>
+                </a>
+                <a class="@(Model.ListView ? "active" : null)" data-val-target="@Html.IdFor(m => Model.ListView)" data-val="@(true)" data-form-trigger="@formId">
+                    <i class="fa fa-th-list"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+    <div id="start"></div>
+
+    @if (Model.MarketplaceItems.Count > 0)
+    {
+        <div id="marketplace-items" class="shift-left" pagesize="@Model.Take">
+            @if (Model.ListView)
+            {
+                <div class="col-md-12 marketplace-item-placeholder">
+                    @foreach (var item in Model.MarketplaceItems)
+                {
+                        @Html.Partial(string.Format("_DisplayItem{0}", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), item, new ViewDataDictionary() { { "ListView", Model.ListView }, { "CircleId", Model.CircleId } });
+                }
+                </div>
+            }
+            else
+            {
+                <div class="tileable-items marketplace-item-placeholder">
+                    @foreach (var item in Model.MarketplaceItems)
+                {
+                        @Html.Partial(string.Format("_DisplayItem{0}", ConfigurationManager.AppSettings["ShowRestyle"] == "true" ? "Restyle" : string.Empty), item, new ViewDataDictionary() { { "ListView", Model.ListView }, { "CircleId", Model.CircleId } })
+                    }
+                </div>
+            }
+        </div>
+        if (Model.MarketplaceItems.Count == 10)
+        {
+            <div class="row">
+                <button class="btn btn-default col-md-4 col-md-offset-4" onclick="marketPlaceLoadMore(this, '#@formId')">@Button.MarketplaceShowMore</button>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>@Title.NoMarketplaceItemsFound</h3>
+    }
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/item-tiler")
+
+    <script>
+        var elements = document.getElementsByClassName('trigger-submit');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].onchange = function() {
+                document.forms.filterform.submit();
+            }
+        }
+
+        var elements = document.getElementsByClassName('mirror-submit');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].onchange = function () {
+                var elements = document.getElementsByClassName('mirror-submit');
+                for (var i = 0; i < elements.length; i++) {
+                    elements[i].setAttribute("disabled", "");
+                }
+                document.getElementById(this.getAttribute("data-mirror-id")).value = this.value;
+                document.forms.filterform.submit();
+            }
+        }
+    </script>
+
+}
